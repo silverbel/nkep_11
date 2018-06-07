@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>êµì¡ì¤</title>
+		<title>교육실</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -46,9 +46,9 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">ìê°</a>
+							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.jsp">ìì½</a>
+							<li><a href="work.jsp">예약</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
@@ -71,8 +71,8 @@
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">êµì¡ì¤ ì í</h2>
-							<p class="page-title__text">êµì¡ì¤ ì íí´ì£¼ì¸ì.</p>
+							<h2 class="page-title__title">교육실 선택</h2>
+							<p class="page-title__text">교육실 선택해주세요.</p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -105,7 +105,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">êµì¡ì¤1</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">교육실1</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-slide-bottom -->
@@ -133,7 +133,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">êµì¡ì¤2</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">교육실2</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-move-top -->
@@ -161,7 +161,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">êµì¡ì¤3</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">교육실3</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-slide-right -->
@@ -188,7 +188,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">êµì¡ì¤4</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">교육실4</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-slide-left -->

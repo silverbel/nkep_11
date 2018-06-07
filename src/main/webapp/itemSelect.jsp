@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>ìì½íê¸°</title>
+		<title>예약하기</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -60,9 +60,9 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">ìê°</a>
+							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.jsp">ìì½</a>
+							<li><a href="work.jsp">예약</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
@@ -85,8 +85,8 @@
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">ìì½íê¸°</h2>
-							<p class="page-title__text">ì¬ì©íì¤ ë¹íì ì íí´ ì£¼ì¸ì.</p>
+							<h2 class="page-title__title">예약하기</h2>
+							<p class="page-title__text">사용하실 비품을 선택해 주세요.</p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -106,58 +106,58 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th colspan="2">ì¢ë¥</th>
-									<th colspan="2">ì´ë¦</th>
-									<th>ìë</th>
-									<th>ê¸°í ìêµ¬ì¬í­</th>
+									<th colspan="2">종류</th>
+									<th colspan="2">이름</th>
+									<th>수량</th>
+									<th>기타 요구사항</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td colspan="2" rowspan="2">
-										<button class="btn btn-default btn-kdb">ê°ì</button>
-										<button class="btn btn-info btn-kdb">ë¹í/ìì¬</button>
+										<button class="btn btn-default btn-kdb">간식</button>
+										<button class="btn btn-info btn-kdb">비품/자재</button>
 									</td>
 									<td colspan="2">
 										<br>
 										<select class="form-control">
-											<option>ë§ì°ì¤</option>
-											<option>í¤ë³´ë</option>
-											<option>ë¹ íë¡ì í¸</option>
-											<option>ë ì´ì  í¬ì¸í°</option>
-											<option>ë¬´ì  ë§ì´í¬</option>
+											<option>마우스</option>
+											<option>키보드</option>
+											<option>빔 프로젝트</option>
+											<option>레이저 포인터</option>
+											<option>무선 마이크</option>
 										</select>
 									</td>
 									<td>
-										<Br><input type="text" class="form-control" placeholder="ìë ìë ¥" />
+										<Br><input type="text" class="form-control" placeholder="수량 입력" />
 									</td>
 									<td>
-										<br><input type="text" class="form-control" placeholder="ìêµ¬ì¬í­ ìë ¥" />
+										<br><input type="text" class="form-control" placeholder="요구사항 입력" />
 									</td>
 								</tr>
 							</tbody>
 							<tfoot>
 								<tr>
-									<td>ì¢ë¥</td>
-									<td colspan="2">ë¹í ì´ë¦</td>
-									<td>ìë</td>
-									<td>ê°ê²©</td>
-									<td>ìêµ¬ì¬í­</td>
+									<td>종류</td>
+									<td colspan="2">비품 이름</td>
+									<td>수량</td>
+									<td>가격</td>
+									<td>요구사항</td>
 								</tr>
 								<tr>
-									<td>ë¹í/ìì¬</td>
-									<td colspan="2">ë§ì°ì¤</td>
+									<td>비품/자재</td>
+									<td colspan="2">마우스</td>
 									<td>3</td>
-									<td>3,000 ì</td>
-									<td>ìë ¥ ìì</td>
+									<td>3,000 원</td>
+									<td>입력 없음</td>
 								</tr>
 							</tfoot>
 						</table>
 						<div class="pull-left ">
-							<button class="btn btn-default btn-kdb">ì´ì </button>
+							<button class="btn btn-default btn-kdb">이전</button>
 						</div>
 						<div class="pull-right">
-							<button class="btn btn-primary btn-kdb">ë¤ì</button>
+							<button class="btn btn-primary btn-kdb">다음</button>
 						</div>
 					</div>
 				</section>

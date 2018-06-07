@@ -184,7 +184,7 @@ p, ul, ol {
 				<table>
 					<tr>
 						<td align="center" class="masthead">
-							<h1 style="color:white;">ìì½ ìë£!</h1>
+							<h1 style="color:white;">예약 완료!</h1>
 						</td>
 					</tr>
 					<tr>
@@ -194,44 +194,44 @@ p, ul, ol {
 					</tr>
 					<tr>
 						<td class="content"><img src="assets/img/works/discuss.jpg" /> <br>
-							<h2 class="text-center">íìì¤ ìì½ ì ë³´</h2>
+							<h2 class="text-center">회의실 예약 정보</h2>
 
 							<table class="table">
 								<thead>
 									<tr>
-										<th colspan="2" class="text-center">ì´ ê¸ì¡ : 18,000ì</th>
+										<th colspan="2" class="text-center">총 금액 : 18,000원</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<th>ê·¼ë¬´ì§</th>
-										<td>ë³´í ë¹ë©</td>
+										<th>근무지</th>
+										<td>보헌 빌딩</td>
 									</tr>
 									<tr>
-										<th>ì¢ë¥</th>
-										<td>íìì¤</td>
+										<th>종류</th>
+										<td>회의실</td>
 									</tr>
 									<tr>
-										<th>ì´ë¦</th>
-										<td>ë¯¸íë£¸ 1</td>
+										<th>이름</th>
+										<td>미팅룸 1</td>
 									</tr>
 									<tr>
-										<th>ì¬ì© ì í</th>
-										<td>ë¨ê¸° ìì½</td>
+										<th>사용 유형</th>
+										<td>단기 예약</td>
 									</tr>
 									<tr>
-										<th>ì¬ì© ìê°</th>
+										<th>사용 시간</th>
 										<td>2018.06.05 15:30 ~ 2018.06.05 16:30</td>
 									</tr>
 									<tr>
-										<th>ì¬ì© ë¹í</th>
-										<td>ë§ì°ì¤ : 3ê° 3,000ì</td>
+										<th>사용 비훔</th>
+										<td>마우스 : 3개 3,000원</td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
-										<th>ë¹ì© ê³ì°</th>
-										<td>7,500ì * 2 + 3,000ì = <strong>18,000 ì</strong></td>
+										<th>비용 계산</th>
+										<td>7,500원 * 2 + 3,000원 = <strong>18,000 원</strong></td>
 									</tr>
 								</tfoot>
 							</table>
@@ -239,7 +239,7 @@ p, ul, ol {
 							<table>
 								<tr>
 									<td align="center">
-										<button class="btn btn-primary form-control" >íì¸</button>
+										<button class="btn btn-primary form-control" >확인</button>
 									</td>
 								</tr>
 							</table>
@@ -255,7 +255,7 @@ p, ul, ol {
 					<tr>
 						<td class="content footer" align="center">
 							<p>
-								Sent by <a href="#">GS ITM</a>, ìì¸í¹ë³ì ì¢ë¡êµ¬ ê³ë 84
+								Sent by <a href="#">GS ITM</a>, 서울특별시 종로구 계동 84
 							</p>
 							<p>
 								<a href="mailto:">gsitm@gsitm.com</a> | <a href="#">Unsubscribe</a>

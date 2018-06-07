@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>ìì½íê¸°</title>
+		<title>예약하기</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -60,9 +60,9 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">ìê°</a>
+							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.jsp">ìì½</a>
+							<li><a href="work.jsp">예약</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
@@ -85,8 +85,8 @@
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">ìì½íê¸°</h2>
-							<p class="page-title__text">ìì½íì¤ ê³³ì ì íí´ ì£¼ì¸ì.</p>
+							<h2 class="page-title__title">예약하기</h2>
+							<p class="page-title__text">예약하실 곳을 선택해 주세요.</p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -104,22 +104,22 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th>ì¢ë¥</th>
-									<th>ì´ë¦</th>
-									<th>êµ¬ë¶</th>
-									<th>ìê° ì í</th>
+									<th>종류</th>
+									<th>이름</th>
+									<th>구분</th>
+									<th>시간 선택</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td rowspan="5">
-										<button class="btn btn-info btn-kdb">íìì¤</button><br>
-										<button class="btn btn-default btn-kdb">êµì¡ì¤</button><br>
+										<button class="btn btn-info btn-kdb">회의실</button><br>
+										<button class="btn btn-default btn-kdb">교육실</button><br>
 									</td>
-									<td><button class="btn btn-default btn-kdb">ë¯¸íë£¸ 1</button></td>
+									<td><button class="btn btn-default btn-kdb">미팅룸 1</button></td>
 									<td rowspan="5">
-										<button class="btn btn-default btn-kdb">ë¨ê¸° ìì½</button>
-										<button class="btn btn-info btn-kdb">ì¥ê¸° ìì½</button>
+										<button class="btn btn-default btn-kdb">단기 예약</button>
+										<button class="btn btn-info btn-kdb">장기 예약</button>
 									</td>
 									<!--<td rowspan="5">
 										<table class="table table-striped">
@@ -218,24 +218,24 @@
 									</td>
 								</tr>
 								<tr>
-									<td><button class="btn btn-default btn-kdb">ë¯¸íë£¸ 2</button></td>
+									<td><button class="btn btn-default btn-kdb">미팅룸 2</button></td>
 								</tr>
 								<tr>
-									<td><button class="btn btn-default btn-kdb">ë¯¸íë£¸ 3</button></td>
+									<td><button class="btn btn-default btn-kdb">미팅룸 3</button></td>
 								</tr>
 								<tr>
-									<td><button class="btn btn-info btn-kdb">ë¯¸íë£¸ 4</button></td>
+									<td><button class="btn btn-info btn-kdb">미팅룸 4</button></td>
 								</tr>
 								<tr>
-									<td><button class="btn btn-default btn-kdb">ë¯¸íë£¸ 5</button></td>
+									<td><button class="btn btn-default btn-kdb">미팅룸 5</button></td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="pull-left ">
-							<button class="btn btn-default btn-kdb">ì´ì </button>
+							<button class="btn btn-default btn-kdb">이전</button>
 						</div>
 						<div class="pull-right">
-							<button class="btn btn-primary btn-kdb">ë¤ì</button>
+							<button class="btn btn-primary btn-kdb">다음</button>
 						</div>
 					</div>
 				</section>

@@ -28,7 +28,7 @@
 			<!-- header -->
 			<header class="header header--fixed">
 				<div class="header__inner">
-					<div class="header__logo"><a href="index.html"><img src="assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
+					<div class="header__logo"><a href="index.jsp"><img src="assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
 					<div class="navbar-toggle" id="fs-button">
 						<div class="navbar-icon"><span></span></div>
 					</div>
@@ -42,15 +42,15 @@
 						
 						<!--  -->
 						<ul class="wil-menu-list">
-							<li class="current-menu-item"><a href="index.html">Home</a>
+							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.html">소개</a>
+							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.html">예약</a>
+							<li><a href="work.jsp">예약</a>
 							</li>
-							<li><a href="about.html">My Page</a>
+							<li><a href="about.jsp">My Page</a>
 							</li>
-							<li><a href="contact.html">Contact</a>
+							<li><a href="contact.jsp">Contact</a>
 							</li>
 						</ul><!--  -->
 						

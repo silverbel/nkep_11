@@ -46,9 +46,9 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">ìê°</a>
+							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.jsp">ìì½</a>
+							<li><a href="work.jsp">예약</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
@@ -71,8 +71,8 @@
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">ê·¼ë¬´ì§ ì í</h2>
-							<p class="page-title__text">íìì¤ ë° êµì¡ì¤ ìì½ ì  í´ë¹ ê·¼ë¬´ì§ë¥¼ ë¨¼ì  ì íí´ì£¼ì¸ì.</p>
+							<h2 class="page-title__title">근무지 선택</h2>
+							<p class="page-title__text">회의실 및 교육실 예약 전 해당 근무지를 먼저 선택해주세요.</p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -105,7 +105,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">ì¼íë¹ë©</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">삼환빌딩</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-slide-bottom -->
@@ -133,7 +133,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">GS ê°ë¨íì</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">GS 강남타워</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-move-top -->
@@ -161,7 +161,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">GS ê°ì Níì</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">GS 강서 N타워</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-slide-right -->

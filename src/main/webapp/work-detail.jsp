@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Work detail</title>
@@ -45,9 +46,9 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">ìê°</a>
+							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.jsp">ìì½</a>
+							<li><a href="work.jsp">예약</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
@@ -70,8 +71,8 @@
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">ì¼íë¹ë©</h2>
-							<p class="page-title__text">ìêµ­ì­ì ìì¹, </p>
+							<h2 class="page-title__title">삼환빌딩</h2>
+							<p class="page-title__text">안국역에 위치, </p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -139,7 +140,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 col-lg-6 ">
-							<p class="footer__coppy">2018 &copy; Copyright <a href="http://awe7.com/">11ì¡°</a>. All rights Reserved.</p>
+							<p class="footer__coppy">2018 &copy; Copyright <a href="http://awe7.com/">11조</a>. All rights Reserved.</p>
 						</div>
 						<div class="col-md-6 col-lg-6 ">
 							<div class="footer__social">

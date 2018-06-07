@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>ìì½íê¸°</title>
+		<title>예약하기</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -63,9 +63,9 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">ìê°</a>
+							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.jsp">ìì½</a>
+							<li><a href="work.jsp">예약</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
@@ -88,8 +88,8 @@
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">ìì½íê¸°</h2>
-							<p class="page-title__text">ìì½ì íìë ¤ë©´ íì¸ì ëë¬ì£¼ì¸ì.</p>
+							<h2 class="page-title__title">예약하기</h2>
+							<p class="page-title__text">예약을 하시려면 확인을 눌러주세요.</p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -113,10 +113,10 @@
 				<section class="awe-section bg-gray">
 					<div class="container">
 						<div class="pull-left ">
-							<button class="btn btn-default btn-kdb">ì´ì </button>
+							<button class="btn btn-default btn-kdb">이전</button>
 						</div>
 						<div class="pull-right">
-							<button class="btn btn-primary btn-kdb">íì¸</button>
+							<button class="btn btn-primary btn-kdb">확인</button>
 						</div>
 					</div>
 				</section>

@@ -46,9 +46,9 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">ìê°</a>
+							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.jsp">ìì½</a>
+							<li><a href="work.jsp">예약</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
@@ -71,8 +71,8 @@
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">ê·¼ë¬´ì§ ìê°</h2>
-							<p class="page-title__text">ê·¼ë¬´ì§ë³ íìì¤ ë° êµì¡ì¤ ìê°</p>
+							<h2 class="page-title__title">근무지 소개</h2>
+							<p class="page-title__text">근무지별 회의실 및 교육실 소개</p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -96,7 +96,7 @@
 												<div class="post__media"><a href="work-detail.jsp"><img src="assets/img/works/samhwan.jpg"/><!--<img src="https://images.pexels.com/photos/807034/pexels-photo-807034.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
 												<div class="post__body">
 													<div class="post__meta"><span class="date">Nov 26, 2017</span><span class="author"><a href="#">by Maria Gutierrez</a></span></div>
-													<h2 class="post__title"><a href="work-detail.jsp">ì¼íë¹ë©</a></h2>
+													<h2 class="post__title"><a href="work-detail.jsp">삼환빌딩</a></h2>
 													<p class="post__text">Duis porttitor libero ac egestas euismod. Maecenas quis felis turpis. Nulla quis turpis sed augue egestas dapibus vel at nibh. Nul</p>
 													<a class="md-btn md-btn--outline-primary" href="#">read more
 													</a>
@@ -115,7 +115,7 @@
 												<div class="post__media"><a href="work-detail.jsp"><img src="assets/img/works/gsnam.jpg"/><!--<img src="https://images.pexels.com/photos/609687/pexels-photo-609687.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
 												<div class="post__body">
 													<div class="post__meta"><span class="date">Nov 26, 2017</span><span class="author"><a href="#">by Bryan Ryan</a></span></div>
-													<h2 class="post__title"><a href="work-detail.jsp">GS ê°ë¨íì</a></h2>
+													<h2 class="post__title"><a href="work-detail.jsp">GS 강남타워</a></h2>
 													<p class="post__text">Nam suscipit nisi risus, et porttitor metus molestie a. Phasellus id quam id turpis suscipit pretium. Maecenas ultrices, lacus ut </p>
 													<a class="md-btn md-btn--outline-primary" href="#">read more
 													</a>
@@ -134,7 +134,7 @@
 												<div class="post__media"><a href="work-detail.jsp"><img src="assets/img/works/gsseo.jpg"/><!--<img src="https://images.pexels.com/photos/754949/pexels-photo-754949.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
 												<div class="post__body">
 													<div class="post__meta"><span class="date">Dec 20, 2017</span><span class="author"><a href="#">by Bruce Powell</a></span></div>
-													<h2 class="post__title"><a href="work-detail.jsp">GS ê°ì N íì</a></h2>
+													<h2 class="post__title"><a href="work-detail.jsp">GS 강서 N 타워</a></h2>
 													<p class="post__text">Maecenas lorem ex, euismod eget pulvinar non, facilisis ut leo. Quisque placerat purus in neque efficitur ornare. Nam at justo mag</p>
 													<a class="md-btn md-btn--outline-primary" href="#">read more
 													</a>

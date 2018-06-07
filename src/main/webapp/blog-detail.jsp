@@ -1,8 +1,8 @@
-<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Post detail</title>
@@ -46,9 +46,9 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">ìê°</a>
+							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.jsp">ìì½</a>
+							<li><a href="work.jsp">예약</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
@@ -72,7 +72,7 @@
 						<!-- page-title -->
 						<div class="page-title pb-40">
 							<span class="post-detail__cat">Free stuff</span>
-							<h2 class="page-title__title">íìì¤ ë° êµì¡ì¤ ì í</h2>
+							<h2 class="page-title__title">회의실 및 교육실 선택</h2>
 							<div class="post-detail__meta"><span class="date">Feb 22, 2018</span><span class="author"><a href="#">by Brandon Hanson</a></span></div>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
