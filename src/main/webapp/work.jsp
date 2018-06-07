@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
 <html>
-<head>
-		<title>Home</title>
+	<head>
+		<title>Work</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -21,12 +22,10 @@
 		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="assets/css/main.css"><!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
-		<meta http-equiv="Content-Type" content="text/jsp; charset=UTF-8">
-
-</head>
-<body>
-<%-- <a href="<%=request.getContextPath()%>/memo.do">메모장</a> --%>
-<div class="page-wrap" id="root">
+	</head>
+	
+	<body>
+		<div class="page-wrap" id="root">
 			
 			<!-- header -->
 			<header class="header header--fixed">
@@ -47,9 +46,9 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">소개</a>
+							<li><a href="blog.jsp">ìê°</a>
 							</li>
-							<li><a href="work.jsp">예약</a>
+							<li><a href="work.jsp">ìì½</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
@@ -71,17 +70,9 @@
 					<div class="container">
 						
 						<!-- page-title -->
-						<div class="page-title">
-							<h2 class="page-title__title">환영합니다! GS ITM 회의실 예약 시스템입니다.<br>
-								
-								<!-- typing__module -->
-								<div class="typing__module">
-									<div class="typed-strings"><span>근무지 별로</span><span>회의실과</span><span>교육실 예약이 가능합니다!</span>
-									</div><span class="typed"></span>
-								</div><!-- End / typing__module -->
-								
-							</h2>
-							<p class="page-title__text"></p>
+						<div class="page-title pb-40">
+							<h2 class="page-title__title">ê·¼ë¬´ì§ ì í</h2>
+							<p class="page-title__text">íìì¤ ë° êµì¡ì¤ ìì½ ì  í´ë¹ ê·¼ë¬´ì§ë¥¼ ë¨¼ì  ì íí´ì£¼ì¸ì.</p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -93,16 +84,6 @@
 				<!-- Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
-						<div class="row">
-							<div class="col-lg-6 ">
-								
-								<!-- title -->
-								<div class="title">
-									<h2 class="title__title">근무지</h2>
-								</div><!-- End / title -->
-								
-							</div>
-						</div>
 						<div class="grid-css grid-css--masonry" data-col-lg="3" data-col-md="2" data-col-sm="2" data-col-xs="1" data-gap="30">
 							<div class="grid__inner">
 								<div class="grid-sizer"></div>
@@ -111,7 +92,7 @@
 										<div class="grid-item__content-wrapper">
 											
 											<!-- work -->
-											<div class="work"><a href="work-detail.jsp">
+											<div class="work"><a href="blog-detail.jsp">
 													
 													<!-- hoverbox ef-slide-bottom -->
 													<div class="hoverbox ef-slide-bottom light">
@@ -124,7 +105,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">삼환빌딩</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">ì¼íë¹ë©</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-slide-bottom -->
@@ -139,7 +120,7 @@
 										<div class="grid-item__content-wrapper">
 											
 											<!-- work -->
-											<div class="work"><a href="work-detail.jsp">
+											<div class="work"><a href="blog-detail.jsp">
 													
 													<!-- hoverbox ef-move-top -->
 													<div class="hoverbox ef-move-top light">
@@ -152,7 +133,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">GS 강남타워</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">GS ê°ë¨íì</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-move-top -->
@@ -167,7 +148,7 @@
 										<div class="grid-item__content-wrapper">
 											
 											<!-- work -->
-											<div class="work"><a href="work-detail.jsp">
+											<div class="work"><a href="blog-detail.jsp">
 													
 													<!-- hoverbox ef-slide-right -->
 													<div class="hoverbox ef-slide-right light">
@@ -180,7 +161,7 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">GS 강서 N타워</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">GS ê°ì Níì</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-slide-right -->
@@ -195,10 +176,10 @@
 										<div class="grid-item__content-wrapper">
 											
 											<!-- work -->
-											<div class="work"><a href="work-detail.jsp">
+											<div class="work"><a href="blog-detail.jsp">
 													
-													<!-- hoverbox ef-zoom-in -->
-													<div class="hoverbox ef-zoom-in light">
+													<!-- hoverbox ef-slide-left -->
+													<div class="hoverbox ef-slide-left light">
 														
 														<!-- hb_front -->
 														<div class="hb_front"><img src="https://images.pexels.com/photos/794578/pexels-photo-794578.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>
@@ -207,10 +188,10 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">Is UX Really That Important?</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">How to Master Microcopy</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
-													</div><!-- End / hoverbox ef-zoom-in -->
+													</div><!-- End / hoverbox ef-slide-left -->
 													</a>
 											</div><!-- End / work -->
 											
@@ -222,19 +203,19 @@
 										<div class="grid-item__content-wrapper">
 											
 											<!-- work -->
-											<div class="work"><a href="work-detail.jsp">
+											<div class="work"><a href="blog-detail.jsp">
 													
 													<!-- hoverbox ef-zoom-in -->
 													<div class="hoverbox ef-zoom-in light">
 														
 														<!-- hb_front -->
-														<div class="hb_front"><img src="https://images.pexels.com/photos/580649/pexels-photo-580649.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>
+														<div class="hb_front"><img src="https://images.pexels.com/photos/159333/pexels-photo-159333.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>
 														</div><!-- End / hb_front -->
 														
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">Best National Locations</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">7 UI Choices That Damage UX</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
 													</div><!-- End / hoverbox ef-zoom-in -->
@@ -249,10 +230,10 @@
 										<div class="grid-item__content-wrapper">
 											
 											<!-- work -->
-											<div class="work"><a href="work-detail.jsp">
+											<div class="work"><a href="blog-detail.jsp">
 													
-													<!-- hoverbox ef-slide-right -->
-													<div class="hoverbox ef-slide-right light">
+													<!-- hoverbox ef-slide-top -->
+													<div class="hoverbox ef-slide-top light">
 														
 														<!-- hb_front -->
 														<div class="hb_front"><img src="https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>
@@ -261,10 +242,10 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">Best National Locations</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">3 Essential Design Trends</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
-													</div><!-- End / hoverbox ef-slide-right -->
+													</div><!-- End / hoverbox ef-slide-top -->
 													</a>
 											</div><!-- End / work -->
 											
@@ -276,10 +257,10 @@
 										<div class="grid-item__content-wrapper">
 											
 											<!-- work -->
-											<div class="work"><a href="work-detail.jsp">
+											<div class="work"><a href="blog-detail.jsp">
 													
-													<!-- hoverbox ef-move-right -->
-													<div class="hoverbox ef-move-right light">
+													<!-- hoverbox ef-push-top -->
+													<div class="hoverbox ef-push-top light">
 														
 														<!-- hb_front -->
 														<div class="hb_front"><img src="https://images.pexels.com/photos/792906/pexels-photo-792906.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>
@@ -288,10 +269,10 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">Free PSD Files</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">The Myth of Ugly Design</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
-													</div><!-- End / hoverbox ef-move-right -->
+													</div><!-- End / hoverbox ef-push-top -->
 													</a>
 											</div><!-- End / work -->
 											
@@ -305,8 +286,8 @@
 											<!-- work -->
 											<div class="work"><a href="work-detail.jsp">
 													
-													<!-- hoverbox ef-move-bottom -->
-													<div class="hoverbox ef-move-bottom light">
+													<!-- hoverbox ef-push-bottom -->
+													<div class="hoverbox ef-push-bottom light">
 														
 														<!-- hb_front -->
 														<div class="hb_front"><img src="https://images.pexels.com/photos/789140/pexels-photo-789140.jpeg?h=350&amp;auto=compress&amp;cs=tinysrgb" alt=""/>
@@ -315,37 +296,10 @@
 														
 														<!-- hb_back -->
 														<div class="hb_back">
-															<h2 class="work__title">5 Ways to Use 404 Pages</h2><span class="work__text">View detail</span>
+															<h2 class="work__title">Free PSD Files</h2><span class="work__text">View detail</span>
 														</div><!-- End / hb_back -->
 														
-													</div><!-- End / hoverbox ef-move-bottom -->
-													</a>
-											</div><!-- End / work -->
-											
-										</div>
-									</div>
-								</div>
-								<div class="grid-item">
-									<div class="grid-item__inner">
-										<div class="grid-item__content-wrapper">
-											
-											<!-- work -->
-											<div class="work"><a href="work-detail.jsp">
-													
-													<!-- hoverbox ef-move-bottom -->
-													<div class="hoverbox ef-move-bottom light">
-														
-														<!-- hb_front -->
-														<div class="hb_front"><img src="https://images.pexels.com/photos/15382/pexels-photo.jpg?h=350&amp;auto=compress&amp;cs=tinysrgb" alt=""/>
-														</div><!-- End / hb_front -->
-														
-														
-														<!-- hb_back -->
-														<div class="hb_back">
-															<h2 class="work__title">5 Ways to Use 404 Pages</h2><span class="work__text">View detail</span>
-														</div><!-- End / hb_back -->
-														
-													</div><!-- End / hoverbox ef-move-bottom -->
+													</div><!-- End / hoverbox ef-push-bottom -->
 													</a>
 											</div><!-- End / work -->
 											
@@ -355,7 +309,7 @@
 							</div>
 						</div>
 						<div class="awe-text-center mt-50">
-							<a class="md-btn md-btn--outline-primary" href="#">all work
+							<a class="md-btn md-btn--outline-primary " href="#">more work
 							</a>
 						</div>
 					</div>
@@ -370,7 +324,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 col-lg-6 ">
-							<p class="footer__coppy">2018 &copy; Copyright <a href="http://awe7.com/">11조</a>. All rights Reserved.</p>
+							<p class="footer__coppy">2018 &copy; Copyright <a href="http://awe7.com/">Awe7</a>. All rights Reserved.</p>
 						</div>
 						<div class="col-md-6 col-lg-6 ">
 							<div class="footer__social">

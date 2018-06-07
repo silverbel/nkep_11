@@ -1,10 +1,10 @@
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
 <html>
-<head>
-		<title>About</title>
+	<head>
+		<title>Work detail</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -21,14 +21,15 @@
 		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="assets/css/main.css"><!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
-</head>
-<body>
-<div class="page-wrap" id="root">
+	</head>
+	
+	<body>
+		<div class="page-wrap" id="root">
 			
 			<!-- header -->
 			<header class="header header--fixed">
 				<div class="header__inner">
-					<div class="header__logo"><a href="index.html"><img src="assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
+					<div class="header__logo"><a href="index.jsp"><img src="assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
 					<div class="navbar-toggle" id="fs-button">
 						<div class="navbar-icon"><span></span></div>
 					</div>
@@ -42,15 +43,15 @@
 						
 						<!--  -->
 						<ul class="wil-menu-list">
-							<li class="current-menu-item"><a href="index.html">Home</a>
+							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.html">소개</a>
+							<li><a href="blog.jsp">ìê°</a>
 							</li>
-							<li><a href="work.html">예약</a>
+							<li><a href="work.jsp">ìì½</a>
 							</li>
-							<li><a href="about.html">My Page</a>
+							<li><a href="about.jsp">My Page</a>
 							</li>
-							<li><a href="contact.html">Contact</a>
+							<li><a href="contact.jsp">Contact</a>
 							</li>
 						</ul><!--  -->
 						
@@ -69,8 +70,8 @@
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">IT1039 남동길</h2>
-							<p class="page-title__text">회원 정보 보기</p>
+							<h2 class="page-title__title">ì¼íë¹ë©</h2>
+							<p class="page-title__text">ìêµ­ì­ì ìì¹, </p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -82,46 +83,49 @@
 				<!-- Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
-						<div class="row">
-							<div class="col-md-6 col-lg-5 "><img src="https://images.pexels.com/photos/797558/pexels-photo-797558.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt="">
+						
+						<!--  -->
+						<div>
+							<div class="work-detail__entry">
+								<p>In nec porttitor nisi. Nunc at egestas ante. Sed vestibulum velit eu nibh commodo, non fermentum libero pellentesque. Fusce sed posuere ex, non ultrices nibh. Fusce quis leo non ex rutrum convallis non ut ante. Phasellus hendrerit ante nec est porta, et elementum massa euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+								<p>Quisque et quam facilisis, posuere justo ut, maximus nulla. Quisque id fermentum tortor. Duis sem mi, luctus sed luctus eget, viverra et ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec faucibus imperdiet porttitor. Etiam fringilla ligula et porttitor tristique..</p><br>
+								<div class="work-img"><img src="assets/img/works/samhwan.jpg" alt=""></div>
+								<div class="work-img"><img src="assets/img/works/samhwan2.png" alt=""></div>
+								<div class="work-img"><img src="assets/img/works/samhwan3.png" alt=""></div>
 							</div>
-							<div class="col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-1 ">
+							<div class="sharebox__module awe-text-center">
+								<p class="social-text">SHARE THIS WORK</p>
 								
-								<!--  -->
-								<div class="mt-30">
-									<h2 class="about__title">Erik Minimis</h2>
-									<p class="about__subtitle">Just Keep Scrolling! How To Design Lengthy, Lengthy Pages</p>
-									<p class="about__text">Maecenas lorem ex, euismod eget pulvinar non, facilisis ut leo. Quisque placerat purus in neque efficitur ornare. Nam at justo magna. Aliquam venenatis odio ante, non euismod augue porttitor eget. Maecenas nec viverra eros, eget euismod felis. Integer cursus libero sed lorem euismod, vel iaculis felis placerat. Pellentesque augue lacus, sodales et eros sed, molestie rhoncus ligula. Vivamus sed massa lorem. Suspendisse mollis lectus nec ex fermentum, in consectetur dolor egestas. Phasellus quis ipsum quis nisl ultricies sollicitudin id in dolor. Proin at consequat dui.</p>
-									
-									<!-- progress -->
-									<div class="progress">
-										<h5 class="progress__title">design</h5>
-										<div class="progress__wrap">
-											<div class="progress__bar" data-progress-percent="33" data-timing="ease" data-duration="1000" data-delay="500"></div><span class="progress__number">39%</span>
-										</div>
-									</div><!-- End / progress -->
-									
-									
-									<!-- progress -->
-									<div class="progress">
-										<h5 class="progress__title">photography</h5>
-										<div class="progress__wrap">
-											<div class="progress__bar" data-progress-percent="59" data-timing="ease" data-duration="1000" data-delay="500"></div><span class="progress__number">47%</span>
-										</div>
-									</div><!-- End / progress -->
-									
-									
-									<!-- progress -->
-									<div class="progress">
-										<h5 class="progress__title">web development</h5>
-										<div class="progress__wrap">
-											<div class="progress__bar" data-progress-percent="53" data-timing="ease" data-duration="1000" data-delay="500"></div><span class="progress__number">59%</span>
-										</div>
-									</div><!-- End / progress -->
-									
-								</div><!-- End /  -->
+								<!-- social-icon -->
+								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-facebook"></i>
+								</a><!-- End / social-icon -->
+								
+								
+								<!-- social-icon -->
+								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-twitter"></i>
+								</a><!-- End / social-icon -->
+								
+								
+								<!-- social-icon -->
+								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-linkedin"></i>
+								</a><!-- End / social-icon -->
+								
+								
+								<!-- social-icon -->
+								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-behance"></i>
+								</a><!-- End / social-icon -->
+								
+								
+								<!-- social-icon -->
+								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-vimeo"></i>
+								</a><!-- End / social-icon -->
 								
 							</div>
+						</div><!-- End /  -->
+						
+						<div class="awe-text-center mt-50">
+							<a class="md-btn md-btn--outline-primary " href="#">All work
+							</a>
 						</div>
 					</div>
 				</section>
@@ -135,7 +139,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 col-lg-6 ">
-							<p class="footer__coppy">2018 &copy; Copyright <a href="http://awe7.com/">Awe7</a>. All rights Reserved.</p>
+							<p class="footer__coppy">2018 &copy; Copyright <a href="http://awe7.com/">11ì¡°</a>. All rights Reserved.</p>
 						</div>
 						<div class="col-md-6 col-lg-6 ">
 							<div class="footer__social">
