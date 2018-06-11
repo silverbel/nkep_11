@@ -1,4 +1,4 @@
-package com.example.sample.model.dto;
+package com.gsitm.user.model.dto;
 
 public class WorkSpaceDTO {
 	private String workSeq;

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="workSpace">
-	<select id="getWorkSpaceList" resultType="com.example.sample.model.dto.WorkSpaceDTO">
+	<select id="getWorkSpaceList" resultType="com.gsitm.user.model.dto.WorkSpaceDTO" parameterType="com.gsitm.user.model.dto.WorkSpaceDTO">
 		SELECT WORK_SEQ, WORK_CODE, WORK_NAME, WORK_ADDR, WORK_TEL 
 		FROM nkep_11.TB_WORKSPACE
 	</select>
