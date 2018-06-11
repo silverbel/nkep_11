@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gsitm.user.model.dto.WorkSpaceDTO;
+import com.gsitm.common.dto.WorkSpaceDTO;
 import com.gsitm.user.service.WorkSpaceService;
 
 @Controller

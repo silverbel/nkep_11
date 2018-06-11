@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.gsitm.user.model.dto.WorkSpaceDTO;
+import com.gsitm.common.dto.WorkSpaceDTO;
 
 @Repository
 public class WorkSpaceDAOImpl implements WorkSpaceDAO {

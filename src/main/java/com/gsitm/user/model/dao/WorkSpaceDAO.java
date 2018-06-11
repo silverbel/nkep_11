@@ -2,7 +2,7 @@ package com.gsitm.user.model.dao;
 
 import java.util.List;
 
-import com.gsitm.user.model.dto.WorkSpaceDTO;
+import com.gsitm.common.dto.WorkSpaceDTO;
 
 
 public interface WorkSpaceDAO {
