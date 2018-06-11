@@ -42,7 +42,7 @@
 						
 						<!--  -->
 						<ul class="wil-menu-list">
-							<li class="current-menu-item"><a href="index.jsp">Home</a>
+							<li class="current-menu-item"><a href="/">Home</a>
 							</li>
 							<li><a href="blog.jsp">소개</a>
 							</li>

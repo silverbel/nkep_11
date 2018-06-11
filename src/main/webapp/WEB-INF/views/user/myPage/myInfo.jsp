@@ -21,44 +21,52 @@
 		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="/assets/css/main.css"><!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
+		<link href="/assets/dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Custom fonts for this template -->
+		<link href="/assets/dist/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+		<!-- Plugin CSS -->
+		<link href="/assets/dist/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+		<!-- Custom styles for this template -->
+		<link href="/assets/dist/css/freelancer.css" rel="stylesheet">
+		
+		<!-- jQuery v2.1.4 -->
+		<script src="/dist/js/jquery.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="/dist/js/bootstrap.js"></script>
+		<!-- Custom Theme JavaScript -->
+		<!-- DatePicker JavaScript -->
+		<script src="/dist/js/moment-ko.js"></script>
+		<script src="/dist/js/transition.js"></script>
+		<script src="/dist/js/collapse.js"></script>
+		<script src="/dist/js/bootstrap-datetimepicker.js"></script>
+		<!-- DataTables JavaScript -->
+		<script src="/dist/js/jquery.dataTables.js"></script>
+		<script src="/dist/js/dataTables.bootstrap.js"></script>
+		<script src="/dist/js/dataTables.responsive.js"></script>
+		<script src="/dist/js/responsive.bootstrap.js"></script>
+		<!-- tabletools -->
+		<script src="/dist/js/dataTables.tableTools.js"></script>
+		<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=19f4d6583e5d740e1acb04f6479a3579&libraries=services,clusterer,drawing"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+		<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				
+			})
+		</script>
 </head>
 <body>
 <div class="page-wrap" id="root">
 			
 			<!-- header -->
-			<header class="header header--fixed">
-				<div class="header__inner">
-					<div class="header__logo"><a href="index.jsp"><img src="/assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
-					<div class="navbar-toggle" id="fs-button">
-						<div class="navbar-icon"><span></span></div>
-					</div>
-				</div>
-				
-				<!-- fullscreenmenu__module -->
-				<div class="fullscreenmenu__module" trigger="#fs-button">
-					
-					<!-- overlay-menu -->
-					<nav class="overlay-menu">
-						
-						<!--  -->
-						<ul class="wil-menu-list">
-							<li class="current-menu-item"><a href="index.jsp">Home</a>
-							</li>
-							<li><a href="blog.jsp">소개</a>
-							</li>
-							<li><a href="work.jsp">예약</a>
-							</li>
-							<li><a href="about.jsp">My Page</a>
-							</li>
-							<li><a href="contact.jsp">Contact</a>
-							</li>
-						</ul><!--  -->
-						
-					</nav><!-- End / overlay-menu -->
-					
-				</div><!-- End / fullscreenmenu__module -->
-				
-			</header><!-- End / header -->
+				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
+			<!-- End / header -->
 			
 			<!-- Content-->
 			<div class="wil-content">
@@ -172,7 +180,9 @@
 			
 		</div>
 		<!-- Vendors-->
+		<!-- Bootstrap Core Javascript -->
 		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
+		<script src="/assets/dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script type="text/javascript" src="/assets/vendors/imagesloaded/imagesloaded.pkgd.js"></script>
 		<script type="text/javascript" src="/assets/vendors/isotope-layout/isotope.pkgd.js"></script>
 		<script type="text/javascript" src="/assets/vendors/jquery-one-page/jquery.nav.min.js"></script>
