@@ -38,39 +38,8 @@ description : my page, 예약 확인
 <div class="page-wrap" id="root">
 			
 			<!-- header -->
-			<header class="header header--fixed">
-				<div class="header__inner">
-					<div class="header__logo"><a href="index.jsp"><img src="/assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
-					<div class="navbar-toggle" id="fs-button">
-						<div class="navbar-icon"><span></span></div>
-					</div>
-				</div>
-				
-				<!-- fullscreenmenu__module -->
-				<div class="fullscreenmenu__module" trigger="#fs-button">
-					
-					<!-- overlay-menu -->
-					<nav class="overlay-menu">
-						
-						<!--  -->
-						<ul class="wil-menu-list">
-							<li class="current-menu-item"><a href="/">Home</a>
-							</li>
-							<li><a href="blog.jsp">소개</a>
-							</li>
-							<li><a href="work.jsp">예약</a>
-							</li>
-							<li><a href="about.jsp">My Page</a>
-							</li>
-							<li><a href="contact.jsp">Contact</a>
-							</li>
-						</ul><!--  -->
-						
-					</nav><!-- End / overlay-menu -->
-					
-				</div><!-- End / fullscreenmenu__module -->
-				
-			</header><!-- End / header -->
+				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
+			<!-- End / header -->
 			
 			<!-- Content-->
 			<div class="wil-content">
@@ -81,7 +50,7 @@ description : my page, 예약 확인
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">IT1039 남동길</h2>
+							<h2 class="page-title__title">${session.empId } - ${session.empName }님</h2>
 							<p class="page-title__text">회원 정보 보기</p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->

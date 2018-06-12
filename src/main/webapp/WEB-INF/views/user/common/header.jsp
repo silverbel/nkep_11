@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -12,11 +13,11 @@ description : header 부분. 메뉴를 담당
   [이름]   [수정일]     [내용]
   ----------------------------------------------------------
   
---%> 
+--%>
 <header class="header header--fixed">
 	<div class="header__inner">
 		<div class="header__logo">
-			<a href="index.jsp"><img src="/assets/img/gsitm.jpg" alt=""
+			<a href="index.jsp"><img src="assets/img/gsitm.jpg" alt=""
 				style="width: 122px;" /></a>
 		</div>
 		<div class="navbar-toggle" id="fs-button">
@@ -36,9 +37,13 @@ description : header 부분. 메뉴를 담당
 			<ul class="wil-menu-list">
 				<li class="current-menu-item"><a href="index.jsp">Home</a></li>
 				<li><a href="blog.jsp">소개</a></li>
-				<li><a href="work.jsp">예약</a></li>
+				<li><a href="${path}/resv/resvStep1.do">예약</a></li>
 				<li><a href="about.jsp">My Page</a></li>
 				<li><a href="contact.jsp">Contact</a></li>
+				<li><a href="${path}/email/write.do">Report</a></li>
+				<c:if test="${'R_MGR' eq sessionID.role }">
+					<li><a href="contact.jsp">관리자 page</a></li>
+				</c:if>
 			</ul>
 			<!--  -->
 

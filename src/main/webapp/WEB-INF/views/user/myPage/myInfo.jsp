@@ -90,7 +90,7 @@ description : my page, 나의 정보 확인
 						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">IT1039 남동길</h2>
+							<h2 class="page-title__title">${sessionID.empId } - ${sessionID.empName }님</h2>
 							<p class="page-title__text">회원 정보 보기</p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
