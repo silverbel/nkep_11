@@ -47,7 +47,7 @@
 						<ul class="wil-menu-list">
 							<li class="current-menu-item"><a href="index.jsp">Home</a>
 							</li>
-							<li><a href="blog.jsp">소개</a>
+							<li><a href="${path}/info/workspace.do">소개</a>
 							</li>
 							<li><a href="${path}/resv/resvStep1.do">예약</a>
 							</li>

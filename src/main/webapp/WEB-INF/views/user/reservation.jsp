@@ -52,6 +52,16 @@ description : 예약하기
 						$(this).addClass('btn-default');
 					} 
 				})
+				
+				$('.resv-btn').click(function() {
+					if($(this).hasClass('btn-default')){
+						$(this).removeClass('btn-default');
+						$(this).addClass('btn-info');
+					}else if($(this).hasClass('btn-info')){
+						$(this).removeClass('btn-info');
+						$(this).addClass('btn-default');
+					}
+				})
 			})
 		function fn_prev(){
 			location.href = "/resv/resvStep1.do";
@@ -147,13 +157,13 @@ description : 예약하기
 							<tbody>
 								<tr>
 									<td rowspan="5">
-										<button class="btn btn-info btn-kdb">회의실</button><br>
-										<button class="btn btn-default btn-kdb">교육실</button><br>
+										<button class="resv-btn btn btn-default btn-kdb">회의실</button><br>
+										<button class="resv-btn btn btn-default btn-kdb">교육실</button><br>
 									</td>
-									<td><button class="btn btn-default btn-kdb">미팅룸 1</button></td>
+									<td><button class="resv-btn btn btn-default btn-kdb">미팅룸 1</button></td>
 									<td rowspan="5">
-										<button class="btn btn-default btn-kdb">단기 예약</button>
-										<button class="btn btn-info btn-kdb">장기 예약</button>
+										<button class="resv-btn btn btn-default btn-kdb">단기 예약</button>
+										<button class="resv-btn btn btn-default btn-kdb">장기 예약</button>
 									</td>
 									<%-- <td rowspan="5">
 										<table class="table table-striped">
@@ -258,7 +268,7 @@ description : 예약하기
 									<td><button class="btn btn-default btn-kdb">미팅룸 3</button></td>
 								</tr>
 								<tr>
-									<td><button class="btn btn-info btn-kdb">미팅룸 4</button></td>
+									<td><button class="btn btn-default btn-kdb">미팅룸 4</button></td>
 								</tr>
 								<tr>
 									<td><button class="btn btn-default btn-kdb">미팅룸 5</button></td>

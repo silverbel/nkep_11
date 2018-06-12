@@ -11,15 +11,15 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<!-- Fonts-->
-		<link rel="stylesheet" type="text/css" href="assets/fonts/fontawesome/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/fonts/pe-icon/pe-icon.css">
+		<link rel="stylesheet" type="text/css" href="/assets/fonts/fontawesome/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="/assets/fonts/pe-icon/pe-icon.css">
 		<!-- Vendors-->
-		<link rel="stylesheet" type="text/css" href="assets/vendors/bootstrap/grid.css">
-		<link rel="stylesheet" type="text/css" href="assets/vendors/magnific-popup/magnific-popup.min.css">
-		<link rel="stylesheet" type="text/css" href="assets/vendors/swiper/swiper.css">
+		<link rel="stylesheet" type="text/css" href="/assets/vendors/bootstrap/grid.css">
+		<link rel="stylesheet" type="text/css" href="/assets/vendors/magnific-popup/magnific-popup.min.css">
+		<link rel="stylesheet" type="text/css" href="/assets/vendors/swiper/swiper.css">
 		<!-- App & fonts-->
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Open+Sans:400,700">
-		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="assets/css/main.css"><!--[if lt IE 9]>
+		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="/assets/css/main.css"><!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
 	</head>
@@ -30,7 +30,7 @@
 			<!-- header -->
 			<header class="header header--fixed">
 				<div class="header__inner">
-					<div class="header__logo"><a href="index.jsp"><img src="assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
+					<div class="header__logo"><a href="index.jsp"><img src="/assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
 					<div class="navbar-toggle" id="fs-button">
 						<div class="navbar-icon"><span></span></div>
 					</div>
@@ -93,7 +93,7 @@
 											
 											<!-- post -->
 											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="assets/img/works/samhwan.jpg"/><!--<img src="https://images.pexels.com/photos/807034/pexels-photo-807034.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
+												<div class="post__media"><a href="work-detail.jsp"><img src="/assets/img/works/samhwan.jpg"/><!--<img src="https://images.pexels.com/photos/807034/pexels-photo-807034.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
 												<div class="post__body">
 													<div class="post__meta"><span class="date">Nov 26, 2017</span><span class="author"><a href="#">by Maria Gutierrez</a></span></div>
 													<h2 class="post__title"><a href="work-detail.jsp">삼환빌딩</a></h2>
@@ -112,7 +112,7 @@
 											
 											<!-- post -->
 											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="assets/img/works/gsnam.jpg"/><!--<img src="https://images.pexels.com/photos/609687/pexels-photo-609687.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
+												<div class="post__media"><a href="work-detail.jsp"><img src="/assets/img/works/gsnam.jpg"/><!--<img src="https://images.pexels.com/photos/609687/pexels-photo-609687.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
 												<div class="post__body">
 													<div class="post__meta"><span class="date">Nov 26, 2017</span><span class="author"><a href="#">by Bryan Ryan</a></span></div>
 													<h2 class="post__title"><a href="work-detail.jsp">GS 강남타워</a></h2>
@@ -131,7 +131,7 @@
 											
 											<!-- post -->
 											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="assets/img/works/gsseo.jpg"/><!--<img src="https://images.pexels.com/photos/754949/pexels-photo-754949.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
+												<div class="post__media"><a href="work-detail.jsp"><img src="/assets/img/works/gsseo.jpg"/><!--<img src="https://images.pexels.com/photos/754949/pexels-photo-754949.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
 												<div class="post__body">
 													<div class="post__meta"><span class="date">Dec 20, 2017</span><span class="author"><a href="#">by Bruce Powell</a></span></div>
 													<h2 class="post__title"><a href="work-detail.jsp">GS 강서 N 타워</a></h2>
@@ -294,19 +294,19 @@
 			
 		</div>
 		<!-- Vendors-->
-		<script type="text/javascript" src="assets/vendors/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="assets/vendors/imagesloaded/imagesloaded.pkgd.js"></script>
-		<script type="text/javascript" src="assets/vendors/isotope-layout/isotope.pkgd.js"></script>
-		<script type="text/javascript" src="assets/vendors/jquery-one-page/jquery.nav.min.js"></script>
-		<script type="text/javascript" src="assets/vendors/jquery.easing/jquery.easing.min.js"></script>
-		<script type="text/javascript" src="assets/vendors/jquery.matchHeight/jquery.matchHeight.min.js"></script>
-		<script type="text/javascript" src="assets/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
-		<script type="text/javascript" src="assets/vendors/masonry-layout/masonry.pkgd.js"></script>
-		<script type="text/javascript" src="assets/vendors/jquery.waypoints/jquery.waypoints.min.js"></script>
-		<script type="text/javascript" src="assets/vendors/swiper/swiper.jquery.js"></script>
-		<script type="text/javascript" src="assets/vendors/menu/menu.js"></script>
-		<script type="text/javascript" src="assets/vendors/typed/typed.min.js"></script>
+		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="/assets/vendors/imagesloaded/imagesloaded.pkgd.js"></script>
+		<script type="text/javascript" src="/assets/vendors/isotope-layout/isotope.pkgd.js"></script>
+		<script type="text/javascript" src="/assets/vendors/jquery-one-page/jquery.nav.min.js"></script>
+		<script type="text/javascript" src="/assets/vendors/jquery.easing/jquery.easing.min.js"></script>
+		<script type="text/javascript" src="/assets/vendors/jquery.matchHeight/jquery.matchHeight.min.js"></script>
+		<script type="text/javascript" src="/assets/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
+		<script type="text/javascript" src="/assets/vendors/masonry-layout/masonry.pkgd.js"></script>
+		<script type="text/javascript" src="/assets/vendors/jquery.waypoints/jquery.waypoints.min.js"></script>
+		<script type="text/javascript" src="/assets/vendors/swiper/swiper.jquery.js"></script>
+		<script type="text/javascript" src="/assets/vendors/menu/menu.js"></script>
+		<script type="text/javascript" src="/assets/vendors/typed/typed.min.js"></script>
 		<!-- App-->
-		<script type="text/javascript" src="assets/js/main.js"></script>
+		<script type="text/javascript" src="/assets/js/main.js"></script>
 	</body>
 </html>

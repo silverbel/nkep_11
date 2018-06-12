@@ -6,6 +6,7 @@ public class WorkSpaceDTO {
 	private String workName;
 	private String workAddr;
 	private String workTel;
+	
 	public String getWorkSeq() {
 		return workSeq;
 	}
