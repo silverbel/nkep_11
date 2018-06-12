@@ -49,11 +49,11 @@
 							</li>
 							<li><a href="blog.jsp">소개</a>
 							</li>
-							<li><a href="work.jsp">예약</a>
+							<li><a href="${path}/resv/resvStep1.do">예약</a>
 							</li>
 							<li><a href="about.jsp">My Page</a>
 							</li>
-							<li><a href="contact.jsp">Contact</a>
+							<li><a href="${path}/email/write.do">Report</a>
 							</li>
 						</ul><!--  -->
 						

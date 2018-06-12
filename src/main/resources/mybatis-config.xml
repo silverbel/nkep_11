@@ -12,10 +12,12 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.gsitm.common.dto.WorkSpaceDTO" alias="workSpace"/>
+		<typeAlias type="com.gsitm.common.dto.ResvDTO" alias="resv"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>
-	</mappers>
+		<mapper resource="mappers/resv/resvMapper.xml"></mapper>
+   </mappers>
 
 </configuration>
 
