@@ -30,6 +30,7 @@
 	<div class="page-wrap" id="root">
 			
 			<!-- header -->
+				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
 			<!-- End / header -->
 			
 			<!-- Content-->
