@@ -43,39 +43,8 @@ description : 메일링
 		<div class="page-wrap" id="root">
 			
 			<!-- header -->
-			<header class="header header--fixed">
-				<div class="header__inner">
-					<div class="header__logo"><a href="index.jsp"><img src="/assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
-					<div class="navbar-toggle" id="fs-button">
-						<div class="navbar-icon"><span></span></div>
-					</div>
-				</div>
-				
-				<!-- fullscreenmenu__module -->
-				<div class="fullscreenmenu__module" trigger="#fs-button">
-					
-					<!-- overlay-menu -->
-					<nav class="overlay-menu">
-						
-						<!--  -->
-						<ul class="wil-menu-list">
-							<li class="current-menu-item"><a href="index.jsp">Home</a>
-							</li>
-							<li><a href="blog.jsp">소개</a>
-							</li>
-							<li><a href="${path}/resv/resvStep1.do">예약</a>
-							</li>
-							<li><a href="about.jsp">My Page</a>
-							</li>
-							<li><a href="${path}/email/write.do">Report</a>
-							</li>
-						</ul><!--  -->
-						
-					</nav><!-- End / overlay-menu -->
-					
-				</div><!-- End / fullscreenmenu__module -->
-				
-			</header><!-- End / header -->
+				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
+			<!-- End / header -->
 			
 			<!-- Content-->
 			<div class="wil-content">
