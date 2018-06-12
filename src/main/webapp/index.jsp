@@ -26,6 +26,7 @@
 	</head>
 	<body>
 	<%-- <a href="<%=request.getContextPath()%>/memo.do">메모장</a> --%>
+	<!-- Test!!! -->
 	<div class="page-wrap" id="root">
 			
 			<!-- header -->
