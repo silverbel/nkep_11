@@ -13,6 +13,7 @@
 	<typeAliases>
 		<typeAlias type="com.gsitm.common.dto.WorkSpaceDTO" alias="workSpace"/>
 		<typeAlias type="com.gsitm.common.dto.EmployeeDTO" alias="empDTO"/>
+		<typeAlias type="com.gsitm.common.dto.ResvDTO" alias="resv"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>
