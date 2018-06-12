@@ -1,25 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%--
+subject    : header.jsp
+author     : ê¹€ë™ë²”
+date       : 2018. 6. 12.
+description : footer ë¶€ë¶„
+ 
+  [ì´ë¦„]   [ìˆ˜ì •ì¼]     [ë‚´ìš©]
+  ----------------------------------------------------------
+	ê¹€ë™ë²”		2018.06.12	ì´ˆì•ˆ  
+--%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
-<%--
-subject    : header.jsp
-author     : ±èµ¿¹ü
-date       : 2018. 6. 12.
-description : footer ºÎºÐ
- 
-  [ÀÌ¸§]   [¼öÁ¤ÀÏ]     [³»¿ë]
-  ----------------------------------------------------------
-  
---%>
 <div class="footer">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 col-lg-6 ">
 				<p class="footer__coppy">
-					2018 &copy; Copyright <a href="http://awe7.com/">11Á¶</a>. All
+					2018 &copy; Copyright <a href="http://awe7.com/">11ì¡°</a>. All
 					rights Reserved.
 				</p>
 			</div>

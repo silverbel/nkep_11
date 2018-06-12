@@ -1,9 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
 <%--
 subject    : header.jsp
 author     : 김동범
@@ -12,8 +6,15 @@ description : header 부분. 메뉴를 담당
  
   [이름]   [수정일]     [내용]
   ----------------------------------------------------------
-  
+	김동범		2018.06.12	메뉴 수정  
+	김동범		2018.06.12	로그아웃 추가  
 --%>
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <header class="header header--fixed">
 	<div class="header__inner">
 		<div class="header__logo">
@@ -41,6 +42,7 @@ description : header 부분. 메뉴를 담당
 				<li><a href="about.jsp">My Page</a></li>
 				<li><a href="contact.jsp">Contact</a></li>
 				<li><a href="${path}/email/write.do">Report</a></li>
+				<li><a href="${path}/email/write.do">Log Out</a></li>
 				<c:if test="${'S_MGR' eq sessionID.role }">
 					<li><a href="contact.jsp">시스템 관리자 page</a></li>
 				</c:if>
