@@ -12,9 +12,11 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.gsitm.common.dto.WorkSpaceDTO" alias="workSpace"/>
+		<typeAlias type="com.gsitm.common.dto.EmployeeDTO" alias="empDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>
+		<mapper resource="mappers/LoginMapper.xml"></mapper>
 	</mappers>
 
 </configuration>

@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%--
+subject    : myReservation.jsp
+author     : 김동범
+date       : 2018. 6. 11.
+description : my page, 예약 확인
+ 
+  [이름]   [수정일]     [내용]
+  ----------------------------------------------------------
+  
+--%> 
+
 <!DOCTYPE html>
 <html>
 <head>

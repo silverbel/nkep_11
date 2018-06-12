@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html>
-<head>
+	<head>
 		<title>Home</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -23,10 +23,10 @@
 		<![endif]-->
 		<meta http-equiv="Content-Type" content="text/jsp; charset=UTF-8">
 
-</head>
-<body>
-<%-- <a href="<%=request.getContextPath()%>/memo.do">메모장</a> --%>
-<div class="page-wrap" id="root">
+	</head>
+	<body>
+	<%-- <a href="<%=request.getContextPath()%>/memo.do">메모장</a> --%>
+	<div class="page-wrap" id="root">
 			
 			<!-- header -->
 			<header class="header header--fixed">
@@ -72,8 +72,8 @@
 						
 						<!-- page-title -->
 						<div class="page-title">
-							<h2 class="page-title__title">환영합니다! GS ITM 회의실 예약 시스템입니다.<br>
-								
+							<h2 class="page-title__title">${sessionID.empName }님 환영합니다!<br>
+								 GS ITM 회의실 예약 시스템입니다.<br>
 								<!-- typing__module -->
 								<div class="typing__module">
 									<div class="typed-strings"><span>근무지 별로</span><span>회의실과</span><span>교육실 예약이 가능합니다!</span>
