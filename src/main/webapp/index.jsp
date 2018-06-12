@@ -26,54 +26,12 @@
 	</head>
 	<body>
 	<%-- <a href="<%=request.getContextPath()%>/memo.do">메모장</a> --%>
+	<!-- Test!!! -->
 	<div class="page-wrap" id="root">
 			
 			<!-- header -->
-			<header class="header header--fixed">
-				<div class="header__inner">
-					<div class="header__logo"><a href="index.jsp"><img src="assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
-					<div class="navbar-toggle" id="fs-button">
-						<div class="navbar-icon"><span></span></div>
-					</div>
-				</div>
-				
-				<!-- fullscreenmenu__module -->
-				<div class="fullscreenmenu__module" trigger="#fs-button">
-					
-					<!-- overlay-menu -->
-					<nav class="overlay-menu">
-						
-						<!--  -->
-						<ul class="wil-menu-list">
-							<li class="current-menu-item"><a href="index.jsp">Home</a>
-							</li>
-							<li><a href="blog.jsp">소개</a>
-							</li>
-							<li><a href="${path}/resv/resvStep1.do">예약</a>
-							</li>
-							<li><a href="about.jsp">My Page</a>
-							</li>
-							<li><a href="contact.jsp">Contact</a>
-							</li>
-							<li><a href="${path}/email/write.do">Report</a>
-							</li>
-							<c:if test="${'S_MGR' eq sessionID.role }">
-							<li><a href="/admin.do">시스템 관리자 page</a></li>
-							</c:if>
-							<c:if test="${'E_MGR' eq sessionID.role }">
-							<li><a href="#">교육실 관리자 page</a></li>
-							</c:if>
-							<c:if test="${'M_MGR' eq sessionID.role }">
-							<li><a href="#">회의실 관리자 page</a></li>
-							</c:if>
-							
-						</ul><!--  -->
-						
-					</nav><!-- End / overlay-menu -->
-					
-				</div><!-- End / fullscreenmenu__module -->
-				
-			</header><!-- End / header -->
+				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
+			<!-- End / header -->
 			
 			<!-- Content-->
 			<div class="wil-content">
@@ -378,44 +336,8 @@
 			<!-- End / Content-->
 			
 			<!-- footer -->
-			<div class="footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6 col-lg-6 ">
-							<p class="footer__coppy">2018 &copy; Copyright <a href="http://awe7.com/">11조</a>. All rights Reserved.</p>
-						</div>
-						<div class="col-md-6 col-lg-6 ">
-							<div class="footer__social">
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-facebook"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-twitter"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-linkedin"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-behance"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-vimeo"></i>
-								</a><!-- End / social-icon -->
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div><!-- End / footer -->
+				<jsp:include page="/WEB-INF/views/user/common/footer.jsp" />
+			<!-- End / footer -->
 			
 		</div>
 		<!-- Vendors-->
