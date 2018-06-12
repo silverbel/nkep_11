@@ -52,16 +52,6 @@ description : 예약하기
 						$(this).addClass('btn-default');
 					} 
 				})
-				
-				$('.resv-btn').click(function() {
-					if($(this).hasClass('btn-default')){
-						$(this).removeClass('btn-default');
-						$(this).addClass('btn-info');
-					}else if($(this).hasClass('btn-info')){
-						$(this).removeClass('btn-info');
-						$(this).addClass('btn-default');
-					}
-				})
 			})
 		function fn_prev(){
 			location.href = "/resv/resvStep1.do";
@@ -85,39 +75,8 @@ description : 예약하기
 		<div class="page-wrap" id="root">
 			
 			<!-- header -->
-			<header class="header header--fixed">
-				<div class="header__inner">
-					<div class="header__logo"><a href="index.jsp"><img src="/assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
-					<div class="navbar-toggle" id="fs-button">
-						<div class="navbar-icon"><span></span></div>
-					</div>
-				</div>
-				
-				<!-- fullscreenmenu__module -->
-				<div class="fullscreenmenu__module" trigger="#fs-button">
-					
-					<!-- overlay-menu -->
-					<nav class="overlay-menu">
-						
-						<!--  -->
-						<ul class="wil-menu-list">
-							<li class="current-menu-item"><a href="index.jsp">Home</a>
-							</li>
-							<li><a href="blog.jsp">소개</a>
-							</li>
-							<li><a href="${path}/resv/resvStep1.do">예약</a>
-							</li>
-							<li><a href="about.jsp">My Page</a>
-							</li>
-							<li><a href="${path}/email/write.do">Contact</a>
-							</li>
-						</ul><!--  -->
-						
-					</nav><!-- End / overlay-menu -->
-					
-				</div><!-- End / fullscreenmenu__module -->
-				
-			</header><!-- End / header -->
+				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
+			<!-- End / header -->
 			
 			<!-- Content-->
 			<div class="wil-content">
@@ -157,13 +116,13 @@ description : 예약하기
 							<tbody>
 								<tr>
 									<td rowspan="5">
-										<button class="resv-btn btn btn-default btn-kdb">회의실</button><br>
-										<button class="resv-btn btn btn-default btn-kdb">교육실</button><br>
+										<button class="btn btn-info btn-kdb">회의실</button><br>
+										<button class="btn btn-default btn-kdb">교육실</button><br>
 									</td>
-									<td><button class="resv-btn btn btn-default btn-kdb">미팅룸 1</button></td>
+									<td><button class="btn btn-default btn-kdb">미팅룸 1</button></td>
 									<td rowspan="5">
-										<button class="resv-btn btn btn-default btn-kdb">단기 예약</button>
-										<button class="resv-btn btn btn-default btn-kdb">장기 예약</button>
+										<button class="btn btn-default btn-kdb">단기 예약</button>
+										<button class="btn btn-info btn-kdb">장기 예약</button>
 									</td>
 									<%-- <td rowspan="5">
 										<table class="table table-striped">
@@ -268,7 +227,7 @@ description : 예약하기
 									<td><button class="btn btn-default btn-kdb">미팅룸 3</button></td>
 								</tr>
 								<tr>
-									<td><button class="btn btn-default btn-kdb">미팅룸 4</button></td>
+									<td><button class="btn btn-info btn-kdb">미팅룸 4</button></td>
 								</tr>
 								<tr>
 									<td><button class="btn btn-default btn-kdb">미팅룸 5</button></td>
@@ -299,44 +258,8 @@ description : 예약하기
 			<!-- End / Content-->
 			
 			<!-- footer -->
-			<div class="footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6 col-lg-6 ">
-							<p class="footer__coppy">2018 &copy; Copyright <a href="http://awe7.com/">Awe7</a>. All rights Reserved.</p>
-						</div>
-						<div class="col-md-6 col-lg-6 ">
-							<div class="footer__social">
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-facebook"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-twitter"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-linkedin"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-behance"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-vimeo"></i>
-								</a><!-- End / social-icon -->
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div><!-- End / footer -->
+				<jsp:include page="/WEB-INF/views/user/common/footer.jsp" />
+			<!-- End / footer -->
 			
 		</div>
 		<!-- Vendors-->
