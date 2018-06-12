@@ -55,6 +55,9 @@
 							</li>
 							<li><a href="contact.jsp">Contact</a>
 							</li>
+							<c:if test="${'R_MGR' eq sessionID.role }">
+							<li><a href="contact.jsp">관리자 page</a></li>
+							</c:if>
 						</ul><!--  -->
 						
 					</nav><!-- End / overlay-menu -->
