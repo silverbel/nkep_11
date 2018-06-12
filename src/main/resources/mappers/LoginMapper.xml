@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+
+<mapper namespace="member">
+	
+	<resultMap type="com.gsitm.common.dto.EmployeeDTO" id="empDTO" />
+	
+	
+	<select id="loginCheck" resultType="int" parameterType="empDTO">
+		SELECT COUNT(*)
+		FROM nkep_11.TB_EMPLOYEE
+		WHERE EMP_ID = #{empId}
+		AND EMP_PW = #{empPw}
+	</select>
+	
+	<select id="empInfo" resultType="empDTO" parameterType="String">
+		SELECT EMP_ID, EMP_NAME, ROLE
+		FROM nkep_11.TB_EMPLOYEE
+		WHERE EMP_ID = #{empId}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
