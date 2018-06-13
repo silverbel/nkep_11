@@ -103,47 +103,44 @@ description : my page, 나의 정보 확인
 				<!-- Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
-						<div class="row">
-							<div class="col-md-6 col-lg-5 "><img src="https://images.pexels.com/photos/797558/pexels-photo-797558.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt="">
-							</div>
-							<div class="col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-1 ">
-								
-								<!--  -->
-								<div class="mt-30">
-									<h2 class="about__title">Erik Minimis</h2>
-									<p class="about__subtitle">Just Keep Scrolling! How To Design Lengthy, Lengthy Pages</p>
-									<p class="about__text">Maecenas lorem ex, euismod eget pulvinar non, facilisis ut leo. Quisque placerat purus in neque efficitur ornare. Nam at justo magna. Aliquam venenatis odio ante, non euismod augue porttitor eget. Maecenas nec viverra eros, eget euismod felis. Integer cursus libero sed lorem euismod, vel iaculis felis placerat. Pellentesque augue lacus, sodales et eros sed, molestie rhoncus ligula. Vivamus sed massa lorem. Suspendisse mollis lectus nec ex fermentum, in consectetur dolor egestas. Phasellus quis ipsum quis nisl ultricies sollicitudin id in dolor. Proin at consequat dui.</p>
-									
-									<!-- progress -->
-									<div class="progress">
-										<h5 class="progress__title">design</h5>
-										<div class="progress__wrap">
-											<div class="progress__bar" data-progress-percent="33" data-timing="ease" data-duration="1000" data-delay="500"></div><span class="progress__number">39%</span>
-										</div>
-									</div><!-- End / progress -->
-									
-									
-									<!-- progress -->
-									<div class="progress">
-										<h5 class="progress__title">photography</h5>
-										<div class="progress__wrap">
-											<div class="progress__bar" data-progress-percent="59" data-timing="ease" data-duration="1000" data-delay="500"></div><span class="progress__number">47%</span>
-										</div>
-									</div><!-- End / progress -->
-									
-									
-									<!-- progress -->
-									<div class="progress">
-										<h5 class="progress__title">web development</h5>
-										<div class="progress__wrap">
-											<div class="progress__bar" data-progress-percent="53" data-timing="ease" data-duration="1000" data-delay="500"></div><span class="progress__number">59%</span>
-										</div>
-									</div><!-- End / progress -->
-									
-								</div><!-- End /  -->
-								
-							</div>
-						</div>
+						<h2>블랙리스트 내역</h2>
+						<table class="table table-hover">
+							<colgroup>
+								<col width="20%">
+								<col width="30%">
+								<col width="50%">
+							</colgroup>
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>날짜</th>
+									<th>사유</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:if test="${0 eq blkCount }">
+									<tr>
+										<td colspan="3">블랙리스트 내역이 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:if test="${0 ne blkCount }">
+									<c:forEach var="blk" items="${blkList }">
+										<tr>
+											<td>${blk.blkSeq }</td>
+										</tr>
+										<tr>
+											<td>
+												<c:out value="${blk.regDate}" /> ~ 
+												<c:out value="${blk.finDate}" />
+											</td>
+										</tr>
+										<tr>
+											<td>${blk.blkRes}</td>
+										</tr>
+									</c:forEach>
+								</c:if>
+							</tbody>
+						</table>
 					</div>
 				</section>
 				<!-- End / Section -->

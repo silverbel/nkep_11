@@ -11,9 +11,18 @@
 
 package com.gsitm.user.service;
 
-import com.gsitm.common.dto.ResvDTO;
+import javax.annotation.Resource;
 
-public interface ResvService {
-	public void create(ResvDTO dto);
+import org.springframework.stereotype.Service;
+
+import com.gsitm.user.model.dao.ResvDAOImpl;
+
+@Service(value="resvService")
+public class ResvService {
+	
+	@Resource(name="resvDao")
+	private ResvDAOImpl rDao;
+	
+	
 }
 

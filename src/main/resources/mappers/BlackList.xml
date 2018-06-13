@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+
+<mapper namespace="blackList">
+	
+	<resultMap type="com.gsitm.common.dto.BlackListLogDTO" id="blkDTO" />
+	
+	
+	<select id="forUserList" resultType="blkDTO" parameterType="String">
+		SELECT BLK_SEQ, DATE_FORMAT(REG_DATE, '%Y/%m/$d') AS REG_DATE
+					 , DATE_FORMAT(FIN_DATE, '%Y/%m/$d') AS FIN_DATE
+					 , BLK_RES, REPORTER, EMP_ID
+		  FROM nkep_11.TB_BLACKLIST
+		 WHERE EMP_ID = #{empId}
+	</select>
+	
+	<select  id="blackListCount" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		  FROM nkep_11.TB_BLACKLIST
+		 WHERE EMP_ID = #{empId}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

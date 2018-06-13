@@ -107,6 +107,9 @@ description : 로그인 화면
 									<input type="submit" value="Log in!" class="btn btn-primary" />
 								</th>
 							</tr>
+							<tr>
+								<th colspan="2">${err }</th>
+							</tr>
 						</table>
 					</div>
 					</form>

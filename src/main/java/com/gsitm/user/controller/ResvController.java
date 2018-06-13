@@ -10,11 +10,9 @@
  */ 
 package com.gsitm.user.controller;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gsitm.user.service.ResvService;
@@ -22,8 +20,8 @@ import com.gsitm.user.service.ResvService;
 @Controller
 @RequestMapping("/resv/*")
 public class ResvController {
-	@Inject
-	ResvService ResvService;
+	@Resource(name="resvService")
+	private ResvService ResvService;
 	
 	@RequestMapping("resvStep1.do")
 	public String resvStep1() {

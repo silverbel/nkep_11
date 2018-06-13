@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.gsitm.common.dto.ResvDTO;
 
-@Repository
+@Repository(value="resvDao")
 public class ResvDAOImpl implements ResvDAO {
 	
 	@Inject
@@ -25,7 +25,6 @@ public class ResvDAOImpl implements ResvDAO {
 
 	@Override
 	public void create(ResvDTO dto){
-		// TODO Auto-generated method stub
 		sqlSession.insert("resv.insert", dto);
 	}
 

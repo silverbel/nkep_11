@@ -14,10 +14,12 @@
 		<typeAlias type="com.gsitm.common.dto.WorkSpaceDTO" alias="workSpace"/>
 		<typeAlias type="com.gsitm.common.dto.EmployeeDTO" alias="empDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvDTO" alias="resv"/>
+		<typeAlias type="com.gsitm.common.dto.BlackListLogDTO" alias="blkDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>
 		<mapper resource="mappers/LoginMapper.xml"></mapper>
+		<mapper resource="mappers/BlackList.xml"></mapper>
 	</mappers>
 
 </configuration>

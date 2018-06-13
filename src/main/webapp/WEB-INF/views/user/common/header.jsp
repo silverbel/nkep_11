@@ -1,17 +1,16 @@
 <%--
 subject    : header.jsp
-author     : ±èµ¿¹ü
+author     : ê¹€ë™ë²”
 date       : 2018. 6. 11.
-description : header ºÎºĞ. ¸Ş´º¸¦ ´ã´ç
+description : header ë¶€ë¶„. ë©”ë‰´ë¥¼ ë‹´ë‹¹
  
-  [ÀÌ¸§]   [¼öÁ¤ÀÏ]     [³»¿ë]
+  [ì´ë¦„]   [ìˆ˜ì •ì¼]     [ë‚´ìš©]
   ----------------------------------------------------------
-	±èµ¿¹ü		2018.06.12	¸Ş´º ¼öÁ¤  
-	±èµ¿¹ü		2018.06.12	·Î±×¾Æ¿ô Ãß°¡  
+	ê¹€ë™ë²”		2018.06.12	ë©”ë‰´ ìˆ˜ì •  
+	ê¹€ë™ë²”		2018.06.12	ë¡œê·¸ì•„ì›ƒ ì¶”ê°€  
 --%>
 
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -37,20 +36,20 @@ description : header ºÎºĞ. ¸Ş´º¸¦ ´ã´ç
 			<!--  -->
 			<ul class="wil-menu-list">
 				<li class="current-menu-item"><a href="/">Home</a></li>
-				<li><a href="blog.jsp">¼Ò°³</a></li>
-				<li><a href="${path}/resv/resvStep1.do">¿¹¾à</a></li>
-				<li><a href="about.jsp">My Page</a></li>
+				<li><a href="blog.jsp">ì†Œê°œ</a></li>
+				<li><a href="${path}/resv/resvStep1.do">ì˜ˆì•½</a></li>
+				<li><a href="/myPage/info.do">My Page</a></li>
 				<li><a href="contact.jsp">Contact</a></li>
 				<li><a href="${path}/email/write.do">Report</a></li>
-				<li><a href="${path}/email/write.do">Log Out</a></li>
+				<li><a href="${path}/logout.do">Log Out</a></li>
 				<c:if test="${'S_MGR' eq sessionID.role }">
-					<li><a href="contact.jsp">½Ã½ºÅÛ °ü¸®ÀÚ page</a></li>
+					<li><a href="contact.jsp">ì‹œìŠ¤í…œ ê´€ë¦¬ì page</a></li>
 				</c:if>
 				<c:if test="${'E_MGR' eq sessionID.role }">
-					<li><a href="contact.jsp">±³À°½Ç °ü¸®ÀÚ page</a></li>
+					<li><a href="contact.jsp">êµìœ¡ì‹¤ ê´€ë¦¬ì page</a></li>
 				</c:if>
 				<c:if test="${'M_MGR' eq sessionID.role }">
-					<li><a href="contact.jsp">È¸ÀÇ½Ç °ü¸®ÀÚ page</a></li>
+					<li><a href="contact.jsp">íšŒì˜ì‹¤ ê´€ë¦¬ì page</a></li>
 				</c:if>
 			</ul>
 			<!--  -->
