@@ -7,6 +7,7 @@ description : my page, 나의 정보 확인
   [이름]   [수정일]     [내용]
   ----------------------------------------------------------
   김동범			2018.06.12	include 추가, 기본 레이아웃 수정
+  김동범			2018.06.13	db연동, modal 적용
 --%> 
 
 
@@ -43,117 +44,222 @@ description : my page, 나의 정보 확인
 		<!-- Plugin CSS -->
 		<link href="/assets/dist/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
 
-		<!-- Custom styles for this template -->
-		<link href="/assets/dist/css/freelancer.css" rel="stylesheet">
+		<style type="text/css">
+			.table-kdb td, .table-kdb th{
+				font-size: 1.5em;
+			}
+			.btn-kdb {
+				width:15%;
+				height:3em;
+				font-size: 2 em;
+			}
+		</style>
 		
 		<!-- jQuery v2.1.4 -->
-		<script src="/dist/js/jquery.js"></script>
+		<script src="/assets/dist/js/jquery.js"></script>
 		<!-- Bootstrap Core JavaScript -->
-		<script src="/dist/js/bootstrap.js"></script>
+		<script src="/assets/dist/js/bootstrap.js"></script>
 		<!-- Custom Theme JavaScript -->
 		<!-- DatePicker JavaScript -->
-		<script src="/dist/js/moment-ko.js"></script>
-		<script src="/dist/js/transition.js"></script>
-		<script src="/dist/js/collapse.js"></script>
-		<script src="/dist/js/bootstrap-datetimepicker.js"></script>
+		<script src="/assets/dist/js/moment-ko.js"></script>
+		<script src="/assets/dist/js/transition.js"></script>
+		<script src="/assets/dist/js/collapse.js"></script>
+		<script src="/assets/dist/js/bootstrap-datetimepicker.js"></script>
 		<!-- DataTables JavaScript -->
-		<script src="/dist/js/jquery.dataTables.js"></script>
-		<script src="/dist/js/dataTables.bootstrap.js"></script>
-		<script src="/dist/js/dataTables.responsive.js"></script>
-		<script src="/dist/js/responsive.bootstrap.js"></script>
+		<script src="/assets/dist/js/jquery.dataTables.js"></script>
+		<script src="/assets/dist/js/dataTables.bootstrap.js"></script>
+		<script src="/assets/dist/js/dataTables.responsive.js"></script>
+		<script src="/assets/dist/js/responsive.bootstrap.js"></script>
 		<!-- tabletools -->
-		<script src="/dist/js/dataTables.tableTools.js"></script>
-		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=19f4d6583e5d740e1acb04f6479a3579&libraries=services,clusterer,drawing"></script>
+		<script src="/assets/dist/js/dataTables.tableTools.js"></script>
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 		<script src="https://code.highcharts.com/modules/data.js"></script>
 		<script src="https://code.highcharts.com/modules/drilldown.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				var $num = comma(<c:out value="${team.budget}" />);
 				
+				$('#tBudget').html($num+' 원');
+				
+				function comma(num) {
+					var len, point, str;
+
+					num = num + "";
+					point = num.length % 3;
+					len = num.length;
+
+					str = num.substring(0, point);
+					while (point < len) {
+						if (str != "")
+							str += ",";
+						str += num.substring(point, point + 3);
+						point += 3;
+					}
+					return str;
+				}
 			})
 		</script>
 </head>
 <body>
-<div class="page-wrap" id="root">
-			
-			<!-- header -->
-				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
-			<!-- End / header -->
-			
-			<!-- Content-->
-			<div class="wil-content">
-				
-				<!-- Section -->
-				<section class="awe-section">
-					<div class="container">
-						
-						<!-- page-title -->
-						<div class="page-title pb-40">
-							<h2 class="page-title__title">${sessionID.empId } - ${sessionID.empName }님</h2>
-							<p class="page-title__text">회원 정보 보기</p>
-							<div class="page-title__divider"></div>
-						</div><!-- End / page-title -->
-						
+	<div class="page-wrap" id="root">
+
+		<!-- header -->
+		<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
+		<!-- End / header -->
+
+		<!-- Content-->
+		<div class="wil-content">
+
+			<!-- Section -->
+			<section class="awe-section">
+				<div class="container">
+					<!-- page-title -->
+					<div class="page-title pb-40">
+						<h2 class="page-title__title">${sessionID.empId }-
+							${sessionID.empName }님</h2>
+						<p class="page-title__text">회원 정보 보기</p>
+						<div class="page-title__divider"></div>
 					</div>
-				</section>
-				<!-- End / Section -->
-				
-				
-				<!-- Section -->
-				<section class="awe-section bg-gray">
-					<div class="container">
-						<h2>블랙리스트 내역</h2>
-						<table class="table table-hover">
-							<colgroup>
-								<col width="20%">
-								<col width="30%">
-								<col width="50%">
-							</colgroup>
-							<thead>
+					<!-- End / page-title -->
+
+				</div>
+			</section>
+			<!-- End / Section -->
+
+
+			<!-- BlackList Section -->
+			<section class="awe-section bg-gray">
+				<div class="container">
+					<h2>블랙리스트 내역</h2>
+					<table class="table table-hover table-kdb">
+						<colgroup>
+							<col width="20%">
+							<col width="30%">
+							<col width="50%">
+						</colgroup>
+						<thead>
+							<tr class="text-center">
+								<th>번호</th>
+								<th>날짜</th>
+								<th>사유</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${0 eq blkCount }">
 								<tr>
-									<th>번호</th>
-									<th>날짜</th>
-									<th>사유</th>
+									<td colspan="3"><h2 class="text-center">블랙리스트 내역이
+											없습니다.</h2></td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:if test="${0 eq blkCount }">
-									<tr>
-										<td colspan="3">블랙리스트 내역이 없습니다.</td>
+							</c:if>
+							<c:if test="${0 ne blkCount }">
+								<c:forEach var="blk" items="${blkList }">
+									<tr class="text-center">
+										<td>${blk.blkSeq }</td>
+										<td><c:out value="${blk.regDate}" /> ~ <c:out
+												value="${blk.finDate}" /></td>
+										<td>${blk.blkRes}</td>
 									</tr>
-								</c:if>
-								<c:if test="${0 ne blkCount }">
-									<c:forEach var="blk" items="${blkList }">
-										<tr>
-											<td>${blk.blkSeq }</td>
-										</tr>
-										<tr>
-											<td>
-												<c:out value="${blk.regDate}" /> ~ 
-												<c:out value="${blk.finDate}" />
-											</td>
-										</tr>
-										<tr>
-											<td>${blk.blkRes}</td>
-										</tr>
-									</c:forEach>
-								</c:if>
-							</tbody>
-						</table>
-					</div>
-				</section>
-				<!-- End / Section -->
-				
-			</div>
-			<!-- End / Content-->
-			
-			<!-- footer -->
-				<jsp:include page="/WEB-INF/views/user/common/footer.jsp" />
-			<!-- End / footer -->
-			
+								</c:forEach>
+							</c:if>
+						</tbody>
+					</table>
+				</div>
+			</section>
+			<!-- End / Section -->
+
+
+			<!-- Team Section -->
+			<section class="awe-section bg-gray">
+				<div class="container">
+					<h2>팀 정보</h2>
+					<table class="table table-hover table-kdb">
+						<colgroup>
+							<col width="20%">
+							<col width="20%">
+							<col width="20%">
+							<col width="20%">
+							<col width="20%">
+						</colgroup>
+						<thead>
+							<tr class="text-center">
+								<th>팀 번호</th>
+								<th>팀 이름</th>
+								<th>팀장</th>
+								<th>총 인원</th>
+								<th>팀 예산</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="text-center" data-toggle="modal" data-target="#teamMember">
+								<td>${team.teamSeq }</td>
+								<td>${team.teamName }</td>
+								<td>${team.bossId }</td>
+								<td>${memCount}</td>
+								<td id="tBudget"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+			<!-- End / Section -->
+
 		</div>
-		<!-- Vendors-->
+		<!-- End / Content-->
+
+		<!-- footer -->
+			<jsp:include page="/WEB-INF/views/user/common/footer.jsp" />
+		<!-- End / footer -->
+
+	</div>
+
+	<!-- Team Mate Modal -->
+	<div class="modal fade" id="teamMember" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="myModalLabel">팀 정보</h3>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="table table-hover table-kdb">
+						<colgroup>
+							<col width="15%" />
+							<col width="15%" />
+							<col width="40%" />
+							<col width="30%" />
+						</colgroup>
+						<thead>
+							<tr class="text-center">
+								<th>ID</th>
+								<th>이름</th>
+								<th>EMAIL 주소</th>
+								<th>블랙리스트</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="mem" items="${memList}">
+								<tr class="text-center">
+									<td>${mem.empId}</td>
+									<td>${mem.empName}</td>
+									<td>${mem.email}</td>
+									<td>${mem.blackYn}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="md-btn md-btn--outline-primary btn-kdb" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div><!-- End / Modal -->
+	
+	<!-- Vendors-->
 		<!-- Bootstrap Core Javascript -->
 		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
 		<script src="/assets/dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

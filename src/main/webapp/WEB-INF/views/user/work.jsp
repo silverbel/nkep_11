@@ -385,9 +385,9 @@
 		src="assets/vendors/jquery.waypoints/jquery.waypoints.min.js"></script>
 	<script type="text/javascript"
 		src="assets/vendors/swiper/swiper.jquery.js"></script>
-	<script type="text/javascript" src="assets/vendors/menu/menu.js"></script>
-	<script type="text/javascript" src="assets/vendors/typed/typed.min.js"></script>
+	<script type="text/javascript" src="/assets/vendors/menu/menu.js"></script>
+	<script type="text/javascript" src="/assets/vendors/typed/typed.min.js"></script>
 	<!-- App-->
-	<script type="text/javascript" src="assets/js/main.js"></script>
+	<script type="text/javascript" src="/assets/js/main.js"></script>
 </body>
 </html>

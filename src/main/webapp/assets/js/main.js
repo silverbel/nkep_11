@@ -246,7 +246,7 @@ $('#back-to-top').on('click', function (e) {
 
 
 var wh = $(window).height(),
-	    half = wh / 5,
+	    half = wh / 10,
 	    headerHeight = $('header').outerHeight();
 
 $(window).scroll(function () {
