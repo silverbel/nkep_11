@@ -12,7 +12,8 @@
 <meta name="author" content="">
 
 <title>SB Admin 2 - Bootstrap Admin Theme</title>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Bootstrap Core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -35,11 +36,39 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script>
+	var workSeq = null;
+	$(document).ready(function(){
+		$('#deleteBtn').click(function(){
+			workSeq = $('#workSeq').val();
+			$('#deleteA').attr('href','/deleteWorkSapceForAdmin.do?workSeq='+workSeq);
+		})
+	});
+</script>
 </head>
 
 <body>
-
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">근무지 삭제</h4>
+        </div>
+        <div class="modal-body">
+          <h2>정말 삭제하시겠습니까??</h2>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+          <a href="" id="deleteA"><button type="button" class="btn btn-danger" data-dismiss="modal">삭제</button></a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 	<div id="wrapper">
 
 		<!-- Navigation -->
@@ -287,13 +316,13 @@
 									<c:out value="<div class='row'>" />
 								</c:if>
 								<div class="col-xs-6 col-md-4 text-center">
-									<%-- <img
-										src="/product/productImgViewServlet?productNo=${product.productno}"
-										width="200px" height="200px" /> --%>
+									 <img
+										src=<c:url value="/getByteImage/${workspace.workSeq}"/>
+										width="200px" height="200px" />
 									<br>
 									<h3>
 										<a
-											href="<c:url value="/customer/customerShopDetailViewServlet?productNo=${product.productno}" />">
+											href="#"><%-- <c:url value="/customer/customerShopDetailViewServlet?productNo=${product.productno}" /> --%>
 											<c:out value="${workspace.workName}" />
 										</a>
 									</h3>
@@ -302,8 +331,9 @@
 									<br> 전화번호 :
 									<c:out value="${workspace.workTel}" />
 									<br>
-									<br> <a href="/modifyWorkSpaceForAdmin.do" class="btn btn-default">수정</a>&nbsp;&nbsp;
-									<a href="#" class="btn btn-danger">삭제</a>
+									<br> <a href="/modifyWorkSpaceForAdminForm.do?workSeq=${workspace.workSeq }" class="btn btn-default">수정</a>&nbsp;&nbsp;
+									<input type="text" id="workSeq" value="${workspace.workSeq }" hidden="hidde"/>
+									<button class="btn btn-danger" data-toggle="modal" data-target="#myModal" id="deleteBtn">삭제</button>
 								</div>
 								<c:if test="${status.index == 0 } || ${status.index % 3 == 0 }">
 									<c:out value="</div>" />
@@ -340,7 +370,7 @@
 						<!-- /.panel-body -->
 					</div>
 					<div class="col-lg-12 text-right">
-						<a href="/newWorkSpaceForAdmin.do" class="btn btn-default">근무지 추가</a>
+						<a href="/newWorkSpaceForAdminForm.do" class="btn btn-default">근무지 추가</a>
 					</div>
 					<!-- /.panel -->
 				</div>
