@@ -1,22 +1,24 @@
+<%--
+subject    : myInfo.jsp
+author     : 김동범
+date       : 2018. 6. 11.
+description : my page, 나의 정보 확인
+ 
+  [이름]   [수정일]     [내용]
+  ----------------------------------------------------------
+  김동범			2018.06.12	include 추가, 기본 레이아웃 수정
+  김동범			2018.06.12	db 연동
+--%> 
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%--
-subject    : myReservation.jsp
-author     : 김동범
-date       : 2018. 6. 11.
-description : my page, 예약 확인
- 
-  [이름]   [수정일]     [내용]
-  ----------------------------------------------------------
-  
---%> 
-
 <!DOCTYPE html>
 <html>
-<head>
-		<title>MY PAGE :: RESERVATION</title>
+	<head>
+		<title>MY PAGE :: MY INFO</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -33,91 +35,236 @@ description : my page, 예약 확인
 		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="/assets/css/main.css"><!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
-</head>
-<body>
-<div class="page-wrap" id="root">
-			
+		<link href="/assets/dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Custom fonts for this template -->
+		<link href="/assets/dist/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+		<!-- Plugin CSS -->
+		<link href="/assets/dist/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+		<style type="text/css">
+			.table-kdb td, .table-kdb th{
+				font-size: 1.5em;
+			}
+			.btn-kdb {
+				width:15%;
+				height:3em;
+				font-size: 2 em;
+			}
+		</style>
+		
+		<!-- jQuery v2.1.4 -->
+		<script src="/assets/dist/js/jquery.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="/assets/dist/js/bootstrap.js"></script>
+		<!-- Custom Theme JavaScript -->
+		<!-- DatePicker JavaScript -->
+		<script src="/assets/dist/js/moment-ko.js"></script>
+		<script src="/assets/dist/js/transition.js"></script>
+		<script src="/assets/dist/js/collapse.js"></script>
+		<script src="/assets/dist/js/bootstrap-datetimepicker.js"></script>
+		<!-- DataTables JavaScript -->
+		<script src="/assets/dist/js/jquery.dataTables.js"></script>
+		<script src="/assets/dist/js/dataTables.bootstrap.js"></script>
+		<script src="/assets/dist/js/dataTables.responsive.js"></script>
+		<script src="/assets/dist/js/responsive.bootstrap.js"></script>
+		<!-- tabletools -->
+		<script src="/assets/dist/js/dataTables.tableTools.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+		<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var $num = comma(<c:out value="${team.budget}" />);
+				
+				$('#tBudget').html($num+' 원');
+				
+				function comma(num) {
+					var len, point, str;
+
+					num = num + "";
+					point = num.length % 3;
+					len = num.length;
+
+					str = num.substring(0, point);
+					while (point < len) {
+						if (str != "")
+							str += ",";
+						str += num.substring(point, point + 3);
+						point += 3;
+					}
+					return str;
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div class="page-wrap" id="root">
+	
 			<!-- header -->
 				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
 			<!-- End / header -->
-			
+	
 			<!-- Content-->
 			<div class="wil-content">
-				
+	
 				<!-- Section -->
 				<section class="awe-section">
 					<div class="container">
-						
 						<!-- page-title -->
 						<div class="page-title pb-40">
-							<h2 class="page-title__title">${session.empId } - ${session.empName }님</h2>
-							<p class="page-title__text">회원 정보 보기</p>
+							<h2 class="page-title__title">${sessionID.empId }-
+								${sessionID.empName }님</h2>
+							<p class="page-title__text">예약 및 사용 정보 보기</p>
 							<div class="page-title__divider"></div>
-						</div><!-- End / page-title -->
-						
+						</div>
+						<!-- End / page-title -->
+	
 					</div>
 				</section>
 				<!-- End / Section -->
-				
-				
-				<!-- Section -->
+	
+	
+				<!-- BlackList Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
-						<div class="row">
-							<div class="col-md-6 col-lg-5 "><img src="https://images.pexels.com/photos/797558/pexels-photo-797558.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt="">
-							</div>
-							<div class="col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-1 ">
-								
-								<!--  -->
-								<div class="mt-30">
-									<h2 class="about__title">Erik Minimis</h2>
-									<p class="about__subtitle">Just Keep Scrolling! How To Design Lengthy, Lengthy Pages</p>
-									<p class="about__text">Maecenas lorem ex, euismod eget pulvinar non, facilisis ut leo. Quisque placerat purus in neque efficitur ornare. Nam at justo magna. Aliquam venenatis odio ante, non euismod augue porttitor eget. Maecenas nec viverra eros, eget euismod felis. Integer cursus libero sed lorem euismod, vel iaculis felis placerat. Pellentesque augue lacus, sodales et eros sed, molestie rhoncus ligula. Vivamus sed massa lorem. Suspendisse mollis lectus nec ex fermentum, in consectetur dolor egestas. Phasellus quis ipsum quis nisl ultricies sollicitudin id in dolor. Proin at consequat dui.</p>
-									
-									<!-- progress -->
-									<div class="progress">
-										<h5 class="progress__title">design</h5>
-										<div class="progress__wrap">
-											<div class="progress__bar" data-progress-percent="33" data-timing="ease" data-duration="1000" data-delay="500"></div><span class="progress__number">39%</span>
-										</div>
-									</div><!-- End / progress -->
-									
-									
-									<!-- progress -->
-									<div class="progress">
-										<h5 class="progress__title">photography</h5>
-										<div class="progress__wrap">
-											<div class="progress__bar" data-progress-percent="59" data-timing="ease" data-duration="1000" data-delay="500"></div><span class="progress__number">47%</span>
-										</div>
-									</div><!-- End / progress -->
-									
-									
-									<!-- progress -->
-									<div class="progress">
-										<h5 class="progress__title">web development</h5>
-										<div class="progress__wrap">
-											<div class="progress__bar" data-progress-percent="53" data-timing="ease" data-duration="1000" data-delay="500"></div><span class="progress__number">59%</span>
-										</div>
-									</div><!-- End / progress -->
-									
-								</div><!-- End /  -->
-								
-							</div>
-						</div>
+						<h2>예약 내역</h2>
+						<table class="table table-hover table-kdb">
+							<colgroup>
+								<col width="30%">
+								<col width="30%">
+								<col width="10%">
+								<col width="10%">
+								<col width="20%">
+							</colgroup>
+							<thead>
+								<tr class="text-center">
+									<th>번호</th>
+									<th>장소</th>
+									<th>신청자</th>
+									<th>비용</th>
+									<th>승인 여부</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:if test="${0 eq resvCnt }">
+									<tr>
+										<td colspan="5">
+											<h2 class="text-center">예약 내역이 없습니다.</h2>
+										</td>
+									</tr>
+								</c:if>
+								<c:if test="${0 ne resvCnt }">
+									<c:forEach var="rc" items="${rcList }">
+										<tr class="text-center" data-toggle="modal" data-target="#myResvInfo">
+											<td>${rc.rsvSeq}</td>
+											<td>${rc.roomName }</td>
+											<td>${rc.applicant}</td>
+											<td>${rc.rsvPrice}</td>
+											<td>
+												<c:if test="${'Y' eq rc.mgrYn}">
+													승인 완료
+												</c:if>
+												<c:if test="${'N' eq rc.mgrYn}">
+													승인 거절
+												</c:if>
+												<c:if test="${null eq rc.mgrYn}">
+													승인 대기
+												</c:if>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:if>
+							</tbody>
+						</table>
 					</div>
 				</section>
 				<!-- End / Section -->
-				
+	
+	
+				<!-- Team Section -->
+				<section class="awe-section bg-gray">
+					<div class="container">
+						<h2>사용 내역</h2>
+						<table class="table table-hover table-kdb">
+							<colgroup>
+								<col width="30%">
+								<col width="30%">
+								<col width="20%">
+								<col width="20%">
+							</colgroup>
+							<thead>
+								<tr class="text-center">
+									<th>사용 번호</th>
+									<th>장소</th>
+									<th>사용 인원</th>
+									<th>비용</th>
+								</tr>
+							</thead>
+							<tbody>
+									<tr>
+										<th colspan="4">사용 내역이 없습니다.</th>
+									</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+				<!-- End / Section -->
+	
 			</div>
 			<!-- End / Content-->
-			
+	
 			<!-- footer -->
 				<jsp:include page="/WEB-INF/views/user/common/footer.jsp" />
 			<!-- End / footer -->
-			
+	
 		</div>
+	
+		<!-- Team Mate Modal -->
+		<div class="modal fade" id="myResvInfo" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="myModalLabel">팀 정보</h3>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table class="table table-hover table-kdb">
+							<colgroup>
+								<col width="15%" />
+								<col width="15%" />
+								<col width="40%" />
+								<col width="30%" />
+							</colgroup>
+							<thead>
+								<tr class="text-center">
+									<th>ID</th>
+									<th>이름</th>
+									<th>EMAIL 주소</th>
+									<th>블랙리스트</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="md-btn md-btn--outline-primary btn-kdb" data-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div><!-- End / Modal -->
+	
 		<!-- Vendors-->
+		<!-- Bootstrap Core Javascript -->
 		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
+		<script src="/assets/dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script type="text/javascript" src="/assets/vendors/imagesloaded/imagesloaded.pkgd.js"></script>
 		<script type="text/javascript" src="/assets/vendors/isotope-layout/isotope.pkgd.js"></script>
 		<script type="text/javascript" src="/assets/vendors/jquery-one-page/jquery.nav.min.js"></script>

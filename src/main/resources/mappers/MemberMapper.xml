@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+
+<mapper namespace="member">
+	
+	<resultMap type="com.gsitm.common.dto.TeamDTO" id="teamDTO" />
+	<resultMap type="com.gsitm.common.dto.EmployeeDTO" id="empDTO" />
+	
+	<!-- login -->
+	<select id="loginCheck" resultType="int" parameterType="empDTO">
+		SELECT COUNT(*)
+		FROM nkep_11.TB_EMPLOYEE
+		WHERE EMP_ID = #{empId}
+		AND EMP_PW = #{empPw}
+	</select>
+	
+	<select id="empInfo" resultType="empDTO" parameterType="String">
+		SELECT EMP_ID, EMP_NAME, ROLE, TEAM_SEQ
+		FROM nkep_11.TB_EMPLOYEE
+		WHERE EMP_ID = #{empId}
+	</select>
+	
+	<!-- 팀 정보 -->
+	<select id="showTeamInfo" resultType="teamDTO" parameterType="String">
+		SELECT TEAM.TEAM_SEQ, TEAM.TEAM_NAME, TEAM.BOSS_ID, TEAM.BUDGET
+		  FROM nkep_11.TB_EMPLOYEE EMP
+		  LEFT JOIN nkep_11.TB_TEAM TEAM
+		    ON EMP.TEAM_SEQ = TEAM.TEAM_SEQ
+		 WHERE EMP.EMP_ID = #{empId}
+	</select>
+	
+	<select id="showTeamMember" resultType="empDTO" parameterType="String">
+		SELECT EMP.EMP_ID, EMP.EMP_NAME, EMP.EMAIL, BLACK_YN
+		  FROM nkep_11.TB_EMPLOYEE EMP
+		  LEFT JOIN nkep_11.TB_TEAM TEAM
+		    ON EMP.TEAM_SEQ = TEAM.TEAM_SEQ
+		 WHERE EMP.TEAM_SEQ = #{teamSeq}
+	</select>
+	
+	<select  id="memCount" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		  FROM nkep_11.TB_EMPLOYEE
+		 WHERE TEAM_SEQ = #{teamSeq}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

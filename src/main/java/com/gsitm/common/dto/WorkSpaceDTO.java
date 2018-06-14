@@ -11,6 +11,18 @@
 
 package com.gsitm.common.dto;
 
+
+
+/**
+ * @programName : WorkSpaceDTO.java
+ * @author      : 남동길
+ * @date        : 2018. 6. 13. 
+ * @function    :  
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 
+ */ 
 public class WorkSpaceDTO {
 	private String workSeq;
 	private String workCode;
@@ -19,19 +31,21 @@ public class WorkSpaceDTO {
 	private String workTel;
 	private String workDescription;
 	private byte[] workImg;
+	private byte[] workImg2;
+	private byte[] workImg3;
 	
-	public byte[] getWorkImg() {
-		return workImg;
-	}
-	public void setWorkImg(byte[] workImg) {
-		this.workImg = workImg;
-	}
-	public String getWorkDescription() {
-		return workDescription;
-	}
-	public void setWorkDescription(String workDescription) {
-		this.workDescription = workDescription;
-	}
+	private String tel1;
+	private String tel2;
+	private String tel3;
+	private String postCode;
+	private String mainAddr;
+	private String subAddr;
+/*	private MultipartFile workImgMulti;
+	private MultipartFile workImg2Multi;
+	private MultipartFile workImg3Multi;
+	private Map<String, Object> workImg;
+	private Map<String, Object> workImg2;
+	private Map<String, Object> workImg3;*/
 	public String getWorkSeq() {
 		return workSeq;
 	}
@@ -61,6 +75,66 @@ public class WorkSpaceDTO {
 	}
 	public void setWorkTel(String workTel) {
 		this.workTel = workTel;
+	}
+	public String getWorkDescription() {
+		return workDescription;
+	}
+	public void setWorkDescription(String workDescription) {
+		this.workDescription = workDescription;
+	}
+	public byte[] getWorkImg() {
+		return workImg;
+	}
+	public void setWorkImg(byte[] workImg) {
+		this.workImg = workImg;
+	}
+	public byte[] getWorkImg2() {
+		return workImg2;
+	}
+	public void setWorkImg2(byte[] workImg2) {
+		this.workImg2 = workImg2;
+	}
+	public byte[] getWorkImg3() {
+		return workImg3;
+	}
+	public void setWorkImg3(byte[] workImg3) {
+		this.workImg3 = workImg3;
+	}
+	public String getPostCode() {
+		return postCode;
+	}
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+	public String getMainAddr() {
+		return mainAddr;
+	}
+	public void setMainAddr(String mainAddr) {
+		this.mainAddr = mainAddr;
+	}
+	public String getSubAddr() {
+		return subAddr;
+	}
+	public void setSubAddr(String subAddr) {
+		this.subAddr = subAddr;
+	}
+	public String getTel1() {
+		return tel1;
+	}
+	public void setTel1(String tel1) {
+		this.tel1 = tel1;
+	}
+	public String getTel2() {
+		return tel2;
+	}
+	public void setTel2(String tel2) {
+		this.tel2 = tel2;
+	}
+	public String getTel3() {
+		return tel3;
+	}
+	public void setTel3(String tel3) {
+		this.tel3 = tel3;
 	}
 	
 	

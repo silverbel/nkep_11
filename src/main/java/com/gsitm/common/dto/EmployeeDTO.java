@@ -8,14 +8,15 @@ public class EmployeeDTO {
 	private String blackYn;
 	private String role;
 	private String teamSeq;
-	
-	public EmployeeDTO() {}
-	
+	private String email;
+
+	public EmployeeDTO() {
+	}
+
 	public EmployeeDTO(String empId, String empPw) {
 		this.setEmpId(empId);
 		this.setEmpPw(empPw);
 	}
-	
 
 	public String getEmpId() {
 		return empId;
@@ -63,6 +64,14 @@ public class EmployeeDTO {
 
 	public void setTeamSeq(String teamSeq) {
 		this.teamSeq = teamSeq;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

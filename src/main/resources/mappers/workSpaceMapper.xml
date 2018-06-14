@@ -5,15 +5,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="workSpace">
-	<select id="getWorkSpaceList" resultType="com.gsitm.common.dto.WorkSpaceDTO" parameterType="com.gsitm.common.dto.WorkSpaceDTO">
-		SELECT WORK_SEQ, WORK_CODE, WORK_NAME, WORK_ADDR, WORK_TEL, WORK_DESCRIPTION, WORK_IMG 
-		FROM nkep_11.TB_WORKSPACE
-	</select>
-
-	<select id="getWorkSpaceListForAdmin" resultType="com.gsitm.common.dto.WorkSpaceDTO" parameterType="com.gsitm.common.dto.WorkSpaceDTO">
+	<cache eviction="FIFO" flushInterval="60000" size="512"
+		readOnly="true" />
+	
+	<resultMap id="workSpace" type="com.gsitm.common.dto.WorkSpaceDTO" >
+<!-- 		<result property="workImg" column="WORK_IMG" jdbcType="BLOB" javaType="org.springframework.web.multipart.MultipartFile" />
+		<result property="workImg2" column="WORK_IMG2" jdbcType="BLOB" javaType="org.springframework.web.multipart.MultipartFile" />
+		<result property="workImg3" column="WORK_IMG3" jdbcType="BLOB" javaType="org.springframework.web.multipart.MultipartFile" /> -->
+	</resultMap>
+	<select id="getWorkSpaceList" resultType="workSpace" parameterType="workSpace">
 		SELECT WORK_SEQ, WORK_CODE, WORK_NAME, WORK_ADDR, WORK_TEL 
 		FROM nkep_11.TB_WORKSPACE
 	</select>
+
+	<select id="getWorkSpaceListForAdmin" resultType="workSpace" parameterType="workSpace">
+		SELECT WORK_SEQ, WORK_CODE, WORK_NAME, WORK_ADDR, WORK_TEL 
+		FROM nkep_11.TB_WORKSPACE
+	</select>
+	
+	<insert id="insertWorkSpaceForAdmin" parameterType="workSpace">
+		INSERT INTO nkep_11.TB_WORKSPACE(WORK_NAME,WORK_ADDR,WORK_TEL,WORK_DESCRIPTION,WORK_IMG,WORK_IMG2,WORK_IMG3) values(#{workName},#{workAddr},#{workTel},#{workDescription},#{workImg},#{workImg2},#{workImg3});
+	</insert>
+	
+	<select id="getByteImage" parameterType="workSpace" resultType="java.util.Map">
+		select WORK_IMG AS IMG FROM TB_WORKSPACE WHERE WORK_SEQ=#{workSeq};
+	</select>
+	
+	<select id="getWorkSpaceByWorkSeq" parameterType="workSpace" resultType="workSpace">
+		SELECT WORK_SEQ, WORK_CODE, WORK_NAME, WORK_ADDR, WORK_TEL, WORK_DESCRIPTION, WORK_IMG, WORK_IMG2, WORK_IMG3 
+		FROM nkep_11.TB_WORKSPACE
+		WHERE WORK_SEQ = #{workSeq} 
+	</select>
+	
+	<update id="updateWorkSpaceNotIncludePic" parameterType="workSpace">
+		UPDATE nkep_11.TB_WORKSPACE SET WORK_NAME = #{workName}, WORK_ADDR = #{workAddr}, WORK_TEL = #{workTel}, WORK_DESCRIPTION = #{workDescription},
+			WORK_IMG = NULL, WORK_IMG2= NULL, WORK_IMG3 = NULL
+		WHERE WORK_SEQ = #{workSeq}
+	</update>
+	<update id="updateWorkSpaceIncludePic" parameterType="workSpace">
+		UPDATE nkep_11.TB_WORKSPACE SET WORK_NAME = #{workName}, WORK_ADDR = #{workAddr}, WORK_TEL = #{workTel}, WORK_DESCRIPTION = #{workDescription},
+			WORK_IMG = #{workImg}, WORK_IMG2= #{workImg2}, WORK_IMG3 = #{workImg3}
+		WHERE WORK_SEQ = #{workSeq}
+	</update>
+	<delete id="deleteWorkSpaceForAdmin" parameterType="workSpace">
+		DELETE FROM nkep_11.TB_WORKSPACE WHERE WORK_SEQ = #{workSeq}
+	</delete>
 </mapper>
 
 
