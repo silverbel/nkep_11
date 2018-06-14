@@ -1,3 +1,13 @@
+<%--
+subject    : workspaceInfo.jsp
+author     : 은종현
+date       : 2018-06-13
+description : 근무지 소개 선택 페이지
+ 
+  [이름]   [수정일]     [내용]
+  ----------------------------------------------------------
+   은종현	 2018-06-13	  초안 
+--%> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -5,7 +15,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Blog</title>
+		<title>workspaceInfo</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -22,45 +32,22 @@
 		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="/assets/css/main.css"><!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
+		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
+		<script type="text/javascript">
+			function fn_go(path, url1, url2) {
+				location.href = path+"/info/workspaceDetail.do?workName="
+						+encodeURIComponent(url1)+
+						"&workAddr="+encodeURIComponent(url2);
+			}
+		</script>
 	</head>
 	
 	<body>
 		<div class="page-wrap" id="root">
 			
 			<!-- header -->
-			<header class="header header--fixed">
-				<div class="header__inner">
-					<div class="header__logo"><a href="index.jsp"><img src="/assets/img/gsitm.jpg" alt="" style="width: 122px;"/></a></div>
-					<div class="navbar-toggle" id="fs-button">
-						<div class="navbar-icon"><span></span></div>
-					</div>
-				</div>
-				
-				<!-- fullscreenmenu__module -->
-				<div class="fullscreenmenu__module" trigger="#fs-button">
-					
-					<!-- overlay-menu -->
-					<nav class="overlay-menu">
-						
-						<!--  -->
-						<ul class="wil-menu-list">
-							<li class="current-menu-item"><a href="index.jsp">Home</a>
-							</li>
-							<li><a href="blog.jsp">소개</a>
-							</li>
-							<li><a href="work.jsp">예약</a>
-							</li>
-							<li><a href="about.jsp">My Page</a>
-							</li>
-							<li><a href="contact.jsp">Contact</a>
-							</li>
-						</ul><!--  -->
-						
-					</nav><!-- End / overlay-menu -->
-					
-				</div><!-- End / fullscreenmenu__module -->
-				
-			</header><!-- End / header -->
+			<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
+			<!-- End / header -->
 			
 			<!-- Content-->
 			<div class="wil-content">
@@ -87,32 +74,38 @@
 						<div class="grid-css grid-css--masonry" data-col-lg="3" data-col-md="2" data-col-sm="2" data-col-xs="1" data-gap="30">
 							<div class="grid__inner">
 								<div class="grid-sizer"></div>
-								<div class="grid-item">
-									<div class="grid-item__inner">
-										<div class="grid-item__content-wrapper">
-											
-											<!-- post -->
-											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="/assets/img/works/samhwan.jpg"/><!--<img src="https://images.pexels.com/photos/807034/pexels-photo-807034.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
-												<div class="post__body">
-													<div class="post__meta"><span class="date">Nov 26, 2017</span><span class="author"><a href="#">by Maria Gutierrez</a></span></div>
-													<h2 class="post__title"><a href="work-detail.jsp">삼환빌딩</a></h2>
-													<p class="post__text">Duis porttitor libero ac egestas euismod. Maecenas quis felis turpis. Nulla quis turpis sed augue egestas dapibus vel at nibh. Nul</p>
-													<a class="md-btn md-btn--outline-primary" href="#">read more
-													</a>
-												</div>
-											</div><!-- End / post -->
-											
+								
+								<c:forEach var="item" items="${workSpaceList}">
+
+									<div class="grid-item">
+										<div class="grid-item__inner">
+											<div class="grid-item__content-wrapper">
+												
+												<!-- post -->
+												<div class="post">
+													<div class="post__media"><a href="${path}/info/workspaceDetail.do?workName=${item.workName}&workAddr=${item.workAddr}"><img src="/assets/img/works/samhwan.jpg"/></a></div>
+													<div class="post__body">
+														<h2 class="post__title"><a href="javascript:fn_go('${path}','${item.workName}','${item.workAddr}');">${item.workName}</a></h2>
+														<p class="post__text">${item.workDescription}</p>
+														<a class="md-btn md-btn--outline-primary" href="${path}/info/workspaceDetail.do?workName=${item.workName}&workAddr=${item.workAddr}">read more
+														</a>
+													</div>
+												</div><!-- End / post -->
+												
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="grid-item">
+								</c:forEach>
+								
+								
+								
+								<!-- <div class="grid-item">
 									<div class="grid-item__inner">
 										<div class="grid-item__content-wrapper">
 											
-											<!-- post -->
+											post
 											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="/assets/img/works/gsnam.jpg"/><!--<img src="https://images.pexels.com/photos/609687/pexels-photo-609687.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
+												<div class="post__media"><a href="work-detail.jsp"><img src="/assets/img/works/gsnam.jpg"/><img src="https://images.pexels.com/photos/609687/pexels-photo-609687.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/></a></div>
 												<div class="post__body">
 													<div class="post__meta"><span class="date">Nov 26, 2017</span><span class="author"><a href="#">by Bryan Ryan</a></span></div>
 													<h2 class="post__title"><a href="work-detail.jsp">GS 강남타워</a></h2>
@@ -120,7 +113,7 @@
 													<a class="md-btn md-btn--outline-primary" href="#">read more
 													</a>
 												</div>
-											</div><!-- End / post -->
+											</div>End / post
 											
 										</div>
 									</div>
@@ -129,9 +122,9 @@
 									<div class="grid-item__inner">
 										<div class="grid-item__content-wrapper">
 											
-											<!-- post -->
+											post
 											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="/assets/img/works/gsseo.jpg"/><!--<img src="https://images.pexels.com/photos/754949/pexels-photo-754949.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
+												<div class="post__media"><a href="work-detail.jsp"><img src="/assets/img/works/gsseo.jpg"/><img src="https://images.pexels.com/photos/754949/pexels-photo-754949.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/></a></div>
 												<div class="post__body">
 													<div class="post__meta"><span class="date">Dec 20, 2017</span><span class="author"><a href="#">by Bruce Powell</a></span></div>
 													<h2 class="post__title"><a href="work-detail.jsp">GS 강서 N 타워</a></h2>
@@ -139,107 +132,11 @@
 													<a class="md-btn md-btn--outline-primary" href="#">read more
 													</a>
 												</div>
-											</div><!-- End / post -->
+											</div>End / post
 											
 										</div>
 									</div>
-								</div>
-								<div class="grid-item">
-									<div class="grid-item__inner">
-										<div class="grid-item__content-wrapper">
-											
-											<!-- post -->
-											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="https://images.pexels.com/photos/794578/pexels-photo-794578.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/></a></div>
-												<div class="post__body">
-													<div class="post__meta"><span class="date">Dec 20, 2017</span><span class="author"><a href="#">by Sean Coleman</a></span></div>
-													<h2 class="post__title"><a href="work-detail.jsp">How to Create and Manage SVG Sprites</a></h2>
-													<p class="post__text">Integer placerat ullamcorper urna nec rhoncus. Sed velit justo, lacinia non sapien imperdiet, sagittis fringilla risus. Nulla in e</p>
-													<a class="md-btn md-btn--outline-primary" href="#">read more
-													</a>
-												</div>
-											</div><!-- End / post -->
-											
-										</div>
-									</div>
-								</div>
-								<div class="grid-item">
-									<div class="grid-item__inner">
-										<div class="grid-item__content-wrapper">
-											
-											<!-- post -->
-											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="https://images.pexels.com/photos/38069/pexels-photo-38069.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/></a></div>
-												<div class="post__body">
-													<div class="post__meta"><span class="date">Feb 15, 2018</span><span class="author"><a href="#">by Daniel Ramirez</a></span></div>
-													<h2 class="post__title"><a href="work-detail.jsp">3 Essential Design Trends</a></h2>
-													<p class="post__text">Maecenas lorem ex, euismod eget pulvinar non, facilisis ut leo. Quisque placerat purus in neque efficitur ornare. Nam at justo mag</p>
-													<a class="md-btn md-btn--outline-primary" href="#">read more
-													</a>
-												</div>
-											</div><!-- End / post -->
-											
-										</div>
-									</div>
-								</div>
-								<div class="grid-item">
-									<div class="grid-item__inner">
-										<div class="grid-item__content-wrapper">
-											
-											<!-- post -->
-											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/></a></div>
-												<div class="post__body">
-													<div class="post__meta"><span class="date">Nov 26, 2017</span><span class="author"><a href="#">by Olivia Ryan</a></span></div>
-													<h2 class="post__title"><a href="work-detail.jsp">3 Essential Design Trends</a></h2>
-													<p class="post__text">Sed ante nisl, fermentum et facilisis in, maximus sed ipsum. Cras hendrerit feugiat eros, ut fringilla nunc finibus sed. Quisque v</p>
-													<a class="md-btn md-btn--outline-primary" href="#">read more
-													</a>
-												</div>
-											</div><!-- End / post -->
-											
-										</div>
-									</div>
-								</div>
-								<div class="grid-item">
-									<div class="grid-item__inner">
-										<div class="grid-item__content-wrapper">
-											
-											<!-- post -->
-											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="https://images.pexels.com/photos/792906/pexels-photo-792906.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/></a></div>
-												<div class="post__body">
-													<div class="post__meta"><span class="date">Jan 28, 2018</span><span class="author"><a href="#">by Ann Fowler</a></span></div>
-													<h2 class="post__title"><a href="work-detail.jsp">Getting Started with Vue.Js</a></h2>
-													<p class="post__text">Suspendisse ac elit vitae est lacinia interdum eu sit amet mauris. Phasellus aliquam nisi sit amet libero mattis ornare. In varius</p>
-													<a class="md-btn md-btn--outline-primary" href="#">read more
-													</a>
-												</div>
-											</div><!-- End / post -->
-											
-										</div>
-									</div>
-								</div>
-								<div class="grid-item">
-									<div class="grid-item__inner">
-										<div class="grid-item__content-wrapper">
-											
-											<!-- post -->
-											<div class="post">
-												<div class="post__media"><a href="work-detail.jsp"><img src="https://images.pexels.com/photos/789140/pexels-photo-789140.jpeg?h=350&amp;auto=compress&amp;cs=tinysrgb" alt=""/></a></div>
-												<div class="post__body">
-													<div class="post__meta"><span class="date">Dec 20, 2017</span><span class="author"><a href="#">by Olivia Ryan</a></span></div>
-													<h2 class="post__title"><a href="work-detail.jsp">Design a Perfect Homepage</a></h2>
-													<p class="post__text">Maecenas lorem ex, euismod eget pulvinar non, facilisis ut leo. Quisque placerat purus in neque efficitur ornare. Nam at justo mag</p>
-													<a class="md-btn md-btn--outline-primary" href="#">read more
-													</a>
-												</div>
-											</div><!-- End / post -->
-											
-										</div>
-									</div>
-								</div>
-							</div>
+								</div> -->
 						</div>
 						<div class="awe-text-center mt-50">
 							<a class="md-btn md-btn--outline-primary " href="#">Load more
@@ -253,48 +150,11 @@
 			<!-- End / Content-->
 			
 			<!-- footer -->
-			<div class="footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6 col-lg-6 ">
-							<p class="footer__coppy">2018 &copy; Copyright <a href="http://awe7.com/">Awe7</a>. All rights Reserved.</p>
-						</div>
-						<div class="col-md-6 col-lg-6 ">
-							<div class="footer__social">
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-facebook"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-twitter"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-linkedin"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-behance"></i>
-								</a><!-- End / social-icon -->
-								
-								
-								<!-- social-icon -->
-								<a class="social-icon" href="#"><i class="social-icon__icon fa fa-vimeo"></i>
-								</a><!-- End / social-icon -->
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div><!-- End / footer -->
+			<jsp:include page="/WEB-INF/views/user/common/footer.jsp" />
+			<!-- End / footer -->			
 			
 		</div>
 		<!-- Vendors-->
-		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="/assets/vendors/imagesloaded/imagesloaded.pkgd.js"></script>
 		<script type="text/javascript" src="/assets/vendors/isotope-layout/isotope.pkgd.js"></script>
 		<script type="text/javascript" src="/assets/vendors/jquery-one-page/jquery.nav.min.js"></script>
