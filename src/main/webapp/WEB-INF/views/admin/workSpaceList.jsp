@@ -317,7 +317,7 @@
 								</c:if>
 								<div class="col-xs-6 col-md-4 text-center">
 									 <img
-										src=<c:url value="/getByteImage/${workspace.workSeq}"/>
+										src=<c:url value="/getByteWorkSpaceImage/${workspace.workSeq}"/>
 										width="200px" height="200px" />
 									<br>
 									<h3>

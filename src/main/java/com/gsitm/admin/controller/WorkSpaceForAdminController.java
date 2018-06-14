@@ -152,7 +152,7 @@ public class WorkSpaceForAdminController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/getByteImage/{workSeq}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getByteWorkSpaceImage/{workSeq}", method = RequestMethod.GET)
 	public void getImageAsByteArray(HttpServletResponse response,@PathVariable String workSeq, WorkSpaceDTO workSpaceDTO) throws IOException {
 		workSpaceDTO.setWorkSeq(workSeq);
 		logger.info(workSeq);
