@@ -10,8 +10,21 @@
  */ 
 package com.gsitm.user.model.dao;
 
+import java.util.List;
+
+import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
+import com.gsitm.common.dto.ResvItemInfoDTO;
+import com.gsitm.common.dto.ResvUserInfoDTO;
 
 public interface ResvDAO {
+	
+	
 	public void create(ResvDTO dto);
+	
+	List<ResvUserInfoDTO> showResvUserList(String empId);
+	List<ResvItemInfoDTO> showResvItemList(String empId);
+	List<ResvConfirmInfoDTO> showResvConfirmList(String empId);
+	
+	int resvCount(String empId);
 }

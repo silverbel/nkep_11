@@ -14,11 +14,17 @@
 		<typeAlias type="com.gsitm.common.dto.WorkSpaceDTO" alias="workSpace"/>
 		<typeAlias type="com.gsitm.common.dto.EmployeeDTO" alias="empDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvDTO" alias="resv"/>
+		<typeAlias type="com.gsitm.common.dto.BlackListLogDTO" alias="blkDTO"/>
+		<typeAlias type="com.gsitm.common.dto.TeamDTO" alias="teamDTO"/>
+		<typeAlias type="com.gsitm.common.dto.ResvUserInfoDTO" alias="rDTO"/>
+		<typeAlias type="com.gsitm.common.dto.ResvItemInfoDTO" alias="riDTO"/>
+		<typeAlias type="com.gsitm.common.dto.ResvConfirmInfoDTO" alias="rcDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>
-		<mapper resource="mappers/LoginMapper.xml"></mapper>
+		<mapper resource="mappers/BlackList.xml"></mapper>
+		<mapper resource="mappers/MemberMapper.xml"></mapper>
+		<mapper resource="mappers/resv/resvMapper.xml"></mapper>
 	</mappers>
 
 </configuration>
-
