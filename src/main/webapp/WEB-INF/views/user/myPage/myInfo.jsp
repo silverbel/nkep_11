@@ -43,10 +43,15 @@ description : my page, 나의 정보 확인
 
 		<!-- Plugin CSS -->
 		<link href="/assets/dist/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+		<!--  -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 		<style type="text/css">
 			.table-kdb td, .table-kdb th{
 				font-size: 1.5em;
+				align-content: center;
 			}
 			.btn-kdb {
 				width:15%;
@@ -147,8 +152,7 @@ description : my page, 나의 정보 확인
 						<tbody>
 							<c:if test="${0 eq blkCount }">
 								<tr>
-									<td colspan="3"><h2 class="text-center">블랙리스트 내역이
-											없습니다.</h2></td>
+									<td colspan="3" class="text-center" >블랙리스트 내역이 없습니다.</td>
 								</tr>
 							</c:if>
 							<c:if test="${0 ne blkCount }">
