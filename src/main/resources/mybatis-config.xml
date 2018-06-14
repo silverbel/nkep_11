@@ -14,6 +14,8 @@
 		<typeAlias type="com.gsitm.common.dto.WorkSpaceDTO" alias="workSpace"/>
 		<typeAlias type="com.gsitm.common.dto.EmployeeDTO" alias="empDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvDTO" alias="resv"/>
+		<typeAlias type="com.gsitm.common.dto.MeetingRoomDTO" alias="mtRoom"/>
+		<typeAlias type="com.gsitm.common.dto.EducationRoomDTO" alias="eduRoom"/>
 		<typeAlias type="com.gsitm.common.dto.BlackListLogDTO" alias="blkDTO"/>
 		<typeAlias type="com.gsitm.common.dto.TeamDTO" alias="teamDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvUserInfoDTO" alias="rDTO"/>
@@ -22,6 +24,8 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>
+		<mapper resource="mappers/MtRoomMapper.xml"></mapper>
+		<mapper resource="mappers/EduRoomMapper.xml"></mapper>
 		<mapper resource="mappers/BlackList.xml"></mapper>
 		<mapper resource="mappers/MemberMapper.xml"></mapper>
 		<mapper resource="mappers/resv/resvMapper.xml"></mapper>

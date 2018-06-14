@@ -7,8 +7,16 @@ public class EducationRoomDTO {
 	private String eduSize;
 	private String eduPrice;
 	private String eduAvail;
+	private String eduDescription;
 	private String workSeq;
 	private String workCode;
+	
+	public String getEduDescription() {
+		return eduDescription;
+	}
+	public void setEduDescription(String eduDescription) {
+		this.eduDescription = eduDescription;
+	}
 	public String getEduSeq() {
 		return eduSeq;
 	}

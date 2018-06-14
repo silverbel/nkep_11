@@ -7,8 +7,15 @@ public class MeetingRoomDTO {
 	private String mtSize;
 	private String mtPrice;
 	private String mtAvail;
+	private String mtDescription;
 	private String workSeq;
 	private String workCode;
+	public String getMtDescription() {
+		return mtDescription;
+	}
+	public void setMtDescription(String mtDescription) {
+		this.mtDescription = mtDescription;
+	}
 	public String getMtSeq() {
 		return mtSeq;
 	}

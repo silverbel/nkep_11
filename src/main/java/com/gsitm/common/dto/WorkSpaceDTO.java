@@ -1,3 +1,14 @@
+/**
+ * @programName : WorkSpaceDTO.java
+ * @author      : 은종현
+ * @date        : 2018-06-11
+ * @function    : 근무지 소개
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 은종현	   2018-06-11	초안
+ */ 
+
 package com.gsitm.common.dto;
 
 

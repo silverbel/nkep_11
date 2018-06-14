@@ -42,7 +42,7 @@
 						
 						<!-- page-title -->
 						<div class="page-title">
-							<h2 class="page-title__title">${sessionID.empName }님 환영합니다!<br>
+							<h2 class="page-title__title">${sessionID.empName}님 환영합니다!<br>
 								 GS ITM 회의실 예약 시스템입니다.<br>
 								<!-- typing__module -->
 								<div class="typing__module">
