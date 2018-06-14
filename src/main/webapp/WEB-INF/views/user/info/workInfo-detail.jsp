@@ -167,7 +167,31 @@ description : 근무지 디테일 페이지
 			<section class="awe-section bg-gray" id="eduRoom">
 				<div class="container">
 					<div class="my-auto">
-						part
+						<div class="grid-css grid-css--masonry" data-col-lg="3" data-col-md="2" data-col-sm="2" data-col-xs="1" data-gap="30">
+								<div class="grid__inner">
+									<div class="grid-sizer"></div>
+									
+									<c:forEach var="item" items="${eduRoomList}">
+	
+										<div class="grid-item">
+											<div class="grid-item__inner">
+												<div class="grid-item__content-wrapper">
+													
+													<!-- post -->
+													<div class="post">
+														<div class="post__media"><a href="${path}/info/workspaceDetail.do"><img src="/assets/img/works/samhwan.jpg"/><!--<img src="https://images.pexels.com/photos/807034/pexels-photo-807034.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
+														<div class="post__body">
+															<h2 class="post__title"><a href="${path}/info/workspaceDetail.do">${item.eduName}</a></h2>
+															<p class="post__text">${item.eduDescription}</p>
+														</div>
+													</div><!-- End / post -->
+													
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
 					</div>
 				</div>
 			</section>

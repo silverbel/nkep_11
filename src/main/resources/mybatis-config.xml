@@ -15,11 +15,14 @@
 		<typeAlias type="com.gsitm.common.dto.EmployeeDTO" alias="empDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvDTO" alias="resv"/>
 		<typeAlias type="com.gsitm.common.dto.MeetingRoomDTO" alias="mtRoom"/>
+		<typeAlias type="com.gsitm.common.dto.EducationRoomDTO" alias="eduRoom"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>
 		<mapper resource="mappers/LoginMapper.xml"></mapper>
 		<mapper resource="mappers/MtRoomMapper.xml"></mapper>
+		<mapper resource="mappers/EduRoomMapper.xml"></mapper>
+		
 	</mappers>
 
 </configuration>

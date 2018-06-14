@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gsitm.common.dto.MeetingRoomDTO;
 import com.gsitm.common.dto.WorkSpaceDTO;
+import com.gsitm.common.dto.EducationRoomDTO;
+import com.gsitm.user.service.EduRoomService;
 import com.gsitm.user.service.MtRoomService;
 import com.gsitm.user.service.WorkSpaceService;
 
@@ -36,6 +38,9 @@ public class InfoController {
 	@Inject
 	private MtRoomService mtRoomService;
 	
+	@Inject
+	private EduRoomService eduRoomService;
+	
 	@RequestMapping("workspace.do")
 	public ModelAndView workspaceInfoView(ModelAndView mv,WorkSpaceDTO workSpaceDTO) {
 		List<WorkSpaceDTO> list = workSpaceService.getWorkSpaceList(workSpaceDTO);
@@ -45,10 +50,12 @@ public class InfoController {
 	}
 	
 	@RequestMapping("workspaceDetail.do")
-	public ModelAndView workspaceDetail(ModelAndView mv, MeetingRoomDTO meetingRoomDTO, @RequestParam("workName") String workName, @RequestParam("workAddr") String workAddr) {
+	public ModelAndView workspaceDetail(ModelAndView mv, MeetingRoomDTO meetingRoomDTO, EducationRoomDTO educationRoomDTO, @RequestParam("workName") String workName, @RequestParam("workAddr") String workAddr) {
 		List<MeetingRoomDTO> mtRoomList = mtRoomService.getMtRoomList(meetingRoomDTO);
+		List<EducationRoomDTO> eduRoomList = eduRoomService.getEduRoomList(educationRoomDTO);
 		mv.setViewName("user/info/workInfo-detail");
 		mv.addObject("mtRoomList", mtRoomList);
+		mv.addObject("eduRoomList", eduRoomList);
 		mv.addObject("workName", workName);
 		mv.addObject("workAddr", workAddr);
 		return mv;
