@@ -22,6 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gsitm.common.dto.BlackListLogDTO;
 import com.gsitm.common.dto.EmployeeDTO;
+import com.gsitm.common.dto.ResvConfirmInfoDTO;
+import com.gsitm.common.dto.ResvItemInfoDTO;
+import com.gsitm.common.dto.ResvUserInfoDTO;
 import com.gsitm.common.dto.TeamDTO;
 import com.gsitm.user.service.BlackListService;
 import com.gsitm.user.service.MemberService;
@@ -65,7 +68,22 @@ public class MyPageController {
 	
 	
 	@RequestMapping(value="/myPage/myReserva.do", method=RequestMethod.GET)
-	public String myPageRsvView() {
-		return "user/myPage/myReservation";
+	public ModelAndView myPageRsvView(HttpSession session) {
+		ModelAndView model = new ModelAndView("user/myPage/myReservation");
+		EmployeeDTO emp = (EmployeeDTO) session.getAttribute("sessionID");
+		
+		List<ResvConfirmInfoDTO> rcList = rService.showResvConfirmList(emp.getEmpId());
+		List<ResvUserInfoDTO> ruList = rService.showResvUserList(emp.getEmpId());
+		List<ResvItemInfoDTO> riList = rService.showResvItemList(emp.getEmpId());
+		int resvCnt = rService.resvCount(emp.getEmpId());
+		
+		model.addObject("resvCnt", resvCnt);
+		model.addObject("rcList", rcList);
+		
+		// 밑에 애들은 바꿔야 한다. ajax 필요
+		model.addObject("ruList", ruList);
+		model.addObject("riList", riList);
+		
+		return model;
 	}
 }

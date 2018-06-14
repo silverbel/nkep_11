@@ -20,6 +20,7 @@ import com.gsitm.user.service.ResvService;
 @Controller
 @RequestMapping("/resv/*")
 public class ResvController {
+	
 	@Resource(name="resvService")
 	private ResvService ResvService;
 	

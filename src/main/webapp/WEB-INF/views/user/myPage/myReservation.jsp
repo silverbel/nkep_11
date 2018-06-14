@@ -117,7 +117,7 @@ description : my page, 나의 정보 확인
 						<div class="page-title pb-40">
 							<h2 class="page-title__title">${sessionID.empId }-
 								${sessionID.empName }님</h2>
-							<p class="page-title__text">회원 정보 보기</p>
+							<p class="page-title__text">예약 및 사용 정보 보기</p>
 							<div class="page-title__divider"></div>
 						</div>
 						<!-- End / page-title -->
@@ -130,34 +130,50 @@ description : my page, 나의 정보 확인
 				<!-- BlackList Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
-						<h2>블랙리스트 내역</h2>
+						<h2>예약 내역</h2>
 						<table class="table table-hover table-kdb">
 							<colgroup>
-								<col width="20%">
 								<col width="30%">
-								<col width="50%">
+								<col width="30%">
+								<col width="10%">
+								<col width="10%">
+								<col width="20%">
 							</colgroup>
 							<thead>
 								<tr class="text-center">
 									<th>번호</th>
-									<th>날짜</th>
-									<th>사유</th>
+									<th>장소</th>
+									<th>신청자</th>
+									<th>비용</th>
+									<th>승인 여부</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:if test="${0 eq blkCount }">
+								<c:if test="${0 eq resvCnt }">
 									<tr>
-										<td colspan="3"><h2 class="text-center">블랙리스트 내역이
-												없습니다.</h2></td>
+										<td colspan="5">
+											<h2 class="text-center">예약 내역이 없습니다.</h2>
+										</td>
 									</tr>
 								</c:if>
-								<c:if test="${0 ne blkCount }">
-									<c:forEach var="blk" items="${blkList }">
-										<tr class="text-center">
-											<td>${blk.blkSeq }</td>
-											<td><c:out value="${blk.regDate}" /> ~ <c:out
-													value="${blk.finDate}" /></td>
-											<td>${blk.blkRes}</td>
+								<c:if test="${0 ne resvCnt }">
+									<c:forEach var="rc" items="${rcList }">
+										<tr class="text-center" data-toggle="modal" data-target="#myResvInfo">
+											<td>${rc.rsvSeq}</td>
+											<td>${rc.roomName }</td>
+											<td>${rc.applicant}</td>
+											<td>${rc.rsvPrice}</td>
+											<td>
+												<c:if test="${'Y' eq rc.mgrYn}">
+													승인 완료
+												</c:if>
+												<c:if test="${'N' eq rc.mgrYn}">
+													승인 거절
+												</c:if>
+												<c:if test="${null eq rc.mgrYn}">
+													승인 대기
+												</c:if>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -171,32 +187,26 @@ description : my page, 나의 정보 확인
 				<!-- Team Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
-						<h2>팀 정보</h2>
+						<h2>사용 내역</h2>
 						<table class="table table-hover table-kdb">
 							<colgroup>
-								<col width="20%">
-								<col width="20%">
-								<col width="20%">
+								<col width="30%">
+								<col width="30%">
 								<col width="20%">
 								<col width="20%">
 							</colgroup>
 							<thead>
 								<tr class="text-center">
-									<th>팀 번호</th>
-									<th>팀 이름</th>
-									<th>팀장</th>
-									<th>총 인원</th>
-									<th>팀 예산</th>
+									<th>사용 번호</th>
+									<th>장소</th>
+									<th>사용 인원</th>
+									<th>비용</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="text-center" data-toggle="modal" data-target="#teamMember">
-									<td>${team.teamSeq }</td>
-									<td>${team.teamName }</td>
-									<td>${team.bossId }</td>
-									<td>${memCount}</td>
-									<td id="tBudget"></td>
-								</tr>
+									<tr>
+										<th colspan="4">사용 내역이 없습니다.</th>
+									</tr>
 							</tbody>
 						</table>
 					</div>
@@ -213,7 +223,7 @@ description : my page, 나의 정보 확인
 		</div>
 	
 		<!-- Team Mate Modal -->
-		<div class="modal fade" id="teamMember" tabindex="-1" role="dialog"
+		<div class="modal fade" id="myResvInfo" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -241,14 +251,6 @@ description : my page, 나의 정보 확인
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="mem" items="${memList}">
-									<tr class="text-center">
-										<td>${mem.empId}</td>
-										<td>${mem.empName}</td>
-										<td>${mem.email}</td>
-										<td>${mem.blackYn}</td>
-									</tr>
-								</c:forEach>
 							</tbody>
 						</table>
 					</div>

@@ -11,10 +11,15 @@
 
 package com.gsitm.user.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.gsitm.common.dto.ResvConfirmInfoDTO;
+import com.gsitm.common.dto.ResvItemInfoDTO;
+import com.gsitm.common.dto.ResvUserInfoDTO;
 import com.gsitm.user.model.dao.ResvDAOImpl;
 
 @Service(value="resvService")
@@ -23,6 +28,20 @@ public class ResvService {
 	@Resource(name="resvDao")
 	private ResvDAOImpl rDao;
 	
+	public List<ResvUserInfoDTO> showResvUserList(String empId) {
+		return rDao.showResvUserList(empId);
+	}
+
+	public List<ResvItemInfoDTO> showResvItemList(String empId) {
+		return rDao.showResvItemList(empId);
+	}
+
+	public List<ResvConfirmInfoDTO> showResvConfirmList(String empId) {
+		return rDao.showResvConfirmList(empId);
+	}
 	
+	public int resvCount(String empId) {
+		return rDao.resvCount(empId);
+	}
 }
 
