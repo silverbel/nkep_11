@@ -10,6 +10,14 @@ public class MeetingRoomDTO {
 	private String mtDescription;
 	private String workSeq;
 	private String workCode;
+	private byte[] mtImg;
+	
+	public byte[] getMtImg() {
+		return mtImg;
+	}
+	public void setMtImg(byte[] mtImg) {
+		this.mtImg = mtImg;
+	}
 	public String getMtDescription() {
 		return mtDescription;
 	}

@@ -11,17 +11,17 @@ import com.gsitm.user.service.WorkSpaceService;
 
 /**
  * @programName : WorkSpaceController.java
- * @author      : 남동길
+ * @author      : �궓�룞湲�
  * @date        : 2018. 6. 13. 
  * @function    :  
  *
- * [이름]   [수정일]     [내용]
+ * [�씠由�]   [�닔�젙�씪]     [�궡�슜]
  * ----------------------------------------------------------
  * 
  */ 
 @Controller
 public class WorkSpaceController {
-	@Inject
+	@Inject	
 	private WorkSpaceService workSpaceService;
 
 

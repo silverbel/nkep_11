@@ -9,6 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT EDU_SEQ, EDU_CODE, EDU_NAME, EDU_SIZE, EDU_PRICE, EDU_AVAIL, EDU_DESCRIPTION, WORK_SEQ, WORK_CODE 
 		FROM nkep_11.TB_EDU_ROOM
 	</select>
+	<select id="getByteEduImage" parameterType="eduRoom" resultType="java.util.Map">
+		SELECT EDU_IMG AS IMG FROM nkep_11.TB_EDU_ROOM WHERE EDU_SEQ=#{eduSeq}
+	</select>
 </mapper>
 
 
