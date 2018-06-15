@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.gsitm.admin.model.dao.WorkSpaceForAdminDAO;
+import com.gsitm.common.dto.EmployeeDTO;
 import com.gsitm.common.dto.WorkSpaceDTO;
 
 /**
@@ -52,5 +53,9 @@ public class WorkSpaceForAdminService {
 
 	public void deleteWorkSpaceForAdmin(WorkSpaceDTO workSpaceDTO) {
 		workSpaceForAdminDAO.deleteWorkSpaceForAdmin(workSpaceDTO);
+	}
+
+	public List<EmployeeDTO> getAuthorityForAdmin(EmployeeDTO employeeDTO) {
+		return null;
 	}
 }

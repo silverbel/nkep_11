@@ -10,6 +10,10 @@ public class MeetingRoomDTO {
 	private String mtDescription;
 	private String workSeq;
 	private String workCode;
+	
+	private byte[] mtImg;
+	private byte[] mtImg2;
+	private byte[] mtImg3;
 	public String getMtDescription() {
 		return mtDescription;
 	}
@@ -63,6 +67,24 @@ public class MeetingRoomDTO {
 	}
 	public void setWorkCode(String workCode) {
 		this.workCode = workCode;
+	}
+	public byte[] getMtImg() {
+		return mtImg;
+	}
+	public void setMtImg(byte[] mtImg) {
+		this.mtImg = mtImg;
+	}
+	public byte[] getMtImg2() {
+		return mtImg2;
+	}
+	public void setMtImg2(byte[] mtImg2) {
+		this.mtImg2 = mtImg2;
+	}
+	public byte[] getMtImg3() {
+		return mtImg3;
+	}
+	public void setMtImg3(byte[] mtImg3) {
+		this.mtImg3 = mtImg3;
 	}
 	
 	

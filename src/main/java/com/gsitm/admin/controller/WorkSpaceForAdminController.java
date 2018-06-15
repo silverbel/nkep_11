@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gsitm.admin.service.WorkSpaceForAdminService;
+import com.gsitm.common.dto.EmployeeDTO;
 import com.gsitm.common.dto.WorkSpaceDTO;
 
 /**
@@ -79,9 +80,17 @@ public class WorkSpaceForAdminController {
 		workSpaceDTO.setWorkAddr(addrPrimary +"|"+ addrDetail +"|"+ addrPost);
 		workSpaceDTO.setWorkTel(tel1 + "-" + tel2 + "-" + tel3);
 		workSpaceDTO.setWorkDescription(workDescription);
-		workSpaceDTO.setWorkImg(multipartFiles.get(0).getBytes());
-		workSpaceDTO.setWorkImg2(multipartFiles.get(1).getBytes());
-		workSpaceDTO.setWorkImg3(multipartFiles.get(2).getBytes());
+		if(multipartFiles.size() == 1) {
+			workSpaceDTO.setWorkImg(multipartFiles.get(0).getBytes());
+		}else if(multipartFiles.size() ==2) {
+			workSpaceDTO.setWorkImg(multipartFiles.get(0).getBytes());
+			workSpaceDTO.setWorkImg2(multipartFiles.get(1).getBytes());
+		}else if(multipartFiles.size() == 3) {
+			workSpaceDTO.setWorkImg(multipartFiles.get(0).getBytes());
+			workSpaceDTO.setWorkImg2(multipartFiles.get(1).getBytes());
+			workSpaceDTO.setWorkImg3(multipartFiles.get(2).getBytes());
+		}
+
 
 		workSpaceForAdminService.insertWorkSpaceForAdmin(workSpaceDTO);
 		mv.setViewName("redirect:/getWorkSpaceListForAdmin.do");
@@ -122,9 +131,16 @@ public class WorkSpaceForAdminController {
 		if(multipartHttpServletRequest.getParameter("changeFlag") == null) {
 			workSpaceDTO.setWorkSeq(workSeq);
 			List<MultipartFile> multipartFiles = multipartHttpServletRequest.getFiles("files[]");
-			workSpaceDTO.setWorkImg(multipartFiles.get(0).getBytes());
-			workSpaceDTO.setWorkImg2(multipartFiles.get(1).getBytes());
-			workSpaceDTO.setWorkImg3(multipartFiles.get(2).getBytes());
+			if(multipartFiles.size() == 1) {
+				workSpaceDTO.setWorkImg(multipartFiles.get(0).getBytes());
+			}else if(multipartFiles.size() ==2) {
+				workSpaceDTO.setWorkImg(multipartFiles.get(0).getBytes());
+				workSpaceDTO.setWorkImg2(multipartFiles.get(1).getBytes());
+			}else if(multipartFiles.size() == 3) {
+				workSpaceDTO.setWorkImg(multipartFiles.get(0).getBytes());
+				workSpaceDTO.setWorkImg2(multipartFiles.get(1).getBytes());
+				workSpaceDTO.setWorkImg3(multipartFiles.get(2).getBytes());
+			}
 			workSpaceDTO.setWorkName(workName);
 			workSpaceDTO.setWorkAddr(addrPrimary +"|"+ addrDetail +"|"+ addrPost);
 			workSpaceDTO.setWorkTel(tel1 + "-" + tel2 + "-" + tel3);
@@ -157,11 +173,12 @@ public class WorkSpaceForAdminController {
 		workSpaceDTO.setWorkSeq(workSeq);
 		logger.info(workSeq);
 		Map<String, Object> map = workSpaceForAdminService.getByteImage(workSpaceDTO);
-		logger.info(map.get("IMG").toString());
+//		logger.info(map.get("IMG").toString());
 		byte[] imageContent = (byte[]) map.get("IMG");
 
 	    InputStream in = new ByteArrayInputStream(imageContent);
 	    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
 	    IOUtils.copy(in, response.getOutputStream());
 	}
+	
 }

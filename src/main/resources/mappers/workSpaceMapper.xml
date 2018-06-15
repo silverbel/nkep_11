@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="getByteImage" parameterType="workSpace" resultType="java.util.Map">
-		select WORK_IMG AS IMG FROM TB_WORKSPACE WHERE WORK_SEQ=#{workSeq};
+		select WORK_IMG AS IMG FROM nkep_11.TB_WORKSPACE WHERE WORK_SEQ=#{workSeq}
 	</select>
 	
 	<select id="getWorkSpaceByWorkSeq" parameterType="workSpace" resultType="workSpace">
