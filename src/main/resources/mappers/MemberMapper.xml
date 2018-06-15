@@ -47,6 +47,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE TEAM_SEQ = #{teamSeq}
 	</select>
 	
+	<!--동길 : 관리자페이지 권한관리 부분  -->
+	<select id="getWorkSpaceListForAdmin" parameterType="empDTO" resultType="empDTO">
+		SELECT EMP_ID, EMP_NAME, ROLE, TEAM_SEQ, EMAIL 
+		FROM nkep_11.TB_EMPLOYEE
+		WHERE ROLE IN ('E_MGR','S_MGR','M_MGR')
+	</select>
+	
+	<select id="getNormalForAdmin" parameterType="empDTO" resultType="empDTO">
+		SELECT EMP_ID, EMP_NAME, ROLE, TEAM_SEQ, EMAIL 
+		FROM nkep_11.TB_EMPLOYEE
+		WHERE ROLE NOT IN ('E_MGR','S_MGR','M_MGR');
+	</select>
+	
+	<update id="changeEmpMgrToNormal" parameterType="empDTO">
+		UPDATE nkep_11.TB_EMPLOYEE SET ROLE='USER', TEAM_SEQ = #{teamSeq}  WHERE EMP_ID = #{empId}
+	</update>
+	<update id="changeEmpNormalToMgr">
+		UPDATE nkep_11.TB_EMPLOYEE SET ROLE=#{role}, TEAM_SEQ = '0000' WHERE EMP_ID = #{empId}
+	</update>
 </mapper>
 
 
