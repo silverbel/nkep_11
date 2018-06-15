@@ -9,8 +9,7 @@ public class MeetingRoomDTO {
 	private String mtAvail;
 	private String mtDescription;
 	private String workSeq;
-	private String workCode;
-	
+	private String workCode;	
 	private byte[] mtImg;
 	private byte[] mtImg2;
 	private byte[] mtImg3;

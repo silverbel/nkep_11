@@ -28,7 +28,7 @@ public class EduRoomDAOImpl implements EduRoomDAO {
 	@Override
 	public List<EducationRoomDTO> getEduRoomList(EducationRoomDTO educationRoomDTO) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("eduRoom.geteduRoomList");
+		return sqlSession.selectList("eduRoom.getEduRoomList");
 	}
 
 }

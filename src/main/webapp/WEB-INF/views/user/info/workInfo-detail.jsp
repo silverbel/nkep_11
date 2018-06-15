@@ -38,6 +38,11 @@ description : 근무지 디테일 페이지
 	href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Open+Sans:400,700">
 <link rel="stylesheet" type="text/css" id="app-stylesheet"
 	href="/assets/css/main.css">
+	<script>
+		function fn_go() {
+			
+		}
+	</script>
 	
 <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -46,11 +51,9 @@ description : 근무지 디테일 페이지
 
 <body>
 	<div class="page-wrap" id="root">
-
 		<!-- header -->
 		<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
 		<!-- End / header -->
-
 		<!-- Content-->
 		<div class="wil-content">
 
@@ -60,7 +63,7 @@ description : 근무지 디테일 페이지
 
 					<!-- page-title -->
 					<div class="page-title pb-40">
-						<span class="post-detail__cat">Free stuff</span>
+						<span class="post-detail__cat">WORKSPACE</span>
 						<h2 class="page-title__title">${workName}</h2>
 						<div class="page-title__divider"></div>
 					</div>
@@ -125,38 +128,54 @@ description : 근무지 디테일 페이지
 			<!-- Section -->
 			<section class="awe-section bg-gray">
 				<div class="container">
-					<h4 class="mb-5">회의실 및 교육실 상세 보기</h4>
+					<h4 class="mb-5">회의실 및 교육실</h4>
 					<center>
 						<a class="md-btn md-btn--outline-primary" href="#mtRoom">회의실 보기</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<a class="md-btn md-btn--outline-primary" href="#eduRoom">교육실 보기</a>
 					</center>					
 				</div>
 			</section>
-			<section id="mtRoom">
+			<section class="awe-section" id="mtRoom">
 				<div class="container">
+					<h4 class="mb-5">회의실 소개</h4>
 					<div class="my-auto">
 						<div class="grid-css grid-css--masonry" data-col-lg="3" data-col-md="2" data-col-sm="2" data-col-xs="1" data-gap="30">
 								<div class="grid__inner">
 									<div class="grid-sizer"></div>
 									
 									<c:forEach var="item" items="${mtRoomList}">
-	
-										<div class="grid-item">
-											<div class="grid-item__inner">
-												<div class="grid-item__content-wrapper">
+									<div class="grid-item">
+									<div class="grid-item__inner">
+										<div class="grid-item__content-wrapper">
+											
+											<!-- work -->
+											<div class="work"><a href="#" onClick="fn_go(); return false;">
 													
-													<!-- post -->
-													<div class="post">
-														<div class="post__media"><a href="${path}/info/workspaceDetail.do"><img src="/assets/img/works/samhwan.jpg"/><!--<img src="https://images.pexels.com/photos/807034/pexels-photo-807034.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
-														<div class="post__body">
-															<h2 class="post__title"><a href="${path}/info/workspaceDetail.do">${item.mtName}</a></h2>
-															<p class="post__text">${item.mtDescription}</p>
-														</div>
-													</div><!-- End / post -->
-													
-												</div>
-											</div>
+													<!-- hoverbox ef-slide-bottom -->
+													<div class="hoverbox ef-slide-bottom light">
+														
+														<!-- hb_front -->
+														<div class="hb_front">
+															<img src="/assets/img/works/samhwan.jpg"/>
+															<%-- <img src="/getByteEduImage/${item.mtSeq}"/> --%>
+														</div><!-- End / hb_front -->
+														
+														
+														<!-- hb_back -->
+														<div class="hb_back">
+															<h2 class="work__title">${item.mtName}</h2>						
+															<h4 class="work__text">인원수 : ${item.mtAvail}명</h4>
+															<h4 class="work__text">가격    : ${item.mtPrice}원</h4>
+															<span class="work__text">${item.mtDescription}</span>
+														</div><!-- End / hb_back -->
+														
+													</div><!-- End / hoverbox ef-slide-bottom -->
+													</a>
+											</div><!-- End / work -->
+											
 										</div>
+									</div>
+									</div>
 									</c:forEach>
 								</div>
 							</div>
@@ -166,29 +185,45 @@ description : 근무지 디테일 페이지
 			
 			<section class="awe-section bg-gray" id="eduRoom">
 				<div class="container">
+					<h4 class="mb-5">교육실 소개</h4>
 					<div class="my-auto">
 						<div class="grid-css grid-css--masonry" data-col-lg="3" data-col-md="2" data-col-sm="2" data-col-xs="1" data-gap="30">
 								<div class="grid__inner">
 									<div class="grid-sizer"></div>
 									
 									<c:forEach var="item" items="${eduRoomList}">
-	
-										<div class="grid-item">
-											<div class="grid-item__inner">
-												<div class="grid-item__content-wrapper">
+									<div class="grid-item">
+									<div class="grid-item__inner">
+										<div class="grid-item__content-wrapper">
+											
+											<!-- work -->
+											<div class="work"><a href="#" onClick="fn_go(); return false;">
 													
-													<!-- post -->
-													<div class="post">
-														<div class="post__media"><a href="${path}/info/workspaceDetail.do"><img src="/assets/img/works/samhwan.jpg"/><!--<img src="https://images.pexels.com/photos/807034/pexels-photo-807034.jpeg?w=1260&amp;h=750&amp;auto=compress&amp;cs=tinysrgb" alt=""/>--></a></div>
-														<div class="post__body">
-															<h2 class="post__title"><a href="${path}/info/workspaceDetail.do">${item.eduName}</a></h2>
-															<p class="post__text">${item.eduDescription}</p>
-														</div>
-													</div><!-- End / post -->
-													
-												</div>
-											</div>
+													<!-- hoverbox ef-slide-bottom -->
+													<div class="hoverbox ef-slide-bottom light">
+														
+														<!-- hb_front -->
+														<div class="hb_front">
+															<img src="/assets/img/works/samhwan.jpg"/>
+															<%-- <img src="/getByteEduImage/${item.eduSeq}"/> --%>
+														</div><!-- End / hb_front -->
+														
+														
+														<!-- hb_back -->
+														<div class="hb_back">
+															<h2 class="work__title">${item.eduName}</h2>						
+															<h4 class="work__text">인원수 : ${item.eduAvail}명</h4>
+															<h4 class="work__text">가격    : ${item.eduPrice}원</h4>
+															<span class="work__text">${item.eduDescription}</span>
+														</div><!-- End / hb_back -->
+														
+													</div><!-- End / hoverbox ef-slide-bottom -->
+													</a>
+											</div><!-- End / work -->
+											
 										</div>
+									</div>
+									</div>
 									</c:forEach>
 								</div>
 							</div>

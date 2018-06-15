@@ -10,7 +10,15 @@ public class EducationRoomDTO {
 	private String eduDescription;
 	private String workSeq;
 	private String workCode;
+	private byte[] eduImg;
 	
+	
+	public byte[] getEduImg() {
+		return eduImg;
+	}
+	public void setEduImg(byte[] eduImg) {
+		this.eduImg = eduImg;
+	}
 	public String getEduDescription() {
 		return eduDescription;
 	}
