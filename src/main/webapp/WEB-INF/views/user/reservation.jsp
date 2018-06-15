@@ -36,6 +36,25 @@ description : 예약하기
 		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="/assets/css/main.css"><!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
+		<!-- jQuery v2.1.4 -->
+		<script src="/assets/dist/js/jquery.js"></script>
+		<!-- Bootstrap Core JavaScript -->
+		<script src="/assets/dist/js/bootstrap.js"></script>
+		<!-- Custom Theme JavaScript -->
+		<!-- DatePicker JavaScript -->
+		<script src="/assets/dist/js/moment-ko.js"></script>
+		<script src="/assets/dist/js/transition.js"></script>
+		<script src="/assets/dist/js/collapse.js"></script>
+		<script src="/assets/dist/js/bootstrap-datetimepicker.js"></script>
+		<!-- DataTables JavaScript -->
+		<script src="/assets/dist/js/jquery.dataTables.js"></script>
+		<script src="/assets/dist/js/dataTables.bootstrap.js"></script>
+		<script src="/assets/dist/js/dataTables.responsive.js"></script>
+		<script src="/assets/dist/js/responsive.bootstrap.js"></script>
+		<!-- tabletools -->
+		<script src="/assets/dist/js/dataTables.tableTools.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/data.js"></script>
 		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
 		<script type="text/javascript">
 			// this 클래스 btn-info => btn-default
@@ -68,6 +87,9 @@ description : 예약하기
 			.awe-section{
 				padding:40px;
 			}
+			.btn-kdb-times {
+				width:70px;
+			}
 		</style>
 	</head>
 	
@@ -96,6 +118,9 @@ description : 예약하기
 					</div>
 				</section>
 				<!-- End / Section -->
+				
+				<!-- Booking Section -->
+				<form action="" method="post">
 				<section class="awe-section bg-gray">
 					<div class="container">
 						<table class="table text-center">
@@ -124,100 +149,8 @@ description : 예약하기
 										<button class="btn btn-default btn-kdb">단기 예약</button>
 										<button class="btn btn-info btn-kdb">장기 예약</button>
 									</td>
-									<%-- <td rowspan="5">
-										<table class="table table-striped">
-											<caption>2018.06</caption>
-											<thead>
-												<tr>
-													<th style="color:red;" width="30px">Sun</th>
-													<th width="30px">Mon</th>
-													<th width="30px">Tue</th>
-													<th width="30px">Wed</th>
-													<th width="30px">Thu</th>
-													<th width="30px">Fri</th>
-													<th style="color:blue;" width="30px">Sat</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<th style="color:red;"></th>
-													<th></th>
-													<th></th>
-													<th></th>
-													<th></th>
-													<th>1</th>
-													<th style="color:blue;">2</th>
-												</tr>
-												<tr>
-													<th style="color:red;">3</th>
-													<th>4</th>
-													<th>5</th>
-													<th class="btn-danger">6</th>
-													<th>7</th>
-													<th>8</th>
-													<th style="color:blue;">9</th>
-												</tr>
-												<tr>
-													<th style="color:red;">10</th>
-													<th>11</th>
-													<th class="btn-info">12</th>
-													<th class="btn-info">13</th>
-													<th class="btn-info">14</th>
-													<th>15</th>
-													<th style="color:blue;">16</th>
-												</tr>
-												<tr>
-													<th style="color:red;">17</th>
-													<th>18</th>
-													<th>19</th>
-													<th>20</th>
-													<th>21</th>
-													<th>22</th>
-													<th style="color:blue;">23</th>
-												</tr>
-												<tr>
-													<th style="color:red;">24</th>
-													<th class="btn-danger">25</th>
-													<th class="btn-danger">26</th>
-													<th>27</th>
-													<th>28</th>
-													<th>29</th>
-													<th style="color:blue;">30</th>
-												</tr>
-											</tbody>
-										</table>
-									</td> --%>
 									<td rowspan="5" class="text-left" id="time">
-										<div class="times btn btn-default">09:00</div>
-										<div class="times btn btn-default">09:30</div>
-										<div class="times btn btn-default">10:00</div>
-										<div class="times btn btn-default">10:30</div>
-										<div class="times btn btn-default">11:00</div>
-										<div class="times btn btn-default">11:30</div>
-										<div class="times btn btn-default">12:00</div>
-										<div class="times btn btn-default">12:30</div>
-										<div class="times btn btn-default">13:00</div>
-										<div class="times btn btn-default">13:30</div>
-										<div class="times btn btn-default">14:00</div>
-										<div class="times btn btn-default">14:30</div>
-										<div class="times btn btn-default">15:00</div>
-										<div class="times btn btn-default">15:30</div>
-										<div class="times btn btn-default">16:00</div>
-										<div class="times btn btn-default">16:30</div>
-										<div class="times btn btn-default">17:00</div>
-										<div class="times btn btn-default">17:30</div>
-										<div class="times btn btn-default">18:00</div>
-										<div class="times btn btn-default">18:30</div>
-										<div class="times btn btn-default">19:00</div>
-										<div class="times btn btn-default">19:30</div>
-										<div class="times btn btn-default">20:00</div>
-										<div class="times btn btn-default">20:30</div>
-										<div class="times btn btn-default">21:00</div>
-										<div class="times btn btn-default">21:30</div>
-										<div class="times btn btn-default">22:00</div>
-										<div class="times btn btn-default">22:30</div>
-										<div class="times btn btn-default">23:00</div>
-										<div class="times btn btn-default">23:30</div>
+										
 									</td>
 								</tr>
 								<tr>
@@ -242,6 +175,7 @@ description : 예약하기
 						</div>
 					</div>
 				</section>
+				</form><!-- END / Booking -->
 				
 				<!-- Section -->
 				<section class="awe-section bg-gray">
