@@ -22,9 +22,11 @@ public interface ResvDAO {
 	
 	public void create(ResvDTO dto);
 	
-	List<ResvUserInfoDTO> showResvUserList(String empId);
-	List<ResvItemInfoDTO> showResvItemList(String empId);
+	List<ResvUserInfoDTO> showResvUserList(String rsvSeq);
+	List<ResvItemInfoDTO> showResvItemList(String rsvSeq);
 	List<ResvConfirmInfoDTO> showResvConfirmList(String empId);
+	ResvConfirmInfoDTO showResvDetail(String rsvSeq);
+	
 	
 	int resvCount(String empId);
 }

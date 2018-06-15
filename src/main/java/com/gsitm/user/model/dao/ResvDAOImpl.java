@@ -33,13 +33,13 @@ public class ResvDAOImpl implements ResvDAO {
 	}
 
 	@Override
-	public List<ResvUserInfoDTO> showResvUserList(String empId) {
-		return sqlSession.selectList("resv.showResvUserList", empId);
+	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {
+		return sqlSession.selectList("resv.showResvUserList", rsvSeq);
 	}
 
 	@Override
-	public List<ResvItemInfoDTO> showResvItemList(String empId) {
-		return sqlSession.selectList("resv.showResvItemList", empId);
+	public List<ResvItemInfoDTO> showResvItemList(String rsvSeq) {
+		return sqlSession.selectList("resv.showResvItemList", rsvSeq);
 	}
 
 	@Override
@@ -50,6 +50,11 @@ public class ResvDAOImpl implements ResvDAO {
 	@Override
 	public int resvCount(String empId) {
 		return sqlSession.selectOne("resv.resvCount", empId);
+	}
+
+	@Override
+	public ResvConfirmInfoDTO showResvDetail(String rsvSeq) {
+		return sqlSession.selectOne("resv.showResvDetail", rsvSeq);
 	}
 
 }

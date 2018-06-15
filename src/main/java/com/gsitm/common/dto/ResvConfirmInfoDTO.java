@@ -13,6 +13,7 @@ public class ResvConfirmInfoDTO {
 	private String roomSeq;
 	private String roomName;
 	private String applicant;
+	private String reject;
 
 	public String getRsvSeq() {
 		return rsvSeq;
@@ -100,6 +101,14 @@ public class ResvConfirmInfoDTO {
 
 	public void setApplicant(String applicant) {
 		this.applicant = applicant;
+	}
+
+	public String getReject() {
+		return reject;
+	}
+
+	public void setReject(String reject) {
+		this.reject = reject;
 	}
 
 }
