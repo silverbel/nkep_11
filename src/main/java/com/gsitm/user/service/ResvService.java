@@ -28,12 +28,12 @@ public class ResvService {
 	@Resource(name="resvDao")
 	private ResvDAOImpl rDao;
 	
-	public List<ResvUserInfoDTO> showResvUserList(String empId) {
-		return rDao.showResvUserList(empId);
+	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {
+		return rDao.showResvUserList(rsvSeq);
 	}
 
-	public List<ResvItemInfoDTO> showResvItemList(String empId) {
-		return rDao.showResvItemList(empId);
+	public List<ResvItemInfoDTO> showResvItemList(String rsvSeq) {
+		return rDao.showResvItemList(rsvSeq);
 	}
 
 	public List<ResvConfirmInfoDTO> showResvConfirmList(String empId) {
@@ -42,6 +42,10 @@ public class ResvService {
 	
 	public int resvCount(String empId) {
 		return rDao.resvCount(empId);
+	}
+	
+	public ResvConfirmInfoDTO showResvDetail(String rsvSeq) {
+		return rDao.showResvDetail(rsvSeq);
 	}
 }
 

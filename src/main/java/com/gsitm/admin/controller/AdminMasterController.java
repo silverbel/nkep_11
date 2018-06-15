@@ -12,4 +12,16 @@ public class AdminMasterController {
 		mv.setViewName("/admin/index");
 		return mv;
 	}
+	
+	@RequestMapping("/eAdmin.do")
+	public ModelAndView eAdminIndex(ModelAndView mv) {
+		mv.setViewName("/eAdmin/index");
+		return mv;
+	}
+	
+	@RequestMapping("/mAdmin.do")
+	public ModelAndView mAdminIndex(ModelAndView mv) {
+		mv.setViewName("/mAdmin/index");
+		return mv;
+	}
 }

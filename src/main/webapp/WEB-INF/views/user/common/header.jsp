@@ -22,7 +22,8 @@ description : header 부분. 메뉴를 담당
 		</div>
 		<div class="navbar-toggle" id="fs-button">
 			<div class="navbar-icon">
-				<span></span>
+				<span>
+				</span>
 			</div>
 		</div>
 	</div>
@@ -47,10 +48,10 @@ description : header 부분. 메뉴를 담당
 					<li><a href="/admin.do">시스템 관리자 page</a></li>
 				</c:if>
 				<c:if test="${'E_MGR' eq sessionID.role }">
-					<li><a href="contact.jsp">교육실 관리자 page</a></li>
+					<li><a href="/eAdmin.do">교육실 관리자 page</a></li>
 				</c:if>
 				<c:if test="${'M_MGR' eq sessionID.role }">
-					<li><a href="contact.jsp">회의실 관리자 page</a></li>
+					<li><a href="/mAdmin.do">회의실 관리자 page</a></li>
 				</c:if>
 			</ul>
 			<!--  -->

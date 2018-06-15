@@ -4,6 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<!-- 쿼리문 교체-->
 <mapper namespace="resv">
 	
 	<resultMap type="com.gsitm.common.dto.ResvItemInfoDTO" id="riDTO" />
@@ -18,17 +19,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="showResvUserList" resultMap="ruDTO" parameterType="String" statementType="PREPARED">
 		SELECT R.RSV_SEQ
-					 , R.RSV_CNT
 					 , RU.APPL_YN
 					 , RU.USE_ID
+					 , E.EMP_NAME
+					 , E.EMAIL
+					 , T.TEAM_NAME
 		  FROM nkep_11.TB_RESERVATION R
 		  LEFT JOIN nkep_11.TB_RSV_DETAIL RU
 		    ON R.RSV_SEQ = RU.RSV_SEQ
-		 WHERE R.RSV_SEQ = (SELECT R.RSV_SEQ
-		 											FROM nkep_11.TB_RESERVATION R
-		 											LEFT JOIN nkep_11.TB_RSV_DETAIL RU
-		 											  ON R.RSV_SEQ = RU.RSV_SEQ
-		 										 WHERE RU.USE_ID = #{empId})
+		  LEFT JOIN nkep_11.TB_EMPLOYEE E
+		    ON RU.USE_ID = E.EMP_ID
+		  LEFT JOIN nkep_11.TB_TEAM T
+		    ON E.TEAM_SEQ = T.TEAM_SEQ
+		 WHERE R.RSV_SEQ = #{rsvSeq}
 	</select>
 	
 	<select id="showResvItemList" resultMap="riDTO" parameterType="String" statementType="PREPARED">
@@ -40,21 +43,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    ON R.RSV_SEQ = IR.RSV_SEQ
 		  LEFT JOIN nkep_11.TB_ITEM I
 		    ON IR.ITEM_SEQ = I.ITEM_SEQ
-		 WHERE R.RSV_SEQ = (SELECT R.RSV_SEQ
-		 											FROM nkep_11.TB_RESERVATION R
-		 											LEFT JOIN nkep_11.TB_RSV_DETAIL RU
-		 											  ON R.RSV_SEQ = RU.RSV_SEQ
-		 										 WHERE RU.USE_ID = #{empId})
+		 WHERE R.RSV_SEQ = #{rsvSeq}
 	</select>
 	
 	<select id="showResvConfirmList" resultMap="rcDTO" parameterType="String" statementType="PREPARED">
 		SELECT R.RSV_SEQ
-					 , C.CON_SEQ
-					 , C.BOSS_YN
 					 , C.MGR_YN
-					 , IF(R.RSV_TYPE = 'L', DATE_FORMAT(R.RSV_DATE, '%Y/%m/%d'),DATE_FORMAT(R.RSV_DATE, '%Y/%m/%d %H:%i')) AS RSV_DATE
-					 , IF(R.RSV_TYPE = 'L', DATE_FORMAT(R.RSV_FDATE, '%Y/%m/%d'),DATE_FORMAT(R.RSV_FDATE, '%Y/%m/%d %H:%i')) AS RSV_FDATE
-					 , IF(R.ROOM_TYPE = 'E', WE.WORK_NAME||'-'||ED.EDU_NAME, WM.WORK_NAME||'-'||MT.MT_NAME) AS ROOM_NAME
+					 , IF(R.ROOM_TYPE = 'E', CONCAT(WE.WORK_NAME,'-',ED.EDU_NAME), CONCAT(WM.WORK_NAME,'-',MT.MT_NAME)) AS ROOM_NAME
 					 , R.RSV_PRICE
 					 , R.APPLICANT
 		  FROM nkep_11.TB_RESERVATION R
@@ -68,11 +63,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    ON MT.WORK_CODE = WM.WORK_CODE
 		  LEFT JOIN nkep_11.TB_WORKSPACE WE
 		    ON ED.WORK_CODE = WE.WORK_CODE
-		 WHERE R.RSV_SEQ = (SELECT R.RSV_SEQ
-		 											FROM nkep_11.TB_RESERVATION R
-		 											LEFT JOIN nkep_11.TB_RSV_DETAIL RU
-		 											  ON R.RSV_SEQ = RU.RSV_SEQ
-		 										 WHERE RU.USE_ID = #{empId})
+		 WHERE R.RSV_SEQ IN (SELECT R.RSV_SEQ
+		 										 	 FROM nkep_11.TB_RESERVATION R
+		 											 LEFT JOIN nkep_11.TB_RSV_DETAIL RU
+		 											   ON R.RSV_SEQ = RU.RSV_SEQ
+		 										  WHERE RU.USE_ID = #{empId})
+	</select>
+	
+	<select id="showResvDetail" resultMap="rcDTO" parameterType="String" statementType="PREPARED">
+		SELECT R.RSV_SEQ
+					 , C.CON_SEQ
+					 , C.BOSS_YN
+					 , C.MGR_YN
+					 , IF(R.RSV_TYPE = 'L', DATE_FORMAT(R.RSV_DATE, '%Y/%m/%d'),DATE_FORMAT(R.RSV_DATE, '%Y/%m/%d %H:%i')) AS RSV_DATE
+					 , IF(R.RSV_TYPE = 'L', DATE_FORMAT(R.RSV_FDATE, '%Y/%m/%d'),DATE_FORMAT(R.RSV_FDATE, '%H:%i')) AS RSV_FDATE
+					 , IF(R.ROOM_TYPE = 'E', CONCAT(WE.WORK_NAME,'-',ED.EDU_NAME), CONCAT(WM.WORK_NAME,'-',MT.MT_NAME)) AS ROOM_NAME
+					 , R.RSV_PRICE
+					 , R.APPLICANT
+					 , C.REJECT
+		  FROM nkep_11.TB_RESERVATION R
+		  LEFT JOIN nkep_11.TB_CONFIRM C
+		    ON R.RSV_SEQ = C.RSV_SEQ
+		  LEFT JOIN nkep_11.TB_MT_ROOM MT
+		    ON R.ROOM_SEQ = MT.MT_CODE
+		  LEFT JOIN nkep_11.TB_EDU_ROOM ED
+		    ON R.ROOM_SEQ = ED.EDU_CODE
+		  LEFT JOIN nkep_11.TB_WORKSPACE WM
+		    ON MT.WORK_CODE = WM.WORK_CODE
+		  LEFT JOIN nkep_11.TB_WORKSPACE WE
+		    ON ED.WORK_CODE = WE.WORK_CODE
+		 WHERE R.RSV_SEQ = #{rsvSeq}
 	</select>
 
 	<select id="resvCount" resultType="int" parameterType="String" statementType="PREPARED">

@@ -13,7 +13,9 @@ package com.gsitm.user.controller;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gsitm.user.service.ResvService;
 
@@ -24,8 +26,9 @@ public class ResvController {
 	@Resource(name="resvService")
 	private ResvService ResvService;
 	
-	@RequestMapping("resvStep1.do")
-	public String resvStep1() {
+	@RequestMapping(value="resvStep1.do", method=RequestMethod.GET)
+	public String resvStep1(Model model) {
+		
 		return "user/rsvSelectWork";
 	}
 	
