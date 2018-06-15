@@ -22,7 +22,8 @@ description : header 부분. 메뉴를 담당
 		</div>
 		<div class="navbar-toggle" id="fs-button">
 			<div class="navbar-icon">
-				<span></span>
+				<span>
+				</span>
 			</div>
 		</div>
 	</div>

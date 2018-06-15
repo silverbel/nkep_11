@@ -10,7 +10,9 @@
  */ 
 package com.gsitm.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gsitm.common.dto.BlackListLogDTO;
@@ -73,17 +77,28 @@ public class MyPageController {
 		EmployeeDTO emp = (EmployeeDTO) session.getAttribute("sessionID");
 		
 		List<ResvConfirmInfoDTO> rcList = rService.showResvConfirmList(emp.getEmpId());
-		List<ResvUserInfoDTO> ruList = rService.showResvUserList(emp.getEmpId());
-		List<ResvItemInfoDTO> riList = rService.showResvItemList(emp.getEmpId());
 		int resvCnt = rService.resvCount(emp.getEmpId());
 		
-		model.addObject("resvCnt", resvCnt);
 		model.addObject("rcList", rcList);
-		
-		// 밑에 애들은 바꿔야 한다. ajax 필요
-		model.addObject("ruList", ruList);
-		model.addObject("riList", riList);
+		model.addObject("resvCnt", resvCnt);
 		
 		return model;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/myPage/showResvAllInfo.do", method=RequestMethod.POST)
+	public Map<String, Object> showResvInfoByAjax(@RequestParam(value="rsvSeq") String rsvSeq) {
+		
+		List<ResvUserInfoDTO> ruList = rService.showResvUserList(rsvSeq);
+		List<ResvItemInfoDTO> riList = rService.showResvItemList(rsvSeq);
+		ResvConfirmInfoDTO rcInfo = rService.showResvDetail(rsvSeq);
+		
+		Map<String, Object> resvInfo = new HashMap<>();
+		resvInfo.put("ruList", ruList);
+		resvInfo.put("riList", riList);
+		resvInfo.put("rcInfo", rcInfo);
+		
+		
+		return resvInfo;
 	}
 }
