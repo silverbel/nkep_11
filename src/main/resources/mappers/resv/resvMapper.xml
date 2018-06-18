@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 쿼리문 교체-->
 <mapper namespace="resv">
 	
+	<resultMap type="com.gsitm.common.dto.ResvDTO" id="resvresvresv" />
 	<resultMap type="com.gsitm.common.dto.ResvItemInfoDTO" id="riDTO" />
 	<resultMap type="com.gsitm.common.dto.ResvConfirmInfoDTO" id="rcDTO" />
 	<resultMap type="com.gsitm.common.dto.ResvUserInfoDTO" id="ruDTO" />
@@ -99,6 +100,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*)
 			FROM nkep_11.TB_RSV_DETAIL
 		 WHERE USE_ID = #{empId}
+	</select>
+	
+	<select id="getResvShortInfoByDate" resultMap="resvresvresv" parameterType="Map" statementType="PREPARED">
+		<![CDATA[
+		SELECT IF(RSV_TYPE = 'S', DATE_FORMAT(RSV_DATE, '%H%i'), '0900') AS RSV_DATE
+           , IF(RSV_TYPE = 'S', DATE_FORMAT(RSV_FDATE, '%H%i'), '2230') AS RSV_FDATE
+           , RSV_SEQ
+           , WORK_SEQ
+           , RSV_TYPE
+		  FROM nkep_11.TB_RESERVATION
+		 WHERE DATE_FORMAT(RSV_DATE, '%Y-%m-%d') <= #{selDate}
+		 	 AND DATE_FORMAT(RSV_FDATE, '%Y-%m-%d') >= #{selDate}
+		 	 AND ROOM_SEQ = #{roomSeq}
+		]]>
+	</select>
+	
+	<select id="getResvLongInfoByDate" resultMap="resvresvresv" parameterType="Map" statementType="PREPARED">
+		<![CDATA[
+		SELECT DATE_FORMAT(RSV_DATE, '%Y-%m-%d') AS RSV_DATE
+           , DATE_FORMAT(RSV_FDATE, '%Y-%m-%d') AS RSV_FDATE 
+		  FROM nkep_11.TB_RESERVATION
+		 WHERE DATE_FORMAT(RSV_DATE, '%Y-%m') <= #{selDate}
+		 	 AND DATE_FORMAT(RSV_FDATE, '%Y-%m') >= #{selDate}
+		 	 AND ROOM_SEQ = #{roomSeq}
+		]]>
+	</select>
+	
+	<select id="roomItemListCheckByRoomSeqAjax" resultMap="riDTO" parameterType="String" statementType="PREPARED">
+		SELECT I.ITEM_NAME
+					 , S.ITEM_SEQ
+					 , S.ROOM_SEQ
+					 , S.ITEM_CNT
+		  FROM nkep_11.TB_STOCK S
+		  LEFT JOIN nkep_11.TB_ITEM I
+		    ON S.ITEM_SEQ = I.ITEM_SEQ
+		 WHERE S.ROOM_SEQ = #{roomSeq}
 	</select>
 
 </mapper>

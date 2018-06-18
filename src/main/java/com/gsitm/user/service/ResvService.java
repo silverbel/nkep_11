@@ -11,13 +11,16 @@
 
 package com.gsitm.user.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
+import com.gsitm.common.dto.ResvDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.ResvUserInfoDTO;
 import com.gsitm.user.model.dao.ResvDAOImpl;
@@ -46,6 +49,18 @@ public class ResvService {
 	
 	public ResvConfirmInfoDTO showResvDetail(String rsvSeq) {
 		return rDao.showResvDetail(rsvSeq);
+	}
+	
+	public List<ResvDTO> getResvInfoByDate(String rsvType, String selDate, String roomSeq){
+		Map<String, String> check = new HashMap<>();
+		check.put("selDate", selDate);
+		check.put("roomSeq", roomSeq);
+		if (rsvType == "S") return rDao.getResvShortInfoByDate(check);
+		else return rDao.getResvShortInfoByDate(check);
+	}
+	
+	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(){
+		return null;
 	}
 }
 

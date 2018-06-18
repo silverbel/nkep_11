@@ -14,8 +14,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="workImg3" column="WORK_IMG3" jdbcType="BLOB" javaType="org.springframework.web.multipart.MultipartFile" /> -->
 	</resultMap>
 	<select id="getWorkSpaceList" resultType="workSpace" parameterType="workSpace">
-		SELECT WORK_SEQ, WORK_CODE, WORK_NAME, WORK_ADDR, WORK_TEL 
+		SELECT WORK_SEQ, WORK_CODE, WORK_NAME, WORK_ADDR, WORK_TEL, WORK_IMG, WORK_DESCRIPTION 
 		FROM nkep_11.TB_WORKSPACE
+		<if test="workSeq != null">
+			WHERE WORK_SEQ = #{workSeq}
+		</if>
 	</select>
 
 	<select id="getWorkSpaceListForAdmin" resultType="workSpace" parameterType="workSpace">

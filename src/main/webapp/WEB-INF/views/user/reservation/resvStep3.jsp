@@ -59,17 +59,33 @@ description : 예약하기
 		<script type="text/javascript">
 			// this 클래스 btn-info => btn-default
 			// 		  btn-default => btn-info
+			var initNum = 0;
+			var isFirst = true;
 			$(document).ready(function(){
 				$('.times').click(function(){
-					if($(this).hasClass('disabled')){
-						return;
-					}else if($(this).hasClass('btn-default')){
-						$(this).removeClass('btn-default');
-						$(this).addClass('btn-info');
-					}else if($(this).hasClass('btn-info')){
-						$(this).removeClass('btn-info');
-						$(this).addClass('btn-default');
-					} 
+					var $this = $(this);
+					var $btn = parseInt($this.attr('id'));
+					console.log($btn);
+					if(isFirst){
+						if($this.hasClass('disabled')){
+							return;
+						}else if($this.hasClass('btn-default')){
+							$this.removeClass('btn-default');
+							$this.addClass('btn-info');
+						}else if($this.hasClass('btn-info')){
+							$this.removeClass('btn-info');
+							$this.addClass('btn-default');
+						}
+						initNum = $btn;
+						isFirst = false;						
+					} else{
+						var curNum = $btn;
+						for(var i=initNum; i<=curNum; i++){
+							$('#'+i).removeClass('btn-default');
+							$('#'+i).addClass('btn-info');
+						}
+						isFirst = true;
+					}
 				})
 			})
 		function fn_prev(){
@@ -118,9 +134,6 @@ description : 예약하기
 					</div>
 				</section>
 				<!-- End / Section -->
-				
-				<!-- Booking Section -->
-				<form action="" method="post">
 				<section class="awe-section bg-gray">
 					<div class="container">
 						<table class="table text-center">
@@ -150,7 +163,10 @@ description : 예약하기
 										<button class="btn btn-info btn-kdb">장기 예약</button>
 									</td>
 									<td rowspan="5" class="text-left" id="time">
-										
+										<c:forEach var="idx" begin="9" end="22" varStatus="vSts">
+											<div class="times btn btn-default btn-kdb-times" id="${vSts.index*2-18}">${idx }:00</div>
+											<div class="times btn btn-default btn-kdb-times" id="${vSts.index*2-17 }">${idx }:30</div>
+										</c:forEach>
 									</td>
 								</tr>
 								<tr>
@@ -175,7 +191,6 @@ description : 예약하기
 						</div>
 					</div>
 				</section>
-				</form><!-- END / Booking -->
 				
 				<!-- Section -->
 				<section class="awe-section bg-gray">

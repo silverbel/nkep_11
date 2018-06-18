@@ -8,9 +8,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<cache eviction="FIFO" flushInterval="60000" size="512"
 		readOnly="true" />
 	<resultMap id="mtRoom" type="com.gsitm.common.dto.MeetingRoomDTO" />
-	<select id="getMtRoomList" resultType="com.gsitm.common.dto.MeetingRoomDTO" parameterType="com.gsitm.common.dto.WorkSpaceDTO">
+	<select id="getMtRoomList" resultType="com.gsitm.common.dto.MeetingRoomDTO" parameterType="String">
 		SELECT MT_SEQ, MT_CODE, MT_NAME, MT_SIZE, MT_PRICE, MT_AVAIL, MT_DESCRIPTION, WORK_SEQ, WORK_CODE 
 		FROM nkep_11.TB_MT_ROOM
+		<if test="workSeq != null">
+			WHERE WORK_SEQ = #{workSeq}
+		</if>
 	</select>
 	<select id="getByteMtImage" parameterType="mtRoom" resultType="java.util.Map">
 		SELECT MT_IMG AS IMG FROM nkep_11.TB_MT_ROOM WHERE MT_SEQ=#{mtSeq}

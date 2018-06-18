@@ -162,12 +162,6 @@ description : my page, 나의 정보 확인
 								$('#ruListTbody').append("<tr><td>"+teamName+"</td><td>"
 										+useId+"</td><td>"+empName+"</td><td>"+email+"</td><td>"+appl+"</td></tr>");
 							}
-							/* $('').empty();
-							for(i=0; i<data.riList.length; i++){
-								var itemName = data.riList[i].itemName;
-								var itemCnt = data.riList[i].itemCnt;
-								
-							} */
 						}
 			    });
 

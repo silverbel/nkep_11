@@ -11,6 +11,7 @@
 package com.gsitm.user.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,21 @@ public class ResvDAOImpl implements ResvDAO {
 	@Override
 	public ResvConfirmInfoDTO showResvDetail(String rsvSeq) {
 		return sqlSession.selectOne("resv.showResvDetail", rsvSeq);
+	}
+
+	@Override
+	public List<ResvDTO> getResvShortInfoByDate(Map<?, ?> check) {
+		return sqlSession.selectList("resv.getResvShortInfoByDate", check);
+	}
+
+	@Override
+	public List<ResvDTO> getResvLongInfoByDate(Map<?, ?> check) {
+		return sqlSession.selectList("resv.getResvLongInfoByDate", check);
+	}
+
+	@Override
+	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax() {
+		return null;
 	}
 
 }
