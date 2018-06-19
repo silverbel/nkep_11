@@ -26,6 +26,8 @@
 		<typeAlias type="com.gsitm.common.dto.ItemDTO" alias="itemDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ConfirmDTO" alias="confirmDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvDetailDTO" alias="resvDetailDTO"/>
+		<typeAlias type="com.gsitm.common.dto.StockDTO" alias="stockDTO"/>
+		<typeAlias type="com.gsitm.common.dto.ItemStockByWorkSpaceDTO" alias="itemStockWorkspace"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>
@@ -36,6 +38,7 @@
 		<mapper resource="mappers/resv/resvMapper.xml"></mapper>
 		<mapper resource="mappers/noticeMapper.xml"></mapper>
 		<mapper resource="mappers/itemMapper.xml"/>
+		<mapper resource="mappers/stockMapper.xml"/>
 	</mappers>
 
 </configuration>
