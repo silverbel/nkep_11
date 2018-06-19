@@ -12,6 +12,7 @@ public class InsertResvDTO {
 	private String rsvType;
 	private String startTime;
 	private String finTime;
+	private String maxCnt;
 
 	public String[] getSNACK() {
 		return SNACK;
@@ -91,6 +92,14 @@ public class InsertResvDTO {
 
 	public void setFinTime(String finTime) {
 		this.finTime = finTime;
+	}
+
+	public String getMaxCnt() {
+		return maxCnt;
+	}
+
+	public void setMaxCnt(String maxCnt) {
+		this.maxCnt = maxCnt;
 	}
 
 }

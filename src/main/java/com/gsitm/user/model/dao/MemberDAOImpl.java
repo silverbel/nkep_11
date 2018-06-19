@@ -40,4 +40,9 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.memCount", empId);
 	}
 
+	@Override
+	public List<EmployeeDTO> allMemberListAjax() {
+		return sqlSession.selectList("member.allMemberListAjax");
+	}
+
 }

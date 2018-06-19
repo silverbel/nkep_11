@@ -17,19 +17,25 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gsitm.common.dto.EmployeeDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.ResvUserInfoDTO;
-import com.gsitm.user.model.dao.ResvDAOImpl;
+import com.gsitm.user.model.dao.MemberDAO;
+import com.gsitm.user.model.dao.ResvDAO;
 
 @Service(value="resvService")
 public class ResvService {
 	
-	@Resource(name="resvDao")
-	private ResvDAOImpl rDao;
+	@Autowired
+	private ResvDAO rDao;
+	
+	@Autowired
+	private MemberDAO mDao;
 	
 	
 	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {
@@ -73,6 +79,10 @@ public class ResvService {
 		if(snack != null) {
 			
 		}
+	}
+	
+	public List<EmployeeDTO> allMemberListAjax(){
+		return mDao.allMemberListAjax();
 	}
 }
 

@@ -10,11 +10,13 @@
  */ 
 package com.gsitm.user.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gsitm.common.dto.EmployeeDTO;
 import com.gsitm.common.dto.InsertResvDTO;
 import com.gsitm.common.dto.ResvDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
@@ -62,6 +65,12 @@ public class ResvController {
 		return "user/reservation/resvStep3";
 	}
 	
+	@RequestMapping(value="resvStep4.do", method=RequestMethod.POST)
+	public String resvStep4(@RequestParam("empId") String empId, HttpServletResponse response) {
+		String[] empIdList = empId.split("/");
+		return "user/resrvation/resvStep4";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="resvCheck.do", method=RequestMethod.POST)
 	public Map<?,?> resvAlreadyBookedCheck(@RequestParam("rsvType") String rsvType,
@@ -83,5 +92,14 @@ public class ResvController {
 		roomItemList.put("roomItemList", itemlist);
 		roomItemList.put("roomInfo", roomInfo);
 		return roomItemList;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="allMemberListAjax.do")
+	public Map<?,?> allMemberListAjax(){
+		List<EmployeeDTO> empList = rService.allMemberListAjax();
+		Map<String, Object> data = new HashMap<>();
+		data.put("empList", empList);
+		return data;
 	}
 }

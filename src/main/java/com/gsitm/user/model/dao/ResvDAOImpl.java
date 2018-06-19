@@ -17,6 +17,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gsitm.common.dto.InsertResvDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
@@ -71,6 +72,11 @@ public class ResvDAOImpl implements ResvDAO {
 	@Override
 	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq) {
 		return sqlSession.selectList("resv.roomItemListCheckByRoomSeqAjax", roomSeq);
+	}
+
+	@Override
+	public void insertReservationTable(InsertResvDTO insertDTO) {
+		
 	}
 
 }

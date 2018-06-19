@@ -35,4 +35,5 @@ public interface LoginDAO {
 	 * @return
 	 */ 
 	EmployeeDTO empInfo(String empId);
+	
 }

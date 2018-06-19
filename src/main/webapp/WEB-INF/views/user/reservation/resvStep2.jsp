@@ -152,12 +152,14 @@ description : 예약하기
 								$('#roomPrice').append('<p>30분 당 가격 : '+data.roomInfo[0].mtPrice+' 원</p>');
 								$('#roomPrice').append('<p>하루 가격 : '+parseInt(data.roomInfo[0].mtPrice)*16+' 원</p>');
 								$('#roomAvail').append(data.roomInfo[0].mtAvail);
+								$('#maxCnt').val(data.roomInfo[0].mtAvail);
 								$('#roomDescription').append(data.roomInfo[0].mtDescription);
 							} else {
 								$('.img-box-kdb').append('<img src="/getByteEduImage/"'+data.roomInfo[0].eduSeq+'" />');
 								$('#roomPrice').append('<p>30분 당 가격 : '+data.roomInfo[0].eduPrice+' 원</p>');
 								$('#roomPrice').append('<p>하루 가격 : '+parseInt(data.roomInfo[0].eduPrice)*16+' 원</p>');
 								$('#roomAvail').append(data.roomInfo[0].eduAvail);
+								$('#maxCnt').val(data.roomInfo[0].eduAvail);
 								$('#roomDescription').append(data.roomInfo[0].eduDescription);
 							}
 							var beforeItem = '';
@@ -406,6 +408,7 @@ description : 예약하기
 								<input type="hidden" id="rsvType" name="rsvType" class="valueValid" />
 								<input type="hidden" id="startTime" name="startTime" class="valueValid" />
 								<input type="hidden" id="finTime" name="finTime" class="valueValid" />
+								<input type="hidden" id="maxCnt" name="maxCnt" class="valueValid" />
 								<button type="button" class="btn btn-primary btn-kdb" onclick="javascript:fn_submitCheck()">다음</button>
 						</div>
 					</div>
