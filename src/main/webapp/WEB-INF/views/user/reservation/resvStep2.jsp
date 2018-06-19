@@ -148,7 +148,7 @@ description : 예약하기
 							$('.ajax-clean').html('');
 							
 							if($roomType == 'M'){
-								$('.img-box-kdb').append('<img src="/getByteMtImage/"'+data.roomInfo[0].mtSeq+'" />');
+								$('.img-box-kdb').append('<img src="/getByteMtImage/'+data.roomInfo[0].mtSeq+'" />');
 								$('#roomPrice').append('<p>30분 당 가격 : '+data.roomInfo[0].mtPrice+' 원</p>');
 								$('#roomPrice').append('<p>하루 가격 : '+parseInt(data.roomInfo[0].mtPrice)*16+' 원</p>');
 								$('#roomAvail').append(data.roomInfo[0].mtAvail);

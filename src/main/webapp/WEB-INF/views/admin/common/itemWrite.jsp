@@ -138,7 +138,7 @@
 										<div class="col-75">
 											<select name="itemType" class="form-control">
 												<option value="FIXTURES">비품</option>
-												<option value="EXPENDABLEs">소모품</option>
+												<option value="EXPENDABLE">소모품</option>
 												<option value="SNACK">간식</option>
 											</select>
 										</div>
