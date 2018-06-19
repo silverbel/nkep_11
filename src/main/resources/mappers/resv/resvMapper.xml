@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  LEFT JOIN nkep_11.TB_RSV_ITEM IR
 		    ON R.RSV_SEQ = IR.RSV_SEQ
 		  LEFT JOIN nkep_11.TB_ITEM I
-		    ON IR.ITEM_SEQ = I.ITEM_SEQ
+		    ON IR.ITEM_CODE = I.ITEM_CODE
 		 WHERE R.RSV_SEQ = #{rsvSeq}
 	</select>
 	
@@ -130,12 +130,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="roomItemListCheckByRoomSeqAjax" resultMap="riDTO" parameterType="String" statementType="PREPARED">
 		SELECT I.ITEM_NAME
 					 , I.ITEM_UNIT
-					 , S.ITEM_SEQ
+					 , S.ITEM_CODE
 					 , S.ROOM_SEQ
 					 , S.ITEM_CNT
 		  FROM nkep_11.TB_STOCK S
 		  LEFT JOIN nkep_11.TB_ITEM I
-		    ON S.ITEM_SEQ = I.ITEM_SEQ
+		    ON S.ITEM_CODE = I.ITEM_CODE
 		 WHERE S.ROOM_SEQ = #{roomSeq}
 	</select>
 	

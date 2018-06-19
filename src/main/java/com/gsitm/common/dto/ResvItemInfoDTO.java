@@ -6,7 +6,7 @@ public class ResvItemInfoDTO {
 	private String itemName;
 	private int itemCnt;
 	private String roomSeq;
-	private String itemSeq;
+	private String itemCode;
 	private String itemUnit;
 
 	public String getRsvSeq() {
@@ -41,12 +41,13 @@ public class ResvItemInfoDTO {
 		this.roomSeq = roomSeq;
 	}
 
-	public String getItemSeq() {
-		return itemSeq;
+
+	public String getItemCode() {
+		return itemCode;
 	}
 
-	public void setItemSeq(String itemSeq) {
-		this.itemSeq = itemSeq;
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
 	}
 
 	public String getItemUnit() {
