@@ -67,6 +67,7 @@
       </property>
    </bean>
    
+   
    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
       <property name="velocityProperties">
          <value>
@@ -75,6 +76,8 @@
          </value>
       </property>
    </bean>
+   <!-- 메일발송 클래스 -->
+   <bean id="simpleNotifier" class="com.gsitm.user.mail.SimpleRegistrationNotifier" />
    
    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
       <property name="resourceLoaderPath" value="WEB-INF/velocity" />

@@ -17,8 +17,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gsitm.common.dto.ConfirmDTO;
+import com.gsitm.common.dto.NoticeDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
+import com.gsitm.common.dto.ResvDetailDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.ResvUserInfoDTO;
 
@@ -71,6 +74,21 @@ public class ResvDAOImpl implements ResvDAO {
 	@Override
 	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq) {
 		return sqlSession.selectList("resv.roomItemListCheckByRoomSeqAjax", roomSeq);
+	}
+	
+	@Override
+	public void deleteResv(ResvDTO resvDTO) {
+		sqlSession.delete("resv.deleteResv", resvDTO);
+	}
+	
+	@Override
+	public void deleteConfirm(ConfirmDTO confirmDTO) {
+		sqlSession.delete("resv.deleteConfirm", confirmDTO);
+	}
+	
+	@Override
+	public void deleteResv(ResvDetailDTO resvDetailDTO) {
+		sqlSession.delete("resv.deleteResvDetail", resvDetailDTO);
 	}
 
 }

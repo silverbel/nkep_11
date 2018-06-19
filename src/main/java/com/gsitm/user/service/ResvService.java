@@ -19,8 +19,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.gsitm.common.dto.ConfirmDTO;
+import com.gsitm.common.dto.NoticeDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
+import com.gsitm.common.dto.ResvDetailDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.ResvUserInfoDTO;
 import com.gsitm.user.model.dao.ResvDAOImpl;
@@ -61,6 +64,18 @@ public class ResvService {
 	
 	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq){
 		return rDao.roomItemListCheckByRoomSeqAjax(roomSeq);
+	}
+	
+	public void deleteResv(ResvDTO resvDTO) {
+		rDao.deleteResv(resvDTO);
+	}
+	
+	public void deleteConfirm(ConfirmDTO confirmDTO) {
+		rDao.deleteConfirm(confirmDTO);
+	}
+	
+	public void deleteResvDetail(ResvDetailDTO resvDetailDTO) {
+		rDao.deleteResv(resvDetailDTO);
 	}
 }
 

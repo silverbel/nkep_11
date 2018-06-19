@@ -124,8 +124,7 @@ description : 메일링
 										
 										<!-- form-item -->
 										<div class="form-item">
-											<input type="submit" class="md-btn md-btn--primary md-btn--lg" value="Report">
-											<a class="md-btn md-btn--outline-primary" href="/sendReport.do">신고하기</a>											
+											<input type="submit" class="md-btn md-btn--primary md-btn--lg" value="Report">										
 										</div><!-- End / form-item -->
 									</form>
 									<!-- 메일 전송 결과 확인 메세지 출력 -->

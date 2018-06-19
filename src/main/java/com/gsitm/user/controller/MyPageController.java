@@ -25,8 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gsitm.common.dto.BlackListLogDTO;
+import com.gsitm.common.dto.ConfirmDTO;
 import com.gsitm.common.dto.EmployeeDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
+import com.gsitm.common.dto.ResvDTO;
+import com.gsitm.common.dto.ResvDetailDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.ResvUserInfoDTO;
 import com.gsitm.common.dto.TeamDTO;
@@ -101,4 +104,27 @@ public class MyPageController {
 		
 		return resvInfo;
 	}
+	
+	@RequestMapping(value="/myPage/deleteMyResv.do")
+	public ModelAndView deleteMyResv(ModelAndView mv, @RequestParam("rsvSeq") String rsvSeq,
+			ResvDTO resvDTO, ConfirmDTO confirmDTO, ResvDetailDTO resvDetailDTO) {
+		resvDTO.setRsvSeq(rsvSeq);
+		rService.deleteResv(resvDTO);
+		
+		confirmDTO.setRsvSeq(rsvSeq);
+		rService.deleteConfirm(confirmDTO);
+		
+		resvDetailDTO.setRsvSeq(rsvSeq);
+		rService.deleteResvDetail(resvDetailDTO);
+		
+		mv.setViewName("redirect:/myPage/myReserva.do");
+		return mv;		
+	}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -13,8 +13,11 @@ package com.gsitm.user.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.gsitm.common.dto.ConfirmDTO;
+import com.gsitm.common.dto.NoticeDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
+import com.gsitm.common.dto.ResvDetailDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.ResvUserInfoDTO;
 
@@ -35,4 +38,10 @@ public interface ResvDAO {
 	
 	
 	int resvCount(String empId);
+	
+	void deleteResv(ResvDTO resvDTO);
+	
+	void deleteConfirm(ConfirmDTO confirmDTO);
+	
+	void deleteResv(ResvDetailDTO resvDetailDTO);
 }
