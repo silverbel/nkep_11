@@ -21,6 +21,7 @@
 		<typeAlias type="com.gsitm.common.dto.ResvItemInfoDTO" alias="riDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvConfirmInfoDTO" alias="rcDTO"/>
 		<typeAlias type="com.gsitm.common.dto.WorkSpaceDTO" alias="workSpace"/>
+		<typeAlias type="com.gsitm.common.dto.NoticeDTO" alias="notice"/>
 		<typeAlias type="com.gsitm.common.dto.LogWSDeleteDTO" alias="wsDLog"/>
 		<typeAlias type="com.gsitm.common.dto.ItemDTO" alias="itemDTO"/>
 	</typeAliases>
@@ -31,6 +32,7 @@
 		<mapper resource="mappers/BlackList.xml"></mapper>
 		<mapper resource="mappers/MemberMapper.xml"></mapper>
 		<mapper resource="mappers/resv/resvMapper.xml"></mapper>
+		<mapper resource="mappers/noticeMapper.xml"></mapper>
 		<mapper resource="mappers/itemMapper.xml"/>
 	</mappers>
 
