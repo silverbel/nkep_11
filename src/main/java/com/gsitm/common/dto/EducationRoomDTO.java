@@ -1,5 +1,7 @@
 package com.gsitm.common.dto;
 
+import java.util.Arrays;
+
 public class EducationRoomDTO {
 	private String eduSeq;
 	private String eduCode;
@@ -100,6 +102,22 @@ public class EducationRoomDTO {
 	}
 	public void setEduAvailEtime(String eduAvailEtime) {
 		this.eduAvailEtime = eduAvailEtime;
+	}
+	@Override
+	public String toString() {
+		return "EducationRoomDTO [eduSeq=" + eduSeq + ", eduCode=" + eduCode + ", eduName=" + eduName + ", eduSize="
+				+ eduSize + ", eduPrice=" + eduPrice + ", eduAvail=" + eduAvail + ", eduDescription=" + eduDescription
+				+ ", workSeq=" + workSeq + ", workCode=" + workCode + ", eduAvailStime=" + eduAvailStime
+				+ ", eduAvailEtime=" + eduAvailEtime + ", eduImg=" + Arrays.toString(eduImg) + ", eduImg2="
+				+ Arrays.toString(eduImg2) + ", eduImg3=" + Arrays.toString(eduImg3) + ", getEduDescription()="
+				+ getEduDescription() + ", getEduSeq()=" + getEduSeq() + ", getEduCode()=" + getEduCode()
+				+ ", getEduName()=" + getEduName() + ", getEduSize()=" + getEduSize() + ", getEduPrice()="
+				+ getEduPrice() + ", getEduAvail()=" + getEduAvail() + ", getWorkSeq()=" + getWorkSeq()
+				+ ", getWorkCode()=" + getWorkCode() + ", getEduImg()=" + Arrays.toString(getEduImg())
+				+ ", getEduImg2()=" + Arrays.toString(getEduImg2()) + ", getEduImg3()=" + Arrays.toString(getEduImg3())
+				+ ", getEduAvailStime()=" + getEduAvailStime() + ", getEduAvailEtime()=" + getEduAvailEtime()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 	
 	

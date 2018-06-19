@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAnyRoomInfo" parameterType="String" resultType="mtRoom">
 		SELECT MT_PRICE, MT_AVAIL, MT_NAME, MT_SEQ, MT_DESCRIPTION
 		  FROM nkep_11.TB_MT_ROOM
-		 WHERE MT_CODE = #{roomSeq}
+		 WHERE MT_SEQ= #{roomSeq}
 	</select>
 	
 	<select id="getByteMeetingRoomImage2" parameterType="mtRoom" resultType="java.util.Map">
