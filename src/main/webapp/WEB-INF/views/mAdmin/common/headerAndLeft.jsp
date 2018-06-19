@@ -264,7 +264,7 @@ description :
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 자재 관리 <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="itemCost.jsp">자재 비용</a>
+                                    <a href="/getItemListForAdmin.do">자재 관리</a>
                                 </li>
                             </ul>
                         </li>

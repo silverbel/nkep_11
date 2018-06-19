@@ -9,6 +9,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT EDU_SEQ, EDU_CODE, EDU_NAME, EDU_SIZE, EDU_PRICE, EDU_AVAIL, EDU_DESCRIPTION, WORK_SEQ, WORK_CODE 
 		FROM nkep_11.TB_EDU_ROOM
 	</select>
+	
+	<insert id="insertEducationRoomForAdmin" parameterType="eduRoom">
+		INSERT INTO nkep_11.TB_EDU_ROOM(EDU_NAME,EDU_SIZE,EDU_PRICE,EDU_AVAIL,EDU_DESCRIPTION,WORK_SEQ,WORK_CODE,
+		EDU_IMG,EDU_IMG2,EDU_IMG3) values(#{eduName},#{eduSize},#{eduPrice},#{eduAvail},#{eduDescription},#{workSeq},#{workCode},
+		#{eduImg},#{eduImg2},#{eduImg3});
+	</insert>
+	
+	<select id="getByteEducationRoomImage" parameterType="eduRoom" resultType="java.util.Map">
+		SELECT EDU_IMG AS IMG FROM nkep_11.TB_EDU_ROOM WHERE EDU_SEQ=#{eduSeq}
+	</select>
+	<select id="getEducationRoomByEduSeq" parameterType="eduRoom" resultType="com.gsitm.common.dto.EducationRoomPlusWSNameDTO">
+		SELECT EDU_SEQ, EDU_CODE, EDU_NAME, EDU_SIZE, EDU_PRICE, EDU_AVAIL, EDU_DESCRIPTION, EDU_AVAIL_STIME, EDU_AVAIL_ETIME,
+	EDU.WORK_SEQ, EDU.WORK_CODE, WORK_NAME
+		FROM nkep_11.TB_EDU_ROOM EDU, nkep_11.TB_WORKSPACE WS
+		WHERE EDU.WORK_SEQ = WS.WORK_SEQ AND EDU_SEQ = #{eduSeq}
+	</select>
+	
+	<update id="updateEduRoomNotIncludePic" parameterType="eduRoom">
+		UPDATE nkep_11.TB_EDU_ROOM SET EDU_NAME = #{eduName}, EDU_AVAIL = #{eduAvail}, EDU_SIZE = #{eduSize}, EDU_DESCRIPTION = #{eduDescription},EDU_PRICE =#{eduPrice},
+			EDU_IMG = NULL, EDU_IMG2= NULL, EDU_IMG3 = NULL
+		WHERE EDU_SEQ = #{eduSeq}
+	</update>
+	<update id="updateEduRoomIncludePic" parameterType="eduRoom">
+		UPDATE nkep_11.TB_EDU_ROOM SET EDU_NAME = #{eduName}, EDU_AVAIL = #{eduAvail}, EDU_SIZE = #{eduSize}, EDU_DESCRIPTION = #{eduDescription},EDU_PRICE =#{eduPrice},
+			EDU_IMG = #{eduImg}, EDU_IMG2= #{eduImg2}, EDU_IMG3 = #{eduImg3}
+		WHERE EDU_SEQ = #{eduSeq}
+	</update>
+	
+	<delete id="deleteEduRoomForAdmin" parameterType="eduRoom">
+		DELETE FROM nkep_11.TB_EDU_ROOM WHERE EDU_SEQ = #{eduSeq}
+	</delete>
+	
+	<select id="getEduRoomByWorkSeq" parameterType="eduRoom" resultType="eduRoom">
+		SELECT EDU_SEQ, EDU_CODE, EDU_NAME, EDU_SIZE, EDU_PRICE, EDU_AVAIL, EDU_DESCRIPTION, WORK_SEQ, WORK_CODE,EDU_AVAIL_STIME, EDU_AVAIL_ETIME 
+		FROM nkep_11.TB_EDU_ROOM
+		WHERE WORK_SEQ = #{workSeq}
+	</select>
+	
+	<select id="getByteEducationRoomImage2" parameterType="eduRoom" resultType="java.util.Map">
+		SELECT EDU_IMG2 AS IMG FROM nkep_11.TB_EDU_ROOM WHERE EDU_SEQ=#{eduSeq}
+	</select>
+	
+	<select id="getByteEducationRoomImage3" parameterType="eduRoom" resultType="java.util.Map">
+		SELECT EDU_IMG3 AS IMG FROM nkep_11.TB_EDU_ROOM WHERE EDU_SEQ=#{eduSeq}
+	</select>
 </mapper>
 
 

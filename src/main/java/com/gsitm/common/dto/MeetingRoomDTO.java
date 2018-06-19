@@ -1,5 +1,7 @@
 package com.gsitm.common.dto;
 
+import java.util.Arrays;
+
 public class MeetingRoomDTO {
 	private String mtSeq;
 	private String mtCode;
@@ -10,6 +12,9 @@ public class MeetingRoomDTO {
 	private String mtDescription;
 	private String workSeq;
 	private String workCode;
+	
+	private String mtAvailStime;
+	private String mtAvailEtime;
 	
 	private byte[] mtImg;
 	private byte[] mtImg2;
@@ -86,6 +91,28 @@ public class MeetingRoomDTO {
 	public void setMtImg3(byte[] mtImg3) {
 		this.mtImg3 = mtImg3;
 	}
+	public String getMtAvailStime() {
+		return mtAvailStime;
+	}
+	public void setMtAvailStime(String mtAvailStime) {
+		this.mtAvailStime = mtAvailStime;
+	}
+	public String getMtAvailEtime() {
+		return mtAvailEtime;
+	}
+	public void setMtAvailEtime(String mtAvailEtime) {
+		this.mtAvailEtime = mtAvailEtime;
+	}
+	@Override
+	public String toString() {
+		return "MeetingRoomDTO [mtSeq=" + mtSeq + ", mtCode=" + mtCode + ", mtName=" + mtName + ", mtSize=" + mtSize
+				+ ", mtPrice=" + mtPrice + ", mtAvail=" + mtAvail + ", mtDescription=" + mtDescription + ", workSeq="
+				+ workSeq + ", workCode=" + workCode + ", mtAvailStime=" + mtAvailStime + ", mtAvailEtime="
+				+ mtAvailEtime + ", mtImg=" + Arrays.toString(mtImg) + ", mtImg2=" + Arrays.toString(mtImg2)
+				+ ", mtImg3=" + Arrays.toString(mtImg3) + "]";
+	}
+
+	
 	
 	
 }

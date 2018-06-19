@@ -40,12 +40,8 @@ public class WorkSpaceDTO {
 	private String postCode;
 	private String mainAddr;
 	private String subAddr;
-/*	private MultipartFile workImgMulti;
-	private MultipartFile workImg2Multi;
-	private MultipartFile workImg3Multi;
-	private Map<String, Object> workImg;
-	private Map<String, Object> workImg2;
-	private Map<String, Object> workImg3;*/
+
+	private String fTime;
 	public String getWorkSeq() {
 		return workSeq;
 	}
@@ -136,6 +132,13 @@ public class WorkSpaceDTO {
 	public void setTel3(String tel3) {
 		this.tel3 = tel3;
 	}
+	public String getfTime() {
+		return fTime;
+	}
+	public void setfTime(String fTime) {
+		this.fTime = fTime;
+	}
+	
 	
 	
 }

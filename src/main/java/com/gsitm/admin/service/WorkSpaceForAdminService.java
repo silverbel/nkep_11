@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.gsitm.admin.model.dao.WorkSpaceForAdminDAO;
 import com.gsitm.common.dto.EmployeeDTO;
+import com.gsitm.common.dto.LogWSDeleteDTO;
 import com.gsitm.common.dto.WorkSpaceDTO;
 
 /**
@@ -57,5 +58,29 @@ public class WorkSpaceForAdminService {
 
 	public List<EmployeeDTO> getAuthorityForAdmin(EmployeeDTO employeeDTO) {
 		return null;
+	}
+
+	public String getResvFTime(WorkSpaceDTO workSpaceDTO) {
+		return workSpaceForAdminDAO.getResvFTime(workSpaceDTO);
+	}
+
+	public void deleteAfterCompleteReservation(WorkSpaceDTO workSpaceDTO) {
+		workSpaceForAdminDAO.deleteAfterCompleteReservation(workSpaceDTO);
+	}
+
+	public List<LogWSDeleteDTO> getLogWorkSpaceDeleteForAdmin() {
+		return workSpaceForAdminDAO.getLogWorkSpaceDeleteForAdmin();
+	}
+
+	public void insertLogDeleteWSForAdmin(WorkSpaceDTO workSpaceDTO) {
+		workSpaceForAdminDAO.insertLogDeleteWSForAdmin(workSpaceDTO);
+	}
+
+	public Map<String, Object> getByteImage2(WorkSpaceDTO workSpaceDTO) {
+		return workSpaceForAdminDAO.getByteImage2(workSpaceDTO);
+	}
+
+	public Map<String, Object> getByteImage3(WorkSpaceDTO workSpaceDTO) {
+		return workSpaceForAdminDAO.getByteImage3(workSpaceDTO);
 	}
 }

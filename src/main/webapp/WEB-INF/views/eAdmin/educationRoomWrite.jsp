@@ -95,7 +95,7 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">회의실 관리</h1>
+					<h1 class="page-header">교육실 관리</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -103,17 +103,17 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">회의실 추가</div>
+						<div class="panel-heading">교육실 추가</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="container">
-								<form action="newMeetingRoomForAdmin.do" enctype="multipart/form-data" method="post">
+								<form action="newEducationRoomForAdmin.do" enctype="multipart/form-data" method="post">
 									<div class="row">
 										<div class="col-25">
-											<label for="fname">근무지 선택</label>
+											<label for="workSeq">근무지 선택</label>
 										</div>
 										<div class="col-75">
-											<select name="workSeq" class="form-control">
+											<select name="workSeq" class="form-control" id="workSeq">
 											<c:forEach var="workSpace" items="${workSpaceList}">
 												<option value="${workSpace.workSeq }/${workSpace.workCode}"><c:out value="${workSpace.workName }"/></option>
 											</c:forEach>
@@ -123,43 +123,43 @@
 									<br><br>
 									<div class="row">
 										<div class="col-25">
-											<label for="mtName">회의실 이름</label>
+											<label for="eduName">교육실 이름</label>
 										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtName" id="mtName"/>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-25">
-											<label for="mtAvail">회의실 인원수</label>
-										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtAvail" id="mtAvail"/>
+										<div class="col-75 text-left">
+											<input type="text" class="form-control" name="eduName" id="eduName"/>
 										</div>
 									</div>
 									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="mtSize">회의실 크기</label>
+											<label for="eduAvail">교육실 인원수</label>
 										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtSize" id="mtSize"/>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-25">
-											<label for="mtPrice">회의실 가격</label>
-										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtPrice" id="mtPrice"/>
+										<div class="col-75 text-left">
+											<input type="text" class="form-control" name="eduAvail" id="eduAvail"/>
 										</div>
 									</div>
 									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="pic">회의실 사진</label>
+											<label for="eduSize">교육실 크기</label>
+										</div>
+										<div class="col-75 text-left">
+											<input type="text" class="form-control" name="eduSize" id="eduSize"/>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-25">
+											<label for="eduPrice">교육실 가격</label>
+										</div>
+										<div class="col-75 text-left">
+											<input type="text" class="form-control" name="eduPrice" id="eduPrice"/>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-25">
+											<label for="pic">교육실 사진</label>
 										</div>
 										<div class="col-75">
 											<div>
@@ -174,10 +174,10 @@
 									<br><br>
 									<div class="row">
 										<div class="col-25">
-											<label for="subject">회의실 설명</label>
+											<label for="eduDescription">교육실 설명</label>
 										</div>
 										<div class="col-75">
-											<textarea id="mtDescription" name="mtDescription"
+											<textarea id="eduDescription" name="eduDescription"
 												placeholder="Write something.." style="height: 200px"
 												class="form-control"></textarea>
 										</div>
@@ -185,7 +185,7 @@
 									<br>
 									<div class="row text-right">
 										<input class="btn btn-primary" type="submit" value="추가">
-										<a href="/meetingRoomList.do" class="btn btn-default">취소</a>
+										<a href="/educationRoomList.do" class="btn btn-default">취소</a>
 									</div>
 								</form>
 							</div>

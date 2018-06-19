@@ -30,6 +30,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getByteImage" parameterType="workSpace" resultType="java.util.Map">
 		select WORK_IMG AS IMG FROM nkep_11.TB_WORKSPACE WHERE WORK_SEQ=#{workSeq}
 	</select>
+	<select id="getByteImage2" parameterType="workSpace" resultType="java.util.Map">
+		select WORK_IMG2 AS IMG FROM nkep_11.TB_WORKSPACE WHERE WORK_SEQ=#{workSeq}
+	</select>
+	<select id="getByteImage3" parameterType="workSpace" resultType="java.util.Map">
+		select WORK_IMG3 AS IMG FROM nkep_11.TB_WORKSPACE WHERE WORK_SEQ=#{workSeq}
+	</select>
 	
 	<select id="getWorkSpaceByWorkSeq" parameterType="workSpace" resultType="workSpace">
 		SELECT WORK_SEQ, WORK_CODE, WORK_NAME, WORK_ADDR, WORK_TEL, WORK_DESCRIPTION, WORK_IMG, WORK_IMG2, WORK_IMG3 
@@ -50,6 +56,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteWorkSpaceForAdmin" parameterType="workSpace">
 		DELETE FROM nkep_11.TB_WORKSPACE WHERE WORK_SEQ = #{workSeq}
 	</delete>
+	
+	<select id="getResvFTime" parameterType="workSpace" resultType="java.lang.String">
+		select MAX(RSV_FDATE) from TB_RESERVATION
+		WHERE WORK_SEQ =  #{workSeq}
+	</select>
+	
+	<update id="deleteAfterCompleteReservation" parameterType="workSpace">
+ 		CREATE EVENT IF NOT EXISTS deleteWorkSpaceEvent
+         ON SCHEDULE AT DATE_ADD(STR_TO_DATE(#{fTime},'%Y-%m-%d %H:%i:%s'),INTERVAL 1 MINUTE)
+         DO 
+         	BEGIN
+         		DELETE FROM nkep_11.TB_WORKSPACE WHERE WORK_SEQ = #{workSeq};
+         		DELETE FROM nkep_11.TB_LOG_WS_DELETE WHERE WORK_SEQ = #{workSeq};
+         	END
+<!-- 		CREATE EVENT IF NOT EXISTS deleteWorkSpaceEvent
+         ON SCHEDULE AT DATE_ADD(STR_TO_DATE(#{fTime},'%Y-%m-%d %H:%i:%s'),INTERVAL 1 MINUTE)
+         DO 
+			BEGIN
+				DELETE FROM nkep_11.TB_WORKSPACE WHERE WORK_SEQ = #{workSeq};
+				INSERT INTO TB_LOG_WS_DELETE VALUES(#{workSeq},DATE_ADD(STR_TO_DATE(#{fTime},'%Y-%m-%d %H:%i:%s'),INTERVAL 1 MINUTE));
+            END  -->
+	</update>
+	
+	<insert id="insertLogDeleteWSForAdmin" parameterType="workSpace">
+		INSERT INTO TB_LOG_WS_DELETE VALUES(#{workSeq},DATE_ADD(STR_TO_DATE(#{fTime},'%Y-%m-%d %H:%i:%s'),INTERVAL 1 MINUTE));
+	</insert>
+	
+	<select id="getLogWorkSpaceDeleteForAdmin" resultType="wsDLog">
+		SELECT WORK_SEQ,DELETE_TIME
+		FROM TB_LOG_WS_DELETE
+	</select>
 </mapper>
 
 

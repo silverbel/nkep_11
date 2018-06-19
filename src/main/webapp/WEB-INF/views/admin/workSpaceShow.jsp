@@ -12,56 +12,7 @@
 <meta name="author" content="">
 
 <title>SB Admin 2 - Bootstrap Admin Theme</title>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-	var sel_files = [];
-	$(document).ready(function() {
-		$('#input_imgs').on("change",handleImgsFilesSelect);
-		$('#input_imgs2').on("change",handleImgsFilesSelect2);
-		$('#input_imgs3').on("change",handleImgsFilesSelect3);
-	});
-	function handleImgsFilesSelect(e) {
-		sel_files = [];
-		$('.imgs_wrap').empty();
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-
-		var index = 0;
-		filesArr.forEach(function(f) {
-			if(!f.type.match("image.*")){
-				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
-			}
-
-			sel_files.push(f);
-
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result +"\" data-file='"+f.name+"' class='selProductFile' title='Click to remove' width=200px height=200px></a>";
-				/* var img_html = "<img src=\"" + e.target.result + "\" width=200px height=200px />";
-				$(".imgs_wrap").append(img_html); */
-				$(".imgs_wrap").append(html);
-				index++;
-			}
-			reader.readAsDataURL(f);
-			
-		});
-	}
-
-	
-	function deleteImageAction(index){
-		console.log("index : "+index);
-		sel_files.splice(index, 1);
-		if(sel_files.length === 0){
-			$('.imgs_wrap').empty();
-		}
-		var img_id = "#img_id_" + index;
-		$(img_id).remove();
-		
-		console.log(sel_files);
-	}
-
-</script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- Bootstrap Core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -90,12 +41,13 @@
 
 	<div id="wrapper">
 
-		<jsp:include page="/WEB-INF/views/mAdmin/common/headerAndLeft.jsp"></jsp:include>
+
+		<jsp:include page="/WEB-INF/views/admin/common/headerAndLeft.jsp"></jsp:include>
 
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">회의실 관리</h1>
+					<h1 class="page-header">근무지 상세정보</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -103,95 +55,67 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">회의실 추가</div>
+						<div class="panel-heading">근무지 정보</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="container">
-								<form action="newMeetingRoomForAdmin.do" enctype="multipart/form-data" method="post">
 									<div class="row">
-										<div class="col-25">
-											<label for="fname">근무지 선택</label>
+										<div class="col-lg-12">
+											<h3>${workSpace.workName }</h3>
+												
 										</div>
-										<div class="col-75">
-											<select name="workSeq" class="form-control">
-											<c:forEach var="workSpace" items="${workSpaceList}">
-												<option value="${workSpace.workSeq }/${workSpace.workCode}"><c:out value="${workSpace.workName }"/></option>
-											</c:forEach>
-											</select>
-										</div>
+									</div>
+									<br> 
+									<div class="col-lg-12">
+									<div class="col-md-4 text-center">
+										<img src=<c:url value="/getByteWorkSpaceImage/${workSpace.workSeq}"/> class="img-responsive img-thumbnail" />
+									</div>
+									<div class="col-md-4 text-center">
+										<img src=<c:url value="/getByteWorkSpaceImage2/${workSpace.workSeq}"/>	class="img-responsive img-thumbnail" />
+									</div>
+									<div class="col-md-4 text-center">
+										<img	src=<c:url value="/getByteWorkSpaceImage3/${workSpace.workSeq}"/>	class="img-responsive img-thumbnail" />
+									</div>
 									</div>
 									<br><br>
-									<div class="row">
-										<div class="col-25">
-											<label for="mtName">회의실 이름</label>
-										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtName" id="mtName"/>
-										</div>
+									<div class="row col-xs-12 text-center">
+									<table class="table" style="font-size:20px;font-style:bold;">
+										<tr>
+													<td width="15%">우편번호 :</td>
+													<td width="85%"><c:out value="${workSpace.postCode }"/></td>
+										</tr>
+										<tr>
+													<td>주소 :</td>
+													<td><c:out value="${workSpace.mainAddr}"/></td>
+										</tr>
+										<tr>
+													<td>상세 주소 :</td>
+													<td><c:out value="${workSpace.subAddr }"/></td>
+										</tr>
+										<tr>
+											<td>전화 번호 : </td>
+											<td><c:out value="${workSpace.tel1 }"/><strong> - </strong>
+												<c:out value="${workSpace.tel2 }"/><strong> - </strong> 
+												<c:out value="${workSpace.tel3 }"/></td>
+										</tr>
+										<tr>
+											<td>상세 정보 : </td>
+											<td><c:out value="${workSpace.workDescription }" /></td>
+										</tr>
+									</table>
 									</div>
-									<br>
-									<div class="row">
-										<div class="col-25">
-											<label for="mtAvail">회의실 인원수</label>
-										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtAvail" id="mtAvail"/>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-25">
-											<label for="mtSize">회의실 크기</label>
-										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtSize" id="mtSize"/>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-25">
-											<label for="mtPrice">회의실 가격</label>
-										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtPrice" id="mtPrice"/>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-25">
-											<label for="pic">회의실 사진</label>
-										</div>
-										<div class="col-75">
-											<div>
-												 <input type="file" id="input_imgs" multiple name="files[]" maxlength="3"/>
-											</div>
-											<div>
-												<div class="imgs_wrap">
-												</div>
-											</div>
-										</div>
-									</div>
-									<br><br>
-									<div class="row">
-										<div class="col-25">
-											<label for="subject">회의실 설명</label>
-										</div>
-										<div class="col-75">
-											<textarea id="mtDescription" name="mtDescription"
-												placeholder="Write something.." style="height: 200px"
-												class="form-control"></textarea>
-										</div>
-									</div>
-									<br>
+												
+									
+												
 									<div class="row text-right">
-										<input class="btn btn-primary" type="submit" value="추가">
-										<a href="/meetingRoomList.do" class="btn btn-default">취소</a>
+										<a class="btn btn-primary" href="/modifyWorkSpaceForAdminForm.do?workSeq=${workSpace.workSeq }">수정</a>
+										<a href="/getWorkSpaceListForAdmin.do" class="btn btn-default">목록</a>
 									</div>
-								</form>
 							</div>
 						</div>
 						<!-- /.panel-body -->
 					</div>
+
 					<!-- /.panel -->
 				</div>
 				<!-- /.col-lg-12 -->
@@ -224,7 +148,6 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="../dist/js/sb-admin-2.js"></script>
-
 	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 	<div id="layer"
 		style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">

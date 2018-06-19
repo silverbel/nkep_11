@@ -192,7 +192,8 @@
 									</div>
 									<br>
 									<div class="row text-right">
-										<input class="btn btn-default" type="submit" value="수정">
+										<input class="btn btn-primary" type="submit" value="수정">
+										<a href="/meetingRoomList.do" class="btn btn-default">취소</a>
 									</div>
 								</form>
 							</div>

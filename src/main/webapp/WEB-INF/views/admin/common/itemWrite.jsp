@@ -90,12 +90,12 @@
 
 	<div id="wrapper">
 
-		<jsp:include page="/WEB-INF/views/mAdmin/common/headerAndLeft.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/eAdmin/common/headerAndLeft.jsp"></jsp:include>
 
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">회의실 관리</h1>
+					<h1 class="page-header">자재 관리</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -103,63 +103,52 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">회의실 추가</div>
+						<div class="panel-heading">자재 추가</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="container">
-								<form action="newMeetingRoomForAdmin.do" enctype="multipart/form-data" method="post">
+								<form action="newItemForAdmin.do" enctype="multipart/form-data" method="post">
 									<div class="row">
 										<div class="col-25">
-											<label for="fname">근무지 선택</label>
+											<label for="itemName">자재 이름</label>
 										</div>
 										<div class="col-75">
-											<select name="workSeq" class="form-control">
-											<c:forEach var="workSpace" items="${workSpaceList}">
-												<option value="${workSpace.workSeq }/${workSpace.workCode}"><c:out value="${workSpace.workName }"/></option>
-											</c:forEach>
-											</select>
+											<input type="text" id="itemName" name="itemName"
+												placeholder="자재 이름" class="form-control">
 										</div>
 									</div>
 									<br><br>
-									<div class="row">
+									<div class="row" >
 										<div class="col-25">
-											<label for="mtName">회의실 이름</label>
+											<label for="itemType">자재 종류</label>
 										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtName" id="mtName"/>
+										<div class="col-75 form-inline">
+											<input type="text" id="itemType" name="itemType"
+												placeholder="자재 종류" class="form-control">
 										</div>
 									</div>
 									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="mtAvail">회의실 인원수</label>
+											<label for="itemPrice">자재 가격</label>
 										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtAvail" id="mtAvail"/>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-25">
-											<label for="mtSize">회의실 크기</label>
-										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtSize" id="mtSize"/>
+										<div class="col-75 form-inline">
+											<input type="text" class="form-control" name="itemPrice" id="itemPrice" placeholder="자재 가격"/>
 										</div>
 									</div>
 									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="mtPrice">회의실 가격</label>
+											<label for="itemUnit">자재 단위</label>
 										</div>
-										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtPrice" id="mtPrice"/>
+										<div class="col-75 form-inline">
+											<input type="text" class="form-control" name="itemUnit" id="itemUnit" placeholder="자재 단위"/>
 										</div>
 									</div>
 									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="pic">회의실 사진</label>
+											<label for="pic">자재 사진</label>
 										</div>
 										<div class="col-75">
 											<div>
@@ -174,18 +163,18 @@
 									<br><br>
 									<div class="row">
 										<div class="col-25">
-											<label for="subject">회의실 설명</label>
+											<label for="itemDescription">자재 설명</label>
 										</div>
 										<div class="col-75">
-											<textarea id="mtDescription" name="mtDescription"
-												placeholder="Write something.." style="height: 200px"
+											<textarea id="itemDescription" name="itemDescription"
+												placeholder="자재 설명.." style="height: 200px"
 												class="form-control"></textarea>
 										</div>
 									</div>
 									<br>
 									<div class="row text-right">
 										<input class="btn btn-primary" type="submit" value="추가">
-										<a href="/meetingRoomList.do" class="btn btn-default">취소</a>
+										<a href="/getItemListForAdmin.do" class="btn btn-default">취소</a>
 									</div>
 								</form>
 							</div>

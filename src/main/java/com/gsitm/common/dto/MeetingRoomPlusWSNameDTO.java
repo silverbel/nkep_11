@@ -11,6 +11,10 @@ public class MeetingRoomPlusWSNameDTO {
 	private String workSeq;
 	private String workCode;
 	private String workName;
+	
+	private String mtAvailStime;
+	private String mtAvailEtime;
+	
 	public String getMtSeq() {
 		return mtSeq;
 	}
@@ -70,6 +74,18 @@ public class MeetingRoomPlusWSNameDTO {
 	}
 	public void setWorkName(String workName) {
 		this.workName = workName;
+	}
+	public String getMtAvailStime() {
+		return mtAvailStime;
+	}
+	public void setMtAvailStime(String mtAvailStime) {
+		this.mtAvailStime = mtAvailStime;
+	}
+	public String getMtAvailEtime() {
+		return mtAvailEtime;
+	}
+	public void setMtAvailEtime(String mtAvailEtime) {
+		this.mtAvailEtime = mtAvailEtime;
 	}
 	
 	

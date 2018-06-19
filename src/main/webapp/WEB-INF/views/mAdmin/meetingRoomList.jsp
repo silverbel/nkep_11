@@ -37,13 +37,66 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <script>
-	var workSeq = null;
+	var mtSeq = null;
+	var j = 0;
 	$(document).ready(function(){
-		$('#deleteBtn').click(function(){
-			workSeq = $('#workSeq').val();
-			$('#deleteA').attr('href','/deleteWorkSapceForAdmin.do?workSeq='+workSeq);
-		})
+		$('.panel-body').on('click', '.deleteBtn', function() {
+			console.log($(this).prev().val());
+			mtSeq = $(this).prev().val();
+			$('#deleteA').attr('href','/deleteMtRoomForAdmin.do?mtSeq='+mtSeq);
+			mtSeq = null;
+		});
+		/*$('.deleteBtn').click(function(){
+			console.log($(this).prev().val());
+			mtSeq = $(this).prev().val();
+			$('#deleteA').attr('href','/deleteMtRoomForAdmin.do?mtSeq='+mtSeq);
+			mtSeq = null;
+		});*/
+		$('#workSelect').on('change',function(){
+			alert($(this).val());
+			if($(this).val() == 'total'){
+				location.href="http://localhost:9090/meetingRoomList.do";				
+			}else{
+				$.ajax(
+						{	type : 'GET'
+							,url: "/getMtRoomByWorkSeq.do?workSeq="+$(this).val()
+							, success: function(result){
+								console.log(result);
+					$(".panel-body").children().remove();
+					if(result.length > 0){
+						for(var i  = 0 ; i<result.length; i++){
+							console.log(result[i]);
+							if(i == 0 || i % 3 == 0){
+								j = i;
+								$(".panel-body").append("<div class='row' id=row"+j+">");
+							}
+							console.log(result[i].mtName);
+							$("#row"+j).append('<div class="col-xs-6 col-md-4 text-center" id="result'+i+'">')
+							$("#result"+i).append('<img src="/getByteMeetingRoomImage/'+result[i].mtSeq+'" class="img-responsive img-thumbnail" /><br>');
+							$("#result"+i).append('<h3><a href="#">'+result[i].mtName+'</a></h3');
+							$("#result"+i).append('회의실 크기 :	'+result[i].mtSize+' 평	<br> ');
+							$("#result"+i).append('회의실 가격 :	'+result[i].mtPrice+' 원 / 30분	<br><br>');
+							$("#result"+i).append('<a href="/modifyMeetingRoomForAdminForm.do?mtSeq='+result[i].mtSeq +'" class="btn btn-default">수정</a>&nbsp;&nbsp;	<input type="text" id="mtSeq" value="'+result[i].mtSeq +'" hidden="hidden"/>');
+							$("#result"+i).append('<button class="btn btn-danger deleteBtn" data-toggle="modal" data-target="#myModal" id="deleteBtn">삭제</button>');
+							$("#row"+j).append('</div>')
+							if(i== 0 || i%3 ==0){
+								$(".panel-body").append($("</div><br>"));
+							}
+						}
+						
+					}else{
+						
+					} 
+		            
+		            
+		       		 									}
+						}
+						);
+			}
+
+		});
 	});
+
 </script>
 </head>
 
@@ -56,14 +109,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">근무지 삭제</h4>
+          <h4 class="modal-title">회의실 삭제</h4>
         </div>
         <div class="modal-body">
           <h2>정말 삭제하시겠습니까??</h2>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-          <a href="" id="deleteA"><button type="button" class="btn btn-danger" data-dismiss="modal">삭제</button></a>
+          <a href="" id="deleteA"><button type="button" class="btn btn-danger">삭제</button></a>
         </div>
       </div>
       
@@ -77,9 +130,16 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header">회의실 관리</h1>
+					<select id="workSelect" class="form-control">
+						<option value="total">전체</option> 
+						<c:forEach var="workspace" items="${workSpaceList }">
+							<option value="${workspace.workSeq }<%-- /${workspace.workCode } --%>">${workspace.workName }</option>
+						</c:forEach>
+					</select>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
+			<br>
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
@@ -89,17 +149,17 @@
 						<div class="panel-body">
 							<c:forEach var="mtRoom" items="${meetRoomList}"
 								varStatus="status">
-								<c:if test="${status.index == 0 } || ${status.index % 3 == 0 }">
-									<c:out value="<div class='row'>" />
+								<c:if test="${status.index == 0  || status.index % 3 == 0 }">
+									<c:out value="<div class='row'>" escapeXml="false"/>
 								</c:if>
 								<div class="col-xs-6 col-md-4 text-center">
 									 <img
 										src=<c:url value="/getByteMeetingRoomImage/${mtRoom.mtSeq}"/>
-										width="200px" height="200px" />
+										 class="img-responsive img-thumbnail" />
 									<br>
 									<h3>
 										<a
-											href="#"><%-- <c:url value="/customer/customerShopDetailViewServlet?productNo=${product.productno}" /> --%>
+											href="/showMtRoomDetailForAdmin.do?mtSeq=${mtRoom.mtSeq}">
 											<c:out value="${mtRoom.mtName}" />
 										</a>
 									</h3>
@@ -109,11 +169,11 @@
 									<c:out value="${mtRoom.mtPrice}" />원 / 30분
 									<br>
 									<br> <a href="/modifyMeetingRoomForAdminForm.do?mtSeq=${mtRoom.mtSeq }" class="btn btn-default">수정</a>&nbsp;&nbsp;
-									<input type="text" id="workSeq" value="${mtRoom.workSeq }" hidden="hidde"/>
-									<button class="btn btn-danger" data-toggle="modal" data-target="#myModal" id="deleteBtn">삭제</button>
+									<input type="text" id="mtSeq" value="${mtRoom.mtSeq }" hidden="hidden"/>
+									<button class="btn btn-danger deleteBtn" data-toggle="modal" data-target="#myModal" id="deleteBtn">삭제</button>
 								</div>
-								<c:if test="${status.index == 0 } || ${status.index % 3 == 0 }">
-									<c:out value="</div>" />
+								<c:if test="${ status.index % 2 == 0 && status.index != 0 }">
+									<c:out value="</div><br>" escapeXml="false" />
 								</c:if>
 							</c:forEach>
 						</div>
