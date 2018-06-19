@@ -9,14 +9,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap type="com.gsitm.common.dto.ItemDTO" id="itemDTO" />
 	
-	<select id="getItemListForAdmin" parameterType="itemDTO" resultType="itemDTO">
-		SELECT ITEM_SEQ, ITEM_CODE, ITEM_TYPE, ITEM_NAME, ITEM_PRICE, ITEM_UNIT,ITEM_DESCRIPTION
-		FROM nkep_11.TB_ITEM;
+	<select id="getItemListForAdmin"  resultType="itemStockWorkspace">
+		SELECT ti.item_seq AS ITEM_SEQ,ITEM_TYPE, ITEM_NAME, ITEM_PRICE, ITEM_UNIT, ITEM_DESCRIPTION,ST_CNT,ws.work_seq AS WORK_SEQ,WORK_NAME 
+		FROM nkep_11.TB_ITEM ti , nkep_11.TB_STOCK ts,nkep_11.TB_WORKSPACE ws 
+		WHERE ti.item_seq = ts.item_seq and ts.work_seq = ws.work_seq
 	</select>
 	<insert id="insertItemForAdmin" parameterType="itemDTO">
 		INSERT INTO nkep_11.TB_ITEM(ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_UNIT,ITEM_DESCRIPTION,ITEM_IMG,ITEM_IMG2,ITEM_IMG3) 
 		VALUES(#{itemType},#{itemName},#{itemPrice},#{itemUnit},#{itemDescription},#{itemImg},#{itemImg2},#{itemImg3})
 	</insert>
+	<select id="getByteImage" parameterType="itemDTO" resultType="java.util.Map">
+		SELECT ITEM_IMG AS IMG FROM nkep_11.TB_ITEM WHERE ITEM_SEQ=#{itemSeq}
+	</select>
+	<select id="getByteImage2" parameterType="itemDTO" resultType="java.util.Map">
+		SELECT ITEM_IMG2 AS IMG FROM nkep_11.TB_ITEM WHERE ITEM_SEQ=#{itemSeq}
+	</select>
+	<select id="getByteImage3" parameterType="itemDTO" resultType="java.util.Map">
+		SELECT ITEM_IMG3 AS IMG FROM nkep_11.TB_ITEM WHERE ITEM_SEQ=#{itemSeq}
+	</select>
+	
+	<select id="getItemByItemSeq" parameterType="itemStockWorkspace" resultType="itemStockWorkspace">
+		SELECT ti.item_seq AS ITEM_SEQ,ITEM_TYPE, ITEM_NAME, ITEM_PRICE, ITEM_UNIT, ITEM_DESCRIPTION,ST_CNT,ws.work_seq AS WORK_SEQ,WORK_NAME 
+		FROM nkep_11.TB_ITEM ti , nkep_11.TB_STOCK ts,nkep_11.TB_WORKSPACE ws 
+		WHERE ti.item_seq = ts.item_seq and ts.work_seq = ws.work_seq and ti.ITEM_SEQ = #{itemSeq} and ts.work_seq = #{workSeq}
+	</select>
+	<select id="getItemMaxPK" resultType="java.lang.String">
+		SELECT MAX(item_seq)+1 FROM nkep_11.TB_ITEM;
+	</select>
+	
+	<update id="updateItemNotIncludePic" parameterType="itemStockWorkspace">
+		UPDATE nkep_11.TB_ITEM item, nkep_11.TB_STOCK stock, nkep_11.TB_WORKSPACE ws
+		 SET item.ITEM_NAME = #{itemName}, stock.ST_CNT = #{stCnt}, item.ITEM_TYPE = #{itemType}, item.ITEM_PRICE = #{itemPrice}, item.ITEM_DESCRIPTION =#{itemDescription},
+			item.ITEM_IMG = NULL, item.ITEM_IMG2= NULL, item.ITEM_IMG3 = NULL
+		WHERE item.ITEM_SEQ = stock.ITEM_SEQ and stock.WORK_SEQ = ws.WORK_SEQ and
+		item.ITEM_SEQ = #{itemSeq} and ws.WORK_SEQ = #{workSeq}
+	</update>
+	<update id="updateItemIncludePic" parameterType="itemStockWorkspace">
+		UPDATE nkep_11.TB_ITEM item, nkep_11.TB_STOCK stock, nkep_11.TB_WORKSPACE ws
+		 SET item.ITEM_NAME = #{itemName}, stock.ST_CNT = #{stCnt}, item.ITEM_TYPE = #{itemType}, item.ITEM_PRICE = #{itemPrice}, item.ITEM_DESCRIPTION =#{itemDescription},
+			item.ITEM_IMG = #{itemImg}, item.ITEM_IMG2= #{itemImg2}, item.ITEM_IMG3 = #{itemImg3}
+		WHERE item.ITEM_SEQ = stock.ITEM_SEQ and stock.WORK_SEQ = ws.WORK_SEQ and
+		item.ITEM_SEQ = #{itemSeq} and ws.WORK_SEQ = #{workSeq}
+	</update>
 	
 </mapper>
 

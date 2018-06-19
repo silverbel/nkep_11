@@ -142,6 +142,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 ]]>
 	</select>
 	
+	<delete id="deleteResv" parameterType="resv">
+		DELETE FROM nkep_11.TB_RESERVATION WHERE RSV_SEQ = #{rsvSeq}
+	</delete>
+	
+	<delete id="deleteConfirm" parameterType="confirmDTO">
+		DELETE FROM nkep_11.TB_CONFIRM WHERE RSV_SEQ = #{rsvSeq}
+	</delete> 
+	
+	<delete id="deleteResvDetail" parameterType="resvDetailDTO">
+		DELETE FROM nkep_11.TB_RSV_DETAIL WHERE RSV_SEQ = #{rsvSeq}
+	</delete> 
 
 </mapper>
 

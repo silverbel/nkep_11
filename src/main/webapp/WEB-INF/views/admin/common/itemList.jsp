@@ -73,6 +73,7 @@ description :
 	        });
 	    });
 	});
+   
     </script>
 </head>
 <body>
@@ -99,21 +100,24 @@ description :
 							<table class="table table-bordered table-striped table-hover" id="dataTables-authority" data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10'>
 								<thead>
 								<tr>
-									<th class="text-center">자재 사진</th>
-									<th class="text-center">자재 종류</th>
-									<th class="text-center">자재 이름</th>
-									<th class="text-center">자재 가격</th>
-									<th class="text-center">자재 단위</th>
+									<th class="text-center" width="15%">근무지 이름</th> 
+									<th class="text-center" width="15%">자재 사진</th>
+									<th class="text-center" width="15%">자재 종류</th>
+									<th class="text-center" width="15%">자재 이름</th>
+									<th class="text-center" width="15%">자재 가격</th>
+									<th class="text-center" width="15%">자재 단위</th>
+									<th class="text-center" width="15%">자재 단위</th>
 								</tr>
 								</thead>
 								<tbody>
 							<c:forEach var="item" items="${itemList}">
 									<tr>
-										<td class="text-center"> <%-- <img
+										<td class="text-center">${item.workName }</td>
+										<td class="text-center"><img
 										src=<c:url value="/getByteItemImage/${item.itemSeq}"/>
-										class="img-responsive img-thumbnail" /> --%></td>
+										class="img-responsive img-thumbnail" width="150px" /></td>
 										<td class="text-center">${item.itemType}</td>
-										<td class="text-center">${item.itemName}</td>
+										<td class="text-center"><a style="text-decoration:none;" href="/showItemDetailForAdmin.do?itemSeq=${item.itemSeq}&workSeq=${item.workSeq}">${item.itemName}</a></td>
 										<td class="text-center">${item.itemPrice}</td>
 										<td class="text-center">${item.itemUnit}</td>
 									</tr>

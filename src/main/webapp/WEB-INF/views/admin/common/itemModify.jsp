@@ -17,8 +17,13 @@
 	var sel_files = [];
 	$(document).ready(function() {
 		$('#input_imgs').on("change",handleImgsFilesSelect);
-		$('#input_imgs2').on("change",handleImgsFilesSelect2);
-		$('#input_imgs3').on("change",handleImgsFilesSelect3);
+		 $("#changeFlag").change(function(){
+		        if($("#changeFlag").is(":checked")){
+		            $('#input_imgs').attr("disabled", true);
+		        }else{
+		            $('#input_imgs').attr("disabled", false);
+		        }
+		    });
 	});
 	function handleImgsFilesSelect(e) {
 		sel_files = [];
@@ -47,7 +52,6 @@
 			
 		});
 	}
-
 	
 	function deleteImageAction(index){
 		console.log("index : "+index);
@@ -59,6 +63,8 @@
 		$(img_id).remove();
 		
 		console.log(sel_files);
+
+
 	}
 
 </script>
@@ -90,7 +96,8 @@
 
 	<div id="wrapper">
 
-		<jsp:include page="/WEB-INF/views/eAdmin/common/headerAndLeft.jsp"></jsp:include>
+		
+	<jsp:include page="/WEB-INF/views/admin/common/headerAndLeft.jsp"></jsp:include>
 
 		<div id="page-wrapper">
 			<div class="row">
@@ -103,43 +110,63 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">자재 추가</div>
+						<div class="panel-heading">자재 수정</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="container">
-								<form action="newItemForAdmin.do" enctype="multipart/form-data" method="post">
+								<form action="modifyItemForAdmin.do"
+									enctype="multipart/form-data" method="post">
+									<input type="text" name="itemSeq" value="${itemDTO.itemSeq }" hidden="hidden"/>
+									<input type="text" name="workSeq" value="${itemDTO.workSeq }" hidden="hidden"/>
 									<div class="row">
 										<div class="col-25">
-											<label for="fname">근무지 선택</label>
+											<label for="workName">근무지</label>
 										</div>
 										<div class="col-75">
-											<select name="workSeq" class="form-control">
-											<c:forEach var="workSpace" items="${workSpaceList}">
-												<option value="${workSpace.workSeq }"><c:out value="${workSpace.workName }"/></option>
-											</c:forEach>
-											</select>
+											<input type="text" id="workName" name="workName" value="${itemDTO.workName }" class="form-control" readonly/>
 										</div>
 									</div>
+									<br>
 									<br>
 									<div class="row">
 										<div class="col-25">
 											<label for="itemName">자재 이름</label>
 										</div>
-										<div class="col-75">
-											<input type="text" id="itemName" name="itemName"
-												placeholder="자재 이름" class="form-control">
+										<div class="col-75 text-left">
+											<input type="text" class="form-control" name="itemName" id="itemName" class="form-control" value="${itemDTO.itemName}"/>
 										</div>
 									</div>
-									<br><br>
-									<div class="row" >
+									<br>
+									<div class="row">
+										<div class="col-25">
+											<label for="stCnt">자재 수량</label>
+										</div>
+										<div class="col-75 text-left">
+											<input type="text" class="form-control" name="stCnt" id="stCnt" class="form-control" value="${itemDTO.stCnt}"/>
+										</div>
+									</div>
+									<br>
+									<div class="row">
 										<div class="col-25">
 											<label for="itemType">자재 종류</label>
 										</div>
-										<div class="col-75">
+										<div class="col-75 text-left">
 											<select name="itemType" class="form-control">
+											<c:if test="${itemDTO.itemType eq 'SNACK' }">
+												<option value="SNACK" selected>간식</option>
 												<option value="FIXTURES">비품</option>
 												<option value="EXPENDABLE">소모품</option>
+											</c:if>
+											<c:if test="${itemDTO.itemType eq 'FIXTURES' }">
 												<option value="SNACK">간식</option>
+												<option value="FIXTURES" selected>비품</option>
+												<option value="EXPENDABLE">소모품</option>
+											</c:if>
+											<c:if test="${itemDTO.itemType eq 'EXPENDABLES' }">
+												<option value="SNACK">간식</option>
+												<option value="FIXTURES">비품</option>
+												<option value="EXPENDABLE" selected>소모품</option>
+											</c:if>	
 											</select>
 										</div>
 									</div>
@@ -148,64 +175,51 @@
 										<div class="col-25">
 											<label for="itemPrice">자재 가격</label>
 										</div>
-										<div class="col-75">
-											<input type="text" class="form-control" name="itemPrice" id="itemPrice" placeholder="자재 가격"/>
+										<div class="col-75 text-left">
+											<input type="text" class="form-control" name="itemPrice" id="itemPrice" value="${itemDTO.itemPrice}"/>
 										</div>
 									</div>
 									<br>
 									<div class="row">
-										<div class="col-25">
-											<label for="itemUnit">자재 단위</label>
-										</div>
-										<div class="col-75">
-											<input type="text" class="form-control" name="itemUnit" id="itemUnit" placeholder="자재 단위"/>
-										</div>
-									</div>
-									<br>
-									<div class="row">
-										<div class="col-25">
-											<label for="stCnt">자재 재고량</label>
-										</div>
-										<div class="col-75">
-											<input type="text" class="form-control" name="stCnt" id="stCnt" placeholder="자재 재고량"/>
-										</div>
-									</div>
-									<br>
-									<div class="row">
+										사진 삭제여부 : <input type="checkbox" name="changeFlag" id="changeFlag" value="changeFlag" />
+										<br><br>
 										<div class="col-25">
 											<label for="pic">자재 사진</label>
 										</div>
 										<div class="col-75">
 											<div>
-												 <input type="file" id="input_imgs" multiple name="files[]" maxlength="3"/>
+												<input type="file" id="input_imgs" multiple name="files[]"
+													maxlength="3" />
 											</div>
 											<div>
-												<div class="imgs_wrap">
-												</div>
+												<div class="imgs_wrap"></div>
 											</div>
 										</div>
 									</div>
-									<br><br>
+									<br>
+									<br>
 									<div class="row">
 										<div class="col-25">
 											<label for="itemDescription">자재 설명</label>
 										</div>
 										<div class="col-75">
 											<textarea id="itemDescription" name="itemDescription"
-												placeholder="자재 설명.." style="height: 200px"
-												class="form-control"></textarea>
+												placeholder="Write something.." style="height: 200px"
+												class="form-control">${itemDTO.itemDescription}</textarea>
 										</div>
 									</div>
 									<br>
 									<div class="row text-right">
-										<input class="btn btn-primary" type="submit" value="추가">
-										<a href="/getItemListForAdmin.do" class="btn btn-default">취소</a>
+										<input class="btn btn-primary" type="submit" value="수정">
+										<a href="/showItemDetailForAdmin.do?itemSeq=${ itemDTO.itemSeq}" class="btn btn-default">상세보기</a>
+										<a href="/getItemListForAdmin.do" class="btn btn-default">목록</a>
 									</div>
 								</form>
 							</div>
 						</div>
 						<!-- /.panel-body -->
 					</div>
+					
 					<!-- /.panel -->
 				</div>
 				<!-- /.col-lg-12 -->
@@ -238,7 +252,6 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="../dist/js/sb-admin-2.js"></script>
-
 	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 	<div id="layer"
 		style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
