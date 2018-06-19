@@ -37,6 +37,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT MAX(item_seq)+1 FROM nkep_11.TB_ITEM;
 	</select>
 	
+	<update id="updateItemNotIncludePic" parameterType="itemStockWorkspace">
+		UPDATE nkep_11.TB_ITEM item, nkep_11.TB_STOCK stock, nkep_11.TB_WORKSPACE ws
+		 SET item.ITEM_NAME = #{itemName}, stock.ST_CNT = #{stCnt}, item.ITEM_TYPE = #{itemType}, item.ITEM_PRICE = #{itemPrice}, item.ITEM_DESCRIPTION =#{itemDescription},
+			item.ITEM_IMG = NULL, item.ITEM_IMG2= NULL, item.ITEM_IMG3 = NULL
+		WHERE item.ITEM_SEQ = stock.ITEM_SEQ and stock.WORK_SEQ = ws.WORK_SEQ and
+		item.ITEM_SEQ = #{itemSeq} and ws.WORK_SEQ = #{workSeq}
+	</update>
+	<update id="updateItemIncludePic" parameterType="itemStockWorkspace">
+		UPDATE nkep_11.TB_ITEM item, nkep_11.TB_STOCK stock, nkep_11.TB_WORKSPACE ws
+		 SET item.ITEM_NAME = #{itemName}, stock.ST_CNT = #{stCnt}, item.ITEM_TYPE = #{itemType}, item.ITEM_PRICE = #{itemPrice}, item.ITEM_DESCRIPTION =#{itemDescription},
+			item.ITEM_IMG = #{itemImg}, item.ITEM_IMG2= #{itemImg2}, item.ITEM_IMG3 = #{itemImg3}
+		WHERE item.ITEM_SEQ = stock.ITEM_SEQ and stock.WORK_SEQ = ws.WORK_SEQ and
+		item.ITEM_SEQ = #{itemSeq} and ws.WORK_SEQ = #{workSeq}
+	</update>
+	
 </mapper>
 
 

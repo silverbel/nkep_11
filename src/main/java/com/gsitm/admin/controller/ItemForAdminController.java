@@ -169,9 +169,9 @@ public class ItemForAdminController {
 				itemStockByWorkSpaceDTO.setItemImg2(multipartFiles.get(1).getBytes());
 				itemStockByWorkSpaceDTO.setItemImg3(multipartFiles.get(2).getBytes());
 			}
-//			itemForAdminService.updateItemIncludePic(itemStockByWorkSpaceDTO);
+			itemForAdminService.updateItemIncludePic(itemStockByWorkSpaceDTO);
 		}else {
-//			itemForAdminService.updateItemNotIncludePic(itemStockByWorkSpaceDTO);
+			itemForAdminService.updateItemNotIncludePic(itemStockByWorkSpaceDTO);
 		}
 		mv.setViewName("redirect:/getItemListForAdmin.do");
 		return mv;

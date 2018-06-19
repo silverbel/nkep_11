@@ -45,5 +45,12 @@ public class ItemForAdminService {
 	public String getItemMaxPK() {
 		return itemForAdminDAO.getItemMaxPK();
 	}
+	
+	public void updateItemIncludePic(ItemStockByWorkSpaceDTO itemStockByWorkSpaceDTO) {
+		itemForAdminDAO.updateItemIncludePic(itemStockByWorkSpaceDTO);
+	}
+	public void updateItemNotIncludePic(ItemStockByWorkSpaceDTO itemStockByWorkSpaceDTO) {
+		itemForAdminDAO.updateItemNotIncludePic(itemStockByWorkSpaceDTO);
+	}
 
 }

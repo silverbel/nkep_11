@@ -53,5 +53,14 @@ public class ItemForAdminDAOImpl implements ItemForAdminDAO {
 		return sqlSession.selectOne("item.getItemMaxPK");
 	}
 
+	@Override
+	public void updateItemIncludePic(ItemStockByWorkSpaceDTO itemStockByWorkSpaceDTO) {
+		sqlSession.update("item.updateItemIncludePic", itemStockByWorkSpaceDTO);
+	}
+	
+	@Override
+	public void updateItemNotIncludePic(ItemStockByWorkSpaceDTO itemStockByWorkSpaceDTO) {
+		sqlSession.update("item.updateItemNotIncludePic", itemStockByWorkSpaceDTO);
+	}
 
 }

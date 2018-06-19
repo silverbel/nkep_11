@@ -174,6 +174,30 @@ description : my page, 나의 정보 확인
 						+encodeURIComponent(url);
 			}
 		</script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var $num = comma(<c:out value="${rcList.get(0).rsvPrice}" />);
+				
+				$('#rsvBudget').html($num+' 원');
+				
+				function comma(num) {
+					var len, point, str;
+
+					num = num + "";
+					point = num.length % 3;
+					len = num.length;
+
+					str = num.substring(0, point);
+					while (point < len) {
+						if (str != "")
+							str += ",";
+						str += num.substring(point, point + 3);
+						point += 3;
+					}
+					return str;
+				}
+			})
+		</script>
 	</head>
 	<body>
 		<div class="page-wrap" id="root">
@@ -191,7 +215,7 @@ description : my page, 나의 정보 확인
 						<!-- page-title -->
 						<div class="page-title pb-40">
 							<h2 class="page-title__title">${sessionID.empId }-
-								${sessionID.empName }님</h2>
+								${sessionID.empName}님</h2>
 							<p class="page-title__text">예약 및 사용 정보 보기</p>
 							<div class="page-title__divider"></div>
 						</div>
@@ -237,9 +261,9 @@ description : my page, 나의 정보 확인
 									<c:forEach var="rc" items="${rcList }">
 										<tr class="text-center rsvSeqCheck" data-toggle="modal" data-target="#myResvInfo">
 											<td class="seq">${rc.rsvSeq}</td>
-											<td>${rc.roomName }</td>
+											<td>${rc.roomName}</td>
 											<td>${rc.applicant}</td>
-											<td>${rc.rsvPrice}</td>
+											<td id="rsvBudget"></td>
 											<td>
 												<c:if test="${'Y' eq rc.mgrYn}">
 													승인 완료
