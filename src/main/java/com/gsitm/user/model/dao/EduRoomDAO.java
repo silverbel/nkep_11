@@ -16,4 +16,7 @@ import com.gsitm.common.dto.EducationRoomDTO;
 
 public interface EduRoomDAO {
 	List<EducationRoomDTO> getEduRoomList(EducationRoomDTO educationRoomDTO);
+	
+	
+	List<EducationRoomDTO> getAnyRoomInfo(String roomSeq);
 }

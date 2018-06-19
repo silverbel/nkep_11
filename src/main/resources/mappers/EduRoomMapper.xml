@@ -20,6 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getByteEduImage" parameterType="eduRoom" resultType="java.util.Map">
 		SELECT EDU_IMG AS IMG FROM nkep_11.TB_EDU_ROOM WHERE EDU_SEQ=#{eduSeq}
 	</select>
+
+	<select id="getAnyRoomInfo" parameterType="String" resultType="eduRoom">
+		SELECT EDU_NAME, EDU_PRICE, EDU_AVAIL, EDU_SEQ, EDU_DESCRIPTION
+		  FROM nkep_11.TB_EDU_ROOM
+		 WHERE EDU_CODE=#{roomSeq}
+	</select>
+	
 </mapper>
 
 

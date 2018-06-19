@@ -50,4 +50,15 @@ public class WorkSpaceService {
 		return mtDAO.getMtRoomList(meetingRoomDTO);
 	}
 	
+	public List<?> getAnyRoomInfo(String roomType, String roomSeq){
+		List<?> roomInfo = null;
+		if(roomType=="E") {
+			roomInfo = edDAO.getAnyRoomInfo(roomSeq);
+		} else {
+			roomInfo = mtDAO.getAnyRoomInfo(roomSeq);
+		}
+		
+		return roomInfo;
+	}
+
 }

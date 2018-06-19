@@ -28,6 +28,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getByteMeetingRoomImage" parameterType="mtRoom" resultType="java.util.Map">
 		SELECT MT_IMG AS IMG FROM nkep_11.TB_MT_ROOM WHERE MT_SEQ=#{mtSeq}
 	</select>
+	
+	<select id="getAnyRoomInfo" parameterType="String" resultType="mtRoom">
+		SELECT MT_PRICE, MT_AVAIL, MT_NAME, MT_SEQ, MT_DESCRIPTION
+		  FROM nkep_11.TB_MT_ROOM
+		 WHERE MT_CODE = #{roomSeq}
+	</select>
+	
 	<select id="getMeetingRoomByMtSeq" parameterType="mtRoom" resultType="com.gsitm.common.dto.MeetingRoomPlusWSNameDTO">
 		SELECT MT_SEQ, MT_CODE, MT_NAME, MT_SIZE, MT_PRICE, MT_AVAIL, MT_DESCRIPTION,
 	MT.WORK_SEQ, MT.WORK_CODE, WORK_NAME

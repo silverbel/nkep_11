@@ -30,4 +30,9 @@ public class EduRoomDAOImpl implements EduRoomDAO {
 		return sqlSession.selectList("eduRoom.getEduRoomList", educationRoomDTO);
 	}
 
+	@Override
+	public List<EducationRoomDTO> getAnyRoomInfo(String roomSeq) {
+		return sqlSession.selectList("eduRoom.getAnyRoomInfo", roomSeq);
+	}
+
 }

@@ -129,6 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="roomItemListCheckByRoomSeqAjax" resultMap="riDTO" parameterType="String" statementType="PREPARED">
 		SELECT I.ITEM_NAME
+					 , I.ITEM_UNIT
 					 , S.ITEM_SEQ
 					 , S.ROOM_SEQ
 					 , S.ITEM_CNT
@@ -137,6 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    ON S.ITEM_SEQ = I.ITEM_SEQ
 		 WHERE S.ROOM_SEQ = #{roomSeq}
 	</select>
+	
 
 </mapper>
 

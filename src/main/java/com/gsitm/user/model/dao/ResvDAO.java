@@ -31,7 +31,7 @@ public interface ResvDAO {
 	List<ResvDTO> getResvLongInfoByDate(Map<?,?> check);
 	
 	// ajax
-	List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax();
+	List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq);
 	
 	
 	int resvCount(String empId);

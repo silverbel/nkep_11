@@ -71,11 +71,14 @@ public class ResvController {
 	
 	@ResponseBody
 	@RequestMapping(value="roomItemList.do", method=RequestMethod.POST)
-	public Map<?,?> roomItemListCheckByRoomSeqAjax(){
+	public Map<?,?> roomItemListCheckByRoomSeqAjax(@RequestParam("roomSeq") String roomSeq,
+			@RequestParam("roomType") String roomType){
 		
-		List<ResvItemInfoDTO> list = null;
+		List<?> roomInfo = wService.getAnyRoomInfo(roomType, roomSeq);
+		List<ResvItemInfoDTO> itemlist = rService.roomItemListCheckByRoomSeqAjax(roomSeq);
 		Map<String, Object> roomItemList = new HashMap<>();
-		roomItemList.put("roomItemList", roomItemList);
+		roomItemList.put("roomItemList", itemlist);
+		roomItemList.put("roomInfo", roomInfo);
 		return roomItemList;
 	}
 }

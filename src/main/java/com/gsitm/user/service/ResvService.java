@@ -59,8 +59,8 @@ public class ResvService {
 		else return rDao.getResvShortInfoByDate(check);
 	}
 	
-	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(){
-		return null;
+	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq){
+		return rDao.roomItemListCheckByRoomSeqAjax(roomSeq);
 	}
 }
 

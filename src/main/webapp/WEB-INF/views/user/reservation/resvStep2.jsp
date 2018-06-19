@@ -122,13 +122,59 @@ description : 예약하기
 						$('#eduRoomBox').attr('class','dispalyBlock');
 					}
 				})
+				
+				// room name select
 				$('.btn-roomName').click(function(){
+					var $roomSeq = $(this).val();
+					var $roomType = $('#roomType').val()
 					$('.btn-roomName').attr('class','btn btn-default btn-kdb btn-roomName');
 					$('#timeButton').attr('class','displayNone onOffBox');
+					// ajax
+					$.ajax({
+						type:"POST",
+						url:"/resv/roomItemList.do",
+						data:{
+							"roomType" : $roomType,
+							"roomSeq" : $roomSeq,
+						},
+						dataType: "JSON",
+						success: function(data) {
+							
+							$('.img-box-kdb').empty();
+							$('.ajax-clean').html('');
+							
+							if($roomType == 'M'){
+								$('.img-box-kdb').append('<img src="/getByteMtImage/"'+data.roomInfo[0].mtSeq);
+								$('#roomPrice').append('<p>30분 당 가격 : '+data.roomInfo[0].mtPrice+' 원</p>');
+								$('#roomPrice').append('<p>하루 가격 : '+parseInt(data.roomInfo[0].mtPrice)*16+' 원</p>');
+								$('#roomAvail').append(data.roomInfo[0].mtAvail);
+								$('#roomDescription').append(data.roomInfo[0].mtDescription);
+							} else {
+								$('.img-box-kdb').append('<img src="/getByteEduImage/"'+data.roomInfo[0].eduSeq);
+								$('#roomPrice').append('<p>30분 당 가격 : '+data.roomInfo[0].eduPrice+' 원</p>');
+								$('#roomPrice').append('<p>하루 가격 : '+parseInt(data.roomInfo[0].eduPrice)*16+' 원</p>');
+								$('#roomAvail').append(data.roomInfo[0].eduAvail);
+								$('#roomDescription').append(data.roomInfo[0].eduDescription);
+							}
+							if(data.roomItemList.length != 0){
+								for(var i=0; i<data.roomItemList.length; i++){
+									var itemName = data.roomItemList[i].itemName;
+									var itemCnt = data.roomItemList[i].itemCnt;
+									var itemUnit = data.roomItemList[i].itemUnit;
+									
+									$('#itemBox').append('<p>'+itemName+' : '+itemCnt+' '+itemUnit+'</p>');
+								}
+							} else {
+							}
+						}
+			    });
+					console.log('ajax test');
 					$('.btn-rsvType').attr('class','btn btn-default btn-kdb btn-rsvType');
 					$(this).attr('class','btn btn-info btn-kdb btn-roomName');
-					$('#roomSeq').val($(this).val());
+					$('#roomSeq').val($val);
 				})
+				
+				// reservation type select
 				$('.btn-rsvType').click(function(){
 					$('.btn-rsvType').attr('class','btn btn-default btn-kdb btn-rsvType');
 					$(this).attr('class','btn btn-info btn-kdb btn-rsvType');
@@ -146,6 +192,7 @@ description : 예약하기
 					}
 				})
 				
+				// date Select
 				$('#selDate').on("change",function(){
 					var $selDate = $(this).val();
 					var $rsvType = $('#rsvType').val();
@@ -165,11 +212,11 @@ description : 예약하기
 							if(currentDay > $selDate){
 								$('.times').addClass('disabled');
 							} else if(currentDay == $selDate){
-								var curTime = nowDay.getHours()*100+nowDay.getMinutes();
+								var curTime = nowDay.getMinutes()<40?nowDay.getHours()*100+nowDay.getMinutes()+20:(nowDay.getHours()+1)*100+nowDay.getMinutes()-40;
 								$('.times').each(function(){
 									var $this = $(this);
 									var $distime = parseInt($this.attr('id'));
-									if(curTime+20>=$distime){
+									if(curTime>=$distime){
 										$this.addClass('disabled');
 									}
 								})	
@@ -220,6 +267,9 @@ description : 예약하기
 				location.href = "/resv/resvStep1.do";
 			}
 		
+			function modal_sel(){
+				
+			}
 		</script>
 		<style type="text/css">
 			.btn-kdb{
@@ -346,17 +396,35 @@ description : 예약하기
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="myModalLabel">예약 상세 정보</h4>
+						<h4 class="modal-title" id="myModalLabel">방 정보</h4>
 					</div>
 					<div class="modal-body">
-						hello
+						<div class="text-center img-box-kdb">
+						</div>
+						<table class="table table-hover">
+							<tr>
+								<td>방 가격</td>
+								<td id="roomPrice" class="ajax-clean"></td>
+							</tr>
+							<tr>
+								<td>최대 인원</td>
+								<td id="roomAvail" class="ajax-clean" ></td>
+							</tr>
+							<tr>
+								<td>기타 설명</td>
+								<td id="roomDescription" class="ajax-clean"></td>
+							</tr>
+							<tr>
+								<td>사용 가능 비품</td>
+								<td id="itemBox" class="ajax-clean"></td>
+							</tr>
+						</table>
 					</div>
 					<div class="modal-footer form-inline">
 						<table class="form-group">
 							<tr>
-								<th><button type="button" class="btn btn-default btn-kdb" data-dismiss="modal">취소</button></th>
 								<td><div style="width: 20px;"></div></td>
-								<th><button type="button" class="btn btn-success btn-kdb" data-dismiss="modal">선택</button></th>
+								<th><button type="button" class="btn btn-success btn-kdb" onclick="javascript:modal_sel()" data-dismiss="modal">확인</button></th>
 								<td><div style="width: 10px;"></div></td>
 							</tr>
 						</table>
