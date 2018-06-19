@@ -154,8 +154,11 @@ description : 예약하기
 								$('#roomAvail').append(data.roomInfo[0].mtAvail);
 								$('#maxCnt').val(data.roomInfo[0].mtAvail);
 								$('#roomDescription').append(data.roomInfo[0].mtDescription);
-							} else {
-								$('.img-box-kdb').append('<img src="/getByteEduImage/"'+data.roomInfo[0].eduSeq+'" />');
+							} else if($roomType=='E'){
+								console.log('!!');
+								console.log($roomSeq);
+								console.log(data.roomInfo[0].eduSeq);
+								$('.img-box-kdb').append('<img src="/getByteEduImage/'+data.roomInfo[0].eduSeq+'" />');
 								$('#roomPrice').append('<p>30분 당 가격 : '+data.roomInfo[0].eduPrice+' 원</p>');
 								$('#roomPrice').append('<p>하루 가격 : '+parseInt(data.roomInfo[0].eduPrice)*16+' 원</p>');
 								$('#roomAvail').append(data.roomInfo[0].eduAvail);
@@ -370,12 +373,12 @@ description : 예약하기
 									<td id="roomList">
 										<div id="mtRoomBox" class="displayNone onOffBox">
 											<c:forEach var="mt" items="${mtList }">
-												<button type="button" class="btn btn-default btn-kdb btn-roomName" data-toggle="modal" data-target="#roomInfo" value="${mt.mtCode}" >${mt.mtName }</button>
+												<button type="button" class="btn btn-default btn-kdb btn-roomName" data-toggle="modal" data-target="#roomInfo" value="${mt.mtSeq}" >${mt.mtName }</button>
 											</c:forEach>
 										</div>
 										<div id="eduRoomBox" class="displayNone onOffBox">
 											<c:forEach var="ed" items="${eduList }">
-												<button type="button" class="btn btn-default btn-kdb btn-roomName" data-toggle="modal" data-target="#roomInfo" value="${ed.eduCode}" >${ed.eduName }</button>
+												<button type="button" class="btn btn-default btn-kdb btn-roomName" data-toggle="modal" data-target="#roomInfo" value="${ed.eduSeq}" >${ed.eduName }</button>
 											</c:forEach>
 										</div>
 									</td>

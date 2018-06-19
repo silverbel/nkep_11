@@ -52,10 +52,11 @@ public class WorkSpaceService {
 	
 	public List<?> getAnyRoomInfo(String roomType, String roomSeq){
 		List<?> roomInfo = null;
-		if(roomType=="E") {
+		if(roomType.equals("E")) {
 			roomInfo = edDAO.getAnyRoomInfo(roomSeq);
 		} else {
 			roomInfo = mtDAO.getAnyRoomInfo(roomSeq);
+			System.out.println(roomInfo.size());
 		}
 		
 		return roomInfo;

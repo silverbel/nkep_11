@@ -23,11 +23,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAnyRoomInfo" parameterType="String" resultType="eduRoom">
 		SELECT EDU_NAME, EDU_PRICE, EDU_AVAIL, EDU_SEQ, EDU_DESCRIPTION
 		  FROM nkep_11.TB_EDU_ROOM
-		 WHERE EDU_CODE=#{roomSeq}
+		 WHERE EDU_SEQ = #{roomSeq}
 	</select>
 	
 	<insert id="insertEducationRoomForAdmin" parameterType="eduRoom">
-		INSERT INTO nkep_11.TB_EDU_ROOM(EDU_NAME,EDU_SIZE,EDU_PRICE,EDU_AVAIL,EDU_DESCRIPTION,WORK_SEQ,WORK_CODE,
+		INSERT INTO nkep_11.TB_EDU_ROOM(EDU_NAME,EDU_SIZE,EDU_PRICE,EDU_AVAIL,EDU_DESCRIgetAnyRoomInfogetAnyRoomInfoPTION,WORK_SEQ,WORK_CODE,
 		EDU_IMG,EDU_IMG2,EDU_IMG3) values(#{eduName},#{eduSize},#{eduPrice},#{eduAvail},#{eduDescription},#{workSeq},#{workCode},
 		#{eduImg},#{eduImg2},#{eduImg3});
 	</insert>

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gsitm.common.dto.EducationRoomDTO;
 import com.gsitm.common.dto.EmployeeDTO;
 import com.gsitm.common.dto.InsertResvDTO;
 import com.gsitm.common.dto.ResvDTO;
@@ -34,6 +35,8 @@ import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.WorkSpaceDTO;
 import com.gsitm.user.service.ResvService;
 import com.gsitm.user.service.WorkSpaceService;
+
+import ch.qos.logback.classic.Logger;
 
 @Controller
 @RequestMapping("/resv/*")
@@ -91,6 +94,9 @@ public class ResvController {
 			@RequestParam("roomType") String roomType, @RequestParam("workSeq") String workSeq){
 		
 		List<?> roomInfo = wService.getAnyRoomInfo(roomType, roomSeq);
+		/*for(Object ed : roomInfo) {
+			System.out.println(((EducationRoomDTO) ed).toString());
+		}*/
 		List<ResvItemInfoDTO> itemlist = rService.roomItemListCheckByRoomSeqAjax(workSeq);
 		Map<String, Object> roomItemList = new HashMap<>();
 		roomItemList.put("roomItemList", itemlist);
