@@ -55,34 +55,20 @@
    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="smtp.gmail.com" />
       <property name="port" value="587" />
-      <property name="username" value="stackover92@gmail.com" />
-      <property name="password" value="Ejh14036@@" />
+      <property name="username" value="BalpoomMaster" />
+      <property name="password" value="balpoom@master" />
       <property name="javaMailProperties" >
          <props>
             <prop key="mail.transport.protocol">smtp</prop>
             <prop key="mail.smtp.auth">true</prop>
             <prop key="mail.smtp.starttls.enable">true</prop>
             <prop key="mail.debug">true</prop>
+            <prop key="mail.smtp.ssl.enable">false</prop>
          </props>
       </property>
    </bean>
    
-   
-   <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
-      <property name="velocityProperties">
-         <value>
-            resource.loader=class
-            class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
-         </value>
-      </property>
-   </bean>
-   <!-- 메일발송 클래스 -->
-   <bean id="simpleNotifier" class="com.gsitm.user.mail.SimpleRegistrationNotifier" />
-   
-   <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-      <property name="resourceLoaderPath" value="WEB-INF/velocity" />
-      
-    </bean>
+  
    <bean id="multipartResolver"
 	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	<property name="maxUploadSize" value="-1"></property>
