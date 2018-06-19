@@ -5,9 +5,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
 <mapper namespace="eduRoom">
-	<select id="getEduRoomList" resultType="com.gsitm.common.dto.EducationRoomDTO">
+
+	<resultMap id="eduRoom" type="com.gsitm.common.dto.EducationRoomDTO" />
+
+	<select id="getEduRoomList" resultType="com.gsitm.common.dto.EducationRoomDTO" parameterType="String">
 		SELECT EDU_SEQ, EDU_CODE, EDU_NAME, EDU_SIZE, EDU_PRICE, EDU_AVAIL, EDU_DESCRIPTION, WORK_SEQ, WORK_CODE 
 		FROM nkep_11.TB_EDU_ROOM
+		<if test="workSeq != null">
+			WHERE WORK_SEQ = #{workSeq}
+		</if>
+	</select>
+	
+	<select id="getByteEduImage" parameterType="eduRoom" resultType="java.util.Map">
+		SELECT EDU_IMG AS IMG FROM nkep_11.TB_EDU_ROOM WHERE EDU_SEQ=#{eduSeq}
+	</select>
+
+	<select id="getAnyRoomInfo" parameterType="String" resultType="eduRoom">
+		SELECT EDU_NAME, EDU_PRICE, EDU_AVAIL, EDU_SEQ, EDU_DESCRIPTION
+		  FROM nkep_11.TB_EDU_ROOM
+		 WHERE EDU_CODE=#{roomSeq}
 	</select>
 	
 	<insert id="insertEducationRoomForAdmin" parameterType="eduRoom">

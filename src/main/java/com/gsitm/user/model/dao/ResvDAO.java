@@ -11,6 +11,7 @@
 package com.gsitm.user.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
@@ -22,9 +23,16 @@ public interface ResvDAO {
 	
 	public void create(ResvDTO dto);
 	
-	List<ResvUserInfoDTO> showResvUserList(String empId);
-	List<ResvItemInfoDTO> showResvItemList(String empId);
+	List<ResvUserInfoDTO> showResvUserList(String rsvSeq);
+	List<ResvItemInfoDTO> showResvItemList(String rsvSeq);
 	List<ResvConfirmInfoDTO> showResvConfirmList(String empId);
+	ResvConfirmInfoDTO showResvDetail(String rsvSeq);
+	List<ResvDTO> getResvShortInfoByDate(Map<?,?> check);
+	List<ResvDTO> getResvLongInfoByDate(Map<?,?> check);
+	
+	// ajax
+	List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq);
+	
 	
 	int resvCount(String empId);
 }

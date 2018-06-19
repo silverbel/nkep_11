@@ -83,11 +83,11 @@ description : 근무지 소개 선택 페이지
 												
 												<!-- post -->
 												<div class="post">
-													<div class="post__media"><a href="${path}/info/workspaceDetail.do?workName=${item.workName}&workAddr=${item.workAddr}"><img src="/getByteWorkSpaceImage/${item.workSeq }"/></a></div>
+													<div class="post__media"><a href="javascript:fn_go('${path}','${item.workName}','${item.workAddr}');"><img src="/getByteWorkSpaceImage/${item.workSeq}"/></a></div>
 													<div class="post__body">
 														<h2 class="post__title"><a href="javascript:fn_go('${path}','${item.workName}','${item.workAddr}');">${item.workName}</a></h2>
 														<p class="post__text">${item.workDescription}</p>
-														<a class="md-btn md-btn--outline-primary" href="${path}/info/workspaceDetail.do?workName=${item.workName}&workAddr=${item.workAddr}">read more
+														<a class="md-btn md-btn--outline-primary" href="javascript:fn_go('${path}','${item.workName}','${item.workAddr}');">read more
 														</a>
 													</div>
 												</div><!-- End / post -->

@@ -11,6 +11,7 @@
 package com.gsitm.user.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,13 @@ public class ResvDAOImpl implements ResvDAO {
 	}
 
 	@Override
-	public List<ResvUserInfoDTO> showResvUserList(String empId) {
-		return sqlSession.selectList("resv.showResvUserList", empId);
+	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {
+		return sqlSession.selectList("resv.showResvUserList", rsvSeq);
 	}
 
 	@Override
-	public List<ResvItemInfoDTO> showResvItemList(String empId) {
-		return sqlSession.selectList("resv.showResvItemList", empId);
+	public List<ResvItemInfoDTO> showResvItemList(String rsvSeq) {
+		return sqlSession.selectList("resv.showResvItemList", rsvSeq);
 	}
 
 	@Override
@@ -50,6 +51,26 @@ public class ResvDAOImpl implements ResvDAO {
 	@Override
 	public int resvCount(String empId) {
 		return sqlSession.selectOne("resv.resvCount", empId);
+	}
+
+	@Override
+	public ResvConfirmInfoDTO showResvDetail(String rsvSeq) {
+		return sqlSession.selectOne("resv.showResvDetail", rsvSeq);
+	}
+
+	@Override
+	public List<ResvDTO> getResvShortInfoByDate(Map<?, ?> check) {
+		return sqlSession.selectList("resv.getResvShortInfoByDate", check);
+	}
+
+	@Override
+	public List<ResvDTO> getResvLongInfoByDate(Map<?, ?> check) {
+		return sqlSession.selectList("resv.getResvLongInfoByDate", check);
+	}
+
+	@Override
+	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq) {
+		return sqlSession.selectList("resv.roomItemListCheckByRoomSeqAjax", roomSeq);
 	}
 
 }

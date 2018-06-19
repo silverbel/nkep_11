@@ -26,8 +26,7 @@ public class WorkSpaceDAOImpl implements WorkSpaceDAO {
 
 	@Override
 	public List<WorkSpaceDTO> getWorkSpaceList(WorkSpaceDTO workSpaceDTO) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("workSpace.getWorkSpaceList");
 	}
-
+	
 }

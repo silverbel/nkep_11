@@ -18,6 +18,8 @@ public class ResvDTO {
 	private String roomSeq;
 	private String roomType;
 	private double rsvPrice;
+	private String rsvType;
+	private String workSeq;
 
 	public String getRsvSeq() {
 		return rsvSeq;
@@ -73,6 +75,22 @@ public class ResvDTO {
 
 	public void setRsvPrice(double rsvPrice) {
 		this.rsvPrice = rsvPrice;
+	}
+
+	public String getRsvType() {
+		return rsvType;
+	}
+
+	public void setRsvType(String rsvType) {
+		this.rsvType = rsvType;
+	}
+
+	public String getWorkSeq() {
+		return workSeq;
+	}
+
+	public void setWorkSeq(String workSeq) {
+		this.workSeq = workSeq;
 	}
 
 }

@@ -77,26 +77,95 @@ description : my page, 나의 정보 확인
 		<script src="https://code.highcharts.com/modules/drilldown.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				var $num = comma(<c:out value="${team.budget}" />);
-				
-				$('#tBudget').html($num+' 원');
-				
-				function comma(num) {
-					var len, point, str;
+				$('.rsvSeqCheck').click(function(){
+					$this = $(this);
+					var seq = $this.find('.seq').html();
+					$.ajax({
+						type:"POST",
+						url:"/myPage/showResvAllInfo.do",
+						data:{
+							"rsvSeq" : seq
+						},
+						dataType: "JSON",
+						success: function(data) {
+							
+							$('#resvTable').empty();
+							var rsvSeq = data.rcInfo.rsvSeq;
+							var bossYn = data.rcInfo.bossYn;
+							var mgrYn = data.rcInfo.mgrYn;
+							var rsvDate = data.rcInfo.rsvDate;
+							var rsvFdate = data.rcInfo.rsvFdate;
+							var roomName = data.rcInfo.roomName;
+							var applicant = data.rcInfo.applicant;
+							var rsvPrice = data.rcInfo.rsvPrice;
+							var reject = data.rcInfo.reject;
+							var confirm = '';
+							var isConfirm = true;
+							if(mgrYn == 'Y'){
+								confirm = '승인 완료';
+							} else if(bossYn=='Y'){
+								confirm = '1차 승인 완료';
+							} else confirm = '승인 대기';
+							
+							// 승인 거절
+							if(mgrYn=='N' || bossYn=='N') {
+								confirm = "승인 거절";
+								isConfirm = false;
+							}
+							
+							$('#resvTable').append('<thead>'
+															+'<tr class="text-center">'
+																+'<th colspan="2" id="resrvSeq">'+rsvSeq+'</th>'
+															+'</tr>'
+														+'</thead>'
+														+'<tbody>'
+															+'<tr>'
+																+'<td>신청자</td>'
+																+'<td>'+applicant+'</td>'
+															+'</tr>'
+															+'<tr>'
+																+'<td>대여 시설</td>'
+																+'<td>'+roomName+'</td>'
+															+'</tr>'
+															+'<tr>'
+																+'<td>신청기간</td>'
+																+'<td>'+rsvDate+' ~ '+rsvFdate+'</td>'
+															+'</tr>'
+															+'<tr>'
+																+'<td>비용</td>'
+																+'<td>'+rsvPrice+'</td>'
+															+'</tr>'
+															+'<tr>'
+																+'<td>승인 상태</td>'
+																+'<td>'+confirm+'</td>'
+															+'</tr>');
+							if(!isConfirm){
+								$('#resvTable').append('<tr><td>반려 사유</td><td>'+reject+'</td></tr>');
+							}
+							$('#resvTable').append('<tr><td>사용 비품</td><td id="itemList"></td></tr></tbody>');
+							for(var i=0; i<data.riList.length; i++){
+								var itemName = data.riList[i].itemName;
+								var itemCnt = data.riList[i].itemCnt;
+								$('#itemList').append('<p>'+itemName+' : '+itemCnt+'</p>')
+							}
+							
+							$('#ruListTbody').empty();
+							for(i=0; i<data.ruList.length; i++){
+								var useId = data.ruList[i].useId;
+								var empName = data.ruList[i].empName;
+								var email= data.ruList[i].email;
+								var teamName= data.ruList[i].teamName;
+								var appl = '';
+								if(data.ruList[i].applYn == 'Y'){
+									appl = '신청자';
+								}
+								$('#ruListTbody').append("<tr><td>"+teamName+"</td><td>"
+										+useId+"</td><td>"+empName+"</td><td>"+email+"</td><td>"+appl+"</td></tr>");
+							}
+						}
+			    });
 
-					num = num + "";
-					point = num.length % 3;
-					len = num.length;
-
-					str = num.substring(0, point);
-					while (point < len) {
-						if (str != "")
-							str += ",";
-						str += num.substring(point, point + 3);
-						point += 3;
-					}
-					return str;
-				}
+				})
 			})
 		</script>
 	</head>
@@ -127,7 +196,7 @@ description : my page, 나의 정보 확인
 				<!-- End / Section -->
 	
 	
-				<!-- BlackList Section -->
+				<!-- Reservation Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
 						<h2>예약 내역</h2>
@@ -158,8 +227,8 @@ description : my page, 나의 정보 확인
 								</c:if>
 								<c:if test="${0 ne resvCnt }">
 									<c:forEach var="rc" items="${rcList }">
-										<tr class="text-center" data-toggle="modal" data-target="#myResvInfo">
-											<td>${rc.rsvSeq}</td>
+										<tr class="text-center rsvSeqCheck" data-toggle="modal" data-target="#myResvInfo">
+											<td class="seq">${rc.rsvSeq}</td>
 											<td>${rc.roomName }</td>
 											<td>${rc.applicant}</td>
 											<td>${rc.rsvPrice}</td>
@@ -184,7 +253,7 @@ description : my page, 나의 정보 확인
 				<!-- End / Section -->
 	
 	
-				<!-- Team Section -->
+				<!-- Used Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
 						<h2>사용 내역</h2>
@@ -222,36 +291,49 @@ description : my page, 나의 정보 확인
 	
 		</div>
 	
-		<!-- Team Mate Modal -->
+		<!-- Resveration Modal -->
 		<div class="modal fade" id="myResvInfo" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h3 class="modal-title" id="myModalLabel">팀 정보</h3>
+						<h3 class="modal-title" id="myModalLabel">예약 상세 정보</h3>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
+						<h2>예약 상세 정보</h2>
+						<table class="table table-hover table-kdb" id="resvTable">
+							<colgroup>
+								<col width="20%" />
+								<col width="80%" />
+							</colgroup>
+						</table>
+						<br>
+						<h2>참석자 명단</h2>
 						<table class="table table-hover table-kdb">
 							<colgroup>
-								<col width="15%" />
-								<col width="15%" />
-								<col width="40%" />
+								<col width="10%" />
+								<col width="20%" />
+								<col width="20%" />
 								<col width="30%" />
+								<col width="20%" />
 							</colgroup>
 							<thead>
 								<tr class="text-center">
+									<th>팀</th>
 									<th>ID</th>
 									<th>이름</th>
 									<th>EMAIL 주소</th>
-									<th>블랙리스트</th>
+									<th>신청자</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="ruListTbody">
 							</tbody>
+						</table>
+						<table class="table table-hover">
 						</table>
 					</div>
 					<div class="modal-footer">

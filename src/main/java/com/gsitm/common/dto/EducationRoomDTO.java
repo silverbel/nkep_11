@@ -10,13 +10,13 @@ public class EducationRoomDTO {
 	private String eduDescription;
 	private String workSeq;
 	private String workCode;
-	
 	private String eduAvailStime;
 	private String eduAvailEtime;
 	
 	private byte[] eduImg;
 	private byte[] eduImg2;
 	private byte[] eduImg3;
+	
 	public String getEduDescription() {
 		return eduDescription;
 	}
