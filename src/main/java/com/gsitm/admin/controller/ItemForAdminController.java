@@ -174,8 +174,6 @@ public class ItemForAdminController {
 			itemForAdminService.updateItemNotIncludePic(itemStockByWorkSpaceDTO);
 		}
 		mv.setViewName("redirect:/getItemListForAdmin.do");
-		return mv;		
-		
-		
+		return mv;
 	}
 }

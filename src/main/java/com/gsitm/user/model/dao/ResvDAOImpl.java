@@ -17,8 +17,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.gsitm.common.dto.InsertResvDTO;
 import com.gsitm.common.dto.ConfirmDTO;
-import com.gsitm.common.dto.NoticeDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
 import com.gsitm.common.dto.ResvDetailDTO;
@@ -89,6 +89,11 @@ public class ResvDAOImpl implements ResvDAO {
 	@Override
 	public void deleteResv(ResvDetailDTO resvDetailDTO) {
 		sqlSession.delete("resv.deleteResvDetail", resvDetailDTO);
+	}
+
+	@Override
+	public void insertReservationTable(InsertResvDTO insertDTO) {
+		
 	}
 
 }

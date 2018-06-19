@@ -13,8 +13,8 @@ package com.gsitm.user.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.gsitm.common.dto.InsertResvDTO;
 import com.gsitm.common.dto.ConfirmDTO;
-import com.gsitm.common.dto.NoticeDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
 import com.gsitm.common.dto.ResvDetailDTO;
@@ -36,9 +36,11 @@ public interface ResvDAO {
 	// ajax
 	List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq);
 	
-	
 	int resvCount(String empId);
 	
+	
+	// insert
+	void insertReservationTable(InsertResvDTO insertDTO);
 	void deleteResv(ResvDTO resvDTO);
 	
 	void deleteConfirm(ConfirmDTO confirmDTO);

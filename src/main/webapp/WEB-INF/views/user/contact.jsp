@@ -105,10 +105,8 @@ description : 메일링
 										
 										
 										<!-- form-item -->
-										<div class="form-item form-item--half">
-											<input class="form-control" type="text" name="senderMail" placeholder="Your email"/>
-										</div><!-- End / form-item -->
-										<input type="hidden" class="form-control" name="receiveMail" value="silverBell@gsitm.com">
+										<!-- End / form-item -->
+										<input type="hidden" class="form-control" name="receiveMail" value="ndgndgal@gsitm.com">
 										
 										<!-- form-item -->
 										<div class="form-item">

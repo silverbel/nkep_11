@@ -9,6 +9,7 @@ public class EmployeeDTO {
 	private String role;
 	private String teamSeq;
 	private String email;
+	private String teamName;
 
 	public EmployeeDTO() {
 	}
@@ -72,6 +73,14 @@ public class EmployeeDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getTeamName() {
+		return teamName;
+	}
+
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
 	}
 
 }
