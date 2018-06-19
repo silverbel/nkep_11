@@ -18,6 +18,4 @@ import com.gsitm.common.dto.WorkSpaceDTO;
 public interface WorkSpaceDAO {
 
 	List<WorkSpaceDTO> getWorkSpaceList(WorkSpaceDTO workSpaceDTO);
-
-
 }

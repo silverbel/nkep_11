@@ -16,4 +16,5 @@ import com.gsitm.common.dto.MeetingRoomDTO;
 
 public interface MtRoomDAO {
 	List<MeetingRoomDTO> getMtRoomList(MeetingRoomDTO meetingRoomDTO);
+	List<MeetingRoomDTO> getAnyRoomInfo(String roomSeq);
 }

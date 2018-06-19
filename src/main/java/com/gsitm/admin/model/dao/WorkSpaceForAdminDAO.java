@@ -3,6 +3,7 @@ package com.gsitm.admin.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.gsitm.common.dto.LogWSDeleteDTO;
 import com.gsitm.common.dto.WorkSpaceDTO;
 
 /**
@@ -32,4 +33,16 @@ public interface WorkSpaceForAdminDAO {
 	void updateWorkSpaceNotIncludePic(WorkSpaceDTO workSpaceDTO);
 
 	void updateWorkSpaceIncludePic(WorkSpaceDTO workSpaceDTO);
+
+	String getResvFTime(WorkSpaceDTO workSpaceDTO);
+
+	void deleteAfterCompleteReservation(WorkSpaceDTO workSpaceDTO);
+
+	List<LogWSDeleteDTO> getLogWorkSpaceDeleteForAdmin();
+
+	void insertLogDeleteWSForAdmin(WorkSpaceDTO workSpaceDTO);
+
+	Map<String, Object> getByteImage2(WorkSpaceDTO workSpaceDTO);
+
+	Map<String, Object> getByteImage3(WorkSpaceDTO workSpaceDTO);
 }

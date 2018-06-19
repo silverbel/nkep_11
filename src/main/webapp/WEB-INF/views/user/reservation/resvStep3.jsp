@@ -57,26 +57,9 @@ description : 예약하기
 		<script src="https://code.highcharts.com/modules/data.js"></script>
 		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
 		<script type="text/javascript">
-			// this 클래스 btn-info => btn-default
-			// 		  btn-default => btn-info
-			$(document).ready(function(){
-				$('.times').click(function(){
-					if($(this).hasClass('disabled')){
-						return;
-					}else if($(this).hasClass('btn-default')){
-						$(this).removeClass('btn-default');
-						$(this).addClass('btn-info');
-					}else if($(this).hasClass('btn-info')){
-						$(this).removeClass('btn-info');
-						$(this).addClass('btn-default');
-					} 
-				})
-			})
 		function fn_prev(){
-			location.href = "/resv/resvStep1.do";
+			location.href = "/resv/resvStep2.do";
 		}
-		
-		
 		</script>
 		<style type="text/css">
 			.btn-kdb{
@@ -118,64 +101,24 @@ description : 예약하기
 					</div>
 				</section>
 				<!-- End / Section -->
-				
-				<!-- Booking Section -->
-				<form action="" method="post">
 				<section class="awe-section bg-gray">
 					<div class="container">
-						<table class="table text-center">
-							<colgroup>
-								<col width="20%"/>
-								<col width="20%"/>
-								<col width="10%"/>
-								<col width="60%"/>
-							</colgroup>
-							<thead>
-								<tr>
-									<th>종류</th>
-									<th>이름</th>
-									<th>구분</th>
-									<th>시간 선택</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td rowspan="5">
-										<button class="btn btn-info btn-kdb">회의실</button><br>
-										<button class="btn btn-default btn-kdb">교육실</button><br>
-									</td>
-									<td><button class="btn btn-default btn-kdb">미팅룸 1</button></td>
-									<td rowspan="5">
-										<button class="btn btn-default btn-kdb">단기 예약</button>
-										<button class="btn btn-info btn-kdb">장기 예약</button>
-									</td>
-									<td rowspan="5" class="text-left" id="time">
-										
-									</td>
-								</tr>
-								<tr>
-									<td><button class="btn btn-default btn-kdb">미팅룸 2</button></td>
-								</tr>
-								<tr>
-									<td><button class="btn btn-default btn-kdb">미팅룸 3</button></td>
-								</tr>
-								<tr>
-									<td><button class="btn btn-info btn-kdb">미팅룸 4</button></td>
-								</tr>
-								<tr>
-									<td><button class="btn btn-default btn-kdb">미팅룸 5</button></td>
-								</tr>
-							</tbody>
-						</table>
+						
 						<div class="pull-left ">
 							<button class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
 						</div>
 						<div class="pull-right">
-							<button class="btn btn-primary btn-kdb">다음</button>
+							<form>
+								<input type="hidden" id="roomType" name="roomType" />
+								<input type="hidden" id="roomSeq" name="roomSeq" />
+								<input type="hidden" id="rsvType" name="rsvType" />
+								<input type="hidden" id="startTime" name="startTime" />
+								<input type="hidden" id="finTime" name="finTime" />
+								<button class="btn btn-primary btn-kdb">다음</button>
+							</form>
 						</div>
 					</div>
 				</section>
-				</form><!-- END / Booking -->
 				
 				<!-- Section -->
 				<section class="awe-section bg-gray">

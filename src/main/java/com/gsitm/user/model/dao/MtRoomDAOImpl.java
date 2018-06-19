@@ -27,8 +27,12 @@ public class MtRoomDAOImpl implements MtRoomDAO {
 
 	@Override
 	public List<MeetingRoomDTO> getMtRoomList(MeetingRoomDTO meetingRoomDTO) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("mtRoom.getMtRoomList");
+		return sqlSession.selectList("mtRoom.getMtRoomList", meetingRoomDTO);
+	}
+
+	@Override
+	public List<MeetingRoomDTO> getAnyRoomInfo(String roomSeq) {
+		return sqlSession.selectList("mtRoom.getAnyRoomInfo", roomSeq);
 	}
 
 }
