@@ -15,24 +15,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gsitm.common.dto.EmployeeDTO;
 import com.gsitm.common.dto.ConfirmDTO;
-import com.gsitm.common.dto.NoticeDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
 import com.gsitm.common.dto.ResvDetailDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.ResvUserInfoDTO;
-import com.gsitm.user.model.dao.ResvDAOImpl;
+import com.gsitm.user.model.dao.MemberDAO;
+import com.gsitm.user.model.dao.ResvDAO;
 
 @Service(value="resvService")
 public class ResvService {
 	
-	@Resource(name="resvDao")
-	private ResvDAOImpl rDao;
+	@Autowired
+	private ResvDAO rDao;
+	
+	@Autowired
+	private MemberDAO mDao;
+	
 	
 	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {
 		return rDao.showResvUserList(rsvSeq);
@@ -64,6 +69,21 @@ public class ResvService {
 	
 	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq){
 		return rDao.roomItemListCheckByRoomSeqAjax(roomSeq);
+	}
+	
+	public void registerReservation(String[] snack, String[] expendables, String[] fixtures,
+			String workSeq, String today, String roomType, String roomSeq, String rsvType,
+			String startTime, String finTime) {
+		
+		String rsvSeq = roomType+rsvType+today;
+		
+		if(snack != null) {
+			
+		}
+	}
+	
+	public List<EmployeeDTO> allMemberListAjax(){
+		return mDao.allMemberListAjax();
 	}
 	
 	public void deleteResv(ResvDTO resvDTO) {

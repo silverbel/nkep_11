@@ -8,6 +8,7 @@ public class ResvItemInfoDTO {
 	private String roomSeq;
 	private String itemSeq;
 	private String itemUnit;
+	private String itemType;
 
 	public String getRsvSeq() {
 		return rsvSeq;
@@ -55,6 +56,14 @@ public class ResvItemInfoDTO {
 
 	public void setItemUnit(String itemUnit) {
 		this.itemUnit = itemUnit;
+	}
+
+	public String getItemType() {
+		return itemType;
+	}
+
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
 	}
 
 }

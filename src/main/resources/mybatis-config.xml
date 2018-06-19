@@ -11,12 +11,12 @@
    	  <setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 	<typeAliases>
-		<typeAlias type="com.gsitm.common.dto.EmployeeDTO" alias="empDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvDTO" alias="resv"/>
+		<typeAlias type="com.gsitm.common.dto.TeamDTO" alias="teamDTO"/>
+		<typeAlias type="com.gsitm.common.dto.EmployeeDTO" alias="empDTO"/>
 		<typeAlias type="com.gsitm.common.dto.MeetingRoomDTO" alias="mtRoom"/>
 		<typeAlias type="com.gsitm.common.dto.EducationRoomDTO" alias="eduRoom"/>
 		<typeAlias type="com.gsitm.common.dto.BlackListLogDTO" alias="blkDTO"/>
-		<typeAlias type="com.gsitm.common.dto.TeamDTO" alias="teamDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvUserInfoDTO" alias="rDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvItemInfoDTO" alias="riDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvConfirmInfoDTO" alias="rcDTO"/>

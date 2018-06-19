@@ -47,6 +47,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE TEAM_SEQ = #{teamSeq}
 	</select>
 	
+	<select id="allMemberListAjax" resultType="empDTO">
+		SELECT E.*, T.TEAM_NAME
+		  FROM nkep_11.TB_EMPLOYEE E
+		  LEFT JOIN nkep_11.TB_TEAM T
+		    ON E.TEAM_SEQ = T.TEAM_SEQ
+		 WHERE E.EMAIL IS NOT NULL
+	</select>
+	
 	<!--동길 : 관리자페이지 권한관리 부분  -->
 	<select id="getWorkSpaceListForAdmin" parameterType="empDTO" resultType="empDTO">
 		SELECT EMP_ID, EMP_NAME, ROLE, TEAM_SEQ, EMAIL 

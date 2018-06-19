@@ -22,4 +22,6 @@ public interface MemberDAO {
 	TeamDTO showTeamInfo(String empId);
 	
 	int memCount(String empId);
+	
+	List<EmployeeDTO> allMemberListAjax();
 }
