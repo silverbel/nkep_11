@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="notice">
+	<cache eviction="FIFO" flushInterval="60000" size="512"
+		readOnly="true" />
+	
+
+	<select id="noticeList" resultType="notice" parameterType="notice">
+		SELECT NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, REG_DATE
+		FROM nkep_11.TB_NOTICE
+	</select>
+	
+	<insert id="insertNotice" parameterType="notice">
+		INSERT INTO nkep_11.TB_NOTICE (NOTICE_TITLE, NOTICE_CONTENT, REG_DATE) VALUES ( #{noticeTitle}, #{noticeContent}, now())
+	</insert>
+ 	<!-- 
+	<select id="getWorkSpaceByWorkSeq" parameterType="workSpace" resultType="workSpace">
+		SELECT WORK_SEQ, WORK_CODE, WORK_NAME, WORK_ADDR, WORK_TEL, WORK_DESCRIPTION, WORK_IMG, WORK_IMG2, WORK_IMG3 
+		FROM nkep_11.TB_WORKSPACE
+		WHERE WORK_SEQ = #{workSeq} 
+	</select>
+	
+	<update id="updateWorkSpaceNotIncludePic" parameterType="workSpace">
+		UPDATE nkep_11.TB_WORKSPACE SET WORK_NAME = #{workName}, WORK_ADDR = #{workAddr}, WORK_TEL = #{workTel}, WORK_DESCRIPTION = #{workDescription},
+			WORK_IMG = NULL, WORK_IMG2= NULL, WORK_IMG3 = NULL
+		WHERE WORK_SEQ = #{workSeq}
+	</update>
+	-->
+	<delete id="deleteNotice" parameterType="notice">
+		DELETE FROM nkep_11.TB_NOTICE WHERE NOTICE_NO = #{noticeNo}
+	</delete> 
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

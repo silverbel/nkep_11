@@ -156,8 +156,8 @@ description : 근무지 디테일 페이지
 														
 														<!-- hb_front -->
 														<div class="hb_front">
-															<img src="/assets/img/works/samhwan.jpg"/>
-															<%-- <img src="/getByteEduImage/${item.mtSeq}"/> --%>
+															<!-- <img src="/assets/img/works/samhwan.jpg"/> -->
+															<img src="/getByteMtImage/${item.mtSeq}"/>
 														</div><!-- End / hb_front -->
 														
 														
@@ -204,8 +204,8 @@ description : 근무지 디테일 페이지
 														
 														<!-- hb_front -->
 														<div class="hb_front">
-															<img src="/assets/img/works/samhwan.jpg"/>
-															<%-- <img src="/getByteEduImage/${item.eduSeq}"/> --%>
+															<!-- <img src="/assets/img/works/samhwan.jpg"/> -->
+															<img src="/getByteEduImage/${item.eduSeq}"/>
 														</div><!-- End / hb_front -->
 														
 														

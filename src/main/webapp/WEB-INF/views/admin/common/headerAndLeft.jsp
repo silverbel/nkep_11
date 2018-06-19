@@ -272,6 +272,14 @@ description :
                                 </li>
 							</ul>
                         </li>
+                        <li>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> 공지사항 관리 <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="noticeList.do">공지사항</a>
+                                </li>
+							</ul>
+                        </li>
 						</c:if>
                         <!-- <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>회원 관리<span class="fa arrow"></span></a>

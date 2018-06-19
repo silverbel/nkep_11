@@ -21,6 +21,7 @@
 		<typeAlias type="com.gsitm.common.dto.ResvItemInfoDTO" alias="riDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ResvConfirmInfoDTO" alias="rcDTO"/>
 		<typeAlias type="com.gsitm.common.dto.WorkSpaceDTO" alias="workSpace"/>
+		<typeAlias type="com.gsitm.common.dto.NoticeDTO" alias="notice"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>
@@ -29,6 +30,7 @@
 		<mapper resource="mappers/BlackList.xml"></mapper>
 		<mapper resource="mappers/MemberMapper.xml"></mapper>
 		<mapper resource="mappers/resv/resvMapper.xml"></mapper>
+		<mapper resource="mappers/noticeMapper.xml"></mapper>
 	</mappers>
 
 </configuration>
