@@ -10,7 +10,6 @@
  */ 
 package com.gsitm.user.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.inject.Inject;
 
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,9 @@ import com.gsitm.user.service.WorkSpaceService;
 @Controller
 @RequestMapping("/resv/*")
 public class ResvController {
+	
+	@Inject
+	private JavaMailSender mailSender;
 	
 	@Resource(name="resvService")
 	private ResvService rService;

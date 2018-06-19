@@ -46,6 +46,7 @@ public class NoticeController {
 	@PostMapping("/noticeList.do")
 	public void createNotice(NoticeDTO noticeDTO) {
 		noticeService.insert(noticeDTO);
+		
 	}
 
 	@RequestMapping("/deleteNotice.do")

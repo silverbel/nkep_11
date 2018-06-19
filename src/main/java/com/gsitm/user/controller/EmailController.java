@@ -1,47 +1,123 @@
 /**
  * @programName : EmailController.java
- * @author      : ÀºÁ¾Çö
+ * @author      : ì€ì¢…í˜„
  * @date        : 2018-06-11
- * @function    : ¸ŞÀÏ¸µ ¼­ºñ½º
+ * @function    : ë©”ì¼ë§ ì„œë¹„ìŠ¤
  *
- * [ÀÌ¸§]   [¼öÁ¤ÀÏ]     [³»¿ë]
+ * [ì´ë¦„]   [ìˆ˜ì •ì¼]     [ë‚´ìš©]
  * ----------------------------------------------------------
- * ÀºÁ¾Çö	   2018-06-11	ÃÊ¾È
+ * ì€ì¢…í˜„	   2018-06-11	ì´ˆì•ˆ
  */ 
 package com.gsitm.user.controller;
 
-import javax.inject.Inject;
+import java.io.UnsupportedEncodingException;
 
+import javax.inject.Inject;
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gsitm.common.dto.EmailDTO;
-import com.gsitm.user.service.EmailService;
+import com.gsitm.admin.controller.ItemForAdminController;
+import com.gsitm.user.mail.MailHandler;
+
 
 @Controller
 @RequestMapping("/email/*")
 public class EmailController {
 	@Inject
-	EmailService emailService;
+	private JavaMailSender mailSender;
+	
+	private static final Logger logger = LoggerFactory.getLogger(EmailController.class);
 	
 	@RequestMapping("write.do")
 	public String write() {
-		return "user/contact";	//email/write.jsp·Î Æ÷¿öµù
+		return "user/contact";	//email/write.jspë¡œ í¬ì›Œë”©
 	}
 	
-	@RequestMapping("send.do")
-	public String send(@ModelAttribute EmailDTO dto, Model model){
-		try {
-			emailService.sendMail(dto);
-			model.addAttribute("message", "¸ŞÀÏÀÌ ¹ß¼ÛµÇ¾ú½À´Ï´Ù.");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			emailService.sendMail(dto);
-			model.addAttribute("message", "¸ŞÀÏÀÌ ¹ß¼Û ½ÇÆĞ...");
-		}
-		return "/user/contact";	// write.jsp ·Î Æ÷¿öµù
+	@RequestMapping("/send.do")
+	public String report(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+		MailHandler sendMail = new MailHandler(mailSender);
+		String senderName = request.getParameter("senderName");
+		String receiveMail = request.getParameter("receiveMail");
+		String subject = request.getParameter("subject");
+		String message = request.getParameter("message");
+		logger.info("ë‹¤ ì˜ ë„˜ì–´ ì˜¤ë‚˜ìš”????????? : "+senderName+"    "+ receiveMail + "  "+ subject + "  "+ message);
+		sendMail.setSubject(subject);
+		sendMail.setText(new StringBuffer().append("<!DOCTYPE html>\r\n" + 
+				"<html>\r\n" + 
+				"<head>\r\n" + 
+				"  <title></title>\r\n" + 
+				"</head>\r\n" + 
+				"<body sytle=\"width: 100% !important; height: 100%; background: #f8f8f8;\">\r\n" + 
+				"<table class=\"body-wrap\" style=\"width: 100% !important; height: 100%; background: #f8f8f8;\">\r\n" + 
+				"    <tr>\r\n" + 
+				"        <td class=\"container\">\r\n" + 
+				"\r\n" + 
+				"            <!-- Message start -->\r\n" + 
+				"            <table style=\"width: 580px; height: 40px; margin: 0 auto;\">\r\n" + 
+				"                <tr>\r\n" + 
+				"                    <td align=\"center\" class=\"masthead\" style=\"padding: 80px 0; background: #FF5100; color: white; \">\r\n" + 
+				"\r\n" + 
+				"                        <h1 style=\"margin: 0 auto !important; max-width: 90%\"> ì‹ ê³ ê°€ ì ‘ìˆ˜ ë˜ì—ˆìŠµë‹ˆë‹¤. </h1>\r\n" + 
+				"\r\n" + 
+				"\r\n" + 
+				"                    </td>\r\n" + 
+				"                </tr>\r\n" + 
+				"                <tr>\r\n" + 
+				"                    <td class=\"content\" style=\"background: white; padding: 30px 35px;\">\r\n" + 
+				"            <img style=\"max-width: 100%; margin: 0 auto; display: block;\" src=\"https://i.imgur.com/Q0zUYOW.png\"/> <br>\r\n" + 
+				"                        <h2>ì‹œìŠ¤í…œ ê´€ë¦¬ìì—ê²Œ,</h2>\r\n" + 
+				"\r\n" + 
+				"                        <p>"+message +"<br>ê°ì‚¬í•©ë‹ˆë‹¤.</p>\r\n" + 
+				"\r\n" + 
+				"                        <table>\r\n" + 
+				"                            <tr>\r\n" + 
+				"                                <td align=\"center\">\r\n" + 
+				"                                    <p>\r\n" + 
+				"                                        <!--<a href=\"#\" class=\"button\">ìŠ¹ì¸</a> <a href=\"#\" class=\"button\">ë°˜ë ¤</a>-->\r\n" + 
+				"                                    </p>\r\n" + 
+				"                                </td>\r\n" + 
+				"                            </tr>\r\n" + 
+				"                        </table>\r\n" + 
+				"\r\n" + 
+				"                        <p>ë¬¸ì˜ì‚¬í•­ì´ ë¬¸ì˜ëŠ”, <a href=\"https://www.gsitm.com/\">GS ITM</a>ì— ë°©ë¬¸í•´ ì£¼ì‹­ì‹œì˜¤.</p>\r\n" + 
+				"\r\n" + 
+				"                        <p><em>-"+senderName +"</em></p>\r\n" + 
+				"\r\n" + 
+				"                    </td>\r\n" + 
+				"                </tr>\r\n" + 
+				"            </table>\r\n" + 
+				"\r\n" + 
+				"        </td>\r\n" + 
+				"    </tr>\r\n" + 
+				"    <tr>\r\n" + 
+				"        <td class=\"container\">\r\n" + 
+				"\r\n" + 
+				"            <!-- Message start -->\r\n" + 
+				"            <table style=\"margin: 0 auto;\">\r\n" + 
+				"                <tr>\r\n" + 
+				"                    <td class=\"content footer\" align=\"center\" style=\"padding:30px 35px\">\r\n" + 
+				"                        <p style=\"margin-bottom: 0; color: #888; text-align: center; font-size: 14px;\">&nbsp;&nbsp;&nbsp;&nbsp;Sent by <a href=\"#\" style=\"color: #888; text-decoration: none; font-weight: bold;\">GS ITM</a>, ì„œìš¸íŠ¹ë³„ì‹œ ì¢…ë¡œêµ¬ ê³„ë™ 84</p>\r\n" + 
+				"                        <p style=\"margin-bottom: 0; color: #888; text-align: center; font-size: 14px;\"><a href=\"mailto:\" style=\"color: #888; text-decoration: none; font-weight: bold;\">&nbsp;&nbsp;&nbsp;&nbsp;gsitm@gsitm.com</a> | <a href=\"#\">Unsubscribe</a></p>\r\n" + 
+				"                    </td>\r\n" + 
+				"                </tr>\r\n" + 
+				"            </table>\r\n" + 
+				"\r\n" + 
+				"        </td>\r\n" + 
+				"    </tr>\r\n" + 
+				"</table>\r\n" + 
+				"</body>\r\n" + 
+				"</html>")
+				.toString());
+		sendMail.setFrom("abc@abc.com", senderName);
+		sendMail.setTo(receiveMail);
+		sendMail.send();
+		return "user/contact";
 	}
+	
 }
