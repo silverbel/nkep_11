@@ -103,17 +103,25 @@ description : 예약하기
 				<!-- End / Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
-						
+						<table>
+							<tr>
+								<td></td>
+							</tr>
+						</table>
+						<table class="table">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
 						<div class="pull-left ">
 							<button class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
 						</div>
 						<div class="pull-right">
 							<form>
-								<input type="hidden" id="roomType" name="roomType" />
-								<input type="hidden" id="roomSeq" name="roomSeq" />
-								<input type="hidden" id="rsvType" name="rsvType" />
-								<input type="hidden" id="startTime" name="startTime" />
-								<input type="hidden" id="finTime" name="finTime" />
 								<button class="btn btn-primary btn-kdb">다음</button>
 							</form>
 						</div>

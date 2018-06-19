@@ -64,6 +64,8 @@ description : 예약하기
 			var isFirst = true;
 			var nowDay = new Date();
 			$(document).ready(function(){
+				var today = 10000*nowDay.getFullYear()+100*(nowDay.getMonth()+1)+nowDay.getDate();
+				$('#today').val(today);
 				$('.times').click(function(){
 					var $this = $(this);
 					var $btn = parseInt($this.attr('id'));
@@ -126,7 +128,8 @@ description : 예약하기
 				// room name select
 				$('.btn-roomName').click(function(){
 					var $roomSeq = $(this).val();
-					var $roomType = $('#roomType').val()
+					var $workSeq = $('#workSeq').val();
+					var $roomType = $('#roomType').val();
 					$('.btn-roomName').attr('class','btn btn-default btn-kdb btn-roomName');
 					$('#timeButton').attr('class','displayNone onOffBox');
 					// ajax
@@ -136,6 +139,7 @@ description : 예약하기
 						data:{
 							"roomType" : $roomType,
 							"roomSeq" : $roomSeq,
+							"workSeq" : $workSeq,
 						},
 						dataType: "JSON",
 						success: function(data) {
@@ -144,34 +148,47 @@ description : 예약하기
 							$('.ajax-clean').html('');
 							
 							if($roomType == 'M'){
-								$('.img-box-kdb').append('<img src="/getByteMtImage/"'+data.roomInfo[0].mtSeq);
+								$('.img-box-kdb').append('<img src="/getByteMtImage/"'+data.roomInfo[0].mtSeq+'" />');
 								$('#roomPrice').append('<p>30분 당 가격 : '+data.roomInfo[0].mtPrice+' 원</p>');
 								$('#roomPrice').append('<p>하루 가격 : '+parseInt(data.roomInfo[0].mtPrice)*16+' 원</p>');
 								$('#roomAvail').append(data.roomInfo[0].mtAvail);
 								$('#roomDescription').append(data.roomInfo[0].mtDescription);
 							} else {
-								$('.img-box-kdb').append('<img src="/getByteEduImage/"'+data.roomInfo[0].eduSeq);
+								$('.img-box-kdb').append('<img src="/getByteEduImage/"'+data.roomInfo[0].eduSeq+'" />');
 								$('#roomPrice').append('<p>30분 당 가격 : '+data.roomInfo[0].eduPrice+' 원</p>');
 								$('#roomPrice').append('<p>하루 가격 : '+parseInt(data.roomInfo[0].eduPrice)*16+' 원</p>');
 								$('#roomAvail').append(data.roomInfo[0].eduAvail);
 								$('#roomDescription').append(data.roomInfo[0].eduDescription);
 							}
+							var beforeItem = '';
+							var str = '';
 							if(data.roomItemList.length != 0){
 								for(var i=0; i<data.roomItemList.length; i++){
 									var itemName = data.roomItemList[i].itemName;
-									var itemCnt = data.roomItemList[i].itemCnt;
-									var itemUnit = data.roomItemList[i].itemUnit;
-									
-									$('#itemBox').append('<p>'+itemName+' : '+itemCnt+' '+itemUnit+'</p>');
+									var itemSeq = data.roomItemList[i].itemSeq;
+									var itemType = data.roomItemList[i].itemType;
+									if(beforeItem != itemType){
+										if(str != '') {
+											$('#itemBox').append(str);
+										}
+										str = '<p>'+itemType+' : '+itemName+'<input type="checkbox" name="'+itemType+'" value="'+itemSeq+'" />';
+										beforeItem = itemType;
+									} else if(i+1 == data.roomItemList.length){
+										str += '</p>';
+										$('#itemBox').append(str);
+									} else {
+										str += ' '+itemName+'<input type="checkbox" name="'+itemType+'" value="'+itemSeq+'" />';
+									}
+									console.log(i+'. : '+itemSeq);
 								}
 							} else {
+									$('#itemBox').append('<p>사용 가능한 비품이 없습니다.</p>');
 							}
 						}
 			    });
-					console.log('ajax test');
 					$('.btn-rsvType').attr('class','btn btn-default btn-kdb btn-rsvType');
 					$(this).attr('class','btn btn-info btn-kdb btn-roomName');
-					$('#roomSeq').val($val);
+					$('#roomSeq').val($roomSeq);
 				})
 				
 				// reservation type select
@@ -267,8 +284,16 @@ description : 예약하기
 				location.href = "/resv/resvStep1.do";
 			}
 		
-			function modal_sel(){
-				
+			function fn_submitCheck(){
+				var submitFlag = true;
+				$('.valueValid').each(function(){
+					var $this = $(this);
+					if(!$this.val()){
+						submitFlag = false;
+					}
+				})
+				if(submitFlag) $('form').submit();
+				else alert('정보를 모두 입력해주세요.');
 			}
 		</script>
 		<style type="text/css">
@@ -299,6 +324,7 @@ description : 예약하기
 				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
 			<!-- End / header -->
 			
+			<form action="/resv/resvStep3.do" method="post">
 			<!-- Content-->
 			<div class="wil-content">
 				
@@ -336,28 +362,28 @@ description : 예약하기
 							<tbody>
 								<tr>
 									<td>
-										<button class="btn btn-default btn-kdb btn-roomType" value="M" >회의실</button><br>
-										<button class="btn btn-default btn-kdb btn-roomType" value="E" >교육실</button><br>
+										<button type="button" class="btn btn-default btn-kdb btn-roomType" value="M" >회의실</button><br>
+										<button type="button" type="button" class="btn btn-default btn-kdb btn-roomType" value="E" >교육실</button><br>
 									</td>
 									<td id="roomList">
 										<div id="mtRoomBox" class="displayNone onOffBox">
 											<c:forEach var="mt" items="${mtList }">
-												<button class="btn btn-default btn-kdb btn-roomName" data-toggle="modal" data-target="#roomInfo" value="${mt.mtCode}" >${mt.mtName }</button>
+												<button type="button" class="btn btn-default btn-kdb btn-roomName" data-toggle="modal" data-target="#roomInfo" value="${mt.mtCode}" >${mt.mtName }</button>
 											</c:forEach>
 										</div>
 										<div id="eduRoomBox" class="displayNone onOffBox">
 											<c:forEach var="ed" items="${eduList }">
-												<button class="btn btn-default btn-kdb btn-roomName" data-toggle="modal" data-target="#roomInfo" value="${ed.eduCode}" >${ed.eduName }</button>
+												<button type="button" class="btn btn-default btn-kdb btn-roomName" data-toggle="modal" data-target="#roomInfo" value="${ed.eduCode}" >${ed.eduName }</button>
 											</c:forEach>
 										</div>
 									</td>
 									<td>
-										<button class="btn btn-default btn-kdb btn-rsvType" value="S">단기 예약</button>
-										<button class="btn btn-default btn-kdb btn-rsvType" value="L">장기 예약</button>
+										<button type="button" class="btn btn-default btn-kdb btn-rsvType" value="S">단기 예약</button>
+										<button type="button" class="btn btn-default btn-kdb btn-rsvType" value="L">장기 예약</button>
 									</td>
 									<td class="text-left" id="time">
 										<div id="timeButton" class="displayNone onOffBox">
-											<input type="date" id="selDate" />
+											<input type="date" name="selDate" id="selDate" />
 											<c:forEach var="idx" begin="9" end="22" varStatus="vSts">
 												<div class="times btn btn-default btn-kdb-times" id="${vSts.index*100}">${idx }:00</div>
 												<div class="times btn btn-default btn-kdb-times" id="${vSts.index*100+30}">${idx }:30</div>
@@ -370,17 +396,17 @@ description : 예약하기
 							</tbody>
 						</table>
 						<div class="pull-left ">
-							<button class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
+							<button type="button" class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
 						</div>
 						<div class="pull-right">
-							<form action="/resv/resvStep3.do" method="post">
-								<input type="hidden" id="roomType" name="roomType" />
-								<input type="hidden" id="roomSeq" name="roomSeq" />
-								<input type="hidden" id="rsvType" name="rsvType" />
-								<input type="hidden" id="startTime" name="startTime" />
-								<input type="hidden" id="finTime" name="finTime" />
-								<button class="btn btn-primary btn-kdb">다음</button>
-							</form>
+								<input type="hidden" id="workSeq" name="workSeq" value="${workSeq }" />
+								<input type="hidden" id="today" name="today" />
+								<input type="hidden" id="roomType" name="roomType" class="valueValid" />
+								<input type="hidden" id="roomSeq" name="roomSeq" class="valueValid" />
+								<input type="hidden" id="rsvType" name="rsvType" class="valueValid" />
+								<input type="hidden" id="startTime" name="startTime" class="valueValid" />
+								<input type="hidden" id="finTime" name="finTime" class="valueValid" />
+								<button type="button" class="btn btn-primary btn-kdb" onclick="javascript:fn_submitCheck()">다음</button>
 						</div>
 					</div>
 				</section>
@@ -424,7 +450,7 @@ description : 예약하기
 						<table class="form-group">
 							<tr>
 								<td><div style="width: 20px;"></div></td>
-								<th><button type="button" class="btn btn-success btn-kdb" onclick="javascript:modal_sel()" data-dismiss="modal">확인</button></th>
+								<th><button type="button" class="btn btn-success btn-kdb" data-dismiss="modal">확인</button></th>
 								<td><div style="width: 10px;"></div></td>
 							</tr>
 						</table>
@@ -432,7 +458,7 @@ description : 예약하기
 				</div>
 			</div>
 		</div><!-- End / Modal -->
-			
+			</form>
 			
 			<!-- footer -->
 				<jsp:include page="/WEB-INF/views/user/common/footer.jsp" />

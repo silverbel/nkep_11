@@ -31,6 +31,7 @@ public class ResvService {
 	@Resource(name="resvDao")
 	private ResvDAOImpl rDao;
 	
+	
 	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {
 		return rDao.showResvUserList(rsvSeq);
 	}
@@ -61,6 +62,17 @@ public class ResvService {
 	
 	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq){
 		return rDao.roomItemListCheckByRoomSeqAjax(roomSeq);
+	}
+	
+	public void registerReservation(String[] snack, String[] expendables, String[] fixtures,
+			String workSeq, String today, String roomType, String roomSeq, String rsvType,
+			String startTime, String finTime) {
+		
+		String rsvSeq = roomType+rsvType+today;
+		
+		if(snack != null) {
+			
+		}
 	}
 }
 

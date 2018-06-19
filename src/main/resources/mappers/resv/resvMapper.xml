@@ -128,15 +128,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="roomItemListCheckByRoomSeqAjax" resultMap="riDTO" parameterType="String" statementType="PREPARED">
+		<![CDATA[
 		SELECT I.ITEM_NAME
 					 , I.ITEM_UNIT
-					 , S.ITEM_CODE
-					 , S.ROOM_SEQ
-					 , S.ITEM_CNT
+					 , I.ITEM_TYPE
+					 , I.ITEM_SEQ
 		  FROM nkep_11.TB_STOCK S
 		  LEFT JOIN nkep_11.TB_ITEM I
-		    ON S.ITEM_CODE = I.ITEM_CODE
-		 WHERE S.ROOM_SEQ = #{roomSeq}
+		    ON S.ITEM_SEQ = I.ITEM_SEQ
+		 WHERE S.WORK_SEQ = #{workSeq}
+		   AND S.ST_CNT > 0
+		 ORDER BY I.ITEM_TYPE
+		 ]]>
 	</select>
 	
 
