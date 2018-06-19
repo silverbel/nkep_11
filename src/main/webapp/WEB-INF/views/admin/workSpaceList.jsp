@@ -38,11 +38,37 @@
     <![endif]-->
 <script>
 	var workSeq = null;
+	var workName = null;
+	var fTime = null;
 	$(document).ready(function(){
-		$('#deleteBtn').click(function(){
-			workSeq = $('#workSeq').val();
-			$('#deleteA').attr('href','/deleteWorkSapceForAdmin.do?workSeq='+workSeq);
-		})
+		$('.deleteBtn').click(function(){
+			workSeq = $(this).prev().val();
+			console.log(workSeq);
+			workName = $(this).prevAll().eq(5).children().text();
+			$.ajax(
+					{	type : 'GET'
+						,url: "/getResvFTime.do?workSeq="+workSeq
+						, success: function(result){
+				$(".modal-body").children('h3').empty();
+				if(result ==''){
+					$(".modal-body").children('h3').append(workName+"에 <br>예약된 회의실이나 교육실이 없습니다.<br> 즉시 삭제가 가능합니다.");
+					fTime = result;
+		            $('#deleteA').attr('href','/deleteWorkSapceForAdmin.do?workSeq='+workSeq);
+					console.log('fTime : '+fTime);
+				}else{
+					result = result.substring(0,19);
+					$(".modal-body").children('h3').append("정말 삭제하시겠습니까??<br><h5>"+workName+"의 최종 예약시간은 : <strong style='font-size:18px;'>"+result+"</strong></h5><br><h4>삭제버튼을 누르시면 최종예약시간 <strong>1분</strong>뒤에 근무지가 삭제 됩니다.</h4>");
+					fTime = result;
+		            $('#deleteA').attr('href','/deleteWorkSapceForAdmin.do?workSeq='+workSeq+'&fTime='+fTime);
+					console.log('fTime : '+fTime);
+				}
+	            
+	            
+	       		 									}
+					}
+					);
+			
+		});
 	});
 </script>
 </head>
@@ -59,11 +85,11 @@
           <h4 class="modal-title">근무지 삭제</h4>
         </div>
         <div class="modal-body">
-          <h2>정말 삭제하시겠습니까??</h2>
+          <h3></h3>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-          <a href="" id="deleteA"><button type="button" class="btn btn-danger" data-dismiss="modal">삭제</button></a>
+          <a href="" id="deleteA"><button type="button" class="btn btn-danger">삭제</button></a>
         </div>
       </div>
       
@@ -89,17 +115,17 @@
 						<div class="panel-body">
 							<c:forEach var="workspace" items="${workSpaceList}"
 								varStatus="status">
-								<c:if test="${status.index == 0 } || ${status.index % 3 == 0 }">
-									<c:out value="<div class='row'>" />
+								<c:if test="${status.index == 0  || status.index % 3 == 0 }">
+									<c:out value="<div class='row'>"  escapeXml="false" />
 								</c:if>
 								<div class="col-xs-6 col-md-4 text-center">
 									 <img
 										src=<c:url value="/getByteWorkSpaceImage/${workspace.workSeq}"/>
-										width="200px" height="200px" />
+										class="img-responsive img-thumbnail" />
 									<br>
 									<h3>
-										<a
-											href="#"><%-- <c:url value="/customer/customerShopDetailViewServlet?productNo=${product.productno}" /> --%>
+										<a style="text-decoration:none;"
+											href="/showWorkSpaceDetailForAdmin.do?workSeq=${workspace.workSeq }">
 											<c:out value="${workspace.workName}" />
 										</a>
 									</h3>
@@ -108,41 +134,19 @@
 									<br> 전화번호 :
 									<c:out value="${workspace.workTel}" />
 									<br>
-									<br> <a href="/modifyWorkSpaceForAdminForm.do?workSeq=${workspace.workSeq }" class="btn btn-default">수정</a>&nbsp;&nbsp;
-									<input type="text" id="workSeq" value="${workspace.workSeq }" hidden="hidde"/>
-									<button class="btn btn-danger" data-toggle="modal" data-target="#myModal" id="deleteBtn">삭제</button>
+									<c:forEach var="log" items="${logs }">
+										<c:if test="${workspace.workSeq eq log.workSeq }">
+											<strong><c:out value="${ log.deleteTime}"/>에 삭제될 예정입니다.</strong><br>
+										</c:if>
+									</c:forEach>
+									<a href="/modifyWorkSpaceForAdminForm.do?workSeq=${workspace.workSeq }" class="btn btn-default">수정</a>&nbsp;&nbsp;
+									<input type="text" id="workSeq" value="${workspace.workSeq }" hidden="hidden"/>
+									<button class="btn btn-danger deleteBtn" data-toggle="modal" data-target="#myModal" id="deleteBtn">삭제</button>
 								</div>
-								<c:if test="${status.index == 0 } || ${status.index % 3 == 0 }">
-									<c:out value="</div>" />
+								<c:if test="${ status.index % 2 == 0 && status.index != 0 }">
+									<c:out value="</div>"  escapeXml="false" />
 								</c:if>
 							</c:forEach>
-
-							<%-- <table class="table table-bordered">
-								<tr>
-									<th class="text-center">근무지 번호</th>
-									<th class="text-center">근무지 코드</th>
-									<th class="text-center">근무지 이름</th>
-									<th class="text-center">근무지 주소</th>
-									<th class="text-center">근무지 전화번호</th>
-									<th colspan="2"></th>
-								</tr>
-								<c:forEach items="${workSpaceList}" var="workspace">
-									<tr>
-										<td class="text-center">${workspace.workSeq}</td>
-										<td class="text-center">${workspace.workCode}</td>
-										<td class="text-center">${workspace.workName }</td>
-										<td class="text-center">${workspace.workAddr}</td>
-										<td class="text-center">${workspace.workTel }</td>
-										<td colspan="2" class="text-center"><a href="#"
-											class="btn btn-default">수정</a> <a href="#"
-											class="btn btn-danger">삭제</a></td>
-									</tr>
-								</c:forEach>
-								<tr>
-									<td colspan="7" class="text-right"><a href=""
-										class="btn btn-default">근무지 추가</a></td>
-								</tr>
-							</table> --%>
 						</div>
 						<!-- /.panel-body -->
 					</div>

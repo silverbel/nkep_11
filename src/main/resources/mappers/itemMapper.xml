@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+
+<mapper namespace="item">
+	
+	<resultMap type="com.gsitm.common.dto.ItemDTO" id="itemDTO" />
+	
+	<select id="getItemListForAdmin" parameterType="itemDTO" resultType="itemDTO">
+		SELECT ITEM_SEQ, ITEM_CODE, ITEM_TYPE, ITEM_NAME, ITEM_PRICE, ITEM_UNIT,ITEM_DESCRIPTION
+		FROM nkep_11.TB_ITEM;
+	</select>
+	<insert id="insertItemForAdmin" parameterType="itemDTO">
+		INSERT INTO nkep_11.TB_ITEM(ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_UNIT,ITEM_DESCRIPTION,ITEM_IMG,ITEM_IMG2,ITEM_IMG3) 
+		VALUES(#{itemType},#{itemName},#{itemPrice},#{itemUnit},#{itemDescription},#{itemImg},#{itemImg2},#{itemImg3})
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

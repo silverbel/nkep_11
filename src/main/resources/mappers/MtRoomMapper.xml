@@ -35,11 +35,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE MT_CODE = #{roomSeq}
 	</select>
 	
+	<select id="getByteMeetingRoomImage2" parameterType="mtRoom" resultType="java.util.Map">
+		SELECT MT_IMG2 AS IMG FROM nkep_11.TB_MT_ROOM WHERE MT_SEQ=#{mtSeq}
+	</select>
+	<select id="getByteMeetingRoomImage3" parameterType="mtRoom" resultType="java.util.Map">
+		SELECT MT_IMG3 AS IMG FROM nkep_11.TB_MT_ROOM WHERE MT_SEQ=#{mtSeq}
+	</select>
 	<select id="getMeetingRoomByMtSeq" parameterType="mtRoom" resultType="com.gsitm.common.dto.MeetingRoomPlusWSNameDTO">
-		SELECT MT_SEQ, MT_CODE, MT_NAME, MT_SIZE, MT_PRICE, MT_AVAIL, MT_DESCRIPTION,
+		SELECT MT_SEQ, MT_CODE, MT_NAME, MT_SIZE, MT_PRICE, MT_AVAIL, MT_DESCRIPTION,MT_AVAIL_STIME,MT_AVAIL_ETIME,
 	MT.WORK_SEQ, MT.WORK_CODE, WORK_NAME
 		FROM nkep_11.TB_MT_ROOM MT, nkep_11.TB_WORKSPACE WS
 		WHERE MT.WORK_SEQ = WS.WORK_SEQ AND MT_SEQ = #{mtSeq}
+	</select>
+	
+	<update id="updateMtRoomNotIncludePic" parameterType="mtRoom">
+		UPDATE nkep_11.TB_MT_ROOM SET MT_NAME = #{mtName}, MT_AVAIL = #{mtAvail}, MT_SIZE = #{mtSize}, MT_DESCRIPTION = #{mtDescription},MT_PRICE =#{mtPrice},
+			MT_IMG = NULL, MT_IMG2= NULL, MT_IMG3 = NULL
+		WHERE MT_SEQ = #{mtSeq}
+	</update>
+	<update id="updateMtRoomIncludePic" parameterType="mtRoom">
+		UPDATE nkep_11.TB_MT_ROOM SET MT_NAME = #{mtName}, MT_AVAIL = #{mtAvail}, MT_SIZE = #{mtSize}, MT_DESCRIPTION = #{mtDescription},MT_PRICE =#{mtPrice},
+			MT_IMG = #{mtImg}, MT_IMG2= #{mtImg2}, MT_IMG3 = #{mtImg3}
+		WHERE MT_SEQ = #{mtSeq}
+	</update>
+	
+	<delete id="deleteMtRoomForAdmin" parameterType="mtRoom">
+		DELETE FROM nkep_11.TB_MT_ROOM WHERE MT_SEQ = #{mtSeq}
+	</delete>
+	
+	<select id="getMtRoomByWorkSeq" parameterType="mtRoom" resultType="mtRoom">
+		SELECT MT_SEQ, MT_CODE, MT_NAME, MT_SIZE, MT_PRICE, MT_AVAIL, MT_DESCRIPTION, WORK_SEQ, WORK_CODE,MT_AVAIL_STIME, MT_AVAIL_ETIME 
+		FROM nkep_11.TB_MT_ROOM
+		WHERE WORK_SEQ = #{workSeq}
 	</select>
 </mapper>
 

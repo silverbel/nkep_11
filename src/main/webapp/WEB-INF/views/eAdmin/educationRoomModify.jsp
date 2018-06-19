@@ -17,8 +17,13 @@
 	var sel_files = [];
 	$(document).ready(function() {
 		$('#input_imgs').on("change",handleImgsFilesSelect);
-		$('#input_imgs2').on("change",handleImgsFilesSelect2);
-		$('#input_imgs3').on("change",handleImgsFilesSelect3);
+		 $("#changeFlag").change(function(){
+		        if($("#changeFlag").is(":checked")){
+		            $('#input_imgs').attr("disabled", true);
+		        }else{
+		            $('#input_imgs').attr("disabled", false);
+		        }
+		    });
 	});
 	function handleImgsFilesSelect(e) {
 		sel_files = [];
@@ -47,7 +52,6 @@
 			
 		});
 	}
-
 	
 	function deleteImageAction(index){
 		console.log("index : "+index);
@@ -59,6 +63,8 @@
 		$(img_id).remove();
 		
 		console.log(sel_files);
+
+
 	}
 
 </script>
@@ -90,12 +96,13 @@
 
 	<div id="wrapper">
 
-		<jsp:include page="/WEB-INF/views/mAdmin/common/headerAndLeft.jsp"></jsp:include>
+		
+	<jsp:include page="/WEB-INF/views/admin/common/headerAndLeft.jsp"></jsp:include>
 
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">회의실 관리</h1>
+					<h1 class="page-header">교육실 관리</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -103,95 +110,98 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">회의실 추가</div>
+						<div class="panel-heading">교육실 리스트</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="container">
-								<form action="newMeetingRoomForAdmin.do" enctype="multipart/form-data" method="post">
+								<form action="modifyEducationRoomForAdmin.do?eduSeq=${educationRoomDTO.eduSeq }"
+									enctype="multipart/form-data" method="post">
 									<div class="row">
 										<div class="col-25">
-											<label for="fname">근무지 선택</label>
+											<label for="workName">근무지</label>
 										</div>
 										<div class="col-75">
-											<select name="workSeq" class="form-control">
-											<c:forEach var="workSpace" items="${workSpaceList}">
-												<option value="${workSpace.workSeq }/${workSpace.workCode}"><c:out value="${workSpace.workName }"/></option>
-											</c:forEach>
-											</select>
+											<input type="text" id="workName" name="workName" value="${educationRoomPlusWSNameDTO.workName }" class="form-control" readonly/>
 										</div>
 									</div>
-									<br><br>
+									<br>
+									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="mtName">회의실 이름</label>
+											<label for="eduName">교육실 이름</label>
 										</div>
 										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtName" id="mtName"/>
+											<input type="text" class="form-control" name="eduName" id="eduName" value="${educationRoomPlusWSNameDTO.eduName}"/>
 										</div>
 									</div>
 									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="mtAvail">회의실 인원수</label>
+											<label for="eduAvail">교육실 인원수</label>
 										</div>
 										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtAvail" id="mtAvail"/>
+											<input type="text" class="form-control" name="eduAvail" id="eduAvail" value="${educationRoomPlusWSNameDTO.eduAvail}"/>
 										</div>
 									</div>
 									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="mtSize">회의실 크기</label>
+											<label for="eduSize">교육실 크기</label>
 										</div>
 										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtSize" id="mtSize"/>
+											<input type="text" class="form-control" name="eduSize" id="eduSize" value="${educationRoomPlusWSNameDTO.eduSize}"/>
 										</div>
 									</div>
 									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="mtPrice">회의실 가격</label>
+											<label for="eduPrice">교육실 가격</label>
 										</div>
 										<div class="col-75 form-inline text-left">
-											<input type="text" class="form-control" name="mtPrice" id="mtPrice"/>
+											<input type="text" class="form-control" name="eduPrice" id="eduPrice" value="${educationRoomPlusWSNameDTO.eduPrice}"/>
 										</div>
 									</div>
 									<br>
 									<div class="row">
+										사진 삭제여부 : <input type="checkbox" name="changeFlag" id="changeFlag" value="changeFlag" />
+										<br><br>
 										<div class="col-25">
-											<label for="pic">회의실 사진</label>
+											<label for="pic">교육실 사진</label>
 										</div>
 										<div class="col-75">
 											<div>
-												 <input type="file" id="input_imgs" multiple name="files[]" maxlength="3"/>
+												<input type="file" id="input_imgs" multiple name="files[]"
+													maxlength="3" />
 											</div>
 											<div>
-												<div class="imgs_wrap">
-												</div>
+												<div class="imgs_wrap"></div>
 											</div>
 										</div>
 									</div>
-									<br><br>
+									<br>
+									<br>
 									<div class="row">
 										<div class="col-25">
-											<label for="subject">회의실 설명</label>
+											<label for="eduDescription">교육실 설명</label>
 										</div>
 										<div class="col-75">
-											<textarea id="mtDescription" name="mtDescription"
+											<textarea id="eduDescription" name="eduDescription"
 												placeholder="Write something.." style="height: 200px"
-												class="form-control"></textarea>
+												class="form-control">${educationRoomPlusWSNameDTO.eduDescription}</textarea>
 										</div>
 									</div>
 									<br>
 									<div class="row text-right">
-										<input class="btn btn-primary" type="submit" value="추가">
-										<a href="/meetingRoomList.do" class="btn btn-default">취소</a>
+										<input class="btn btn-primary" type="submit" value="수정">
+										<a href="/showEduRoomDetailForAdmin.do?eduSeq=${ educationRoomPlusWSNameDTO.eduSeq}" class="btn btn-default">상세보기</a>
+										<a href="/educationRoomList.do" class="btn btn-default">목록</a>
 									</div>
 								</form>
 							</div>
 						</div>
 						<!-- /.panel-body -->
 					</div>
+					
 					<!-- /.panel -->
 				</div>
 				<!-- /.col-lg-12 -->
@@ -224,7 +234,6 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="../dist/js/sb-admin-2.js"></script>
-
 	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 	<div id="layer"
 		style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
