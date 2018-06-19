@@ -168,6 +168,12 @@ description : my page, 나의 정보 확인
 				})
 			})
 		</script>
+		<script>
+			function fn_delete(url) {
+				location.href="/myPage/deleteMyResv.do?rsvSeq="
+						+encodeURIComponent(url);
+			}
+		</script>
 	</head>
 	<body>
 		<div class="page-wrap" id="root">
@@ -202,11 +208,12 @@ description : my page, 나의 정보 확인
 						<h2>예약 내역</h2>
 						<table class="table table-hover table-kdb">
 							<colgroup>
-								<col width="30%">
+								<col width="20%">
 								<col width="30%">
 								<col width="10%">
 								<col width="10%">
 								<col width="20%">
+								<col width="10%">
 							</colgroup>
 							<thead>
 								<tr class="text-center">
@@ -215,6 +222,7 @@ description : my page, 나의 정보 확인
 									<th>신청자</th>
 									<th>비용</th>
 									<th>승인 여부</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -242,6 +250,9 @@ description : my page, 나의 정보 확인
 												<c:if test="${null eq rc.mgrYn}">
 													승인 대기
 												</c:if>
+											</td>
+											<td>
+												<a class="md-btn md-btn--outline-primary" href="javascript:fn_delete('${rc.rsvSeq}');">Cancle</a>
 											</td>
 										</tr>
 									</c:forEach>

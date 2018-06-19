@@ -24,6 +24,8 @@
 		<typeAlias type="com.gsitm.common.dto.NoticeDTO" alias="notice"/>
 		<typeAlias type="com.gsitm.common.dto.LogWSDeleteDTO" alias="wsDLog"/>
 		<typeAlias type="com.gsitm.common.dto.ItemDTO" alias="itemDTO"/>
+		<typeAlias type="com.gsitm.common.dto.ConfirmDTO" alias="confirmDTO"/>
+		<typeAlias type="com.gsitm.common.dto.ResvDetailDTO" alias="resvDetailDTO"/>
 		<typeAlias type="com.gsitm.common.dto.StockDTO" alias="stockDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ItemStockByWorkSpaceDTO" alias="itemStockWorkspace"/>
 	</typeAliases>
