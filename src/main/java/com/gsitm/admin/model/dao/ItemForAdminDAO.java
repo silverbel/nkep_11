@@ -23,5 +23,7 @@ public interface ItemForAdminDAO {
 
 	String getItemMaxPK();
 
-
+	void updateItemIncludePic(ItemStockByWorkSpaceDTO itemStockByWorkSpaceDTO);
+	
+	void updateItemNotIncludePic(ItemStockByWorkSpaceDTO itemStockByWorkSpaceDTO);
 }

@@ -104,7 +104,8 @@ description : my page, 나의 정보 확인
 					return str;
 				}
 			})
-		</script>
+		</script>	
+		
 </head>
 <body>
 	<div class="page-wrap" id="root">

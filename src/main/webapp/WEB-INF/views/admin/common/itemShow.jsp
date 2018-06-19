@@ -106,8 +106,9 @@
 									
 												
 									<div class="row text-right">
-										<a class="btn btn-primary" href="/modifyItemForAdminForm.do?itemSeq=${itemDTO.itemSeq }&workSeq=${itemDTO.workSeq}">수정</a>
 										<a href="/getItemListForAdmin.do" class="btn btn-default">목록</a>
+										<a class="btn btn-primary" href="/modifyItemForAdminForm.do?itemSeq=${itemDTO.itemSeq }&workSeq=${itemDTO.workSeq}">수정</a>
+										<a href="/getItemListForAdmin.do" class="btn btn-danger">삭제</a>
 									</div>
 							</div>
 						</div>

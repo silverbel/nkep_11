@@ -120,11 +120,5 @@ public class MyPageController {
 		mv.setViewName("redirect:/myPage/myReserva.do");
 		return mv;		
 	}
-	
-	
-	
-	
-	
-	
-	
+		
 }
