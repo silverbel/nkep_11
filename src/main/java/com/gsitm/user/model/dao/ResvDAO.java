@@ -31,8 +31,8 @@ public interface ResvDAO {
 	List<ResvConfirmInfoDTO> showResvConfirmList(String empId);
 	List<ResvDTO> mtRoomRsvList(ResvDTO dto);
 	ResvConfirmInfoDTO showResvDetail(String rsvSeq);
-	List<ResvDTO> getResvShortInfoByDate(Map<?,?> check);
-	List<ResvDTO> getResvLongInfoByDate(Map<?,?> check);
+	List<ResvConfirmInfoDTO> getResvShortInfoByDate(Map<?,?> check);
+	List<ResvConfirmInfoDTO> getResvLongInfoByDate(Map<?,?> check);
 	
 	// ajax
 	List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String workSeq);
@@ -40,11 +40,20 @@ public interface ResvDAO {
 	int resvCount(String empId);
 	
 	
-	// insert
-	void insertReservationTable(InsertResvDTO insertDTO);
 	void deleteResv(ResvDTO resvDTO);
 	
 	void deleteConfirm(ConfirmDTO confirmDTO);
 	
 	void deleteResv(ResvDetailDTO resvDetailDTO);
+
+	public void insertResv(InsertResvDTO insert);
+
+	public void insertRI(InsertResvDTO insert);
+
+	public void insertRDNotApplicant(InsertResvDTO insert);
+
+	public void insertRDApplicant(InsertResvDTO insert);
+
+	public void insertConfirm(InsertResvDTO insert);
+
 }

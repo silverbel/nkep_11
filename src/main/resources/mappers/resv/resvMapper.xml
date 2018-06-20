@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="com.gsitm.common.dto.ResvItemInfoDTO" id="riDTO" />
 	<resultMap type="com.gsitm.common.dto.ResvConfirmInfoDTO" id="rcDTO" />
 	<resultMap type="com.gsitm.common.dto.ResvUserInfoDTO" id="ruDTO" />
+	<resultMap type="com.gsitm.common.dto.InsertResvDTO" id="resvInsert"></resultMap>
 
 	<select id="mtRoomRsvList" resultMap="resvresvresv" parameterType="String" statementType="PREPARED">
 		SELECT R.APPLICANT, R.RSV_PRICE
@@ -110,25 +111,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE USE_ID = #{empId}
 	</select>
 	
-	<select id="getResvShortInfoByDate" resultMap="resvresvresv" parameterType="Map" statementType="PREPARED">
+	<select id="getResvShortInfoByDate" resultMap="rcDTO" parameterType="Map" statementType="PREPARED">
 		<![CDATA[
-		SELECT IF(RSV_TYPE = 'S', DATE_FORMAT(RSV_DATE, '%H%i'), '0900') AS RSV_DATE
-           , IF(RSV_TYPE = 'S', DATE_FORMAT(RSV_FDATE, '%H%i'), '2230') AS RSV_FDATE
-           , RSV_SEQ
-           , WORK_SEQ
-           , RSV_TYPE
-		  FROM nkep_11.TB_RESERVATION
+		SELECT IF(R.RSV_TYPE = 'S', DATE_FORMAT(R.RSV_DATE, '%H%i'), '0900') AS RSV_DATE
+           , IF(R.RSV_TYPE = 'S', DATE_FORMAT(R.RSV_FDATE, '%H%i'), '2230') AS RSV_FDATE
+           , R.RSV_SEQ
+           , R.WORK_SEQ
+           , R.RSV_TYPE
+           , IFNULL(C.BOSS_YN, 'NULL') AS BOSS_YN
+           , IFNULL(C.MGR_YN, 'NULL') AS MGR_YN
+		  FROM nkep_11.TB_RESERVATION R
+		  LEFT JOIN nkep_11.TB_CONFIRM C
+		    ON R.RSV_SEQ = C.RSV_SEQ
 		 WHERE DATE_FORMAT(RSV_DATE, '%Y-%m-%d') <= #{selDate}
 		 	 AND DATE_FORMAT(RSV_FDATE, '%Y-%m-%d') >= #{selDate}
 		 	 AND ROOM_SEQ = #{roomSeq}
 		]]>
 	</select>
 	
-	<select id="getResvLongInfoByDate" resultMap="resvresvresv" parameterType="Map" statementType="PREPARED">
+	<select id="getResvLongInfoByDate" resultMap="rcDTO" parameterType="Map" statementType="PREPARED">
 		<![CDATA[
-		SELECT DATE_FORMAT(RSV_DATE, '%Y-%m-%d') AS RSV_DATE
-           , DATE_FORMAT(RSV_FDATE, '%Y-%m-%d') AS RSV_FDATE 
-		  FROM nkep_11.TB_RESERVATION
+		SELECT DATE_FORMAT(R.RSV_DATE, '%Y-%m-%d') AS RSV_DATE
+           , DATE_FORMAT(R.RSV_FDATE, '%Y-%m-%d') AS RSV_FDATE
+           , R.RSV_SEQ
+           , R.WORK_SEQ
+           , R.RSV_TYPE
+           , IFNULL(C.BOSS_YN, 'NULL') AS BOSS_YN
+           , IFNULL(C.MGR_YN, 'NULL') AS MGR_YN
+		  FROM nkep_11.TB_RESERVATION R
+		  LEFT JOIN nkep_11.TB_CONFIRM C
+		    ON R.RSV_SEQ = C.RSV_SEQ
 		 WHERE DATE_FORMAT(RSV_DATE, '%Y-%m') <= #{selDate}
 		 	 AND DATE_FORMAT(RSV_FDATE, '%Y-%m') >= #{selDate}
 		 	 AND ROOM_SEQ = #{roomSeq}
@@ -162,6 +174,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM nkep_11.TB_RSV_DETAIL WHERE RSV_SEQ = #{rsvSeq}
 	</delete> 
 
+	<insert id="insertResv" parameterType="resvInsert">
+		INSERT INTO nkep_11.TB_RESERVATION(RSV_SEQ, RSV_CNT, RSV_DATE, RSV_FDATE, ROOM_SEQ,RSV_PRICE,ROOM_TYPE,RSV_TYPE,APPLICANT,WORK_SEQ)
+		VALUES(#{rsvSeq},#{rsvCnt},#{rsvDate},#{rsvFdate},#{roomSeq},#{rsvPrice},#{roomType},#{rsvType},#{applicant},#{workSeq})
+	</insert>
+	
+	<insert id="insertRI" parameterType="resvItemDTO">
+		INSERT INTO nkep_11.TB_RSV_ITEM(RSV_SEQ,ITEM_SEQ)
+		VALUES(#{rsvSeq},#{itemSeq});
+	</insert>
+	
+	<insert id="insertRDNotApplicant" parameterType="resvDetailDTO">
+		INSERT INTO nkep_11.TB_RSV_DETAIL(RSV_SEQ,USE_ID,TEAM_SEQ)
+		VALUES(#{rsvSeq},#{useId},#{teamSeq})
+	</insert>
+	
+	<insert id="insertRDApplicant" parameterType="resvDetailDTO">
+		INSERT INTO nkep_11.TB_RSV_DETAIL(APPL_YN,RSV_SEQ,USE_ID,TEAM_SEQ)
+		VALUES(#{applYn},#{rsvSeq},#{useId},#{teamSeq})
+	</insert>
+	<insert id="insertConfirm" parameterType="confirmDTO">
+		INSERT INTO nkep_11.TB_CONFIRM(RSV_SEQ)
+		VALUES(#{rsvSeq})
+	</insert>
 </mapper>
 
 

@@ -10,6 +10,7 @@
  */ 
 package com.gsitm.user.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.gsitm.common.dto.ConfirmDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
 import com.gsitm.common.dto.ResvDetailDTO;
+import com.gsitm.common.dto.ResvItemDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.ResvUserInfoDTO;
 
@@ -67,12 +69,12 @@ public class ResvDAOImpl implements ResvDAO {
 	}
 
 	@Override
-	public List<ResvDTO> getResvShortInfoByDate(Map<?, ?> check) {
+	public List<ResvConfirmInfoDTO> getResvShortInfoByDate(Map<?, ?> check) {
 		return sqlSession.selectList("resv.getResvShortInfoByDate", check);
 	}
 
 	@Override
-	public List<ResvDTO> getResvLongInfoByDate(Map<?, ?> check) {
+	public List<ResvConfirmInfoDTO> getResvLongInfoByDate(Map<?, ?> check) {
 		return sqlSession.selectList("resv.getResvLongInfoByDate", check);
 	}
 
@@ -96,9 +98,47 @@ public class ResvDAOImpl implements ResvDAO {
 		sqlSession.delete("resv.deleteResvDetail", resvDetailDTO);
 	}
 
+
 	@Override
-	public void insertReservationTable(InsertResvDTO insertDTO) {
-		
+	public void insertResv(InsertResvDTO insert) {
+		sqlSession.insert("resv.insertResv",insert);
 	}
+
+	@Override
+	public void insertRI(InsertResvDTO insert) {
+		for(int i = 0; i<insert.getItems().size();i++) {
+			ResvItemDTO dt = new ResvItemDTO(insert.getRsvSeq(),insert.getItems().get(i));
+			sqlSession.insert("resv.insertRI",dt);
+		}
+	}
+
+	@Override
+	public void insertRDNotApplicant(InsertResvDTO insert) {
+		for(int i = 0; i<insert.getEmpIds().size(); i++) {
+			ResvDetailDTO dt = new ResvDetailDTO();
+			dt.setRsvSeq(insert.getRsvSeq());
+			dt.setTeamSeq(insert.getTeamSeq());
+			dt.setUseId(insert.getEmpIds().get(i));
+			sqlSession.insert("resv.insertRDNotApplicant",dt);
+		}
+	}
+
+	@Override
+	public void insertRDApplicant(InsertResvDTO insert) {
+		ResvDetailDTO dt = new ResvDetailDTO();
+		dt.setApplYn("Y");
+		dt.setRsvSeq(insert.getRsvSeq());
+		dt.setUseId(insert.getApplicant());
+		dt.setTeamSeq(insert.getTeamSeq());
+		sqlSession.insert("resv.insertRDApplicant",dt);
+	}
+
+	@Override
+	public void insertConfirm(InsertResvDTO insert) {
+		ConfirmDTO dt = new ConfirmDTO();
+		dt.setRsvSeq(insert.getRsvSeq());
+		sqlSession.insert("resv.insertConfirm",dt);
+	}
+
 
 }

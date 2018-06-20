@@ -64,12 +64,12 @@ description :
 	    $(document).ready(function($) {
 			$(document).ready(function() {
 		        $('#dataTables-authority').DataTable({
-		             responsive: true
-		            ,ordering: true
-		            ,"bAutoWidth": true
-	                ,"columnDefs": [
-	                               { "orderable": false, "targets": 0 }
-	                             ] 
+		            responsive: true,
+		            ordering: false,
+		            language : lang_kor,
+		            "scrollY": 200,
+		            "scrollCollapse": true,
+		            "bAutoWidth": true,
 		        });
 		    });
 		});

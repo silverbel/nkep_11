@@ -14,6 +14,8 @@ public class ResvConfirmInfoDTO {
 	private String roomName;
 	private String applicant;
 	private String reject;
+	private String rsvType;
+	private String workSeq;
 
 	public String getRsvSeq() {
 		return rsvSeq;
@@ -109,6 +111,22 @@ public class ResvConfirmInfoDTO {
 
 	public void setReject(String reject) {
 		this.reject = reject;
+	}
+
+	public String getRsvType() {
+		return rsvType;
+	}
+
+	public void setRsvType(String rsvType) {
+		this.rsvType = rsvType;
+	}
+
+	public String getWorkSeq() {
+		return workSeq;
+	}
+
+	public void setWorkSeq(String workSeq) {
+		this.workSeq = workSeq;
 	}
 
 }
