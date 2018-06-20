@@ -1,6 +1,9 @@
 package com.gsitm.user.model.dao;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +46,12 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<EmployeeDTO> allMemberListAjax() {
 		return sqlSession.selectList("member.allMemberListAjax");
+	}
+
+	public List<EmployeeDTO> getEmployeeBySabun(List<String> parameter2) {
+		Map<String, List<String>> param = new HashMap<>();
+		param.put("empId_list", parameter2);
+		return sqlSession.selectList("member.getEmployeeBySabun",param);
 	}
 
 }

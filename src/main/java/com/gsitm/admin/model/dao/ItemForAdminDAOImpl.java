@@ -1,5 +1,6 @@
 package com.gsitm.admin.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,6 +62,13 @@ public class ItemForAdminDAOImpl implements ItemForAdminDAO {
 	@Override
 	public void updateItemNotIncludePic(ItemStockByWorkSpaceDTO itemStockByWorkSpaceDTO) {
 		sqlSession.update("item.updateItemNotIncludePic", itemStockByWorkSpaceDTO);
+	}
+
+	@Override
+	public List<ItemDTO> getItemByManyItemSeq(List<String> parameter) {
+		Map<String, List<String>> param = new HashMap<>();
+		param.put("item_list", parameter);
+		return sqlSession.selectList("item.getItemByManyItemSeq",param);
 	}
 
 }

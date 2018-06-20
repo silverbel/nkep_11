@@ -74,6 +74,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="changeEmpNormalToMgr">
 		UPDATE nkep_11.TB_EMPLOYEE SET ROLE=#{role}, TEAM_SEQ = '0000' WHERE EMP_ID = #{empId}
 	</update>
+	
+	<select id="getEmployeeBySabun" parameterType="java.util.HashMap" resultType="empDTO">
+		SELECT EMP_ID,EMP_PW,EMP_NAME,TEAM_SEQ,EMAIL
+		FROM nkep_11.TB_EMPLOYEE
+	<choose>
+            <when test="empId_list.size != 0">
+                WHERE EMP_ID IN
+                <foreach collection="empId_list" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </when>
+        </choose>
+	</select>
 </mapper>
 
 
