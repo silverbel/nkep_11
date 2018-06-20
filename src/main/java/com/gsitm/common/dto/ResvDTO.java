@@ -20,6 +20,15 @@ public class ResvDTO {
 	private double rsvPrice;
 	private String rsvType;
 	private String workSeq;
+	private String applicant;
+
+	public String getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(String applicant) {
+		this.applicant = applicant;
+	}
 
 	public String getRsvSeq() {
 		return rsvSeq;

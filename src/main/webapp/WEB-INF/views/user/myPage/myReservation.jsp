@@ -133,7 +133,7 @@ description : my page, 나의 정보 확인
 															+'</tr>'
 															+'<tr>'
 																+'<td>비용</td>'
-																+'<td>'+rsvPrice+'</td>'
+																+'<td>'+rsvPrice+'원</td>'
 															+'</tr>'
 															+'<tr>'
 																+'<td>승인 상태</td>'
@@ -146,7 +146,7 @@ description : my page, 나의 정보 확인
 							for(var i=0; i<data.riList.length; i++){
 								var itemName = data.riList[i].itemName;
 								var itemCnt = data.riList[i].itemCnt;
-								$('#itemList').append('<p>'+itemName+' : '+itemCnt+'</p>')
+								$('#itemList').append('<p>'+itemName+' : '+itemCnt+'개</p>')
 							}
 							
 							$('#ruListTbody').empty();
@@ -339,7 +339,7 @@ description : my page, 나의 정보 확인
 						</button>
 					</div>
 					<div class="modal-body">
-						<h2>예약 상세 정보</h2>
+						<h2></h2>
 						<table class="table table-hover table-kdb" id="resvTable">
 							<colgroup>
 								<col width="20%" />

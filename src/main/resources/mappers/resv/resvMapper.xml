@@ -12,6 +12,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="com.gsitm.common.dto.ResvConfirmInfoDTO" id="rcDTO" />
 	<resultMap type="com.gsitm.common.dto.ResvUserInfoDTO" id="ruDTO" />
 
+	<select id="mtRoomRsvList" resultMap="resvresvresv" parameterType="String" statementType="PREPARED">
+		SELECT R.APPLICANT, R.RSV_PRICE
+		FROM TB_RESERVATION R
+		LEFT JOIN TB_CONFIRM C
+		ON R.RSV_SEQ = C.RSV_SEQ
+		WHERE R.ROOM_TYPE = 'M' AND C.BOSS_YN = 'Y'				
+	</select>
+
 	<insert id="insert">
 		INSERT INTO nkep_11.TB_RESERVATION
 		(RSV_SEQ, RSV_CNT, RSV_DATE, RSV_FDATE, ROOM_SEQ, RSV_PRICE) 

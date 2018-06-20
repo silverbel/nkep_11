@@ -272,7 +272,7 @@ description :
                             <a href="#"><i class="fa fa-table fa-fw"></i> 예약 관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="icons.html">회의실 예약 </a>
+                                    <a href="/mtRoomRsvManagement.do">회의실 예약 관리 </a>
                                 </li>
                             </ul>
                         </li>     
