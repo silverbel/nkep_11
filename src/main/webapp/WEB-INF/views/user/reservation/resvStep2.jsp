@@ -476,7 +476,8 @@ description : 예약하기
 				<!-- End / Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
-						<table class="table text-cente table-responsive">
+						<div class="table-responsive-lg">
+						<table class="table text-center">
 							<colgroup>
 								<col width="10%"/>
 								<col width="10%"/>
@@ -528,6 +529,7 @@ description : 예약하기
 								</tr>
 							</tbody>
 						</table>
+						</div>
 						<div class="pull-left ">
 							<button type="button" class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
 						</div>
