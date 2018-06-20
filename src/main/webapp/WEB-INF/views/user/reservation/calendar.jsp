@@ -2,12 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
 <%--
-subject    : 
+subject    : calendar
 author     : 김동범
 date       : 2018. 6. 20.
-description :
+description : 장기 예약용 달력
  
   [이름]   [수정일]     [내용]
   ----------------------------------------------------------

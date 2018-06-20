@@ -49,6 +49,11 @@ a:focus, input:focus, button:focus, textarea:focus {
     outline: none;
 }
 
+.kdb-title {
+	background-color: rgba(255,255,255,0.5);
+}
+
+
 p {
     margin-top: 0;
     margin-bottom: 10px;

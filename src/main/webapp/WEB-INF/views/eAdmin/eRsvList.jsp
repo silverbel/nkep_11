@@ -1,5 +1,5 @@
 <%--
-subject    : mRsvList.jsp
+subject    : 
 author     : 은종현
 date       : 2018. 6. 20.
 description :
@@ -33,26 +33,26 @@ description :
     <script src="/dist/js/jquery.dataTables.js"></script>
     <script src="/dist/js/dataTables.bootstrap.js"></script>
     <script src="/dist/js/dataTables.responsive.js"></script>
-		<script src="/dist/js/responsive.bootstrap.js"></script>
-		<!-- tabletools -->
-		<script src="/dist/js/dataTables.tableTools.js"></script>
-	  
-		<!-- Bootstrap Core CSS -->
-		<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		
-		<!-- MetisMenu CSS -->
-		<link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-		
-		<!-- Custom CSS -->
-		<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
-		
-		<!-- Morris Charts CSS -->
-		<link href="../vendor/morrisjs/morris.css" rel="stylesheet">
-		
-		<!-- Custom Fonts -->
-		<link href="../vendor/font-awesome/css/font-awesome.min.css"
-			rel="stylesheet" type="text/css">
-			
+	<script src="/dist/js/responsive.bootstrap.js"></script>
+	<!-- tabletools -->
+	<script src="/dist/js/dataTables.tableTools.js"></script>
+  
+<!-- Bootstrap Core CSS -->
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- MetisMenu CSS -->
+<link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Morris Charts CSS -->
+<link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="../vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
 		<!-- Datatables Mobile CSS -->	
 		<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
 		<link href="https://cdn.datatables.net/rowreorder/1.2.4/css/rowReorder.dataTables.min.css" rel="stylesheet">
@@ -64,22 +64,23 @@ description :
 		<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.datatables.net/rowreorder/1.2.4/js/dataTables.rowReorder.min.js"></script>
 		<script src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
+
     <script>
-			$(document).ready(function($) {
-				$(document).ready(function() {
-					$('#dataTables-mtRoom').DataTable({
-		    			rowReorder: {
-		    				selector: 'td:nth-child(2)'
-		    			},
-		    			responsive: true,
-		    			ordering: true,
-		    			"bAutoWidth": true,
-		    			"columnDefs": [
-		    				{ "orderable": false, "targets": 0 }
-							] 
-						});
+	    $(document).ready(function($) {
+	    	$(document).ready(function() {
+	    		$('#dataTables-mtRoom').DataTable({
+	    			rowReorder: {
+	    				selector: 'td:nth-child(2)'
+	    			},
+	    			responsive: true,
+	    			ordering: true,
+	    			"bAutoWidth": true,
+	    			"columnDefs": [
+	    				{ "orderable": false, "targets": 0 }
+						] 
+					});
 		    });
-	    });
+			});
     	function fn_go_list(url) {
     		location.href = "/deleteNotice.do?noticeNo="+url;
     	}
@@ -88,7 +89,7 @@ description :
 <body>
 <div id="wrapper">
 
-		<jsp:include page="/WEB-INF/views/mAdmin/common/headerAndLeft.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/eAdmin/common/headerAndLeft.jsp"></jsp:include>
 
 		<div id="page-wrapper">
 			<div class="row">
@@ -102,12 +103,12 @@ description :
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">회의실 예약 관리</div></div>
+						<div class="panel-heading">교육실 예약 관리</div></div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 						<div class="table-responsive">
-							<table class="table table-bordered table-striped table-hover nowrap display" style="width:100%" 
-								id="dataTables-authority" data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10'>
+							<table class="table table-bordered table-striped table-hover nowrap display" id="dataTables-edRoom" 
+							data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10' style="width: 100%">
 								<thead>
 								<tr>
 									<th class="text-center" width="50%">신청자</th>

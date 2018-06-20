@@ -1,12 +1,11 @@
 <%--
-subject    : reservation.jsp
-author     : 은종현
+subject    : reservation.jsp -> resvStep2.jsp
+author     : 김동범
 date       : 2018-06-11
 description : 예약하기
  
   [이름]   [수정일]     [내용]
   ----------------------------------------------------------
-  은종현	2018-06-11	 초안
 --%>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -466,7 +465,7 @@ description : 예약하기
 			<div class="wil-content">
 				
 				<!-- Section -->
-				<section class="awe-section">
+				<section class="awe-section kdb-title">
 					<div class="container">
 						
 						<!-- page-title -->

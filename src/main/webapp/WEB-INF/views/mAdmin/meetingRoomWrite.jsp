@@ -3,6 +3,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%--
+subject    : meetingRoomWrite.jsp
+author     : 남동길
+date       : 2018. 6. 11.
+description :
+ 
+  [이름]   [수정일]     [내용]
+  ----------------------------------------------------------
+  
+--%> 
+
 <html lang="ko">
 <head>
 <meta charset="utf-8">
