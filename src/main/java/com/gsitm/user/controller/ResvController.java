@@ -43,7 +43,7 @@ import com.gsitm.common.dto.InsertResvDTO;
 import com.gsitm.common.dto.ItemDTO;
 import com.gsitm.common.dto.MeetingRoomDTO;
 import com.gsitm.common.dto.MeetingRoomPlusWSNameDTO;
-import com.gsitm.common.dto.ResvDTO;
+import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.RoomPlusWSNameDTO;
 import com.gsitm.common.dto.TeamDTO;
@@ -105,7 +105,9 @@ public class ResvController {
 	
 	@RequestMapping(value="resvStep3.do", method=RequestMethod.POST)
 	public String resvStep3(InsertResvDTO insert, HttpSession session) {
-		System.out.println(insert.toString());
+
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!" + insert.getStartTime());
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!" + insert.getFinTime());
 		session.setAttribute("insertResv", insert);
 		return "user/reservation/resvStep3";
 	}
@@ -186,6 +188,7 @@ public class ResvController {
 		mv.addObject("insert",tempInsert);
 		return mv;
 	}
+	
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/resvStep5.do")
@@ -333,7 +336,7 @@ public class ResvController {
 	@RequestMapping(value="resvCheck.do", method=RequestMethod.POST)
 	public Map<?,?> resvAlreadyBookedCheck(@RequestParam("rsvType") String rsvType,
 			@RequestParam("selDate") String selDate, @RequestParam("roomSeq") String roomSeq){
-		List<ResvDTO> list = rService.getResvInfoByDate(rsvType, selDate, roomSeq);
+		List<ResvConfirmInfoDTO> list = rService.getResvInfoByDate(rsvType, selDate, roomSeq);
 		Map<String, Object> resvList = new HashMap<>();
 		resvList.put("resvList", list);
 		return resvList;
@@ -345,9 +348,6 @@ public class ResvController {
 			@RequestParam("roomType") String roomType, @RequestParam("workSeq") String workSeq){
 		
 		List<?> roomInfo = wService.getAnyRoomInfo(roomType, roomSeq);
-		/*for(Object ed : roomInfo) {
-			System.out.println(((EducationRoomDTO) ed).toString());
-		}*/
 		List<ResvItemInfoDTO> itemlist = rService.roomItemListCheckByRoomSeqAjax(workSeq);
 		Map<String, Object> roomItemList = new HashMap<>();
 		roomItemList.put("roomItemList", itemlist);

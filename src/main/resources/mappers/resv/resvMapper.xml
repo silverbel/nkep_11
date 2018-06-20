@@ -13,6 +13,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="com.gsitm.common.dto.ResvUserInfoDTO" id="ruDTO" />
 	<resultMap type="com.gsitm.common.dto.InsertResvDTO" id="resvInsert"></resultMap>
 
+	<select id="mtRoomRsvList" resultMap="resvresvresv" parameterType="String" statementType="PREPARED">
+		SELECT R.APPLICANT, R.RSV_PRICE
+		FROM TB_RESERVATION R
+		LEFT JOIN TB_CONFIRM C
+		ON R.RSV_SEQ = C.RSV_SEQ
+		WHERE R.ROOM_TYPE = 'M' AND C.BOSS_YN = 'Y'				
+	</select>
+
 	<insert id="insert">
 		INSERT INTO nkep_11.TB_RESERVATION
 		(RSV_SEQ, RSV_CNT, RSV_DATE, RSV_FDATE, ROOM_SEQ, RSV_PRICE) 
@@ -58,13 +66,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  LEFT JOIN nkep_11.TB_CONFIRM C
 		    ON R.RSV_SEQ = C.RSV_SEQ
 		  LEFT JOIN nkep_11.TB_MT_ROOM MT
-		    ON R.ROOM_SEQ = MT.MT_CODE
+		    ON R.ROOM_SEQ = MT.MT_SEQ
 		  LEFT JOIN nkep_11.TB_EDU_ROOM ED
-		    ON R.ROOM_SEQ = ED.EDU_CODE
+		    ON R.ROOM_SEQ = ED.EDU_SEQ
 		  LEFT JOIN nkep_11.TB_WORKSPACE WM
-		    ON MT.WORK_CODE = WM.WORK_CODE
+		    ON MT.WORK_SEQ = WM.WORK_SEQ
 		  LEFT JOIN nkep_11.TB_WORKSPACE WE
-		    ON ED.WORK_CODE = WE.WORK_CODE
+		    ON ED.WORK_SEQ = WE.WORK_SEQ
 		 WHERE R.RSV_SEQ IN (SELECT R.RSV_SEQ
 		 										 	 FROM nkep_11.TB_RESERVATION R
 		 											 LEFT JOIN nkep_11.TB_RSV_DETAIL RU
@@ -87,13 +95,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  LEFT JOIN nkep_11.TB_CONFIRM C
 		    ON R.RSV_SEQ = C.RSV_SEQ
 		  LEFT JOIN nkep_11.TB_MT_ROOM MT
-		    ON R.ROOM_SEQ = MT.MT_CODE
+		    ON R.ROOM_SEQ = MT.MT_SEQ
 		  LEFT JOIN nkep_11.TB_EDU_ROOM ED
-		    ON R.ROOM_SEQ = ED.EDU_CODE
+		    ON R.ROOM_SEQ = ED.EDU_SEQ
 		  LEFT JOIN nkep_11.TB_WORKSPACE WM
-		    ON MT.WORK_CODE = WM.WORK_CODE
+		    ON MT.WORK_SEQ = WM.WORK_SEQ
 		  LEFT JOIN nkep_11.TB_WORKSPACE WE
-		    ON ED.WORK_CODE = WE.WORK_CODE
+		    ON ED.WORK_SEQ = WE.WORK_SEQ
 		 WHERE R.RSV_SEQ = #{rsvSeq}
 	</select>
 
@@ -103,25 +111,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 WHERE USE_ID = #{empId}
 	</select>
 	
-	<select id="getResvShortInfoByDate" resultMap="resvresvresv" parameterType="Map" statementType="PREPARED">
+	<select id="getResvShortInfoByDate" resultMap="rcDTO" parameterType="Map" statementType="PREPARED">
 		<![CDATA[
-		SELECT IF(RSV_TYPE = 'S', DATE_FORMAT(RSV_DATE, '%H%i'), '0900') AS RSV_DATE
-           , IF(RSV_TYPE = 'S', DATE_FORMAT(RSV_FDATE, '%H%i'), '2230') AS RSV_FDATE
-           , RSV_SEQ
-           , WORK_SEQ
-           , RSV_TYPE
-		  FROM nkep_11.TB_RESERVATION
+		SELECT IF(R.RSV_TYPE = 'S', DATE_FORMAT(R.RSV_DATE, '%H%i'), '0900') AS RSV_DATE
+           , IF(R.RSV_TYPE = 'S', DATE_FORMAT(R.RSV_FDATE, '%H%i'), '2230') AS RSV_FDATE
+           , R.RSV_SEQ
+           , R.WORK_SEQ
+           , R.RSV_TYPE
+           , IFNULL(C.BOSS_YN, 'NULL') AS BOSS_YN
+           , IFNULL(C.MGR_YN, 'NULL') AS MGR_YN
+		  FROM nkep_11.TB_RESERVATION R
+		  LEFT JOIN nkep_11.TB_CONFIRM C
+		    ON R.RSV_SEQ = C.RSV_SEQ
 		 WHERE DATE_FORMAT(RSV_DATE, '%Y-%m-%d') <= #{selDate}
 		 	 AND DATE_FORMAT(RSV_FDATE, '%Y-%m-%d') >= #{selDate}
 		 	 AND ROOM_SEQ = #{roomSeq}
 		]]>
 	</select>
 	
-	<select id="getResvLongInfoByDate" resultMap="resvresvresv" parameterType="Map" statementType="PREPARED">
+	<select id="getResvLongInfoByDate" resultMap="rcDTO" parameterType="Map" statementType="PREPARED">
 		<![CDATA[
-		SELECT DATE_FORMAT(RSV_DATE, '%Y-%m-%d') AS RSV_DATE
-           , DATE_FORMAT(RSV_FDATE, '%Y-%m-%d') AS RSV_FDATE 
-		  FROM nkep_11.TB_RESERVATION
+		SELECT DATE_FORMAT(R.RSV_DATE, '%Y-%m-%d') AS RSV_DATE
+           , DATE_FORMAT(R.RSV_FDATE, '%Y-%m-%d') AS RSV_FDATE
+           , R.RSV_SEQ
+           , R.WORK_SEQ
+           , R.RSV_TYPE
+           , IFNULL(C.BOSS_YN, 'NULL') AS BOSS_YN
+           , IFNULL(C.MGR_YN, 'NULL') AS MGR_YN
+		  FROM nkep_11.TB_RESERVATION R
+		  LEFT JOIN nkep_11.TB_CONFIRM C
+		    ON R.RSV_SEQ = C.RSV_SEQ
 		 WHERE DATE_FORMAT(RSV_DATE, '%Y-%m') <= #{selDate}
 		 	 AND DATE_FORMAT(RSV_FDATE, '%Y-%m') >= #{selDate}
 		 	 AND ROOM_SEQ = #{roomSeq}

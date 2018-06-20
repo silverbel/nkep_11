@@ -7,11 +7,65 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
 
-<title>SB Admin 2 - Bootstrap Admin Theme</title>
+<title>관리자 PAGE :: 자재 상세 보기</title>
+
+<!-- BootStrap & CSS -->
+<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="/assets/css/css_full/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="/assets/css/css_full/font-awesome.css">
+<!-- Fonts-->
+<link rel="stylesheet" type="text/css"
+	href="/assets/fonts/fontawesome/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/assets/fonts/pe-icon/pe-icon.css">
+<!-- Vendors-->
+<link rel="stylesheet" type="text/css"
+	href="/assets/vendors/bootstrap/grid.css">
+<link rel="stylesheet" type="text/css"
+	href="/assets/vendors/magnific-popup/magnific-popup.min.css">
+<link rel="stylesheet" type="text/css"
+	href="/assets/vendors/swiper/swiper.css">
+<!-- App & fonts-->
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Open+Sans:400,700">
+<link rel="stylesheet" type="text/css" id="app-stylesheet"
+	href="/assets/css/main.css">
+<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<![endif]-->
+<!-- jQuery v2.1.4 -->
+<script src="/assets/dist/js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/assets/dist/js/bootstrap.js"></script>
+<!-- Custom Theme JavaScript -->
+<!-- DatePicker JavaScript -->
+<script src="/assets/dist/js/moment-ko.js"></script>
+<script src="/assets/dist/js/transition.js"></script>
+<script src="/assets/dist/js/collapse.js"></script>
+<script src="/assets/dist/js/bootstrap-datetimepicker.js"></script>
+<!-- DataTables JavaScript -->
+<script src="/assets/dist/js/jquery.dataTables.js"></script>
+<script src="/assets/dist/js/dataTables.bootstrap.js"></script>
+<script src="/assets/dist/js/dataTables.responsive.js"></script>
+<script src="/assets/dist/js/responsive.bootstrap.js"></script>
+<!-- tabletools -->
+<script src="/assets/dist/js/dataTables.tableTools.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script type="text/javascript"
+	src="/assets/vendors/jquery/jquery.min.js"></script>
+<!-- data table -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- Bootstrap Core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,9 +95,15 @@
 
 	<div id="wrapper">
 
-
-		<jsp:include page="/WEB-INF/views/admin/common/headerAndLeft.jsp"></jsp:include>
-
+		<c:if test="${'S_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/admin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${'E_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/eAdmin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${'M_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/mAdmin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
@@ -52,75 +112,98 @@
 				<!-- /.col-lg-12 -->
 			</div>
 			<!-- /.row -->
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">자재 정보</div>
-						<!-- /.panel-heading -->
-						<div class="panel-body">
-							<div class="container">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">자재 정보</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div class="container">
 									<div class="row">
 										<div class="col-lg-12">
 											<h3>${itemDTO.itemName }</h3>
-												
 										</div>
 									</div>
-									<br> 
+									<br>
 									<div class="col-lg-12">
-									<div class="col-md-4 text-center">
-										<img src=<c:url value="/getByteItemImage/${itemDTO.itemSeq}"/> class="img-responsive img-thumbnail" />
+										<div class="col-md-4 text-center">
+											<c:if test="${itemDTO.itemImg eq null }">
+												<img src="/assets/img/nono.png"
+													class="img-responsive img-thumbnail" />
+											</c:if>
+											<c:if test="${itemDTO.itemImg ne null }">
+												<img
+													src=<c:url value="/getByteItemImage/${itemDTO.itemSeq}"/>
+													class="img-responsive img-thumbnail" />
+											</c:if>
+										</div>
+										<div class="col-md-4 text-center">
+											<c:if test="${itemDTO.itemImg2 ne null }">
+												<img
+													src=<c:url value="/getByteItemImage2/${itemDTO.itemSeq}"/>
+													class="img-responsive img-thumbnail" />
+											</c:if>
+										</div>
+										<div class="col-md-4 text-center">
+											<c:if test="${itemDTO.itemImg3 ne null }">
+												<img
+													src=<c:url value="/getByteItemImage3/${itemDTO.itemSeq}"/>
+													class="img-responsive img-thumbnail" />
+											</c:if>
+										</div>
 									</div>
-									<div class="col-md-4 text-center">
-										<img src=<c:url value="/getByteItemImage2/${itemDTO.itemSeq}"/>	class="img-responsive img-thumbnail" />
-									</div>
-									<div class="col-md-4 text-center">
-										<img	src=<c:url value="/getByteItemImage3/${itemDTO.itemSeq}"/>	class="img-responsive img-thumbnail" />
-									</div>
-									</div>
-									<br><br>
+									<br> <br>
 									<div class="row col-xs-12 text-center">
-									<table class="table" style="font-size:20px;font-style:bold;">
-										<tr>
-													<td width="15%">근무지 이름 :</td>
-													<td width="85%"><c:out value="${itemDTO.workName }"/></td>
-										</tr>
-										<tr>
-												<td>자재 수량 : </td>
-												<td><c:out value="${itemDTO.stCnt }"/></td>
-										</tr>
-										<tr>
-													<td width="15%">자재 종류 :</td>
-													<td width="85%"><c:out value="${itemDTO.itemType }"/></td>
-										</tr>
-										<tr>
-													<td>가격 :</td>
-													<td><c:out value="${itemDTO.itemPrice} 원  / ${itemDTO.itemUnit }"/></td>
-										</tr>
-										<tr>
-											<td>상세 정보 : </td>
-											<td><c:out value="${itemDTO.itemDescription }" /></td>
-										</tr>
-									</table>
+										<table class="table">
+											<colgroup>
+												<col width="30%">
+												<col width="70%">
+											</colgroup>
+											<tr>
+												<td>근무지 이름 :</td>
+												<td><c:out value="${itemDTO.workName }" /></td>
+											</tr>
+											<tr>
+												<td>자재 수량 :</td>
+												<td><c:out value="${itemDTO.stCnt }" /></td>
+											</tr>
+											<tr>
+												<td>자재 종류 :</td>
+												<td><c:out value="${itemDTO.itemType }" /></td>
+											</tr>
+											<tr>
+												<td>가격 :</td>
+												<td><c:out
+														value="${itemDTO.itemPrice} 원  / ${itemDTO.itemUnit }" /></td>
+											</tr>
+											<tr>
+												<td>상세 정보 :</td>
+												<td><c:out value="${itemDTO.itemDescription }" /></td>
+											</tr>
+										</table>
 									</div>
-												
-									
-												
+
+
+
 									<div class="row text-right">
 										<a href="/getItemListForAdmin.do" class="btn btn-default">목록</a>
-										<a class="btn btn-primary" href="/modifyItemForAdminForm.do?itemSeq=${itemDTO.itemSeq }&workSeq=${itemDTO.workSeq}">수정</a>
+										<a class="btn btn-primary"
+											href="/modifyItemForAdminForm.do?itemSeq=${itemDTO.itemSeq }&workSeq=${itemDTO.workSeq}">수정</a>
 										<a href="/getItemListForAdmin.do" class="btn btn-danger">삭제</a>
 									</div>
+								</div>
 							</div>
+							<!-- /.panel-body -->
 						</div>
-						<!-- /.panel-body -->
+
+						<!-- /.panel -->
 					</div>
+					<!-- /.col-lg-12 -->
 
-					<!-- /.panel -->
 				</div>
-				<!-- /.col-lg-12 -->
-
+				<!-- /.row -->
 			</div>
-			<!-- /.row -->
 		</div>
 		<!-- /#page-wrapper -->
 

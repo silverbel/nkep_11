@@ -39,6 +39,9 @@ public class ResvService {
 	@Autowired
 	private MemberDAO mDao;
 	
+	public List<ResvDTO> mtRoomRsvList(ResvDTO dto) {
+		return rDao.mtRoomRsvList(dto);
+	}
 	
 	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {
 		return rDao.showResvUserList(rsvSeq);
@@ -60,12 +63,12 @@ public class ResvService {
 		return rDao.showResvDetail(rsvSeq);
 	}
 	
-	public List<ResvDTO> getResvInfoByDate(String rsvType, String selDate, String roomSeq){
+	public List<ResvConfirmInfoDTO> getResvInfoByDate(String rsvType, String selDate, String roomSeq){
 		Map<String, String> check = new HashMap<>();
 		check.put("selDate", selDate);
 		check.put("roomSeq", roomSeq);
-		if (rsvType == "S") return rDao.getResvShortInfoByDate(check);
-		else return rDao.getResvShortInfoByDate(check);
+		if (rsvType.equals("S")) return rDao.getResvShortInfoByDate(check);
+		else return rDao.getResvLongInfoByDate(check);
 	}
 	
 	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String workSeq){

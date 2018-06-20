@@ -1,7 +1,7 @@
 <%--
 subject    : 
 author     : 은종현
-date       : 2018. 6. 17.
+date       : 2018. 6. 20.
 description :
  
   [이름]   [수정일]     [내용]
@@ -64,54 +64,18 @@ description :
 	    $(document).ready(function($) {
 			$(document).ready(function() {
 		        $('#dataTables-authority').DataTable({
-		            responsive: true,
-		            ordering: false,
-		            language : lang_kor,
-		            "scrollY": 200,
-		            "scrollCollapse": true,
-		            "bAutoWidth": true,
+		             responsive: true
+		            ,ordering: true
+		            ,"bAutoWidth": true
+	                ,"columnDefs": [
+	                               { "orderable": false, "targets": 0 }
+	                             ] 
 		        });
 		    });
 		});
     	function fn_go_list(url) {
     		location.href = "/deleteNotice.do?noticeNo="+url;
     	}
-    </script>
-    <script type="text/javascript">
-    	$(document).ready(function($){
-    		var action = '';
-			var url = '';
-			var type = '';
-			var noticeNo=0;
-			
-			// insert
-			$(document).on("click", function(){
-				$("#createBtn").on("click", function() {
-					action ='createNotice';
-					type='POST';
-					$("#modal-title").text("새 공지 사항 작성");
-					$("#myModal").modal();
-				});
-			});
-			
-			$("#modalSubmit").on("click", function() {
-				if(action=='create') {
-					url = 'noticeList.do';
-				}
-				
-				var data = {
-					"noticeTitle" : $("#noticeTitle").val(),
-					"noticeContent" : $("#noticeContent").val()
-				};
-				$.ajax({
-					url :url,
-					type : type,
-					data : data
-				})
-				
-				location.reload();
-			});
-    	});
     </script>
 </head>
 <body>
@@ -122,7 +86,7 @@ description :
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">공지사항 관리</h1>
+					<h1 class="page-header">예약 관리</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
@@ -131,30 +95,31 @@ description :
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">NOTICE</div>
+						<div class="panel-heading">회의실 예약 관리</div></div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped table-hover" id="dataTables-authority" data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10'>
 								<thead>
 								<tr>
-									<th class="text-center" width="50%">공지 사항</th>
-									<th class="text-center" width="20%">등록일자</th>
-									<th class="text-center" width="20%"></th>
+									<th class="text-center" width="50%">신청자</th>
+									<th class="text-center" width="20%">가격</th>
+									<th></th>
 								</tr>
 								</thead>
 								<tbody>
-							<c:forEach var="list" items="${noticeList}" varStatus="status">
-								<tr data-toggle="modal" data-target="#noticeDetail">
-										<td class="text-center">${list.noticeTitle}</td>
-										<td class="text-center">${list.regDate}</td>
-										<td class="text-center"><a href="javascript:fn_go_list('${list.noticeNo}')"
-											class="btn btn-danger">삭제</a></td>
+							<c:forEach var="list" items="${mtRoomRsvList}" varStatus="status">
+								<tr>
+										<td class="text-center">${list.applicant}</td>
+										<td class="text-center">${list.rsvPrice}</td>
+										<td>
+											<button type="button" class="btn btn-info">승인</button>
+											<button type="button" class="btn btn-danger">반려</button>
+										</td>
 								</tr>
 							</c:forEach>
 							</tbody>
 							</table>
-							<button id="createBtn" type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">공지 사항 작성</button>
 						</div>
 						
 						<!-- /.panel-body -->
@@ -167,54 +132,6 @@ description :
 		</div>
 		<!-- /#page-wrapper -->
 		</div>
-		<!-- Modal -->
-	<div class="modal fade" id="noticeDetail" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title" id="myModalLabel">NOTICE</h3>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<h4>${noticeList.get(0).noticeContent}</h4>
-				</div>
-			</div>
-		</div>
-	</div><!-- End / Modal -->
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-	
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 id="modal-title" class="modal-title"></h4>
-				</div>
-				<div class="modal-body">
-					<table class="table">
-						<tr>
-							<td>제목</td>
-							<td><input class="form-control" id="noticeTitle" type="text"></td>
-						</tr>
-						<tr>
-							<td>내용</td>
-							<td><textarea class="form-control" id="noticeContent" rows="10"></textarea></td>
-						</tr>					
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button id="modalSubmit" type="button" class="btn btn-success">Submit</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	</div>
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->

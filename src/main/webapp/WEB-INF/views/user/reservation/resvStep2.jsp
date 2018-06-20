@@ -57,27 +57,30 @@ description : 예약하기
 		<script src="https://code.highcharts.com/modules/data.js"></script>
 		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
 		<script type="text/javascript">
-			// this 클래스 btn-info => btn-default
-			// 		  btn-default => btn-info
 			var initNum = 0;
 			var finNum = 0;
+			var iniDate = 0;
+			var finDate = 0;
+			var iniMonth = '';
+			var finMonth = '';
 			var isFirst = true;
+			var isFirstDate = true;
 			var nowDay = new Date();
 			$(document).ready(function(){
+				setCalendar(new Date(nowDay.getFullYear(), nowDay.getMonth(),1));
 				var today = 10000*nowDay.getFullYear()+100*(nowDay.getMonth()+1)+nowDay.getDate();
 				$('#today').val(today);
+				
+				// 단기 예약
 				$('.times').click(function(){
 					var $this = $(this);
 					var $btn = parseInt($this.attr('id'));
 					if(isFirst){
-						if($this.hasClass('disabled')){
+						if($this.hasClass('disabled')||$this.hasClass('btn-danger')){
 							return;
 						}else if($this.hasClass('btn-default')){
 							$this.removeClass('btn-default');
 							$this.addClass('btn-info');
-						}else if($this.hasClass('btn-info')){
-							$this.removeClass('btn-info');
-							$this.addClass('btn-default');
 						}
 						initNum = $btn;
 						isFirst = false;						
@@ -91,7 +94,7 @@ description : 예약하기
 						finNum = $btn;
 						isFlag = true;
 						for(var i=initNum; i<=finNum; i++){
-							if($('#'+i).hasClass('disabled')) {
+							if($('#'+i).hasClass('disabled')||$('#'+i).hasClass('btn-danger')) {
 								isFlag = false;
 							}
 						}
@@ -105,6 +108,54 @@ description : 예약하기
 						} else{
 							alert('유효하지 않은 시간입니다.');
 							isFlag = true;
+						}
+					}
+				})
+				
+				// 장기 예약
+				$('.calCell').click(function(){
+					if(!$(this).hasClass('date')) return;
+					var $this = $(this);
+					var $date = parseInt($this.text());
+					if(isFirstDate){
+						if($this.hasClass('kdb-disabled')||$this.hasClass('kdb-resv')){
+							console.log('return!');
+							return;
+						}else {
+							$this.addClass('kdb-select');
+						}
+						iniDate = $date;
+						iniMonth = $('#selMonth').text();
+						isFirstDate = false;						
+					} else if(iniDate * finDate){
+						isFirstDate = true;
+						$('#startTime').val('');
+						$('#finTime').val('');
+						iniDate = 0;
+						finDate = 0;
+						$('.date').removeClass('kdb-select');
+					} else{
+						var selectDate = $('#selMonth').text()+'-'+($date<10?'0'+$date:$date);
+						var initialDate = iniMonth+'-'+(iniDate<10?'0'+iniDate:iniDate);
+						console.log('seletcDate : '+selectDate);
+						console.log('initailDate : '+initialDate);
+						console.log(selectDate >= initialDate);
+						if(selectDate >= initialDate) {
+							finDate = $date;
+							finMonth = $('#selMonth').text();
+						}
+						else {
+							alert('끝 시간은 시작 시간보다 뒤의 시간이어야 합니다.');
+							return;
+						}
+						if($('.date:gt('+(iniDate-2)+')').hasClass('kdb-resv') && !$('.date:gt('+(finDate-2)+')').hasClass('kdb-resv')){
+							alert('유효하지 않은 시간입니다.');
+						} else{
+							$('.date:gt('+(iniDate-2)+')').addClass('kdb-select');
+							$('.date:gt('+(finDate-1)+')').removeClass('kdb-select');
+							
+							$('#startTime').val(iniMonth+'-'+(iniDate<10?'0'+iniDate:iniDate));
+							$('#finTime').val(finMonth+'-'+(finDate<10?'0'+finDate:finDate)); 
 						}
 					}
 				})
@@ -155,9 +206,6 @@ description : 예약하기
 								$('#maxCnt').val(data.roomInfo[0].mtAvail);
 								$('#roomDescription').append(data.roomInfo[0].mtDescription);
 							} else if($roomType=='E'){
-								console.log('!!');
-								console.log($roomSeq);
-								console.log(data.roomInfo[0].eduSeq);
 								$('.img-box-kdb').append('<img src="/getByteEduImage/'+data.roomInfo[0].eduSeq+'" />');
 								$('#roomPrice').append('<p>30분 당 가격 : '+data.roomInfo[0].eduPrice+' 원</p>');
 								$('#roomPrice').append('<p>하루 가격 : '+parseInt(data.roomInfo[0].eduPrice)*16+' 원</p>');
@@ -182,9 +230,8 @@ description : 예약하기
 										str += '</p>';
 										$('#itemBox').append(str);
 									} else {
-										str += ' '+itemName+'<input type="checkbox" name="'+itemType+'" value="'+itemSeq+'" />';
+										str += ' / '+itemName+'<input type="checkbox" name="'+itemType+'" value="'+itemSeq+'" />';
 									}
-									console.log(i+'. : '+itemSeq);
 								}
 							} else {
 									$('#itemBox').append('<p>사용 가능한 비품이 없습니다.</p>');
@@ -211,77 +258,25 @@ description : 예약하기
 						$('#timeButton').attr('class','displayNone onOffBox');
 						$('#calendarButton').attr('class','displayNone onOffBox');
 						$('#calendarButton').attr('class','dispalyBlock onOffBox');
+						alreadyBooked(nowDay.getFullYear()+'-'+((nowDay.getMonth()+1)<10?'0'+(nowDay.getMonth()+1):(nowDay.getMonth()+1)));
 					}
 				})
 				
 				// date Select
 				$('#selDate').on("change",function(){
 					var $selDate = $(this).val();
-					var $rsvType = $('#rsvType').val();
-					var $roomSeq = $('#roomSeq').val();
-					var currentDay = nowDay.getFullYear()+'-'+((nowDay.getMonth()+1<10?'0'+(nowDay.getMonth()+1):nowDay.getMonth()+1))+'-'+nowDay.getDate();
-					$.ajax({
-						type:"POST",
-						url:"/resv/resvCheck.do",
-						data:{
-							"rsvType" : $rsvType,
-							"selDate" : $selDate,
-							"roomSeq" : $roomSeq
-						},
-						dataType: "JSON",
-						success: function(data) {
-							$('.times').attr('class','times btn btn-default btn-kdb-times');
-							if(currentDay > $selDate){
-								$('.times').addClass('disabled');
-							} else if(currentDay == $selDate){
-								var curTime = nowDay.getMinutes()<40?nowDay.getHours()*100+nowDay.getMinutes()+20:(nowDay.getHours()+1)*100+nowDay.getMinutes()-40;
-								$('.times').each(function(){
-									var $this = $(this);
-									var $distime = parseInt($this.attr('id'));
-									if(curTime>=$distime){
-										$this.addClass('disabled');
-									}
-								})	
-							}
-							for(var i=0; data.resvList.length; i++){
-								var iniDate = validTimeView(data.resvList[i].rsvDate,0);
-								var finDate = validTimeView(data.resvList[i].rsvFdate,1);
-								$('.times').each(function(idx){
-									var $this = $(this);
-									$timeNum = parseInt($this.attr('id'));
-									if(iniDate<=$timeNum && finDate>=$timeNum){
-										$this.removeClass('btn-default');
-										$this.addClass('btn-danger');
-									}
-								})
-							}
-							
-						}
-			    });
-				})
-				// function
-				function validTimeView(num,idx){
-					var no = parseInt(num);
-					var q = parseInt(no / 100);
-					var x = no % 100;
-					if(no==900 || no==2230) return no;
-					if(!idx) {
-						if(x==30){
-							x = 0;
-						} else {
-							q = q-1;
-							x = 30;
-						}
-					} else {
-						if(x==0){
-							x = 30;
-						} else {
-							q = q+1;
-							x = 0;
-						}
-					}
-					return 100*q+x;
-				}
+					alreadyBooked($selDate); 
+				});
+				// 이전달 버튼
+	      $('#prev').on('click', function(event) {
+	        setCalendar(new Date(parseInt($('#year').text()), parseInt($('#mon').text()) - 2,1));
+					alreadyBooked($('#selMonth').text());
+	      });
+	      // 다음달 버튼
+	      $('#next').on('click', function(event) {
+	        setCalendar(new Date(parseInt($('#year').text()), parseInt($('#mon').text()),1));
+					alreadyBooked($('#selMonth').text());
+	      });
 			})
 			
 			// prev page
@@ -300,12 +295,137 @@ description : 예약하기
 				if(submitFlag) $('form').submit();
 				else alert('정보를 모두 입력해주세요.');
 			}
+			
+			// function ajax
+			function alreadyBooked($selDate){
+				var $rsvType = $('#rsvType').val();
+				var $roomSeq = $('#roomSeq').val();
+				var currentDay = nowDay.getFullYear()+'-'+((nowDay.getMonth()+1<10?'0'+(nowDay.getMonth()+1):nowDay.getMonth()+1))
+						+'-'+(nowDay.getDate()<10?'0'+nowDay.getDate():nowDay.getDate());
+				var curMonth = nowDay.getFullYear()+'-'+((nowDay.getMonth()+1<10?'0'+(nowDay.getMonth()+1):nowDay.getMonth()+1));
+				$.ajax({
+					type:"POST",
+					url:"/resv/resvCheck.do",
+					data:{
+						"rsvType" : $rsvType,
+						"selDate" : $selDate,
+						"roomSeq" : $roomSeq
+					},
+					dataType: "JSON",
+					success: function(data) {
+						if($rsvType == 'S'){
+							$('.times').attr('class','times btn btn-default btn-kdb-times');
+							if(currentDay > $selDate){
+								$('.times').addClass('disabled');
+							} else if(currentDay == $selDate){
+								var curTime = nowDay.getMinutes()<40?nowDay.getHours()*100+nowDay.getMinutes()+20:(nowDay.getHours()+1)*100+nowDay.getMinutes()-40;
+								$('.times').each(function(){
+									var $this = $(this);
+									var $distime = parseInt($this.attr('id'));
+									if(curTime>=$distime){
+										$this.addClass('disabled');
+									}
+								})	
+							}
+							for(var i=0;i< data.resvList.length; i++){
+								if(data.resvList[i].bossYn=='N' || data.resvList[i].mgrYn=='N') continue;
+								var iniTime = validTimeView(data.resvList[i].rsvDate,0);
+								var finTime= validTimeView(data.resvList[i].rsvFdate,1);
+								$('.times').each(function(idx){
+									var $this = $(this);
+									$timeNum = parseInt($this.attr('id'));
+									if(iniTime<=$timeNum && finTime>=$timeNum){
+										$this.removeClass('btn-default');
+										$this.addClass('btn-danger');
+									}
+								})
+							}
+						} else {
+							$('.calCell').removeClass('kdb-select');
+							$('.calCell').removeClass('kdb-disabled');
+							$('.calCell').removeClass('kdb-resv');
+							console.log('curMonth : '+curMonth);
+							console.log('selDate : '+$selDate);
+							console.log(curMonth > $selDate);
+							if(curMonth > $selDate){
+								if($('.calCell').hasClass('date')) {
+									$('.calCell').addClass('kdb-disabled');
+								}
+							} else if(curMonth == $selDate) {
+								$('.date').each(function(){
+									if(nowDay.getDate()>parseInt($(this).text())){
+										$(this).addClass('kdb-disabled');
+									}
+								})
+							}
+							for(var i=0; i<data.resvList.length; i++){
+								if(data.resvList[i].bossYn=='N' || data.resvList[i].mgrYn=='N') continue;
+								var rsvDateArray = data.resvList[i].rsvDate.split('-');
+								var rsvFdateArray = data.resvList[i].rsvFdate.split('-');
+								$('.date').each(function(idx){
+									var $this = $(this);
+									if(parseInt(rsvDateArray[2])<=parseInt($this.text()) && parseInt(rsvFdateArray[2])>=parseInt($this.text())){
+										$this.addClass('kdb-resv');
+									}
+								})
+							}
+						}
+					}
+		    });
+			}
+			// function
+			function validTimeView(num,idx){
+				var no = parseInt(num);
+				var q = parseInt(no / 100);
+				var x = no % 100;
+				if(no==900 || no==2230) return no;
+				if(!idx) {
+					if(x==30){
+						x = 0;
+					} else {
+						q = q-1;
+						x = 30;
+					}
+				} else {
+					if(x==0){
+						x = 30;
+					} else {
+						q = q+1;
+						x = 0;
+					}
+				}
+				return 100*q+x;
+			}
+			
+			 /*
+		    날짜 뿌려주기
+		    parameter : 선택 월 Date instance
+		    */
+		    function setCalendar(_date) {
+		      $('#year').text(_date.getFullYear());
+		      $('#mon').text((_date.getMonth()+1)<10?'0'+(_date.getMonth()+1):(_date.getMonth()+1));
+		      var nowWeek = _date.getDay();
+		      var lastday = new Date(_date.getFullYear(), _date.getMonth() + 1, 0).getDate();
+		      var $td = $('table .calCell' + (nowWeek == 0 ? '' : ':gt(' + (nowWeek - 1) + ')'));
+		      var daycount = 1; // 1일부터 시작
+		      $('table .calCell').text('').removeClass('date'); // 초기화
+		      $td.each(function(index) {
+		        $(this).text(daycount);
+		        $(this).addClass('date');
+		        daycount++;
+		        if (daycount > lastday) {
+		          return false;
+		        }
+		      });
+		    }
+			
 		</script>
 		<style type="text/css">
 			.btn-kdb{
-				width:100%;
+				width:80%;
 				height:40px;
 				margin: 10px;
+				font-size: 0.9em;
 			}
 			.awe-section{
 				padding:40px;
@@ -319,6 +439,13 @@ description : 예약하기
 			.displayBlock{
 				display: block;
 			}
+			#calendarButton{
+				margin: 0 10%;
+			}
+			.table-kdb td{
+				padding: 5px 0;
+			}
+			
 		</style>
 	</head>
 	
@@ -349,12 +476,13 @@ description : 예약하기
 				<!-- End / Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
+						<div class="table-responsive-lg">
 						<table class="table text-center">
 							<colgroup>
-								<col width="20%"/>
-								<col width="20%"/>
 								<col width="10%"/>
-								<col width="60%"/>
+								<col width="10%"/>
+								<col width="10%"/>
+								<col width="70%"/>
 							</colgroup>
 							<thead>
 								<tr>
@@ -394,12 +522,14 @@ description : 예약하기
 												<div class="times btn btn-default btn-kdb-times" id="${vSts.index*100+30}">${idx }:30</div>
 											</c:forEach>
 										</div>
-										<div id="calendarButton" class="displayNone onOffBox">
+										<div id="calendarButton" class="text-center displayNone onOffBox">
+											<jsp:include page="/WEB-INF/views/user/reservation/calendar.jsp" />
 										</div>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+						</div>
 						<div class="pull-left ">
 							<button type="button" class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
 						</div>
@@ -433,22 +563,22 @@ description : 예약하기
 					<div class="modal-body">
 						<div class="text-center img-box-kdb">
 						</div>
-						<table class="table table-hover">
+						<table class="table table-hover table-kdb">
 							<tr>
 								<td>방 가격</td>
-								<td id="roomPrice" class="ajax-clean"></td>
+								<td id="roomPrice" class="ajax-clean text-left"></td>
 							</tr>
 							<tr>
 								<td>최대 인원</td>
-								<td id="roomAvail" class="ajax-clean" ></td>
+								<td id="roomAvail" class="ajax-clean text-left" ></td>
 							</tr>
 							<tr>
 								<td>기타 설명</td>
-								<td id="roomDescription" class="ajax-clean"></td>
+								<td id="roomDescription" class="ajax-clean text-left"></td>
 							</tr>
 							<tr>
 								<td>사용 가능 비품</td>
-								<td id="itemBox" class="ajax-clean"></td>
+								<td id="itemBox" class="ajax-clean text-left"></td>
 							</tr>
 						</table>
 					</div>

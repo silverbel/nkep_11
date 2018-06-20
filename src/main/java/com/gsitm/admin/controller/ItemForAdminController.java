@@ -176,4 +176,5 @@ public class ItemForAdminController {
 		mv.setViewName("redirect:/getItemListForAdmin.do");
 		return mv;
 	}
+	
 }
