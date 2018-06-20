@@ -78,7 +78,7 @@ description :
   <script type="text/javascript">
       
   </script>
-	<table class="table">
+	<table class="table table-responsive">
     <tr>
       <th class='header'><button type="button" id="prev">&lt;</button></th>
       <th class='header' colspan="5" id="selMonth"><span id="year"></span>-<span id="mon"></span></th>

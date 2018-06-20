@@ -315,12 +315,13 @@ description : 예약하기
 								})	
 							}
 							for(var i=0; data.resvList.length; i++){
-								var iniDate = validTimeView(data.resvList[i].rsvDate,0);
-								var finDate = validTimeView(data.resvList[i].rsvFdate,1);
+								if(data.resvList[i].bossYn=='N' || data.resvList[i].mgrYn=='N') continue;
+								var iniTime = validTimeView(data.resvList[i].rsvDate,0);
+								var finTime= validTimeView(data.resvList[i].rsvFdate,1);
 								$('.times').each(function(idx){
 									var $this = $(this);
 									$timeNum = parseInt($this.attr('id'));
-									if(iniDate<=$timeNum && finDate>=$timeNum){
+									if(iniTime<=$timeNum && finTime>=$timeNum){
 										$this.removeClass('btn-default');
 										$this.addClass('btn-danger');
 									}
@@ -343,9 +344,9 @@ description : 예약하기
 								})
 							}
 							for(var i=0; data.resvList.length; i++){
-								
-							var rsvDateArray = data.resvList[i].rsvDate.split('-');
-							var rsvFdateArray = data.resvList[i].rsvFdate.split('-');
+								if(data.resvList[i].bossYn=='N' || data.resvList[i].mgrYn=='N') continue;
+								var rsvDateArray = data.resvList[i].rsvDate.split('-');
+								var rsvFdateArray = data.resvList[i].rsvFdate.split('-');
 								$('.date').each(function(idx){
 									var $this = $(this);
 									if(parseInt(rsvDateArray[2])<=parseInt($this.text()) && parseInt(rsvFdateArray[2])>=parseInt($this.text())){
@@ -406,9 +407,10 @@ description : 예약하기
 		</script>
 		<style type="text/css">
 			.btn-kdb{
-				width:100%;
+				width:80%;
 				height:40px;
 				margin: 10px;
+				font-size: 0.9em;
 			}
 			.awe-section{
 				padding:40px;
@@ -461,10 +463,10 @@ description : 예약하기
 					<div class="container">
 						<table class="table text-cente table-responsive">
 							<colgroup>
-								<col width="20%"/>
-								<col width="20%"/>
 								<col width="10%"/>
-								<col width="60%"/>
+								<col width="10%"/>
+								<col width="10%"/>
+								<col width="70%"/>
 							</colgroup>
 							<thead>
 								<tr>

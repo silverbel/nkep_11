@@ -196,7 +196,6 @@ public class ResvController {
 		
 		List<?> roomInfo = wService.getAnyRoomInfo(roomType, roomSeq);
 		List<ResvItemInfoDTO> itemlist = rService.roomItemListCheckByRoomSeqAjax(workSeq);
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+itemlist.size());
 		Map<String, Object> roomItemList = new HashMap<>();
 		roomItemList.put("roomItemList", itemlist);
 		roomItemList.put("roomInfo", roomInfo);
