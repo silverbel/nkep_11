@@ -94,7 +94,10 @@ description : 예약하기
 						var val = $('#empListTable').DataTable().row(this).data();
 						if(val.blackYn != 'Y'){
 							var str = $emp.val();
-							
+							if(str.match(val.empId)){
+								alert('이미 추가한 사원입니다.');
+								return;
+							}
 							str += val.empId + '/';
 							$emp.val(str);
 							

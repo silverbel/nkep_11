@@ -78,6 +78,8 @@ public class ResvController {
 		return "user/resrvation/resvStep4";
 	}
 	
+	
+	// ajax
 	@ResponseBody
 	@RequestMapping(value="resvCheck.do", method=RequestMethod.POST)
 	public Map<?,?> resvAlreadyBookedCheck(@RequestParam("rsvType") String rsvType,
@@ -94,10 +96,8 @@ public class ResvController {
 			@RequestParam("roomType") String roomType, @RequestParam("workSeq") String workSeq){
 		
 		List<?> roomInfo = wService.getAnyRoomInfo(roomType, roomSeq);
-		/*for(Object ed : roomInfo) {
-			System.out.println(((EducationRoomDTO) ed).toString());
-		}*/
 		List<ResvItemInfoDTO> itemlist = rService.roomItemListCheckByRoomSeqAjax(workSeq);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+itemlist.size());
 		Map<String, Object> roomItemList = new HashMap<>();
 		roomItemList.put("roomItemList", itemlist);
 		roomItemList.put("roomInfo", roomInfo);

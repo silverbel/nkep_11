@@ -72,8 +72,8 @@ public class ResvDAOImpl implements ResvDAO {
 	}
 
 	@Override
-	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq) {
-		return sqlSession.selectList("resv.roomItemListCheckByRoomSeqAjax", roomSeq);
+	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String workSeq) {
+		return sqlSession.selectList("resv.roomItemListCheckByRoomSeqAjax", workSeq);
 	}
 	
 	@Override
