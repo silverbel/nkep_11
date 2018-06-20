@@ -38,7 +38,7 @@ public class LoginController {
 		if (error != null) {
 			model.addAttribute("err","Wrong ID or PASSWORD!");
 		}
-		return "/login/login";
+		return "/login";
 	}
 	
 	@RequestMapping(value="/logout.do", method=RequestMethod.GET)

@@ -43,10 +43,9 @@ public class MtRoomRsvManageController {
 	
 	@Resource(name="resvService")
 	private ResvService rService;
-	
 			
 	@RequestMapping(value="/mtRoomRsvManagement.do", method=RequestMethod.GET)
-	public ModelAndView myPageRsvView(ModelAndView mv, ResvDTO dto) {
+	public ModelAndView mtRsvView(ModelAndView mv, ResvDTO dto) {
 		List<ResvDTO> list = rService.mtRoomRsvList(dto);
 		mv.setViewName("mAdmin/mRsvList");
 		mv.addObject("mtRoomRsvList", list);

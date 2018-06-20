@@ -104,6 +104,7 @@ description :
 								<tr>
 									<th class="text-center" width="50%">신청자</th>
 									<th class="text-center" width="20%">가격</th>
+									<th></th>
 								</tr>
 								</thead>
 								<tbody>
@@ -111,6 +112,10 @@ description :
 								<tr>
 										<td class="text-center">${list.applicant}</td>
 										<td class="text-center">${list.rsvPrice}</td>
+										<td>
+											<button type="button" class="btn btn-info">승인</button>
+											<button type="button" class="btn btn-danger">반려</button>
+										</td>
 								</tr>
 							</c:forEach>
 							</tbody>
