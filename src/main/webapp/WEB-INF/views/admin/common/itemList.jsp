@@ -106,7 +106,6 @@ description :
 									<th class="text-center" width="15%">자재 이름</th>
 									<th class="text-center" width="15%">자재 가격</th>
 									<th class="text-center" width="15%">자재 단위</th>
-									<th class="text-center" width="15%">자재 단위</th>
 								</tr>
 								</thead>
 								<tbody>
