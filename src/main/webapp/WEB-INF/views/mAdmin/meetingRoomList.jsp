@@ -204,16 +204,16 @@
 	<script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
 	<!-- Flot Charts JavaScript -->
-	<script src="../vendor/flot/excanvas.min.js"></script>
-	<script src="../vendor/flot/jquery.flot.js"></script>
-	<script src="../vendor/flot/jquery.flot.pie.js"></script>
-	<script src="../vendor/flot/jquery.flot.resize.js"></script>
-	<script src="../vendor/flot/jquery.flot.time.js"></script>
-	<script src="../vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-	<script src="../data/flot-data.js"></script>
+	<script src="/vendor/flot/excanvas.min.js"></script>
+	<script src="/vendor/flot/jquery.flot.js"></script>
+	<script src="/vendor/flot/jquery.flot.pie.js"></script>
+	<script src="/vendor/flot/jquery.flot.resize.js"></script>
+	<script src="/vendor/flot/jquery.flot.time.js"></script>
+	<script src="/vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
+	<script src="/data/flot-data.js"></script>
 
 	<!-- Custom Theme JavaScript -->
-	<script src="../dist/js/sb-admin-2.js"></script>
+	<script src="/dist/js/sb-admin-2.js"></script>
 
 </body>
 

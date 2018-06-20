@@ -1,7 +1,7 @@
 <%--
 subject    : 
-author     : 남동길
-date       : 2018. 6. 14.
+author     : 은종현
+date       : 2018. 6. 20.
 description :
  
   [이름]   [수정일]     [내용]
@@ -61,18 +61,21 @@ description :
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
-    $(document).ready(function($) {
-		$(document).ready(function() {
-	        $('#dataTables-authority').DataTable({
-	             responsive: true
-	            ,ordering: true
-	            ,"bAutoWidth": true
-                ,"columnDefs": [
-                               { "orderable": false, "targets": 0 }
-                             ] 
-	        });
-	    });
-	});
+	    $(document).ready(function($) {
+			$(document).ready(function() {
+		        $('#dataTables-authority').DataTable({
+		             responsive: true
+		            ,ordering: true
+		            ,"bAutoWidth": true
+	                ,"columnDefs": [
+	                               { "orderable": false, "targets": 0 }
+	                             ] 
+		        });
+		    });
+		});
+    	function fn_go_list(url) {
+    		location.href = "/deleteNotice.do?noticeNo="+url;
+    	}
     </script>
 </head>
 <body>
@@ -83,110 +86,52 @@ description :
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">권한 관리</h1>
+					<h1 class="page-header">예약 관리</h1>
 				</div>
 				<!-- /.col-lg-12 -->
 			</div>
+			
 			<!-- /.row -->
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">현재 관리자 리스트</div>
-						<!-- /.panel-heading -->
-						<div class="panel-body">
-							<table class="table table-bordered">
-								<tr>
-									<th class="text-center">사용자 아이디</th>
-									<th class="text-center">사용자 이름</th>
-									<th class="text-center">사용자 권한</th>
-									<th class="text-center">사용자 팀</th>
-									<th class="text-center">사용자 이메일</th>
-									<th colspan="2"></th>
-								</tr>
-							<c:forEach var="mgr" items="${employeeMgrList}" varStatus="status">
-								<tr>
-										<td class="text-center">${mgr.empId}</td>
-										<td class="text-center">${mgr.empName}</td>
-										<td class="text-center">${mgr.role}</td>
-										<td class="text-center">${mgr.teamSeq}</td>
-										<td class="text-center">${mgr.email }</td>
-										<td colspan="2" class="text-center">
-										<c:choose>
-											<c:when test="${ mgr.empId eq 'sysmgr' }">
-       											 시스템 관리자입니다.
-    										</c:when>
-    										<c:otherwise>
-    										<form action="/changeEmpMgrToNormal.do" method="post" >
-    											<div class="form-inline">
-    											<input type="hidden" id="empId" name="empId" value="${mgr.empId }"/>
-										        <input type="text" id="teamSeq" name="teamSeq" class="form-control" placeholder="배정하실 팀을 입력하세요."/>&nbsp;&nbsp;
-										        <input type="submit" class="btn btn-danger" value="일반 회원">
-										        <%-- id="manageBtn${status.index }" --%>
-											</div>
-											</form> 
-										    </c:otherwise>
-
-										</c:choose>
-										</td>
-									</tr>
-							</c:forEach>
-							</table>
-						</div>
-						<!-- /.panel-body -->
-					</div>
-					<!-- /.panel -->
-				</div>
-				<!-- /.col-lg-12 -->
-
-			</div>
-			<!-- /.row -->
-			<!-- /.row -->
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">회원 리스트</div>
+						<div class="panel-heading">회의실 예약 관리</div></div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped table-hover" id="dataTables-authority" data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10'>
 								<thead>
 								<tr>
-									<th class="text-center">사용자 아이디</th>
-									<th class="text-center">사용자 이름</th>
-									<th class="text-center">사용자 권한</th>
-									<th class="text-center">사용자 팀</th>
-									<th class="text-center">사용자 이메일</th>
-									<th class="text-center">변경</th>
+									<th class="text-center" width="50%">신청자</th>
+									<th class="text-center" width="20%">가격</th>
+									<th></th>
 								</tr>
 								</thead>
 								<tbody>
-							<c:forEach var="normal" items="${employeeNormalList}">
+							<c:forEach var="list" items="${mtRoomRsvList}" varStatus="status">
 								<tr>
-										<td class="text-center">${normal.empId}</td>
-										<td class="text-center">${normal.empName}</td>
-										<td class="text-center">${normal.role}</td>
-										<td class="text-center">${normal.teamSeq}</td>
-										<td class="text-center">${normal.email }</td>
-										<td class="text-center"><a href="/changeEmpNormalToMgr.do?empId=${normal.empId }&role=M_MGR"
-											class="btn btn-primary">회의실관리자</a> <a href="/changeEmpNormalToMgr.do?empId=${normal.empId }&role=E_MGR"
-											class="btn btn-info">교육실관리자</a></td>
-									</tr>
+										<td class="text-center">${list.applicant}</td>
+										<td class="text-center">${list.rsvPrice}</td>
+										<td>
+											<button type="button" class="btn btn-info">승인</button>
+											<button type="button" class="btn btn-danger">반려</button>
+										</td>
+								</tr>
 							</c:forEach>
 							</tbody>
 							</table>
 						</div>
+						
 						<!-- /.panel-body -->
 					</div>
 					<!-- /.panel -->
 				</div>
 				<!-- /.col-lg-12 -->
-
 			</div>
 			<!-- /.row -->
 		</div>
 		<!-- /#page-wrapper -->
-</div>
-	</div>
+		</div>
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->

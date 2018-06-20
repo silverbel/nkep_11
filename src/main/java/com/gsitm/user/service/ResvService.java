@@ -38,6 +38,9 @@ public class ResvService {
 	@Autowired
 	private MemberDAO mDao;
 	
+	public List<ResvDTO> mtRoomRsvList(ResvDTO dto) {
+		return rDao.mtRoomRsvList(dto);
+	}
 	
 	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {
 		return rDao.showResvUserList(rsvSeq);

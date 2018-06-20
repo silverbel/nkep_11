@@ -35,6 +35,11 @@ public class ResvDAOImpl implements ResvDAO {
 	public void create(ResvDTO dto){
 		sqlSession.insert("resv.insert", dto);
 	}
+	/* 승인 페이지 */
+	@Override
+	public List<ResvDTO> mtRoomRsvList(ResvDTO dto) {
+		return sqlSession.selectList("resv.mtRoomRsvList");
+	}
 
 	@Override
 	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {
