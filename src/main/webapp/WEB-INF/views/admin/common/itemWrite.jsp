@@ -11,14 +11,14 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Bootstrap Admin Theme</title>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<title>관리자 PAGE :: 자재 등록</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	var sel_files = [];
 	$(document).ready(function() {
-		$('#input_imgs').on("change",handleImgsFilesSelect);
-		$('#input_imgs2').on("change",handleImgsFilesSelect2);
-		$('#input_imgs3').on("change",handleImgsFilesSelect3);
+		$('#input_imgs').on("change", handleImgsFilesSelect);
+		$('#input_imgs2').on("change", handleImgsFilesSelect2);
+		$('#input_imgs3').on("change", handleImgsFilesSelect3);
 	});
 	function handleImgsFilesSelect(e) {
 		sel_files = [];
@@ -27,40 +27,43 @@
 		var filesArr = Array.prototype.slice.call(files);
 
 		var index = 0;
-		filesArr.forEach(function(f) {
-			if(!f.type.match("image.*")){
-				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
-			}
+		filesArr
+				.forEach(function(f) {
+					if (!f.type.match("image.*")) {
+						alert("확장자는 이미지 확장자만 가능합니다.");
+						return;
+					}
 
-			sel_files.push(f);
+					sel_files.push(f);
 
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result +"\" data-file='"+f.name+"' class='selProductFile' title='Click to remove' width=200px height=200px></a>";
-				/* var img_html = "<img src=\"" + e.target.result + "\" width=200px height=200px />";
-				$(".imgs_wrap").append(img_html); */
-				$(".imgs_wrap").append(html);
-				index++;
-			}
-			reader.readAsDataURL(f);
-			
-		});
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("
+								+ index
+								+ ")\" id=\"img_id_"
+								+ index
+								+ "\"><img src=\"" + e.target.result +"\" data-file='"+f.name+"' class='selProductFile' title='Click to remove' width=200px height=200px></a>";
+						/* var img_html = "<img src=\"" + e.target.result + "\" width=200px height=200px />";
+						$(".imgs_wrap").append(img_html); */
+						$(".imgs_wrap").append(html);
+						index++;
+					}
+					reader.readAsDataURL(f);
+
+				});
 	}
 
-	
-	function deleteImageAction(index){
-		console.log("index : "+index);
+	function deleteImageAction(index) {
+		console.log("index : " + index);
 		sel_files.splice(index, 1);
-		if(sel_files.length === 0){
+		if (sel_files.length === 0) {
 			$('.imgs_wrap').empty();
 		}
 		var img_id = "#img_id_" + index;
 		$(img_id).remove();
-		
+
 		console.log(sel_files);
 	}
-
 </script>
 <!-- Bootstrap Core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -89,9 +92,15 @@
 <body>
 
 	<div id="wrapper">
-
-		<jsp:include page="/WEB-INF/views/eAdmin/common/headerAndLeft.jsp"></jsp:include>
-
+		<c:if test="${'S_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/admin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${'E_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/eAdmin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${'M_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/mAdmin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
@@ -107,16 +116,18 @@
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="container">
-								<form action="newItemForAdmin.do" enctype="multipart/form-data" method="post">
+								<form action="newItemForAdmin.do" enctype="multipart/form-data"
+									method="post">
 									<div class="row">
 										<div class="col-25">
 											<label for="fname">근무지 선택</label>
 										</div>
 										<div class="col-75">
 											<select name="workSeq" class="form-control">
-											<c:forEach var="workSpace" items="${workSpaceList}">
-												<option value="${workSpace.workSeq }"><c:out value="${workSpace.workName }"/></option>
-											</c:forEach>
+												<c:forEach var="workSpace" items="${workSpaceList}">
+													<option value="${workSpace.workSeq }"><c:out
+															value="${workSpace.workName }" /></option>
+												</c:forEach>
 											</select>
 										</div>
 									</div>
@@ -130,8 +141,9 @@
 												placeholder="자재 이름" class="form-control">
 										</div>
 									</div>
-									<br><br>
-									<div class="row" >
+									<br>
+									<br>
+									<div class="row">
 										<div class="col-25">
 											<label for="itemType">자재 종류</label>
 										</div>
@@ -149,7 +161,8 @@
 											<label for="itemPrice">자재 가격</label>
 										</div>
 										<div class="col-75">
-											<input type="text" class="form-control" name="itemPrice" id="itemPrice" placeholder="자재 가격"/>
+											<input type="text" class="form-control" name="itemPrice"
+												id="itemPrice" placeholder="자재 가격" />
 										</div>
 									</div>
 									<br>
@@ -158,7 +171,8 @@
 											<label for="itemUnit">자재 단위</label>
 										</div>
 										<div class="col-75">
-											<input type="text" class="form-control" name="itemUnit" id="itemUnit" placeholder="자재 단위"/>
+											<input type="text" class="form-control" name="itemUnit"
+												id="itemUnit" placeholder="자재 단위" />
 										</div>
 									</div>
 									<br>
@@ -167,7 +181,8 @@
 											<label for="stCnt">자재 재고량</label>
 										</div>
 										<div class="col-75">
-											<input type="text" class="form-control" name="stCnt" id="stCnt" placeholder="자재 재고량"/>
+											<input type="text" class="form-control" name="stCnt"
+												id="stCnt" placeholder="자재 재고량" />
 										</div>
 									</div>
 									<br>
@@ -177,15 +192,16 @@
 										</div>
 										<div class="col-75">
 											<div>
-												 <input type="file" id="input_imgs" multiple name="files[]" maxlength="3"/>
+												<input type="file" id="input_imgs" multiple name="files[]"
+													maxlength="3" />
 											</div>
 											<div>
-												<div class="imgs_wrap">
-												</div>
+												<div class="imgs_wrap"></div>
 											</div>
 										</div>
 									</div>
-									<br><br>
+									<br>
+									<br>
 									<div class="row">
 										<div class="col-25">
 											<label for="itemDescription">자재 설명</label>

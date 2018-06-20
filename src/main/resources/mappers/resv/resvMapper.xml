@@ -117,8 +117,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
            , R.RSV_SEQ
            , R.WORK_SEQ
            , R.RSV_TYPE
-           , C.BOSS_YN
-           , C.MGR_YN
+           , IFNULL(C.BOSS_YN, 'NULL') AS BOSS_YN
+           , IFNULL(C.MGR_YN, 'NULL') AS MGR_YN
 		  FROM nkep_11.TB_RESERVATION R
 		  LEFT JOIN nkep_11.TB_CONFIRM C
 		    ON R.RSV_SEQ = C.RSV_SEQ
@@ -135,8 +135,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
            , R.RSV_SEQ
            , R.WORK_SEQ
            , R.RSV_TYPE
-           , C.BOSS_YN
-           , C.MGR_YN
+           , IFNULL(C.BOSS_YN, 'NULL') AS BOSS_YN
+           , IFNULL(C.MGR_YN, 'NULL') AS MGR_YN
 		  FROM nkep_11.TB_RESERVATION R
 		  LEFT JOIN nkep_11.TB_CONFIRM C
 		    ON R.RSV_SEQ = C.RSV_SEQ

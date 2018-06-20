@@ -10,7 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="com.gsitm.common.dto.ItemDTO" id="itemDTO" />
 	
 	<select id="getItemListForAdmin"  resultType="itemStockWorkspace">
-		SELECT ti.item_seq AS ITEM_SEQ,ITEM_TYPE, ITEM_NAME, ITEM_PRICE, ITEM_UNIT, ITEM_DESCRIPTION,ST_CNT,ws.work_seq AS WORK_SEQ,WORK_NAME 
+		SELECT ti.item_seq AS ITEM_SEQ,ITEM_TYPE, ITEM_NAME, ITEM_PRICE, ITEM_UNIT, ITEM_DESCRIPTION,ST_CNT,ws.work_seq AS WORK_SEQ,WORK_NAME
+					 , ti.ITEM_IMG, ti.ITEM_IMG2, ti.ITEM_IMG3
 		FROM nkep_11.TB_ITEM ti , nkep_11.TB_STOCK ts,nkep_11.TB_WORKSPACE ws 
 		WHERE ti.item_seq = ts.item_seq and ts.work_seq = ws.work_seq
 	</select>
@@ -30,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getItemByItemSeq" parameterType="itemStockWorkspace" resultType="itemStockWorkspace">
 		SELECT ti.item_seq AS ITEM_SEQ,ITEM_TYPE, ITEM_NAME, ITEM_PRICE, ITEM_UNIT, ITEM_DESCRIPTION,ST_CNT,ws.work_seq AS WORK_SEQ,WORK_NAME 
+					 , ti.ITEM_IMG, ti.ITEM_IMG2, ti.ITEM_IMG3
 		FROM nkep_11.TB_ITEM ti , nkep_11.TB_STOCK ts,nkep_11.TB_WORKSPACE ws 
 		WHERE ti.item_seq = ts.item_seq and ts.work_seq = ws.work_seq and ti.ITEM_SEQ = #{itemSeq} and ts.work_seq = #{workSeq}
 	</select>

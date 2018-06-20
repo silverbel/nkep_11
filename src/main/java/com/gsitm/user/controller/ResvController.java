@@ -33,9 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gsitm.admin.service.EmployeeForAdminService;
 import com.gsitm.admin.service.ItemForAdminService;
-import com.gsitm.admin.service.WorkSpaceForAdminService;
 import com.gsitm.common.dto.EducationRoomDTO;
 import com.gsitm.common.dto.EducationRoomPlusWSNameDTO;
 import com.gsitm.common.dto.EmployeeDTO;
@@ -43,7 +41,7 @@ import com.gsitm.common.dto.InsertResvDTO;
 import com.gsitm.common.dto.ItemDTO;
 import com.gsitm.common.dto.MeetingRoomDTO;
 import com.gsitm.common.dto.MeetingRoomPlusWSNameDTO;
-import com.gsitm.common.dto.ResvDTO;
+import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.RoomPlusWSNameDTO;
 import com.gsitm.common.dto.WorkSpaceDTO;
@@ -103,7 +101,9 @@ public class ResvController {
 	
 	@RequestMapping(value="resvStep3.do", method=RequestMethod.POST)
 	public String resvStep3(InsertResvDTO insert, HttpSession session) {
-		System.out.println(insert.toString());
+
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!" + insert.getStartTime());
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!" + insert.getFinTime());
 		session.setAttribute("insertResv", insert);
 		return "user/reservation/resvStep3";
 	}
@@ -183,7 +183,7 @@ public class ResvController {
 	@RequestMapping(value="resvCheck.do", method=RequestMethod.POST)
 	public Map<?,?> resvAlreadyBookedCheck(@RequestParam("rsvType") String rsvType,
 			@RequestParam("selDate") String selDate, @RequestParam("roomSeq") String roomSeq){
-		List<ResvDTO> list = rService.getResvInfoByDate(rsvType, selDate, roomSeq);
+		List<ResvConfirmInfoDTO> list = rService.getResvInfoByDate(rsvType, selDate, roomSeq);
 		Map<String, Object> resvList = new HashMap<>();
 		resvList.put("resvList", list);
 		return resvList;

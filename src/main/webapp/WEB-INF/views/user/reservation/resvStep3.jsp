@@ -67,13 +67,17 @@ description : 예약하기
 				$emp = $('#empId');
 				$('#empListTable').DataTable({         
 					pageLength : 5,
-					bPaginate : true,
+					responsive : {
+						breakpoints:[
+							{name:'empId', width:1250},
+							{name:'empName', width:1000},
+							{name:'teamName', width:750},
+							{name:'email', width:500},
+							{name:'blackYn', width:250}
+						]
+					},
 					bLengthChange : false,
-					lengthMenu : [10,25,50,"ALL"],
-					bAutoWidth : false,
-					processing : true,
 					ordering : true,
-					serverSide : false,
 					searching : true,
 					paging : true,
 					ajax : {
@@ -170,30 +174,34 @@ description : 예약하기
 				<!-- End / Section -->
 				<section class="awe-section bg-gray">
 					<div class="container">
-						<table class="table table-hover table-responsive" id="empListTable">
-							<thead>
-								<tr>
-									<td>사번</td>
-									<td>이름</td>
-									<td>소속</td>
-									<td>이메일</td>
-									<td>블랙리스트 여부</td>
-								</tr>
-							</thead>
-						</table>
-						<table class="table table-hover table-responsive">
-							<thead>
-								<tr>
-									<td>사번</td>
-									<td>이름</td>
-									<td>소속</td>
-									<td>이메일</td>
-									<td>삭제</td>
-								</tr>
-							</thead>
-							<tbody id="attendList">
-							</tbody>
-						</table>
+						<div class="table-responsive-lg">
+							<table class="table table-hover" id="empListTable">
+								<thead>
+									<tr>
+										<td>사번</td>
+										<td>이름</td>
+										<td>소속</td>
+										<td>이메일</td>
+										<td>블랙리스트 여부</td>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div class="table-responsive-lg">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<td>사번</td>
+										<td>이름</td>
+										<td>소속</td>
+										<td>이메일</td>
+										<td>삭제</td>
+									</tr>
+								</thead>
+								<tbody id="attendList">
+								</tbody>
+							</table>
+						</div>
 						<div class="pull-left ">
 							<button class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
 						</div>

@@ -67,12 +67,12 @@ public class ResvDAOImpl implements ResvDAO {
 	}
 
 	@Override
-	public List<ResvDTO> getResvShortInfoByDate(Map<?, ?> check) {
+	public List<ResvConfirmInfoDTO> getResvShortInfoByDate(Map<?, ?> check) {
 		return sqlSession.selectList("resv.getResvShortInfoByDate", check);
 	}
 
 	@Override
-	public List<ResvDTO> getResvLongInfoByDate(Map<?, ?> check) {
+	public List<ResvConfirmInfoDTO> getResvLongInfoByDate(Map<?, ?> check) {
 		return sqlSession.selectList("resv.getResvLongInfoByDate", check);
 	}
 

@@ -61,6 +61,8 @@ description : 예약하기
 			var finNum = 0;
 			var iniDate = 0;
 			var finDate = 0;
+			var iniMonth = '';
+			var finMonth = '';
 			var isFirst = true;
 			var isFirstDate = true;
 			var nowDay = new Date();
@@ -92,7 +94,7 @@ description : 예약하기
 						finNum = $btn;
 						isFlag = true;
 						for(var i=initNum; i<=finNum; i++){
-							if($('#'+i).hasClass('disabled')) {
+							if($('#'+i).hasClass('disabled')||$('#'+i).hasClass('btn-danger')) {
 								isFlag = false;
 							}
 						}
@@ -111,16 +113,19 @@ description : 예약하기
 				})
 				
 				// 장기 예약
-				$('.date').click(function(){
+				$('.calCell').click(function(){
+					if(!$(this).hasClass('date')) return;
 					var $this = $(this);
 					var $date = parseInt($this.text());
 					if(isFirstDate){
 						if($this.hasClass('kdb-disabled')||$this.hasClass('kdb-resv')){
+							console.log('return!');
 							return;
 						}else {
 							$this.addClass('kdb-select');
 						}
 						iniDate = $date;
+						iniMonth = $('#selMonth').text();
 						isFirstDate = false;						
 					} else if(iniDate * finDate){
 						isFirstDate = true;
@@ -130,18 +135,27 @@ description : 예약하기
 						finDate = 0;
 						$('.date').removeClass('kdb-select');
 					} else{
-						if($date >= iniDate) finDate = $date;
+						var selectDate = $('#selMonth').text()+'-'+($date<10?'0'+$date:$date);
+						var initialDate = iniMonth+'-'+(iniDate<10?'0'+iniDate:iniDate);
+						console.log('seletcDate : '+selectDate);
+						console.log('initailDate : '+initialDate);
+						console.log(selectDate >= initialDate);
+						if(selectDate >= initialDate) {
+							finDate = $date;
+							finMonth = $('#selMonth').text();
+						}
 						else {
 							alert('끝 시간은 시작 시간보다 뒤의 시간이어야 합니다.');
 							return;
 						}
-						if($('.date:gt('+(iniDate-2)+')').hasClass('kdb-resv') && !$('.date:gt('+finDate-2+')').hasClass('kdb-resv')){
+						if($('.date:gt('+(iniDate-2)+')').hasClass('kdb-resv') && !$('.date:gt('+(finDate-2)+')').hasClass('kdb-resv')){
 							alert('유효하지 않은 시간입니다.');
 						} else{
 							$('.date:gt('+(iniDate-2)+')').addClass('kdb-select');
 							$('.date:gt('+(finDate-1)+')').removeClass('kdb-select');
-							$('#startTime').val(iniDate);
-							$('#finTime').val(finDate); 
+							
+							$('#startTime').val(iniMonth+'-'+(iniDate<10?'0'+iniDate:iniDate));
+							$('#finTime').val(finMonth+'-'+(finDate<10?'0'+finDate:finDate)); 
 						}
 					}
 				})
@@ -218,7 +232,6 @@ description : 예약하기
 									} else {
 										str += ' / '+itemName+'<input type="checkbox" name="'+itemType+'" value="'+itemSeq+'" />';
 									}
-									console.log(i+'. : '+itemSeq);
 								}
 							} else {
 									$('#itemBox').append('<p>사용 가능한 비품이 없습니다.</p>');
@@ -314,7 +327,7 @@ description : 예약하기
 									}
 								})	
 							}
-							for(var i=0; data.resvList.length; i++){
+							for(var i=0;i< data.resvList.length; i++){
 								if(data.resvList[i].bossYn=='N' || data.resvList[i].mgrYn=='N') continue;
 								var iniTime = validTimeView(data.resvList[i].rsvDate,0);
 								var finTime= validTimeView(data.resvList[i].rsvFdate,1);
@@ -331,10 +344,12 @@ description : 예약하기
 							$('.calCell').removeClass('kdb-select');
 							$('.calCell').removeClass('kdb-disabled');
 							$('.calCell').removeClass('kdb-resv');
+							console.log('curMonth : '+curMonth);
+							console.log('selDate : '+$selDate);
+							console.log(curMonth > $selDate);
 							if(curMonth > $selDate){
 								if($('.calCell').hasClass('date')) {
 									$('.calCell').addClass('kdb-disabled');
-									console.log('!!');
 								}
 							} else if(curMonth == $selDate) {
 								$('.date').each(function(){
@@ -343,7 +358,7 @@ description : 예약하기
 									}
 								})
 							}
-							for(var i=0; data.resvList.length; i++){
+							for(var i=0; i<data.resvList.length; i++){
 								if(data.resvList[i].bossYn=='N' || data.resvList[i].mgrYn=='N') continue;
 								var rsvDateArray = data.resvList[i].rsvDate.split('-');
 								var rsvFdateArray = data.resvList[i].rsvFdate.split('-');

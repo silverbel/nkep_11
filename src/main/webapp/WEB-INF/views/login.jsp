@@ -17,136 +17,118 @@ description : 로그인 화면
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Title</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<meta name="format-detection" content="telephone=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<!-- Fonts-->
-		<link rel="stylesheet" type="text/css" href="/assets/fonts/fontawesome/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="/assets/fonts/pe-icon/pe-icon.css">
-		<!-- Vendors-->
-		<link rel="stylesheet" type="text/css" href="/assets/vendors/bootstrap/grid.css">
-		<link rel="stylesheet" type="text/css" href="/assets/vendors/magnific-popup/magnific-popup.min.css">
-		<link rel="stylesheet" type="text/css" href="/assets/vendors/swiper/swiper.css">
-		<!-- App & fonts-->
-		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Open+Sans:400,700">
-		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="/assets/css/main.css"><!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<![endif]-->
-		<link href="/assets/dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<!-- Custom fonts for this template -->
-		<link href="/assets/dist/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-		<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+		<title>로그인</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- DataTable CSS -->
+    <link href="/dist/css/dataTables.bootstrap.css" rel="stylesheet">
+	<!-- tabletools -->
+	<link href="/dist/css/dataTables.tableTools.css" rel="stylesheet" />
+	<!-- DataTables JavaScript -->
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/dist/js/jquery.dataTables.js"></script>
+    <script src="/dist/js/dataTables.bootstrap.js"></script>
+    <script src="/dist/js/dataTables.responsive.js"></script>
+	<script src="/dist/js/responsive.bootstrap.js"></script>
+	<!-- tabletools -->
+	<script src="/dist/js/dataTables.tableTools.js"></script>
+  
+<!-- Bootstrap Core CSS -->
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-		<!-- Plugin CSS -->
-		<link href="/assets/dist/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+<!-- MetisMenu CSS -->
+<link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
-		<!-- Custom styles for this template -->
-		<link href="/assets/dist/css/freelancer.css" rel="stylesheet">
-		
-		<!-- jQuery v2.1.4 -->
-		<script src="/dist/js/jquery.js"></script>
-		<!-- Bootstrap Core JavaScript -->
-		<script src="/dist/js/bootstrap.js"></script>
-		<!-- Custom Theme JavaScript -->
-		<!-- DatePicker JavaScript -->
-		<script src="/dist/js/moment-ko.js"></script>
-		<script src="/dist/js/transition.js"></script>
-		<script src="/dist/js/collapse.js"></script>
-		<script src="/dist/js/bootstrap-datetimepicker.js"></script>
-		<!-- DataTables JavaScript -->
-		<script src="/dist/js/jquery.dataTables.js"></script>
-		<script src="/dist/js/dataTables.bootstrap.js"></script>
-		<script src="/dist/js/dataTables.responsive.js"></script>
-		<script src="/dist/js/responsive.bootstrap.js"></script>
-		<!-- tabletools -->
-		<script src="/dist/js/dataTables.tableTools.js"></script>
-		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=19f4d6583e5d740e1acb04f6479a3579&libraries=services,clusterer,drawing"></script>
-		<script src="https://code.highcharts.com/highcharts.js"></script>
-		<script src="https://code.highcharts.com/modules/data.js"></script>
-		<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+<!-- Custom CSS -->
+<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+<!-- Morris Charts CSS -->
+<link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="../vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="/style.css">
 		<style type="text/css">
-			.kdb-box {
-				width: 70%;
-				margin:10px auto;
+			.tableSetting{
+				margin: 20px;
+				margin-bottom: 0;
+			}
+			h1 {
+				font-size: 2em;
+				font-weight: bolder;
+			}
+			.tableSetting tr td:first-child {
+				width: 70px;
+				height: 70px;
+			}
+			tr td:nth-child(2n) {
+				text-align: left;
+				padding: 0 0 0 10px;
+				width: 330px;
+			}
+			th {
+				border-top: 1px solid black;
+			}
+			#twinBtnContainer>.btn {
+				padding: 0 20px;
+			}
+			#loginBtn {
+				height: 100px;
+			}
+			#fieldSet {
+				height: 340px;
+				padding-bottom: 0;
+			}
+			#containerCenter {
+				padding: 50px;
+				margin-top: -250px;
+				margin-left: -350px;
+				border-radius: 30px 0 50px 0;
+				box-shadow: 0px 0px 100px #A9E2F3;
+			}
+			.twinBtn {
+				margin: 25px 25px;
+			}
+			img {
+				position: absolute;
+				top: 50px;
+				right: 50px;
+				width: 15%;
 			}
 		</style>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				
-			})
-		</script>
 	</head>
 	<body>
-		<div class="page-wrap" id="root">
-			
-			<!-- header -->
-			<!-- End / header -->
-			
-			<!-- Content-->
-			<div class="wil-content">
-				
-				<!-- Section -->
-				<section class="awe-section text-center">
-					<form action="/login.do" method="post">
-					<div class="kdb-box">
-						<table class="table">
-							<tr>
-								<th>ID</th>
-								<td><input type="text" name="username" class="form-control" /></td>
-							</tr>
-							<tr>
-								<th>PW</th>
-								<td><input type="password" name="password" class="form-control" /></td>
-							</tr>
-							<tr>
-								<th colspan="2">
-									<input type="submit" value="Log in!" class="btn btn-primary" />
-								</th>
-							</tr>
-							<tr>
-								<th colspan="2">${err }</th>
-							</tr>
-						</table>
+			<div id="containerCenter">
+				<img src="/logoM.png">
+				<h1>회의실 예약관리 시스템</h1>
+					<div>
+						<form action="/login.do" method="post" >
+							<table class="tableSetting table">
+								<colgroup>
+									<col width="30%">
+									<col width="70%">
+								</colgroup>
+								<tr>
+									<td><label for="idInput"><strong>사번</strong></label></td>
+									<td>
+										<select id="idInput" name="idInput" class="form-control">
+											<option value="1">IT1053</option>
+											<option value="2">회의실 관리자</option>
+											<option value="3">시스템 관리자</option>
+										</select>
+									</td>
+									<td rowspan="2"><button class="btn" id="loginBtn"><h1>로그인</h1></button></td>
+								</tr>
+								<tr>
+									<td><label for="pwInput"><strong>비밀번호</strong></label></td>
+									<td><input type="password" id="pwInput" name="passwordInput" class="form-control" ></td>
+								</tr>
+							</table>
+						</form>
 					</div>
-					</form>
-				</section>
-				<!-- End / Section -->
-				
-				<!-- Section -->
-				<section class="awe-section bg-gray">
-				</section>
-				<!-- End / Section -->
-				
 			</div>
-			<!-- End / Content-->
-			
-			<!-- footer -->
-			<div class="footer">
-			</div>
-			<!-- End / footer -->
-			
-		</div>
-		
-		<!-- Vendors-->
-		<!-- Bootstrap Core Javascript -->
-		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
-		<script src="/assets/dist/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		<script type="text/javascript" src="/assets/vendors/imagesloaded/imagesloaded.pkgd.js"></script>
-		<script type="text/javascript" src="/assets/vendors/isotope-layout/isotope.pkgd.js"></script>
-		<script type="text/javascript" src="/assets/vendors/jquery-one-page/jquery.nav.min.js"></script>
-		<script type="text/javascript" src="/assets/vendors/jquery.easing/jquery.easing.min.js"></script>
-		<script type="text/javascript" src="/assets/vendors/jquery.matchHeight/jquery.matchHeight.min.js"></script>
-		<script type="text/javascript" src="/assets/vendors/magnific-popup/jquery.magnific-popup.min.js"></script>
-		<script type="text/javascript" src="/assets/vendors/masonry-layout/masonry.pkgd.js"></script>
-		<script type="text/javascript" src="/assets/vendors/jquery.waypoints/jquery.waypoints.min.js"></script>
-		<script type="text/javascript" src="/assets/vendors/swiper/swiper.jquery.js"></script>
-		<script type="text/javascript" src="/assets/vendors/menu/menu.js"></script>
-		<script type="text/javascript" src="/assets/vendors/typed/typed.min.js"></script>
-		<!-- App-->
-		<script type="text/javascript" src="/assets/js/main.js"></script>
 	</body>
 </html>

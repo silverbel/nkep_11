@@ -69,10 +69,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="changeEmpMgrToNormal" parameterType="empDTO">
-		UPDATE nkep_11.TB_EMPLOYEE SET ROLE='USER', TEAM_SEQ = #{teamSeq}  WHERE EMP_ID = #{empId}
+		UPDATE nkep_11.TB_EMPLOYEE SET ROLE='USER' WHERE EMP_ID = #{empId}
 	</update>
 	<update id="changeEmpNormalToMgr">
-		UPDATE nkep_11.TB_EMPLOYEE SET ROLE=#{role}, TEAM_SEQ = '0000' WHERE EMP_ID = #{empId}
+		UPDATE nkep_11.TB_EMPLOYEE SET ROLE=#{role} WHERE EMP_ID = #{empId}
 	</update>
 	
 	<select id="getEmployeeBySabun" parameterType="java.util.HashMap" resultType="empDTO">

@@ -20,7 +20,7 @@ description :
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>SB Admin 2 - Bootstrap Admin Theme</title>
+<title>관리자 PAGE :: 자재 관리</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- DataTable CSS -->
@@ -77,10 +77,16 @@ description :
     </script>
 </head>
 <body>
-<div id="wrapper">
-
-		<jsp:include page="/WEB-INF/views/eAdmin/common/headerAndLeft.jsp"></jsp:include>
-
+	<div id="wrapper">
+		<c:if test="${'S_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/admin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${'E_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/eAdmin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${'M_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/mAdmin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
@@ -96,7 +102,7 @@ description :
 						<div class="panel-heading">자재 리스트</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-						<div class="table-responsive">
+						<div class="table-responsive-lg">
 							<table class="table table-bordered table-striped table-hover" id="dataTables-authority" data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10'>
 								<thead>
 								<tr>
@@ -112,9 +118,14 @@ description :
 							<c:forEach var="item" items="${itemList}">
 									<tr>
 										<td class="text-center">${item.workName }</td>
-										<td class="text-center"><img
-										src=<c:url value="/getByteItemImage/${item.itemSeq}"/>
-										class="img-responsive img-thumbnail" width="150px" /></td>
+										<td class="text-center">
+											<c:if test="${item.itemImg eq null }">
+												<img src="/assets/img/nono.png" class="img-responsive img-thumbnail" width="150px" />
+											</c:if>
+											<c:if test="${item.itemImg ne null }">
+												<img src=<c:url value="/getByteItemImage/${item.itemSeq}"/> class="img-responsive img-thumbnail" width="150px" />
+											</c:if>
+										</td>
 										<td class="text-center">${item.itemType}</td>
 										<td class="text-center"><a style="text-decoration:none;" href="/showItemDetailForAdmin.do?itemSeq=${item.itemSeq}&workSeq=${item.workSeq}">${item.itemName}</a></td>
 										<td class="text-center">${item.itemPrice}</td>

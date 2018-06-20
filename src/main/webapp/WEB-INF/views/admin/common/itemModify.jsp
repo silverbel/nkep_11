@@ -11,19 +11,19 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>SB Admin 2 - Bootstrap Admin Theme</title>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<title>관리자 PAGE :: 자재 수정</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	var sel_files = [];
 	$(document).ready(function() {
-		$('#input_imgs').on("change",handleImgsFilesSelect);
-		 $("#changeFlag").change(function(){
-		        if($("#changeFlag").is(":checked")){
-		            $('#input_imgs').attr("disabled", true);
-		        }else{
-		            $('#input_imgs').attr("disabled", false);
-		        }
-		    });
+		$('#input_imgs').on("change", handleImgsFilesSelect);
+		$("#changeFlag").change(function() {
+			if ($("#changeFlag").is(":checked")) {
+				$('#input_imgs').attr("disabled", true);
+			} else {
+				$('#input_imgs').attr("disabled", false);
+			}
+		});
 	});
 	function handleImgsFilesSelect(e) {
 		sel_files = [];
@@ -32,41 +32,44 @@
 		var filesArr = Array.prototype.slice.call(files);
 
 		var index = 0;
-		filesArr.forEach(function(f) {
-			if(!f.type.match("image.*")){
-				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
-			}
+		filesArr
+				.forEach(function(f) {
+					if (!f.type.match("image.*")) {
+						alert("확장자는 이미지 확장자만 가능합니다.");
+						return;
+					}
 
-			sel_files.push(f);
+					sel_files.push(f);
 
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result +"\" data-file='"+f.name+"' class='selProductFile' title='Click to remove' width=200px height=200px></a>";
-				/* var img_html = "<img src=\"" + e.target.result + "\" width=200px height=200px />";
-				$(".imgs_wrap").append(img_html); */
-				$(".imgs_wrap").append(html);
-				index++;
-			}
-			reader.readAsDataURL(f);
-			
-		});
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("
+								+ index
+								+ ")\" id=\"img_id_"
+								+ index
+								+ "\"><img src=\"" + e.target.result +"\" data-file='"+f.name+"' class='selProductFile' title='Click to remove' width=200px height=200px></a>";
+						/* var img_html = "<img src=\"" + e.target.result + "\" width=200px height=200px />";
+						$(".imgs_wrap").append(img_html); */
+						$(".imgs_wrap").append(html);
+						index++;
+					}
+					reader.readAsDataURL(f);
+
+				});
 	}
-	
-	function deleteImageAction(index){
-		console.log("index : "+index);
+
+	function deleteImageAction(index) {
+		console.log("index : " + index);
 		sel_files.splice(index, 1);
-		if(sel_files.length === 0){
+		if (sel_files.length === 0) {
 			$('.imgs_wrap').empty();
 		}
 		var img_id = "#img_id_" + index;
 		$(img_id).remove();
-		
+
 		console.log(sel_files);
 
-
 	}
-
 </script>
 <!-- Bootstrap Core CSS -->
 <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -95,10 +98,15 @@
 <body>
 
 	<div id="wrapper">
-
-		
-	<jsp:include page="/WEB-INF/views/admin/common/headerAndLeft.jsp"></jsp:include>
-
+		<c:if test="${'S_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/admin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${'E_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/eAdmin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${'M_MGR' eq sessionID.role}">
+			<jsp:include page="/WEB-INF/views/mAdmin/common/headerAndLeft.jsp"></jsp:include>
+		</c:if>
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
@@ -116,24 +124,27 @@
 							<div class="container">
 								<form action="modifyItemForAdmin.do"
 									enctype="multipart/form-data" method="post">
-									<input type="text" name="itemSeq" value="${itemDTO.itemSeq }" hidden="hidden"/>
-									<input type="text" name="workSeq" value="${itemDTO.workSeq }" hidden="hidden"/>
+									<input type="text" name="itemSeq" value="${itemDTO.itemSeq }"
+										hidden="hidden" /> <input type="text" name="workSeq"
+										value="${itemDTO.workSeq }" hidden="hidden" />
 									<div class="row">
 										<div class="col-25">
 											<label for="workName">근무지</label>
 										</div>
 										<div class="col-75">
-											<input type="text" id="workName" name="workName" value="${itemDTO.workName }" class="form-control" readonly/>
+											<input type="text" id="workName" name="workName"
+												value="${itemDTO.workName }" class="form-control" readonly />
 										</div>
 									</div>
-									<br>
-									<br>
+									<br> <br>
 									<div class="row">
 										<div class="col-25">
 											<label for="itemName">자재 이름</label>
 										</div>
 										<div class="col-75 text-left">
-											<input type="text" class="form-control" name="itemName" id="itemName" class="form-control" value="${itemDTO.itemName}"/>
+											<input type="text" class="form-control" name="itemName"
+												id="itemName" class="form-control"
+												value="${itemDTO.itemName}" />
 										</div>
 									</div>
 									<br>
@@ -142,7 +153,8 @@
 											<label for="stCnt">자재 수량</label>
 										</div>
 										<div class="col-75 text-left">
-											<input type="text" class="form-control" name="stCnt" id="stCnt" class="form-control" value="${itemDTO.stCnt}"/>
+											<input type="text" class="form-control" name="stCnt"
+												id="stCnt" class="form-control" value="${itemDTO.stCnt}" />
 										</div>
 									</div>
 									<br>
@@ -152,21 +164,21 @@
 										</div>
 										<div class="col-75 text-left">
 											<select name="itemType" class="form-control">
-											<c:if test="${itemDTO.itemType eq 'SNACK' }">
-												<option value="SNACK" selected>간식</option>
-												<option value="FIXTURES">비품</option>
-												<option value="EXPENDABLE">소모품</option>
-											</c:if>
-											<c:if test="${itemDTO.itemType eq 'FIXTURES' }">
-												<option value="SNACK">간식</option>
-												<option value="FIXTURES" selected>비품</option>
-												<option value="EXPENDABLE">소모품</option>
-											</c:if>
-											<c:if test="${itemDTO.itemType eq 'EXPENDABLES' }">
-												<option value="SNACK">간식</option>
-												<option value="FIXTURES">비품</option>
-												<option value="EXPENDABLE" selected>소모품</option>
-											</c:if>	
+												<c:if test="${itemDTO.itemType eq 'SNACK' }">
+													<option value="SNACK" selected>간식</option>
+													<option value="FIXTURES">비품</option>
+													<option value="EXPENDABLE">소모품</option>
+												</c:if>
+												<c:if test="${itemDTO.itemType eq 'FIXTURES' }">
+													<option value="SNACK">간식</option>
+													<option value="FIXTURES" selected>비품</option>
+													<option value="EXPENDABLE">소모품</option>
+												</c:if>
+												<c:if test="${itemDTO.itemType eq 'EXPENDABLES' }">
+													<option value="SNACK">간식</option>
+													<option value="FIXTURES">비품</option>
+													<option value="EXPENDABLE" selected>소모품</option>
+												</c:if>
 											</select>
 										</div>
 									</div>
@@ -176,13 +188,15 @@
 											<label for="itemPrice">자재 가격</label>
 										</div>
 										<div class="col-75 text-left">
-											<input type="text" class="form-control" name="itemPrice" id="itemPrice" value="${itemDTO.itemPrice}"/>
+											<input type="text" class="form-control" name="itemPrice"
+												id="itemPrice" value="${itemDTO.itemPrice}" />
 										</div>
 									</div>
 									<br>
 									<div class="row">
-										사진 삭제여부 : <input type="checkbox" name="changeFlag" id="changeFlag" value="changeFlag" />
-										<br><br>
+										사진 삭제여부 : <input type="checkbox" name="changeFlag"
+											id="changeFlag" value="changeFlag" /> <br>
+										<br>
 										<div class="col-25">
 											<label for="pic">자재 사진</label>
 										</div>
@@ -196,8 +210,7 @@
 											</div>
 										</div>
 									</div>
-									<br>
-									<br>
+									<br> <br>
 									<div class="row">
 										<div class="col-25">
 											<label for="itemDescription">자재 설명</label>
@@ -211,15 +224,17 @@
 									<br>
 									<div class="row text-right">
 										<input class="btn btn-primary" type="submit" value="수정">
-										<a href="/showItemDetailForAdmin.do?itemSeq=${ itemDTO.itemSeq}" class="btn btn-default">상세보기</a>
-										<a href="/getItemListForAdmin.do" class="btn btn-default">목록</a>
+										<a
+											href="/showItemDetailForAdmin.do?itemSeq=${ itemDTO.itemSeq}"
+											class="btn btn-default">상세보기</a> <a
+											href="/getItemListForAdmin.do" class="btn btn-default">목록</a>
 									</div>
 								</form>
 							</div>
 						</div>
 						<!-- /.panel-body -->
 					</div>
-					
+
 					<!-- /.panel -->
 				</div>
 				<!-- /.col-lg-12 -->

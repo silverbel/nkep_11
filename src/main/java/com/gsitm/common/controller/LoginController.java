@@ -48,14 +48,19 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	public void loginProcess(String username, String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		boolean loginCheck = false;
+	public void loginProcess(String idInput, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
-		loginCheck = lService.loginCheck(username, password);
-		if(loginCheck) {
-			EmployeeDTO emp = lService.empInfo(username);
-			session.setAttribute("sessionID", emp);
-			response.sendRedirect("/");
-		} else response.sendRedirect("/login.do?error");
+		String username;
+		if("1".equals(idInput)) {
+			username  = "IT1053";
+		} else if("2".equals(idInput)) {
+			username = "madmin";
+		} else {
+			username = "sysmgr";
+		}
+		
+		EmployeeDTO emp = lService.empInfo(username);
+		session.setAttribute("sessionID", emp);
+		response.sendRedirect("/");
 	}
 }

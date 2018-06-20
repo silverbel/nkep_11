@@ -40,10 +40,8 @@ public class EmployeeForAdminController {
 	}
 	
 	@RequestMapping(value = "/changeEmpMgrToNormal.do",method=RequestMethod.POST)
-	public ModelAndView changeEmpMgrToNormal(ModelAndView mv, @RequestParam("empId") String empId,
-			@RequestParam("teamSeq") String teamSeq, EmployeeDTO employeeDTO) {
+	public ModelAndView changeEmpMgrToNormal(ModelAndView mv, @RequestParam("empId") String empId, EmployeeDTO employeeDTO) {
 		employeeDTO.setEmpId(empId);
-		employeeDTO.setTeamSeq(teamSeq);
 		employeeForAdminService.changeEmpMgrToNormal(employeeDTO);
 		mv.setViewName("redirect:/getAuthorityForAdmin.do");
 		return mv;
