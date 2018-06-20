@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gsitm.common.dto.EmployeeDTO;
+import com.gsitm.common.dto.InsertResvDTO;
 import com.gsitm.common.dto.ConfirmDTO;
 import com.gsitm.common.dto.ResvConfirmInfoDTO;
 import com.gsitm.common.dto.ResvDTO;
@@ -97,5 +98,26 @@ public class ResvService {
 	public void deleteResvDetail(ResvDetailDTO resvDetailDTO) {
 		rDao.deleteResv(resvDetailDTO);
 	}
+
+	public void insertResv(InsertResvDTO insert) {
+		rDao.insertResv(insert);
+	}
+
+	public void insertRI(InsertResvDTO insert) {
+		rDao.insertRI(insert);
+	}
+
+	public void insertRDNotApplicant(InsertResvDTO insert) {
+		rDao.insertRDNotApplicant(insert);
+	}
+
+	public void insertRDApplicant(InsertResvDTO insert) {
+		rDao.insertRDApplicant(insert);
+	}
+
+	public void insertConfirm(InsertResvDTO insert) {
+		rDao.insertConfirm(insert);
+	}
+
 }
 

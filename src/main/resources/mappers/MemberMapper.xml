@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		UPDATE nkep_11.TB_EMPLOYEE SET ROLE=#{role}, TEAM_SEQ = '0000' WHERE EMP_ID = #{empId}
 	</update>
 	
-	<select id="getEmployeeBySabun" parameterType="java.util.HashMap" resultType="empDTO">
+	<select id="getEmployeeByManySabun" parameterType="java.util.HashMap" resultType="empDTO">
 		SELECT EMP_ID,EMP_PW,EMP_NAME,TEAM_SEQ,EMAIL
 		FROM nkep_11.TB_EMPLOYEE
 	<choose>
@@ -86,6 +86,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 </foreach>
             </when>
         </choose>
+	</select>
+	
+	<select id="getTeamBossByid" parameterType="java.lang.String" resultType="empDTO">
+		SELECT EMP_ID,EMP_NAME,EMAIL,TEAM_SEQ
+		FROM nkep_11.TB_EMPLOYEE
+		WHERE EMP_ID = #{id}
 	</select>
 </mapper>
 
@@ -102,3 +108,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
+ 

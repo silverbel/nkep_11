@@ -48,10 +48,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectList("member.allMemberListAjax");
 	}
 
-	public List<EmployeeDTO> getEmployeeBySabun(List<String> parameter2) {
+	public List<EmployeeDTO> getEmployeeByManySabun(List<String> parameter2) {
 		Map<String, List<String>> param = new HashMap<>();
 		param.put("empId_list", parameter2);
-		return sqlSession.selectList("member.getEmployeeBySabun",param);
+		return sqlSession.selectList("member.getEmployeeByManySabun",param);
+	}
+
+	public EmployeeDTO getTeamBossByid(String id) {
+		return sqlSession.selectOne("member.getTeamBossByid",id);
 	}
 
 }

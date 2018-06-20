@@ -216,28 +216,7 @@ p, ul, ol {
 </head>
 
 <body>
-<!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">예약 진행</h4>
-        </div>
-        <div class="modal-body">
-          <h3>예약 하시겠습니까?</h3>
-          변경사항이 있으신지 다시 한 번 확인해주세요.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-          <a href="/resv/resvStep5.do" id="deleteA"><button type="button" class="btn btn-danger" >예약</button></a>
-        </div>
-      </div>
-    </div>
-  </div>
 	<div class="page-wrap" id="root">
-
 		<!-- header -->
 		<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
 		<!-- End / header -->
@@ -252,8 +231,8 @@ p, ul, ol {
 					<!-- page-title -->
 					<div class="page-title pb-40">
 
-						<h2 class="page-title__title">예약정보 확인</h2>
-						<p class="page-title__text">선택한 예약정보를 확인해주세요.</p>
+						<h2 class="page-title__title">예약신청 완료</h2>
+						<p class="page-title__text">예약이 확정되기 위해서 승인절차를 기다려주세요.</p>
 						<div class="page-title__divider"></div>
 					</div>
 					<!-- End / page-title -->
@@ -269,73 +248,18 @@ p, ul, ol {
         <div class="col-lg-12" style="background:white; box-shadow: 0 2px 92px 0 rgba(0, 0, 0, .18);">
 
           <!-- Title -->
-          <h1 class="mt-4 masthead" style="background: #3DB7CC;" align="center" >예약정보를 확인해주세요.</h1>
+          <h1 class="mt-4 masthead" style="background: #3DB7CC;" align="center" >예약 승인이 대기중입니다.</h1>
           <hr>
           <div class="container_t"><img src="https://i.imgur.com/Q0zUYOW.png" /></div>
           
 
           <!-- Post Content -->
-          <div class="col-lg-6">
-          <table style="margin:auto;">
-          	<tr>
-          		<td class="text-center"><p class="lead">근무지 : </p></td>
-          		<td class="text-center"><p class="lead"><c:out value="${roomInfo.workName }"/></p></td>
-          	</tr>
-          
-											
-          <tr>
-          	<td class="text-center"><p>장소 이름 : </p></td>
-          	<td class="text-center"><p><c:out value="${roomInfo.roomName }"/></p></td>
-          </tr>
-
-          <tr>
-          	<td class="text-center"><p>장소 크기 :</p></td>
-          	<td class="text-center"><p><c:out value="${roomInfo.roomSize }"/> 평</p></td>
-          </tr>
-
-		<tr>
-			<td class="text-center"><p>장소 가격 : </p></td>
-			<td class="text-center"><p><c:out value="${roomInfo.roomPrice} 원"/></p></td>
-       </tr>
-       <tr>
-       	<td class="text-center"><p>장소 설명 : </p></td>
-       	<td class="text-center"><p><c:out value="${roomInfo.roomDescription }"/></p></td>
-       </tr>
-       
-       <tr>
-       	<td class="text-center"><p>자재 : </p></td>
-       	<td class="text-center"><c:forEach items="${items }" var="item"><p>
-														${item.itemName }
-														${item.itemPrice } 원
-													<%-- 	${item.itemUnit } --%>
-													<%-- 	${item.itemDescription } --%>
-         	 </p>
-         	 </c:forEach>
-			</td>
-       </tr>
-</table>
-</div>
-<div class="col-lg-6">
-	<table>
-		<tr>
-			<td class="text-center"><p>예약자 명단 : </p></td>
-			<td class="text-center">
-				<c:forEach items="${empList }" var="emp">
-				<p>
-					${emp.teamSeq } 팀
-					${emp.empName }
-					${emp.email } 
-					</p>
-				</c:forEach>
-			</td>
-		</tr>
-		<tr>
-			<td class="text-center"><p>이용시간 : </p></td>
-			<td class="text-center"><p>${insert.today}</p>
-				<p>${insert.startTime} ~ ${insert.finTime}</p></td>
-		</tr>
-	</table>
-</div>
+          <div class="col-lg-12 text-center">
+          		<h1>예약이 신청되었습니다!</h1>
+          		<h3>승인 절차가 진행중이니 기다려 주십시오.</h3>
+          		<h4>감사합니다.</h4>
+          		
+			</div>
 <div class="container_t">
 <table>
 									<tr>
@@ -409,14 +333,7 @@ p, ul, ol {
 		<!-- End / footer -->
 
 	</div>
-<!-- 	<script>
-	var submitAction = function(e) {
-		e.preventDefault();
-	    e.stopPropagation();
-		/* do something with Error */
-	};
-	$('form').bind('submit', submitAction);
-	</script> -->
+
 	<!-- Vendors-->
 	<script type="text/javascript"
 		src="/assets/vendors/imagesloaded/imagesloaded.pkgd.js"></script>

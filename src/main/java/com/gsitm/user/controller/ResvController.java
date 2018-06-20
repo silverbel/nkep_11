@@ -10,6 +10,7 @@
  */ 
 package com.gsitm.user.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -33,9 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gsitm.admin.service.EmployeeForAdminService;
 import com.gsitm.admin.service.ItemForAdminService;
-import com.gsitm.admin.service.WorkSpaceForAdminService;
 import com.gsitm.common.dto.EducationRoomDTO;
 import com.gsitm.common.dto.EducationRoomPlusWSNameDTO;
 import com.gsitm.common.dto.EmployeeDTO;
@@ -46,9 +46,11 @@ import com.gsitm.common.dto.MeetingRoomPlusWSNameDTO;
 import com.gsitm.common.dto.ResvDTO;
 import com.gsitm.common.dto.ResvItemInfoDTO;
 import com.gsitm.common.dto.RoomPlusWSNameDTO;
+import com.gsitm.common.dto.TeamDTO;
 import com.gsitm.common.dto.WorkSpaceDTO;
 import com.gsitm.eAdmin.service.EducationRoomForEadminService;
 import com.gsitm.mAdmin.service.MeetingRoomForMadminService;
+import com.gsitm.user.mail.MailHandler;
 import com.gsitm.user.service.MemberService;
 import com.gsitm.user.service.ResvService;
 import com.gsitm.user.service.WorkSpaceService;
@@ -117,7 +119,6 @@ public class ResvController {
 		String[] empIdList = empId.split("/");
 		insert.setEmpIdList(empIdList);
 		System.out.println(insert.toString());
-		session.setAttribute("insertResv", insert);
 		InsertResvDTO tempInsert = insert.clone();
 		Date sTemp = parser2.parse(tempInsert.getStartTime());
 		Date eTemp = parser2.parse(tempInsert.getFinTime());
@@ -135,7 +136,7 @@ public class ResvController {
 		}
 		List<String> parameter2 = new ArrayList<String>(tempInsert.getEmpIdList().length);
 		Collections.addAll(parameter2, tempInsert.getEmpIdList());
-		List<EmployeeDTO> empList = memberService.getEmployeeBySabun(parameter2);
+		List<EmployeeDTO> empList = memberService.getEmployeeByManySabun(parameter2);
 		if(tempInsert.getRoomType().equals("M")) {
 			meetingRoomDTO.setMtSeq(insert.getRoomSeq());
 			temp1 = mtRoomService.getMeetingRoomByMtSeq(meetingRoomDTO);
@@ -152,6 +153,8 @@ public class ResvController {
 			roomInfo.setWorkName(temp1.getWorkName());
 			roomInfo.setRoomAvailEtime(temp1.getMtAvailEtime());
 			roomInfo.setRoomAvailStime(temp1.getMtAvailStime());
+			insert.setWorkName(temp1.getWorkName());
+			insert.setRoomPrice(temp1.getMtPrice());
 			mv.addObject("roomInfo",roomInfo);
 		}else if(tempInsert.getRoomType().equals("E")) {
 			educationRoomDTO.setEduSeq(insert.getRoomSeq());
@@ -168,14 +171,163 @@ public class ResvController {
 			roomInfo.setWorkName(temp2.getWorkName());
 			roomInfo.setRoomAvailEtime(temp2.getEduAvailEtime());
 			roomInfo.setRoomAvailStime(temp2.getEduAvailStime());
+			insert.setWorkName(temp2.getWorkName());
+			insert.setRoomPrice(temp2.getEduPrice());
 			mv.addObject("roomInfo",roomInfo);
 		}
+		session.setAttribute("insertResv", insert);
+		session.setAttribute("trimedInsertResv", tempInsert);
+		session.setAttribute("items", selectItems);
+		session.setAttribute("empList", empList);
+		System.out.println(insert.toString());
 		mv.setViewName("user/reservation/resvStep4");
 		mv.addObject("items",selectItems);
 		mv.addObject("empList",empList);
 		mv.addObject("insert",tempInsert);
 		return mv;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/resvStep5.do")
+	public ModelAndView resvvStep5(ModelAndView mv,HttpSession session,InsertResvDTO insert,
+			TeamDTO teamDTO,EmployeeDTO bossInfo) throws MessagingException, ParseException, UnsupportedEncodingException {
+		EmployeeDTO currnetLoginEmp = (EmployeeDTO) session.getAttribute("sessionID");
+		System.out.println("현재 로그인한 아이디!!!!!!!!!!!!!!"+currnetLoginEmp.getEmpId());
+		insert = (InsertResvDTO) session.getAttribute("insertResv");
+		insert.setTeamSeq(currnetLoginEmp.getTeamSeq());
+		System.out.println(insert.toString());
+		insert.setRsvSeq(insert.getRoomType()+insert.getRsvType()+insert.getToday()+insert.getStartTime()+insert.getFinTime());
+		insert.setRsvCnt(String.valueOf(insert.getEmpIdList().length+1));
+		
+		Date end = parser2.parse(insert.getFinTime());
+		Date start = parser2.parse(insert.getStartTime());
+		insert.setStartTime(fm2.format(start));
+		insert.setFinTime(fm2.format(end));
+		insert.setRsvDate(insert.getSelDate()+" "+insert.getStartTime());
+		insert.setRsvFdate(insert.getSelDate()+" "+insert.getFinTime());
+		long diff = end.getTime() - start.getTime();
+		long _30minutes = diff / 1800000;
+		String rsvPrice = String.valueOf(Long.parseLong(insert.getRoomPrice()) * _30minutes);
+		insert.setRsvPrice(rsvPrice);
+		insert.setApplicant(currnetLoginEmp.getEmpId());
+		rService.insertResv(insert);
+		
+		
+		ArrayList<String> parameter = new ArrayList<String>(insert.getSNACK().length+insert.getFIXTURES().length+insert.getEXPENDABLE().length);
+	    Collections.addAll(parameter, insert.getSNACK());
+	    Collections.addAll(parameter, insert.getFIXTURES());
+	    Collections.addAll(parameter, insert.getEXPENDABLE());
+	    insert.setItems(parameter);
+		rService.insertRI(insert);
+		
+		ArrayList<String> empIds = new ArrayList<>();
+		Collections.addAll(empIds, insert.getEmpIdList());
+		insert.setEmpIds(empIds);
+		rService.insertRDNotApplicant(insert);
+		rService.insertRDApplicant(insert);
+		
+		
+		rService.insertConfirm(insert);
+		
+		teamDTO = memberService.showTeamInfo(currnetLoginEmp.getEmpId());
+		String bossId = teamDTO.getBossId();
+		bossInfo = memberService.getTeamBossById(bossId);
+
+		InsertResvDTO trimedInsert = (InsertResvDTO) session.getAttribute("trimedInsertResv");
+		List<ItemDTO> items = (List<ItemDTO>) session.getAttribute("items");
+		List<EmployeeDTO> emps = (List<EmployeeDTO>) session.getAttribute("empList");
+		
+		MailHandler sendMail = new MailHandler(mailSender);
+		sendMail.setSubject(bossInfo.getTeamSeq()+"팀 팀장님 예약을 위한 승인이 필요합니다.");
+		String mailContent = insert.getApplicant()+"가(이) 예약을 신청했습니다.<br>"+insert.getWorkName()+
+				insert.getRoomName()+"에서"+"&nbsp;"+insert.getRsvDate()+"~"+insert.getRsvFdate()+"<br>대여비 : "+insert.getRoomPrice()+"원<br>";
+		
+		for(ItemDTO item : items) {
+			mailContent += item.getItemName()+"&nbsp;&nbsp;"+item.getItemPrice()+"<br>";
+		}
+		mailContent += "총 " +insert.getRsvCnt()+"명<br>";
+		for(EmployeeDTO emp : emps) {
+			mailContent += emp.getEmpId()+"&nbsp;&nbsp;"+emp.getEmpName()+"\t"+emp.getEmail()+"<br>";
+		}
+		sendMail.setText(new StringBuffer().append("<!DOCTYPE html>\r\n" + 
+				"<html>\r\n" + 
+				"<head>\r\n" + 
+				"  <title></title>\r\n" + 
+				"</head>\r\n" + 
+				"<body sytle=\"width: 100% !important; height: 100%; background: #f8f8f8;\">\r\n" + 
+				"<table class=\"body-wrap\" style=\"width: 100% !important; height: 100%; background: #f8f8f8;\">\r\n" + 
+				"    <tr>\r\n" + 
+				"        <td class=\"container\">\r\n" + 
+				"\r\n" + 
+				"            <!-- Message start -->\r\n" + 
+				"            <table style=\"width: 580px; height: 40px; margin: 0 auto;\">\r\n" + 
+				"                <tr>\r\n" + 
+				"                    <td align=\"center\" class=\"masthead\" style=\"padding: 80px 0; background: #3DB7CC; color: white; \">\r\n" + 
+				"\r\n" + 
+				"                        <h1 style=\"margin: 0 auto !important; max-width: 90%\"> 승인을 기다립니다. </h1>\r\n" + 
+				"\r\n" + 
+				"\r\n" + 
+				"                    </td>\r\n" + 
+				"                </tr>\r\n" + 
+				"                <tr>\r\n" + 
+				"                    <td class=\"content\" style=\"background: white; padding: 30px 35px;\">\r\n" + 
+				"            <img style=\"max-width: 100%; margin: 0 auto; display: block;\" src=\"https://i.imgur.com/Q0zUYOW.png\"/> <br>\r\n" + 
+				"                        <h2>시스템 관리자에게,</h2>\r\n" + 
+				"\r\n" + 
+				"                        <p>"+bossInfo.getTeamSeq() +"조 팀장님"+mailContent+"<br>감사합니다.</p>\r\n" + 
+				"\r\n" + 
+				"                        <table>\r\n" + 
+				"                            <tr>\r\n" + 
+				"                                <td align=\"center\">\r\n" + 
+				"                                    <p>\r\n" + 
+				"                                        <a href=\"http://localhost:9090/resv/confirm.do?rsvSeq="+insert.getRsvSeq()+"&bossYn=Y\" class=\"button\">승인</a> <a href=\"http://localhost:9090/resv/confirm.do?rsvSeq=\"+trimedInsert.getRsvSeq()+\"&bossYn=N\" class=\"button\">반려</a>\r\n" + 
+				"                                    </p>\r\n" + 
+				"                                </td>\r\n" + 
+				"                            </tr>\r\n" + 
+				"                        </table>\r\n" + 
+				"\r\n" + 
+				"                        <p>문의사항이 문의는, <a href=\"https://www.gsitm.com/\">GS ITM</a>에 방문해 주십시오.</p>\r\n" + 
+				"\r\n" + 
+				"                        <p><em>-GS ITM 예약시스템</em></p>\r\n" + 
+				"\r\n" + 
+				"                    </td>\r\n" + 
+				"                </tr>\r\n" + 
+				"            </table>\r\n" + 
+				"\r\n" + 
+				"        </td>\r\n" + 
+				"    </tr>\r\n" + 
+				"    <tr>\r\n" + 
+				"        <td class=\"container\">\r\n" + 
+				"\r\n" + 
+				"            <!-- Message start -->\r\n" + 
+				"            <table style=\"margin: 0 auto;\">\r\n" + 
+				"                <tr>\r\n" + 
+				"                    <td class=\"content footer\" align=\"center\" style=\"padding:30px 35px\">\r\n" + 
+				"                        <p style=\"margin-bottom: 0; color: #888; text-align: center; font-size: 14px;\">&nbsp;&nbsp;&nbsp;&nbsp;Sent by <a href=\"#\" style=\"color: #888; text-decoration: none; font-weight: bold;\">GS ITM</a>, 서울특별시 종로구 계동 84</p>\r\n" + 
+				"                        <p style=\"margin-bottom: 0; color: #888; text-align: center; font-size: 14px;\"><a href=\"mailto:\" style=\"color: #888; text-decoration: none; font-weight: bold;\">&nbsp;&nbsp;&nbsp;&nbsp;gsitm@gsitm.com</a> | <a href=\"#\">Unsubscribe</a></p>\r\n" + 
+				"                    </td>\r\n" + 
+				"                </tr>\r\n" + 
+				"            </table>\r\n" + 
+				"\r\n" + 
+				"        </td>\r\n" + 
+				"    </tr>\r\n" + 
+				"</table>\r\n" + 
+				"</body>\r\n" + 
+				"</html>")
+				.toString());
+		sendMail.setFrom("abc@abc.com", "GS ITM 예약시스템");
+		sendMail.setTo(bossInfo.getEmail());
+		sendMail.send();
+		mv.setViewName("user/reservation/resvStep5");
+		return mv;
+	}
+	
+	@RequestMapping("/confirm.do")
+	public ModelAndView confirm(ModelAndView mv,@RequestParam("rsvSeq") String rsvSeq,
+			@RequestParam("bossYn") String bossYn) {
+		return mv;
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value="resvCheck.do", method=RequestMethod.POST)
