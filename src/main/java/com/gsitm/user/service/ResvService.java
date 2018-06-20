@@ -67,8 +67,8 @@ public class ResvService {
 		else return rDao.getResvShortInfoByDate(check);
 	}
 	
-	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String roomSeq){
-		return rDao.roomItemListCheckByRoomSeqAjax(roomSeq);
+	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String workSeq){
+		return rDao.roomItemListCheckByRoomSeqAjax(workSeq);
 	}
 	
 	public void registerReservation(String[] snack, String[] expendables, String[] fixtures,

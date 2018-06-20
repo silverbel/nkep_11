@@ -26,4 +26,6 @@ public interface ItemForAdminDAO {
 	void updateItemIncludePic(ItemStockByWorkSpaceDTO itemStockByWorkSpaceDTO);
 	
 	void updateItemNotIncludePic(ItemStockByWorkSpaceDTO itemStockByWorkSpaceDTO);
+
+	List<ItemDTO> getItemByManyItemSeq(List<String> parameter);
 }

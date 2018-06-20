@@ -53,4 +53,8 @@ public class ItemForAdminService {
 		itemForAdminDAO.updateItemNotIncludePic(itemStockByWorkSpaceDTO);
 	}
 
+	public List<ItemDTO> getItemByManyItemSeq(List<String> parameter) {
+		return itemForAdminDAO.getItemByManyItemSeq(parameter);
+	}
+
 }
