@@ -43,7 +43,6 @@ description : header 부분. 메뉴를 담당
 				</c:if>
 				<li><a href="${path }/myPage/info.do">My Page</a></li>
 				<li><a href="${path }/myPage/myReserva.do">My Reservation</a></li>
-				<li><a href="contact.jsp">Contact</a></li>
 				<li><a href="${path}/email/write.do">Report</a></li>
 				<li><a href="${path}/logout.do">Log Out</a></li>
 				<c:if test="${'S_MGR' eq sessionID.role }">

@@ -1,21 +1,10 @@
-<%--
-subject    : workspaceInfo.jsp
-author     : 은종현
-date       : 2018-06-13
-description : 근무지 소개 선택 페이지
- 
-  [이름]   [수정일]     [내용]
-  ----------------------------------------------------------
-   은종현	 2018-06-13	  초안 
---%> 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
 <html>
 	<head>
-		<title>workspaceInfo</title>
+		<title>Homepage</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="format-detection" content="telephone=no">
@@ -32,26 +21,21 @@ description : 근무지 소개 선택 페이지
 		<link rel="stylesheet" type="text/css" id="app-stylesheet" href="/assets/css/main.css"><!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
-		<script type="text/javascript">
-			function fn_go(path, url1, url2) {
-				location.href = path+"/info/workspaceDetail.do?workName="
-						+encodeURIComponent(url1)+
-						"&workAddr="+encodeURIComponent(url2);
-			}
-		</script>
+		<meta http-equiv="Content-Type" content="text/jsp; charset=UTF-8">
 		<style type="text/css">
 		body{
 			background-image: url("/assets/img/back.png");
 		}
 		</style>
+
 	</head>
-	
 	<body>
-		<div class="page-wrap" id="root">
+	<%-- <a href="<%=request.getContextPath()%>/memo.do">메모장</a> --%>
+	<!-- Test!!! -->
+	<div class="page-wrap" id="root">
 			
 			<!-- header -->
-			<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
+				<jsp:include page="/WEB-INF/views/user/common/header.jsp" />
 			<!-- End / header -->
 			
 			<!-- Content-->
@@ -62,9 +46,17 @@ description : 근무지 소개 선택 페이지
 					<div class="container">
 						
 						<!-- page-title -->
-						<div class="page-title pb-40">
-							<h2 class="page-title__title">근무지 소개</h2>
-							<p class="page-title__text">근무지별 회의실 및 교육실 소개</p>
+						<div class="page-title">
+							<h2 class="page-title__title">${sessionID.empName}님 환영합니다!<br>
+								 GS ITM 회의실 예약 시스템입니다.<br>
+								<!-- typing__module -->
+								<div class="typing__module">
+									<div class="typed-strings"><span>근무지 별로</span><span>회의실과</span><span>교육실 예약이 가능합니다!</span>
+									</div><span class="typed"></span>
+								</div><!-- End / typing__module -->
+								
+							</h2>
+							<p class="page-title__text"></p>
 							<div class="page-title__divider"></div>
 						</div><!-- End / page-title -->
 						
@@ -155,11 +147,12 @@ description : 근무지 소개 선택 페이지
 			<!-- End / Content-->
 			
 			<!-- footer -->
-			<jsp:include page="/WEB-INF/views/user/common/footer.jsp" />
-			<!-- End / footer -->			
+				<jsp:include page="/WEB-INF/views/user/common/footer.jsp" />
+			<!-- End / footer -->
 			
 		</div>
 		<!-- Vendors-->
+		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="/assets/vendors/imagesloaded/imagesloaded.pkgd.js"></script>
 		<script type="text/javascript" src="/assets/vendors/isotope-layout/isotope.pkgd.js"></script>
 		<script type="text/javascript" src="/assets/vendors/jquery-one-page/jquery.nav.min.js"></script>

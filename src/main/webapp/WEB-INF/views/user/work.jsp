@@ -31,6 +31,11 @@
 <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
+		<style type="text/css">
+		body{
+			background-image: url("/assets/img/back.png");
+		}
+		</style>
 </head>
 
 <body>

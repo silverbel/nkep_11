@@ -36,6 +36,11 @@
 				padding:40px;
 			}
 		</style>
+		<style type="text/css">
+		body{
+			background-image: url("/assets/img/back.png");
+		}
+		</style>
 	</head>
 	
 	<body>
