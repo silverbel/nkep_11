@@ -213,6 +213,11 @@ p, ul, ol {
 	text-decoration: underline;
 }
 </style>
+<style type="text/css">
+		body{
+			background-image: url("/assets/img/back.png");
+		}
+		</style>
 </head>
 
 <body>

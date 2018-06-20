@@ -47,6 +47,11 @@ description : 근무지 디테일 페이지
 <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
+		<style type="text/css">
+		body{
+			background-image: url("/assets/img/back.png");
+		}
+		</style>
 </head>
 
 <body>
@@ -126,7 +131,7 @@ description : 근무지 디테일 페이지
 			<!-- End / Section -->
 			
 			<!-- Section -->
-			<section class="awe-section bg-gray">
+			<section class="awe-section">
 				<div class="container">
 					<h4 class="mb-5">회의실 및 교육실</h4>
 					<center>
@@ -135,7 +140,7 @@ description : 근무지 디테일 페이지
 					</center>					
 				</div>
 			</section>
-			<section class="awe-section" id="mtRoom">
+			<section class="awe-section bg-gray" id="mtRoom">
 				<div class="container">
 					<h4 class="mb-5">회의실 소개</h4>
 					<div class="my-auto">
