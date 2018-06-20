@@ -1,10 +1,12 @@
 package com.gsitm.common.dto;
 
+import java.util.Arrays;
 
-public class InsertResvDTO {
+public class InsertResvDTO implements Cloneable {
 	private String[] SNACK;
 	private String[] FIXTURES;
-	private String[] EXPENDABLES;
+	private String[] EXPENDABLE;
+	private String[] empIdList;
 	private String today;
 	private String workSeq;
 	private String roomType;
@@ -28,14 +30,6 @@ public class InsertResvDTO {
 
 	public void setFIXTURES(String[] fIXTURES) {
 		FIXTURES = fIXTURES;
-	}
-
-	public String[] getEXPENDABLES() {
-		return EXPENDABLES;
-	}
-
-	public void setEXPENDABLES(String[] eXPENDABLES) {
-		EXPENDABLES = eXPENDABLES;
 	}
 
 	public String getToday() {
@@ -101,5 +95,47 @@ public class InsertResvDTO {
 	public void setMaxCnt(String maxCnt) {
 		this.maxCnt = maxCnt;
 	}
+
+	public String[] getEmpIdList() {
+		return empIdList;
+	}
+
+	public void setEmpIdList(String[] empIdList) {
+		this.empIdList = empIdList;
+	}
+
+	@Override
+	public String toString() {
+		return "InsertResvDTO [SNACK=" + Arrays.toString(SNACK) + ", FIXTURES=" + Arrays.toString(FIXTURES)
+				+ ", EXPENDABLES=" + Arrays.toString(EXPENDABLE) + ", empIdList=" + Arrays.toString(empIdList)
+				+ ", today=" + today + ", workSeq=" + workSeq + ", roomType=" + roomType + ", roomSeq=" + roomSeq
+				+ ", rsvType=" + rsvType + ", startTime=" + startTime + ", finTime=" + finTime + ", maxCnt=" + maxCnt
+				+ "]";
+	}
+
+	public String[] getEXPENDABLE() {
+		return EXPENDABLE;
+	}
+
+	public void setEXPENDABLE(String[] eXPENDABLE) {
+		EXPENDABLE = eXPENDABLE;
+	}
+	
+	public InsertResvDTO clone() throws CloneNotSupportedException {
+		InsertResvDTO route = (InsertResvDTO) super.clone();
+	    route.SNACK = SNACK.clone();
+	    route.FIXTURES = FIXTURES.clone();
+	    route.EXPENDABLE = EXPENDABLE.clone();
+	    route.empIdList = empIdList.clone();
+	   	route.today = this.today;
+	    route.workSeq = this.workSeq;
+	    route.roomType = this.roomType;
+	    route.roomSeq = this.roomSeq;
+	    route.rsvType = this.rsvType;
+	    route.startTime = this.startTime;
+	    route.finTime = this.finTime;
+	    route.maxCnt = this.maxCnt;
+	    return route;
+	  }
 
 }

@@ -37,4 +37,8 @@ public class MemberService {
 	public int memCount(String empId) {
 		return mDao.memCount(empId);
 	}
+
+	public List<EmployeeDTO> getEmployeeBySabun(List<String> parameter2) {
+		return mDao.getEmployeeBySabun(parameter2);
+	}
 }

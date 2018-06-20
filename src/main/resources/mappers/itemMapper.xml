@@ -51,9 +51,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE item.ITEM_SEQ = stock.ITEM_SEQ and stock.WORK_SEQ = ws.WORK_SEQ and
 		item.ITEM_SEQ = #{itemSeq} and ws.WORK_SEQ = #{workSeq}
 	</update>
-	
+	<select id="getItemByManyItemSeq" parameterType="java.util.HashMap" resultType="itemDTO">
+		SELECT ITEM_SEQ,ITEM_CODE,ITEM_TYPE,ITEM_NAME,ITEM_PRICE,ITEM_UNIT,ITEM_DESCRIPTION
+		FROM nkep_11.TB_ITEM
+		<choose>
+            <when test="item_list.size != 0">
+                WHERE ITEM_SEQ IN
+                <foreach collection="item_list" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </when>
+        </choose>
+	</select>
 </mapper>
-
 
 
 

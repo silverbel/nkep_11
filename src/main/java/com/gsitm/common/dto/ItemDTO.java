@@ -1,5 +1,7 @@
 package com.gsitm.common.dto;
 
+import java.util.Arrays;
+
 public class ItemDTO {
 	private String itemSeq;
 	private String itemCode;
@@ -73,4 +75,12 @@ public class ItemDTO {
 	public void setItemImg3(byte[] itemImg3) {
 		this.itemImg3 = itemImg3;
 	}
+	@Override
+	public String toString() {
+		return "ItemDTO [itemSeq=" + itemSeq + ", itemCode=" + itemCode + ", itemType=" + itemType + ", itemName="
+				+ itemName + ", itemPrice=" + itemPrice + ", itemUnit=" + itemUnit + ", itemDescription="
+				+ itemDescription + ", itemImg=" + Arrays.toString(itemImg) + ", itemImg2=" + Arrays.toString(itemImg2)
+				+ ", itemImg3=" + Arrays.toString(itemImg3) + "]";
+	}
+	
 }

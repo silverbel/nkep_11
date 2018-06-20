@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  LEFT JOIN nkep_11.TB_RSV_ITEM IR
 		    ON R.RSV_SEQ = IR.RSV_SEQ
 		  LEFT JOIN nkep_11.TB_ITEM I
-		    ON IR.ITEM_CODE = I.ITEM_CODE
+		    ON IR.ITEM_SEQ = I.ITEM_SEQ
 		 WHERE R.RSV_SEQ = #{rsvSeq}
 	</select>
 	
@@ -65,13 +65,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  LEFT JOIN nkep_11.TB_CONFIRM C
 		    ON R.RSV_SEQ = C.RSV_SEQ
 		  LEFT JOIN nkep_11.TB_MT_ROOM MT
-		    ON R.ROOM_SEQ = MT.MT_CODE
+		    ON R.ROOM_SEQ = MT.MT_SEQ
 		  LEFT JOIN nkep_11.TB_EDU_ROOM ED
-		    ON R.ROOM_SEQ = ED.EDU_CODE
+		    ON R.ROOM_SEQ = ED.EDU_SEQ
 		  LEFT JOIN nkep_11.TB_WORKSPACE WM
-		    ON MT.WORK_CODE = WM.WORK_CODE
+		    ON MT.WORK_SEQ = WM.WORK_SEQ
 		  LEFT JOIN nkep_11.TB_WORKSPACE WE
-		    ON ED.WORK_CODE = WE.WORK_CODE
+		    ON ED.WORK_SEQ = WE.WORK_SEQ
 		 WHERE R.RSV_SEQ IN (SELECT R.RSV_SEQ
 		 										 	 FROM nkep_11.TB_RESERVATION R
 		 											 LEFT JOIN nkep_11.TB_RSV_DETAIL RU
@@ -94,13 +94,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  LEFT JOIN nkep_11.TB_CONFIRM C
 		    ON R.RSV_SEQ = C.RSV_SEQ
 		  LEFT JOIN nkep_11.TB_MT_ROOM MT
-		    ON R.ROOM_SEQ = MT.MT_CODE
+		    ON R.ROOM_SEQ = MT.MT_SEQ
 		  LEFT JOIN nkep_11.TB_EDU_ROOM ED
-		    ON R.ROOM_SEQ = ED.EDU_CODE
+		    ON R.ROOM_SEQ = ED.EDU_SEQ
 		  LEFT JOIN nkep_11.TB_WORKSPACE WM
-		    ON MT.WORK_CODE = WM.WORK_CODE
+		    ON MT.WORK_SEQ = WM.WORK_SEQ
 		  LEFT JOIN nkep_11.TB_WORKSPACE WE
-		    ON ED.WORK_CODE = WE.WORK_CODE
+		    ON ED.WORK_SEQ = WE.WORK_SEQ
 		 WHERE R.RSV_SEQ = #{rsvSeq}
 	</select>
 
@@ -137,15 +137,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="roomItemListCheckByRoomSeqAjax" resultMap="riDTO" parameterType="String" statementType="PREPARED">
 		<![CDATA[
-		SELECT I.ITEM_NAME
-					 , I.ITEM_UNIT
-					 , I.ITEM_TYPE
-					 , I.ITEM_SEQ
+		SELECT I.ITEM_NAME AS ITEM_NAME
+					 , I.ITEM_UNIT AS ITEM_UNIT
+					 , I.ITEM_TYPE AS ITEM_TYPE
+					 , I.ITEM_SEQ AS ITEM_SEQ
 		  FROM nkep_11.TB_STOCK S
 		  LEFT JOIN nkep_11.TB_ITEM I
 		    ON S.ITEM_SEQ = I.ITEM_SEQ
 		 WHERE S.WORK_SEQ = #{workSeq}
-		   AND S.ST_CNT > 0
+		   AND S.ST_CNT > 0 AND I.ITEM_TYPE IS NOT NULL
 		 ORDER BY I.ITEM_TYPE
 		 ]]>
 	</select>
