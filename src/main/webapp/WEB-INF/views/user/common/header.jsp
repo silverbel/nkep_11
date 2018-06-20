@@ -38,7 +38,9 @@ description : header 부분. 메뉴를 담당
 			<ul class="wil-menu-list">
 				<li class="current-menu-item"><a href="/">Home</a></li>
 				<li><a href="${path}/info/workspace.do">소개</a></li>
-				<li><a href="${path}/resv/resvStep1.do">예약</a></li>
+				<c:if test="${'N' eq sessionID.blackYn }">
+					<li><a href="${path}/resv/resvStep1.do">예약</a></li>
+				</c:if>
 				<li><a href="${path }/myPage/info.do">My Page</a></li>
 				<li><a href="${path }/myPage/myReserva.do">My Reservation</a></li>
 				<li><a href="contact.jsp">Contact</a></li>

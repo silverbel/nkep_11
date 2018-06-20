@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="empInfo" resultType="empDTO" parameterType="String">
-		SELECT EMP_ID, EMP_NAME, ROLE, TEAM_SEQ
+		SELECT EMP_ID, EMP_NAME, ROLE, TEAM_SEQ, BLACK_YN
 		FROM nkep_11.TB_EMPLOYEE
 		WHERE EMP_ID = #{empId}
 	</select>

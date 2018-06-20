@@ -63,8 +63,8 @@ public class ResvService {
 		Map<String, String> check = new HashMap<>();
 		check.put("selDate", selDate);
 		check.put("roomSeq", roomSeq);
-		if (rsvType == "S") return rDao.getResvShortInfoByDate(check);
-		else return rDao.getResvShortInfoByDate(check);
+		if (rsvType.equals("S")) return rDao.getResvShortInfoByDate(check);
+		else return rDao.getResvLongInfoByDate(check);
 	}
 	
 	public List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String workSeq){
