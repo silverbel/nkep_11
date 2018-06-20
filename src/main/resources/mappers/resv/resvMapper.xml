@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="com.gsitm.common.dto.ResvItemInfoDTO" id="riDTO" />
 	<resultMap type="com.gsitm.common.dto.ResvConfirmInfoDTO" id="rcDTO" />
 	<resultMap type="com.gsitm.common.dto.ResvUserInfoDTO" id="ruDTO" />
+	<resultMap type="com.gsitm.common.dto.InsertResvDTO" id="resvInsert"></resultMap>
 
 	<select id="mtRoomRsvList" resultMap="resvresvresv" parameterType="String" statementType="PREPARED">
 		SELECT R.APPLICANT, R.RSV_PRICE
@@ -173,6 +174,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM nkep_11.TB_RSV_DETAIL WHERE RSV_SEQ = #{rsvSeq}
 	</delete> 
 
+	<insert id="insertResv" parameterType="resvInsert">
+		INSERT INTO nkep_11.TB_RESERVATION(RSV_SEQ, RSV_CNT, RSV_DATE, RSV_FDATE, ROOM_SEQ,RSV_PRICE,ROOM_TYPE,RSV_TYPE,APPLICANT,WORK_SEQ)
+		VALUES(#{rsvSeq},#{rsvCnt},#{rsvDate},#{rsvFdate},#{roomSeq},#{rsvPrice},#{roomType},#{rsvType},#{applicant},#{workSeq})
+	</insert>
+	
+	<insert id="insertRI" parameterType="resvItemDTO">
+		INSERT INTO nkep_11.TB_RSV_ITEM(RSV_SEQ,ITEM_SEQ)
+		VALUES(#{rsvSeq},#{itemSeq});
+	</insert>
+	
+	<insert id="insertRDNotApplicant" parameterType="resvDetailDTO">
+		INSERT INTO nkep_11.TB_RSV_DETAIL(RSV_SEQ,USE_ID,TEAM_SEQ)
+		VALUES(#{rsvSeq},#{useId},#{teamSeq})
+	</insert>
+	
+	<insert id="insertRDApplicant" parameterType="resvDetailDTO">
+		INSERT INTO nkep_11.TB_RSV_DETAIL(APPL_YN,RSV_SEQ,USE_ID,TEAM_SEQ)
+		VALUES(#{applYn},#{rsvSeq},#{useId},#{teamSeq})
+	</insert>
+	<insert id="insertConfirm" parameterType="confirmDTO">
+		INSERT INTO nkep_11.TB_CONFIRM(RSV_SEQ)
+		VALUES(#{rsvSeq})
+	</insert>
 </mapper>
 
 

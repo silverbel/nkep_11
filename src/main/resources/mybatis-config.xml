@@ -28,6 +28,8 @@
 		<typeAlias type="com.gsitm.common.dto.ResvDetailDTO" alias="resvDetailDTO"/>
 		<typeAlias type="com.gsitm.common.dto.StockDTO" alias="stockDTO"/>
 		<typeAlias type="com.gsitm.common.dto.ItemStockByWorkSpaceDTO" alias="itemStockWorkspace"/>
+		<typeAlias type="com.gsitm.common.dto.InsertResvDTO" alias="resvInsert"/>
+		<typeAlias type="com.gsitm.common.dto.ResvItemDTO" alias="resvItemDTO"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/workSpaceMapper.xml"></mapper>

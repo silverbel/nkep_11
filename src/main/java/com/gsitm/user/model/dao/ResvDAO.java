@@ -40,11 +40,20 @@ public interface ResvDAO {
 	int resvCount(String empId);
 	
 	
-	// insert
-	void insertReservationTable(InsertResvDTO insertDTO);
 	void deleteResv(ResvDTO resvDTO);
 	
 	void deleteConfirm(ConfirmDTO confirmDTO);
 	
 	void deleteResv(ResvDetailDTO resvDetailDTO);
+
+	public void insertResv(InsertResvDTO insert);
+
+	public void insertRI(InsertResvDTO insert);
+
+	public void insertRDNotApplicant(InsertResvDTO insert);
+
+	public void insertRDApplicant(InsertResvDTO insert);
+
+	public void insertConfirm(InsertResvDTO insert);
+
 }
