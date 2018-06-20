@@ -198,6 +198,11 @@ description : my page, 나의 정보 확인
 				}
 			})
 		</script>
+		<style type="text/css">
+		body{
+			background-image: url("/assets/img/back.png");
+		}
+		</style>
 	</head>
 	<body>
 		<div class="page-wrap" id="root">

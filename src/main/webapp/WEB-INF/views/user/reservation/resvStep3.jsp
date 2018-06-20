@@ -145,6 +145,11 @@ description : 예약하기
 				background-color: rgba(100,200,255,0.2);
 			}
 		</style>
+		<style type="text/css">
+		body{
+			background-image: url("/assets/img/back.png");
+		}
+		</style>
 	</head>
 	
 	<body>

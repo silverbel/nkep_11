@@ -37,6 +37,11 @@ description : 메일링
 				color : red;
 			}
 		</style>
+		<style type="text/css">
+		body{
+			background-image: url("/assets/img/back.png");
+		}
+		</style>
 	</head>
 	
 	<body>
