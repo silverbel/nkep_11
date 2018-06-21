@@ -116,6 +116,7 @@ description : 로그인 화면
 									<td>
 										<select id="idInput" name="idInput" class="form-control">
 											<option value="1">IT1053</option>
+											<option value="0">IT1052</option>
 											<option value="2">회의실 관리자</option>
 											<option value="3">시스템 관리자</option>
 										</select>

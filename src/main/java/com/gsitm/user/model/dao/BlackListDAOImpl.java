@@ -23,4 +23,9 @@ public class BlackListDAOImpl implements BlackListDAO {
 	public int blackListCount(String empId) {
 		return sqlSession.selectOne("blackList.blackListCount", empId);
 	}
+	
+	@Override
+	public void insertBlackList(BlackListLogDTO bList) {
+		sqlSession.insert("blackList.insertBlackList", bList);
+	}
 }

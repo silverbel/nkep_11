@@ -334,8 +334,13 @@ public class ResvController {
 				.toString());
 		sendMail.setFrom("abc@abc.com", "GS ITM 예약시스템");
 		sendMail.setTo(bossInfo.getEmail());
-		sendMail.send();
-		mv.setViewName("user/reservation/resvStep5");
+		if(!(insert.getRoomType().equals("M") && insert.getRsvType().equals("S"))) {
+	         sendMail.send();
+	         mv.setViewName("user/reservation/resvStep5");
+	      }
+	      
+	      mv.setViewName("user/reservation/resvStep5");
+	      mv.addObject("complete", "예약완료");
 		return mv;
 	}
 	

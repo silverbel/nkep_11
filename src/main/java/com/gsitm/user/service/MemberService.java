@@ -45,5 +45,9 @@ public class MemberService {
 	public EmployeeDTO getTeamBossById(String id) {
 		return mDao.getTeamBossByid(id);
 	}
+	
+	public void updateBlackList(String empId) {
+		mDao.updateBlackList(empId);
+	}
 
 }
