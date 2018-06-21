@@ -1,13 +1,4 @@
-/**
- * @programName : ResvController.java
- * @author      : 은종현
- * @date        : 2018-06-11
- * @function    : 예약 서비스
- *
- * [이름]   [수정일]     [내용]
- * ----------------------------------------------------------
- * 은종현	   2018-06-11	초안
- */ 
+
 package com.gsitm.user.controller;
 
 import java.io.UnsupportedEncodingException;
@@ -54,6 +45,20 @@ import com.gsitm.user.mail.MailHandler;
 import com.gsitm.user.service.MemberService;
 import com.gsitm.user.service.ResvService;
 import com.gsitm.user.service.WorkSpaceService;
+
+/**
+ * @programName : ResvController.java
+ * @author      : 은종현
+ * @date        : 2018-06-11
+ * @function    : 예약 서비스
+ *
+ * [이름]	   	[수정일]     [내용]
+ * ----------------------------------------------------------
+ * 은종현	   2018-06-11	초안
+ * 김동범		18.06.15	예약 내역 확인
+ * 김동범		18.06.18	뷰에서 보내는 데이터 확인
+ */ 
+
 
 @Controller
 @RequestMapping("/resv/*")
@@ -122,10 +127,14 @@ public class ResvController {
 		insert.setEmpIdList(empIdList);
 		System.out.println(insert.toString());
 		InsertResvDTO tempInsert = insert.clone();
-		Date sTemp = parser2.parse(tempInsert.getStartTime());
-		Date eTemp = parser2.parse(tempInsert.getFinTime());
-		tempInsert.setStartTime(fm2.format(sTemp));
-		tempInsert.setFinTime(fm2.format(eTemp));
+		Date sTemp = null;
+		Date eTemp = null;
+		if("S".equals(tempInsert.getRsvType())) {
+			sTemp = parser2.parse(tempInsert.getStartTime());
+			eTemp = parser2.parse(tempInsert.getFinTime());
+			tempInsert.setStartTime(fm2.format(sTemp));
+			tempInsert.setFinTime(fm2.format(eTemp));
+		}
 		Date temp = parser.parse(tempInsert.getToday());
 		tempInsert.setToday(fm.format(temp));
 		List<String> parameter = new ArrayList<String>(tempInsert.getSNACK().length+tempInsert.getFIXTURES().length+tempInsert.getEXPENDABLE().length);
@@ -201,13 +210,18 @@ public class ResvController {
 		System.out.println(insert.toString());
 		insert.setRsvSeq(insert.getRoomType()+insert.getRsvType()+insert.getToday()+insert.getStartTime()+insert.getFinTime());
 		insert.setRsvCnt(String.valueOf(insert.getEmpIdList().length+1));
-		
 		Date end = parser2.parse(insert.getFinTime());
 		Date start = parser2.parse(insert.getStartTime());
 		insert.setStartTime(fm2.format(start));
 		insert.setFinTime(fm2.format(end));
-		insert.setRsvDate(insert.getSelDate()+" "+insert.getStartTime());
-		insert.setRsvFdate(insert.getSelDate()+" "+insert.getFinTime());
+		if("S".equals(insert.getRsvType())) {
+			insert.setRsvDate(insert.getSelDate()+" "+insert.getStartTime());
+			insert.setRsvFdate(insert.getSelDate()+" "+insert.getFinTime());
+		} else {
+			insert.setRsvDate(insert.getStartTime());
+			insert.setRsvFdate(insert.getFinTime());
+		}
+	
 		long diff = end.getTime() - start.getTime();
 		long _30minutes = diff / 1800000;
 		String rsvPrice = String.valueOf(Long.parseLong(insert.getRoomPrice()) * _30minutes);

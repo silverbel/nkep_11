@@ -2,6 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+<%--
+subject    : 
+author     : 김동범
+date       : 2018. 6. 16.
+description : 예약하기 - 근무지 선택
+ 
+  [이름]   [수정일]     [내용]
+  ----------------------------------------------------------
+  김동범			18.06.16		db 연동
+--%> 
+
 <!DOCTYPE html>
 <html>
 <head>

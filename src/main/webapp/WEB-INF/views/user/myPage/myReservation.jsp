@@ -1,5 +1,5 @@
 <%--
-subject    : myInfo.jsp
+subject    : myInfo.jsp -> myReservation.jsp
 author     : 김동범
 date       : 2018. 6. 11.
 description : my page, 나의 정보 확인
@@ -8,6 +8,10 @@ description : my page, 나의 정보 확인
   ----------------------------------------------------------
   김동범			2018.06.12	include 추가, 기본 레이아웃 수정
   김동범			2018.06.12	db 연동
+  김동범			18.06.13		예약 내역 쿼리 수정 
+  김동범			18.06.14		예약 내역 쿼리 완료 
+  김동범			18.06.15		모달 적용 
+  김동범			18.06.16		버그 수정 
 --%> 
 
 
@@ -43,6 +47,18 @@ description : my page, 나의 정보 확인
 
 		<!-- Plugin CSS -->
 		<link href="/assets/dist/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+		
+		<!-- Datatables Mobile CSS -->	
+		<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
+		<link href="https://cdn.datatables.net/rowreorder/1.2.4/css/rowReorder.dataTables.min.css" rel="stylesheet">
+		<link href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.dataTables.min.css" rel="stylesheet">
+		
+		
+		<!-- Datatables Mobile JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/rowreorder/1.2.4/js/dataTables.rowReorder.min.js"></script>
+		<script src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
 
 		<style type="text/css">
 			.table-kdb td, .table-kdb th{
@@ -175,27 +191,56 @@ description : my page, 나의 정보 확인
 			}
 		</script>
 		<script type="text/javascript">
-			$(document).ready(function(){
-				var $num = comma(<c:out value="${rcList.get(0).rsvPrice}" />);
-				
-				$('#rsvBudget').html($num+' 원');
-				
-				function comma(num) {
-					var len, point, str;
-
-					num = num + "";
-					point = num.length % 3;
-					len = num.length;
-
-					str = num.substring(0, point);
-					while (point < len) {
-						if (str != "")
-							str += ",";
-						str += num.substring(point, point + 3);
-						point += 3;
+			$(document).ready(function($){
+				$(document).ready(function(){
+					var table = $('#resvInfoList-table').DataTable( {
+		        rowReorder: {
+		            selector: 'td:nth-child(2)'
+		        },
+		        responsive: true,
+		        paging : true,
+						ordering: false,
+						bAutoWidth: false,
+						bPaginate : false,
+						bFilter : false,
+						bInfo : false,
+						dom: 'Bfrtip'
+			    } );
+					var table2 = $('#usedList-table').DataTable( {
+		        rowReorder: {
+		            selector: 'td:nth-child(2)'
+		        },
+		        responsive: true,
+		        paging : true,
+						ordering: false,
+						bAutoWidth: false,
+						bPaginate : false,
+						bFilter : false,
+						bInfo : false,
+						dom: 'Bfrtip'
+			    } );
+					
+					var $num = comma(<c:out value="${rcList.get(0).rsvPrice}" />);
+					
+					$('#rsvBudget').html($num+' 원');
+					
+					function comma(num) {
+						var len, point, str;
+	
+						num = num + "";
+						point = num.length % 3;
+						len = num.length;
+	
+						str = num.substring(0, point);
+						while (point < len) {
+							if (str != "")
+								str += ",";
+							str += num.substring(point, point + 3);
+							point += 3;
+						}
+						return str;
 					}
-					return str;
-				}
+				})
 			})
 		</script>
 		<style type="text/css">
@@ -215,7 +260,7 @@ description : my page, 나의 정보 확인
 			<div class="wil-content">
 	
 				<!-- Section -->
-				<section class="awe-section">
+				<section class="awe-section kdb-title">
 					<div class="container">
 						<!-- page-title -->
 						<div class="page-title pb-40">
@@ -235,7 +280,7 @@ description : my page, 나의 정보 확인
 				<section class="awe-section bg-gray">
 					<div class="container">
 						<h2>예약 내역</h2>
-						<table class="table table-hover table-kdb">
+						<table class="table table-hover table-kdb display nowrap" id="resvInfoList-table" style="width:100%">
 							<colgroup>
 								<col width="20%">
 								<col width="30%">
@@ -297,7 +342,7 @@ description : my page, 나의 정보 확인
 				<section class="awe-section bg-gray">
 					<div class="container">
 						<h2>사용 내역</h2>
-						<table class="table table-hover table-kdb">
+						<table class="table table-hover table-kdb display nowrap" id="usedList-table" style="width:100%">
 							<colgroup>
 								<col width="30%">
 								<col width="30%">

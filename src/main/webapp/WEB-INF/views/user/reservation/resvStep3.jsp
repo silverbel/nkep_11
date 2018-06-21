@@ -7,6 +7,7 @@ description : 예약하기
   [이름]   [수정일]     [내용]
   ----------------------------------------------------------
   은종현	2018-06-11	 초안
+  김동범 2018-06-21	datatable
 --%>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -56,30 +57,26 @@ description : 예약하기
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 		<script src="https://code.highcharts.com/modules/data.js"></script>
 		<script type="text/javascript" src="/assets/vendors/jquery/jquery.min.js"></script>
-		<!-- data table -->
-		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.css">
-		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.js"></script>
+
+
+		<!-- Datatables Mobile CSS -->	
+		<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
+		<link href="https://cdn.datatables.net/rowreorder/1.2.4/css/rowReorder.dataTables.min.css" rel="stylesheet">
+		<link href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.dataTables.min.css" rel="stylesheet">
+		
+		
+		<!-- Datatables Mobile JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/rowreorder/1.2.4/js/dataTables.rowReorder.min.js"></script>
+		<script src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
 		<script type="text/javascript">
 			var count = 1;
 			var MAXCNT = ${insertResv.maxCnt}
 			var $emp;
 			$(document).ready(function() {
 				$emp = $('#empId');
-				$('#empListTable').DataTable({         
-					pageLength : 5,
-					responsive : {
-						breakpoints:[
-							{name:'empId', width:1250},
-							{name:'empName', width:1000},
-							{name:'teamName', width:750},
-							{name:'email', width:500},
-							{name:'blackYn', width:250}
-						]
-					},
-					bLengthChange : false,
-					ordering : true,
-					searching : true,
-					paging : true,
+				var table = $('#empListTable').DataTable({         
 					ajax : {
 					"url" : "/resv/allMemberListAjax.do",
 					"type" : "POST",
@@ -91,11 +88,21 @@ description : 예약하기
 						{data : "teamName"},
 						{data : "email"},
 						{data : "blackYn"}
-					]
+					],
+					order : [[1, 'asc']],
+					rowReorder: {
+			    	selector: 'td:nth-child(2)'
+					},
+					responsive : true,
+					ordering : false,
+					bAutoWidth : false,
+					bFilter : false,
+					bInfo : false,
+					dom: 'Bfrtip'
  				});
 				$('#empListTable tbody').on('click','tr',function(){
 					if(count <= MAXCNT){
-						var val = $('#empListTable').DataTable().row(this).data();
+						var val = table.row(this).data();
 						if(val.blackYn != 'Y'){
 							var str = $emp.val();
 							if(str.match(val.empId)){
@@ -111,6 +118,18 @@ description : 예약하기
 						} else alert('해당 사원은 블랙리스트입니다.');
 					} else{
 						alert('해당 시설의 최대 인원 수를 넘었습니다.');
+					}
+				})
+				$('#empListTable tbody').on('click','td.details-control',function(){
+					var tr = $(this).closest('tr');
+					var row = table.row(tr);
+				
+					if(row.child.isShown()){
+						row.child.hide();
+						tr.removeClass('shown');
+					} else {
+						row.child(format(row.data())).show();
+						tr.addClass('shown');
 					}
 				})
 			})
@@ -163,7 +182,7 @@ description : 예약하기
 			<div class="wil-content">
 				
 				<!-- Section -->
-				<section class="awe-section">
+				<section class="awe-section kdb-title">
 					<div class="container">
 						
 						<!-- page-title -->
@@ -180,7 +199,7 @@ description : 예약하기
 				<section class="awe-section bg-gray">
 					<div class="container">
 						<div class="table-responsive-lg">
-							<table class="table table-hover" id="empListTable">
+							<table class="table table-hover display nowrap" style="width: 100%" id="empListTable">
 								<thead>
 									<tr>
 										<td>사번</td>

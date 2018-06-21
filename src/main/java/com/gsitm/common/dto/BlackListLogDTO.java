@@ -1,5 +1,15 @@
 package com.gsitm.common.dto;
 
+/**
+ * @programName : BlackListLogDTO.java
+ * @author      : 김동범
+ * @date        : 2018. 6. 12. 
+ * @function    :  
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 
+ */ 
 public class BlackListLogDTO {
 
 	private String blkSeq;

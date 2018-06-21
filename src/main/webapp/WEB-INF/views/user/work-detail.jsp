@@ -40,7 +40,7 @@
 			<div class="wil-content">
 				
 				<!-- Section -->
-				<section class="awe-section">
+				<section class="awe-section kdb-title">
 					<div class="container">
 						
 						<!-- page-title -->

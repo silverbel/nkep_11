@@ -6,7 +6,7 @@ description :
  
   [이름]   [수정일]     [내용]
   ----------------------------------------------------------
-  
+ 김동범			18.06.21		세션 처리 
 --%>
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

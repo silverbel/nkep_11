@@ -55,22 +55,38 @@ description :
 <!-- Custom Fonts -->
 <link href="../vendor/font-awesome/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
+	
+	<!-- Datatables Mobile CSS -->	
+		<link href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
+		<link href="https://cdn.datatables.net/rowreorder/1.2.4/css/rowReorder.dataTables.min.css" rel="stylesheet">
+		<link href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.dataTables.min.css" rel="stylesheet">
+		
+		
+		<!-- Datatables Mobile JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/rowreorder/1.2.4/js/dataTables.rowReorder.min.js"></script>
+		<script src="https://cdn.datatables.net/responsive/2.2.2/js/dataTables.responsive.min.js"></script>
 
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 <script>
-	$(document).ready(function($) {
-		$(document).ready(function() {
-			$('#dataTables-authority').DataTable({
-				responsive : true,
-			});
-		});
-	});
+$(document).ready(function($){
+	$(document).ready(function() {
+		var table = $('#dataTables-authority').DataTable( {
+	        rowReorder: {
+	            selector: 'td:nth-child(2)'
+	        },
+	        responsive: true,
+	        paging : true,
+					ordering: false,
+					bAutoWidth: false,
+					bPaginate : false,
+					bFilter : false,
+					bInfo : false,
+					dom: 'Bfrtip'
+	    } );
+	})
+
+})
 </script>
 </head>
 <body>
@@ -144,8 +160,8 @@ description :
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="table-responsive-lg">
-								<table class="table table-bordered table-striped table-hover"
-									id="dataTables-authority"
+								<table class="table table-bordered table-striped table-hover display nowrap"
+									id="dataTables-authority" style="width: 100%"
 									data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10'>
 									<thead>
 										<tr>

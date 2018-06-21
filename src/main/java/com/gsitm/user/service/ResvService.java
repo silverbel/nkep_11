@@ -1,14 +1,3 @@
-/**
- * @programName : ResvService.java
- * @author      : 은종현
- * @date        : 2018-06-11
- * @function    : 메일링 서비스
- *
- * [이름]   [수정일]     [내용]
- * ----------------------------------------------------------
- * 은종현	   2018-06-11	초안
- */ 
-
 package com.gsitm.user.service;
 
 import java.util.HashMap;
@@ -30,6 +19,16 @@ import com.gsitm.common.dto.ResvUserInfoDTO;
 import com.gsitm.user.model.dao.MemberDAO;
 import com.gsitm.user.model.dao.ResvDAO;
 
+/**
+ * @programName : ResvService.java
+ * @author      : 김동범
+ * @date        : 2018. 6. 11. 
+ * @function    :  
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 
+ */ 
 @Service(value="resvService")
 public class ResvService {
 	
