@@ -316,7 +316,7 @@ p, ul, ol {
 						<button class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
 					</div>
 					<div class="pull-right">
-						<form action="/main.do" method="get"> -->
+						<form action="/main.do" method="get">
 							<button class="btn btn-primary btn-kdb">확인</button>
 						</form> 
 					</div>
