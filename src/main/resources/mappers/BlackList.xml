@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="forUserList" resultType="blkDTO" parameterType="String">
-		SELECT BLK_SEQ, DATE_FORMAT(REG_DATE, '%Y/%m/$d') AS REG_DATE
+		SELECT BLK_SEQ, DATE_FORMAT(REG_DATE, '%Y/%m/%d') AS REG_DATE
 					 , DATE_FORMAT(FIN_DATE, '%Y/%m/$d') AS FIN_DATE
 					 , BLK_RES, REPORTER, EMP_ID
 		  FROM nkep_11.TB_BLACKLIST
@@ -23,6 +23,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM nkep_11.TB_BLACKLIST
 		 WHERE EMP_ID = #{empId}
 	</select>
+
+	<insert id="insertBlackList" parameterType="blkDTO">
+		INSERT INTO nkep_11.TB_BLACKLIST(BLK_SEQ, REG_DATE, BLK_RES, EMP_ID)
+		VALUES (#{blkSeq}, CURDATE(), #{blkRes}, #{empId})
+	</insert>	
 	
 </mapper>
 

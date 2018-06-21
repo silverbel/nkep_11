@@ -84,6 +84,7 @@ public class MyPageController {
 		int resvCnt = rService.resvCount(emp.getEmpId());
 		
 		model.addObject("rcList", rcList);
+		model.addObject("usedList", usedList);
 		model.addObject("resvCnt", resvCnt);
 		
 		return model;

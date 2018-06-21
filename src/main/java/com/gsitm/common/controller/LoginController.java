@@ -55,6 +55,8 @@ public class LoginController {
 			username  = "IT1053";
 		} else if("2".equals(idInput)) {
 			username = "madmin";
+		} else if("0".equals(idInput)) {
+			username = "IT1052";
 		} else {
 			username = "sysmgr";
 		}

@@ -105,23 +105,23 @@ description : 메일링
 									<form method="post" action="${path}/email/send.do">
 										<!-- form-item -->
 										<div class="form-item form-item--half">
-											<input class="form-control" type="text" name="senderName" placeholder="Your name"/>
+											<input class="form-control" type="text" name="senderName" placeholder="신고할 사원의 ID"/>
 										</div><!-- End / form-item -->
 										
 										
 										<!-- form-item -->
 										<!-- End / form-item -->
-										<input type="hidden" class="form-control" name="receiveMail" value="ndgndgal@gsitm.com">
+										<input type="hidden" class="form-control" id="titime" name="receiveMail" value="">
 										
 										<!-- form-item -->
 										<div class="form-item">
-											<input class="form-control" type="text" name="subject" placeholder="Subject"/>
+											<input class="form-control" type="text" name="신고 주제" placeholder="Subject"/>
 										</div><!-- End / form-item -->
 										
 										
 										<!-- form-item -->
 										<div class="form-item">
-											<textarea class="form-control" name="message" placeholder="Your message" style="min-height:200px;"></textarea>
+											<textarea class="form-control" name="message" placeholder="신고 사유" style="min-height:200px;"></textarea>
 										</div><!-- End / form-item -->
 										
 										
@@ -162,5 +162,11 @@ description : 메일링
 		<script type="text/javascript" src="/assets/vendors/typed/typed.min.js"></script>
 		<!-- App-->
 		<script type="text/javascript" src="/assets/js/main.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var date = new Date();
+				$('#titime').val(date.getYear()*10000+date.getMonth()*100+date.getDate());
+			})
+		</script>
 	</body>
 </html>
