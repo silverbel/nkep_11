@@ -20,7 +20,7 @@ description :
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>SB Admin 2 - Bootstrap Admin Theme</title>
+<title>회의실 예약 관리</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!-- DataTable CSS -->
@@ -71,13 +71,27 @@ description :
 		    			rowReorder: {
 		    				selector: 'td:nth-child(2)'
 		    			},
+		    			responsive: true
+					});
+					$('#dataTables-mtRoom-cancel').DataTable({
+		    			rowReorder: {
+		    				selector: 'td:nth-child(2)'
+		    			},
 		    			responsive: true,
 		    			ordering: true,
 		    			"bAutoWidth": true,
 		    			"columnDefs": [
 		    				{ "orderable": false, "targets": 0 }
 							] 
-						});
+					});
+					$('.btn-info').click(function(){
+						console.log('!!');
+						console.log($(this).val());
+						location.href = '/mtRoomRsvConfirm.do?rsvSeq='+$(this).val();
+					})
+					$('.btn-danger').click(function(){
+						location.href = '/mtRoomRsvReject.do?rsvSeq='+$(this).val();
+					})
 		    });
 	    });
     	function fn_go_list(url) {
@@ -105,31 +119,90 @@ description :
 						<div class="panel-heading">회의실 예약 관리</div></div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover nowrap display" style="width:100%" 
+									id="dataTables-mtRoom" data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10'>
+									<colgroup>
+										<col width="20%">
+										<col width="30%">
+										<col width="20%">
+										<col width="10%">
+										<col width="20%">
+									</colgroup>
+									<thead>
+									<tr>
+										<th class="text-center">예약번호</th>
+										<th class="text-center">장소</th>
+										<th class="text-center">신청자</th>
+										<th class="text-center">가격</th>
+										<th class="text-center">승인 처리</th>
+									</tr>
+									</thead>
+									<tbody>
+								<c:forEach var="list" items="${mtRoomRsvList}" varStatus="status">
+									<tr>
+											<td class="text-center">${list.rsvSeq}</td>
+											<td class="text-center">${list.roomName}</td>
+											<td class="text-center">${list.applicant}</td>
+											<td class="text-center">${list.rsvPrice} 원</td>
+											<td>
+												<c:if test="${'Y' ne list.mgrYn }">
+														<button type="button" class="btn btn-info" style="width: 50%" value="${list.rsvSeq }">승인</button>
+														<button type="button" class="btn btn-danger" style="width: 50%" value="${list.rsvSeq }">반려</button>
+												</c:if>
+												<c:if test="${'Y' eq list.mgrYn }">
+													승인 완료
+												</c:if>
+											</td>
+									</tr>
+								</c:forEach>
+								</tbody>
+								</table>
+							</div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">반려된 예약 리스트</div></div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
 						<div class="table-responsive">
 							<table class="table table-bordered table-striped table-hover nowrap display" style="width:100%" 
-								id="dataTables-authority" data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10'>
+								id="dataTables-mtRoom-cancel" data-order='[[ 0, "desc" ],[ 2, "asc" ]]' data-page-length='10'>
+								<colgroup>
+									<col width="20%">
+									<col width="30%">
+									<col width="20%">
+									<col width="30%">
+								</colgroup>
 								<thead>
 								<tr>
-									<th class="text-center" width="50%">신청자</th>
-									<th class="text-center" width="20%">가격</th>
-									<th></th>
+									<th class="text-center">예약번호</th>
+									<th class="text-center">장소</th>
+									<th class="text-center">신청자</th>
+									<th class="text-center">가격</th>
 								</tr>
 								</thead>
 								<tbody>
-							<c:forEach var="list" items="${mtRoomRsvList}" varStatus="status">
+							<c:forEach var="list" items="${mtRoomRsvRejectList}" varStatus="status">
 								<tr>
+										<td class="text-center">${list.rsvSeq}</td>
+										<td class="text-center">${list.roomName}</td>
 										<td class="text-center">${list.applicant}</td>
-										<td class="text-center">${list.rsvPrice}</td>
-										<td>
-											<button type="button" class="btn btn-info">승인</button>
-											<button type="button" class="btn btn-danger">반려</button>
-										</td>
+										<td class="text-center">${list.rsvPrice} 원</td>
 								</tr>
 							</c:forEach>
 							</tbody>
 							</table>
 						</div>
-						
 						<!-- /.panel-body -->
 					</div>
 					<!-- /.panel -->

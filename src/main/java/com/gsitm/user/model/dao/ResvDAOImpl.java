@@ -39,8 +39,13 @@ public class ResvDAOImpl implements ResvDAO {
 	}
 	/* 승인 페이지 */
 	@Override
-	public List<ResvDTO> mtRoomRsvList(ResvDTO dto) {
+	public List<ResvConfirmInfoDTO> mtRoomRsvList() {
 		return sqlSession.selectList("resv.mtRoomRsvList");
+	}
+	
+	@Override
+	public List<ResvConfirmInfoDTO> mtRoomRsvRejectList() {
+		return sqlSession.selectList("resv.mtRoomRsvRejectList");
 	}
 
 	@Override
@@ -138,6 +143,18 @@ public class ResvDAOImpl implements ResvDAO {
 		ConfirmDTO dt = new ConfirmDTO();
 		dt.setRsvSeq(insert.getRsvSeq());
 		sqlSession.insert("resv.insertConfirm",dt);
+	}
+	@Override
+	public void mtConfirm(String rsvSeq) {
+		sqlSession.update("resv.mtConfirm", rsvSeq);
+	}
+	@Override
+	public void mtReject(String rsvSeq) {
+		sqlSession.update("resv.mtReject", rsvSeq);
+	}
+	@Override
+	public List<ResvConfirmInfoDTO> showUsedList(String empId) {
+		return sqlSession.selectList("resv.showUsedList", empId);
 	}
 
 

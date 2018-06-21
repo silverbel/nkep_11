@@ -10,11 +10,13 @@
  */ 
 package com.gsitm.mAdmin.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -46,10 +48,25 @@ public class MtRoomRsvManageController {
 			
 	@RequestMapping(value="/mtRoomRsvManagement.do", method=RequestMethod.GET)
 	public ModelAndView mtRsvView(ModelAndView mv, ResvDTO dto) {
-		List<ResvDTO> list = rService.mtRoomRsvList(dto);
+		List<ResvConfirmInfoDTO> list = rService.mtRoomRsvList();
+		List<ResvConfirmInfoDTO> rlist = rService.mtRoomRsvRejectList();
 		mv.setViewName("mAdmin/mRsvList");
 		mv.addObject("mtRoomRsvList", list);
+		mv.addObject("mtRoomRsvRejectList", rlist);
 		return mv;
+	}
+	
+	@RequestMapping(value="/mtRoomRsvConfirm.do", method=RequestMethod.GET)
+	public void mtConfirm(String rsvSeq, HttpServletResponse response) throws IOException {
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+rsvSeq);
+		rService.mtConfirm(rsvSeq);
+		response.sendRedirect("/mtRoomRsvManagement.do");
+	}
+	
+	@RequestMapping(value="/mtRoomRsvReject.do", method=RequestMethod.GET)
+	public void mtReject(String rsvSeq, HttpServletResponse response) throws IOException {
+		rService.mtReject(rsvSeq);
+		response.sendRedirect("/mtRoomRsvManagement.do");
 	}
 	
 /*	@ResponseBody

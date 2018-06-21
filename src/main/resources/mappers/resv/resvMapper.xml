@@ -13,12 +13,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="com.gsitm.common.dto.ResvUserInfoDTO" id="ruDTO" />
 	<resultMap type="com.gsitm.common.dto.InsertResvDTO" id="resvInsert"></resultMap>
 
-	<select id="mtRoomRsvList" resultMap="resvresvresv" parameterType="String" statementType="PREPARED">
-		SELECT R.APPLICANT, R.RSV_PRICE
-		FROM TB_RESERVATION R
-		LEFT JOIN TB_CONFIRM C
-		ON R.RSV_SEQ = C.RSV_SEQ
-		WHERE R.ROOM_TYPE = 'M' AND C.BOSS_YN = 'Y'				
+	<select id="mtRoomRsvList" resultMap="rcDTO" statementType="PREPARED">
+		SELECT R.RSV_SEQ
+					 , CONCAT(WM.WORK_NAME,'-',MT.MT_NAME) AS ROOM_NAME
+					 , R.RSV_PRICE
+					 , CONCAT(R.APPLICANT,'-',EM.EMP_NAME) AS APPLICANT
+					 , C.MGR_YN
+		  FROM nkep_11.TB_RESERVATION R
+		  LEFT JOIN nkep_11.TB_CONFIRM C
+		    ON R.RSV_SEQ = C.RSV_SEQ
+		  LEFT JOIN nkep_11.TB_MT_ROOM MT
+		    ON R.ROOM_SEQ = MT.MT_SEQ
+		  LEFT JOIN nkep_11.TB_WORKSPACE WM
+		    ON MT.WORK_SEQ = WM.WORK_SEQ
+		  LEFT JOIN nkep_11.TB_EMPLOYEE EM
+		    ON R.APPLICANT = EM.EMP_ID
+		 WHERE C.BOSS_YN = 'Y'
+		 	 AND R.ROOM_TYPE = 'M'
+	</select>
+	
+	<select id="mtRoomRsvRejectList" resultMap="rcDTO" statementType="PREPARED">
+		SELECT R.RSV_SEQ
+					 , CONCAT(WM.WORK_NAME,'-',MT.MT_NAME) AS ROOM_NAME
+					 , R.RSV_PRICE
+					 , CONCAT(R.APPLICANT,'-',EM.EMP_NAME) AS APPLICANT
+					 , C.MGR_YN
+		  FROM nkep_11.TB_RESERVATION R
+		  LEFT JOIN nkep_11.TB_CONFIRM C
+		    ON R.RSV_SEQ = C.RSV_SEQ
+		  LEFT JOIN nkep_11.TB_MT_ROOM MT
+		    ON R.ROOM_SEQ = MT.MT_SEQ
+		  LEFT JOIN nkep_11.TB_WORKSPACE WM
+		    ON MT.WORK_SEQ = WM.WORK_SEQ
+		  LEFT JOIN nkep_11.TB_EMPLOYEE EM
+		    ON R.APPLICANT = EM.EMP_ID
+		 WHERE C.MGR_YN = 'N'
+		 	 AND R.ROOM_TYPE = 'M'
 	</select>
 
 	<insert id="insert">
@@ -78,6 +108,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 											 LEFT JOIN nkep_11.TB_RSV_DETAIL RU
 		 											   ON R.RSV_SEQ = RU.RSV_SEQ
 		 										  WHERE RU.USE_ID = #{empId})
+	</select>
+	
+	<select id="showUsedList" resultMap="rcDTO" parameterType="String" statementType="PREPARED">
+	<![CDATA[
+		SELECT R.RSV_SEQ
+					 , R.RSV_TYPE
+					 , R.RSV_DATE
+					 , R.RSV_FDATE
+					 , C.MGR_YN
+					 , IF(R.ROOM_TYPE = 'E', CONCAT(WE.WORK_NAME,'-',ED.EDU_NAME), CONCAT(WM.WORK_NAME,'-',MT.MT_NAME)) AS ROOM_NAME
+					 , R.RSV_PRICE
+					 , R.APPLICANT
+		  FROM nkep_11.TB_RESERVATION R
+		  LEFT JOIN nkep_11.TB_CONFIRM C
+		    ON R.RSV_SEQ = C.RSV_SEQ
+		  LEFT JOIN nkep_11.TB_MT_ROOM MT
+		    ON R.ROOM_SEQ = MT.MT_SEQ
+		  LEFT JOIN nkep_11.TB_EDU_ROOM ED
+		    ON R.ROOM_SEQ = ED.EDU_SEQ
+		  LEFT JOIN nkep_11.TB_WORKSPACE WM
+		    ON MT.WORK_SEQ = WM.WORK_SEQ
+		  LEFT JOIN nkep_11.TB_WORKSPACE WE
+		    ON ED.WORK_SEQ = WE.WORK_SEQ
+		 WHERE R.RSV_SEQ IN (SELECT R.RSV_SEQ
+		 										 	 FROM nkep_11.TB_RESERVATION R
+		 											 LEFT JOIN nkep_11.TB_RSV_DETAIL RU
+		 											   ON R.RSV_SEQ = RU.RSV_SEQ
+		 										  WHERE RU.USE_ID = #{empId})
+		 	 AND R.RSV_DATE < DATE_SUB(NOW(), INTERVAL -1 MINUTE)
+		 	 AND C.MGR_YN = 'Y'
+	]]>
 	</select>
 	
 	<select id="showResvDetail" resultMap="rcDTO" parameterType="String" statementType="PREPARED">
@@ -197,6 +258,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO nkep_11.TB_CONFIRM(RSV_SEQ)
 		VALUES(#{rsvSeq})
 	</insert>
+	
+	<update id="mtConfirm" parameterType="String">
+		UPDATE nkep_11.TB_CONFIRM
+			 SET MGR_YN = 'Y'
+		 WHERE RSV_SEQ = #{rsvSeq}
+	</update>
+	<update id="mtReject" parameterType="String">
+		UPDATE nkep_11.TB_CONFIRM
+			 SET MGR_YN = 'N'
+		 WHERE RSV_SEQ = #{rsvSeq}
+	</update>
 </mapper>
 
 

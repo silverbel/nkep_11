@@ -80,6 +80,7 @@ public class MyPageController {
 		EmployeeDTO emp = (EmployeeDTO) session.getAttribute("sessionID");
 		
 		List<ResvConfirmInfoDTO> rcList = rService.showResvConfirmList(emp.getEmpId());
+		List<ResvConfirmInfoDTO> usedList = rService.showUsedList(emp.getEmpId());
 		int resvCnt = rService.resvCount(emp.getEmpId());
 		
 		model.addObject("rcList", rcList);
