@@ -1,13 +1,3 @@
-/**
- * @programName : MyPageController.java
- * @author      : 김동범
- * @date        : 2018. 6. 11. 
- * @function    : mypage 처리 controller
- *
- * [이름]   [수정일]     [내용]
- * ----------------------------------------------------------
- * 
- */ 
 package com.gsitm.user.controller;
 
 import java.util.HashMap;
@@ -37,6 +27,16 @@ import com.gsitm.user.service.BlackListService;
 import com.gsitm.user.service.MemberService;
 import com.gsitm.user.service.ResvService;
 
+/**
+ * @programName : MyPageController.java
+ * @author      : 김동범
+ * @date        : 2018. 6. 11. 
+ * @function    : mypage 처리 controller
+ *
+ * [이름]		[수정일]     [내용]
+ * ----------------------------------------------------------
+ * 김동범		18.06.12	블랙리스트 내역 추가
+ */ 
 
 @Controller
 public class MyPageController {

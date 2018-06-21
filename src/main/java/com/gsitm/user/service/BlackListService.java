@@ -9,6 +9,16 @@ import org.springframework.stereotype.Service;
 import com.gsitm.common.dto.BlackListLogDTO;
 import com.gsitm.user.model.dao.BlackListDAOImpl;
 
+/**
+ * @programName : BlackListService.java
+ * @author      : 김동범
+ * @date        : 2018. 6. 21. 
+ * @function    : 블랙리스트
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 
+ */ 
 @Service(value="blkService")
 public class BlackListService {
 

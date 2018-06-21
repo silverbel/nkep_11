@@ -3,6 +3,16 @@ package com.gsitm.common.dto;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @programName : InsertResvDTO.java
+ * @author      : 김동범
+ * @date        : 2018. 6. 21. 
+ * @function    :  
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 
+ */ 
 public class InsertResvDTO implements Cloneable {
 	private String[] SNACK;
 	private String[] FIXTURES;

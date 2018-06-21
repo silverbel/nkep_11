@@ -1,3 +1,5 @@
+package com.gsitm.common.dto;
+
 /**
  * @programName : ResvDTO.java
  * @author      : 은종현
@@ -8,7 +10,6 @@
  * ----------------------------------------------------------
  * 은종현	   2018-06-11	초안
  */
-package com.gsitm.common.dto;
 
 public class ResvDTO {
 	private String rsvSeq;

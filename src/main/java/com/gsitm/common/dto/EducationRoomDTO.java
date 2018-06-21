@@ -2,6 +2,16 @@ package com.gsitm.common.dto;
 
 import java.util.Arrays;
 
+/**
+ * @programName : EducationRoomDTO.java
+ * @author      : 김동범
+ * @date        : 2018. 6. 21. 
+ * @function    :  
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 
+ */ 
 public class EducationRoomDTO {
 	private String eduSeq;
 	private String eduCode;

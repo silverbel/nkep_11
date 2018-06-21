@@ -1,13 +1,3 @@
-/**
- * @programName : LoginController.java
- * @author      : 김동범
- * @date        : 2018. 6. 11. 
- * @function    : 로그인 컨트롤러
- *
- * [이름]		[수정일]     [내용]
- * ----------------------------------------------------------
- * 김동범		2018.
- */ 
 package com.gsitm.common.controller;
 
 import java.io.IOException;
@@ -25,6 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.gsitm.common.dto.EmployeeDTO;
 import com.gsitm.common.service.LoginService;
 
+/**
+ * @programName : LoginController.java
+ * @author      : 김동범
+ * @date        : 2018. 6. 11. 
+ * @function    : 로그인 컨트롤러
+ *
+ * [이름]		[수정일]     [내용]
+ * ----------------------------------------------------------
+ * 김동범		2018.
+ */ 
 
 @Controller
 public class LoginController {

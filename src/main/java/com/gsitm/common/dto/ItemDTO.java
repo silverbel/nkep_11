@@ -2,6 +2,16 @@ package com.gsitm.common.dto;
 
 import java.util.Arrays;
 
+/**
+ * @programName : ItemDTO.java
+ * @author      : 김동범
+ * @date        : 2018. 6. 21. 
+ * @function    :  
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 
+ */ 
 public class ItemDTO {
 	private String itemSeq;
 	private String itemCode;

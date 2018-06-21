@@ -1,5 +1,15 @@
 package com.gsitm.common.dto;
 
+/**
+ * @programName : EducationRoomPlusWSNameDTO.java
+ * @author      : 남동길
+ * @date        : 2018. 6. 21. 
+ * @function    :  
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 
+ */ 
 public class EducationRoomPlusWSNameDTO {
 	private String eduSeq;
 	private String eduCode;

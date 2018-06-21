@@ -1,13 +1,4 @@
-/**
- * @programName : ResvController.java
- * @author      : 은종현
- * @date        : 2018-06-11
- * @function    : 예약 서비스
- *
- * [이름]   [수정일]     [내용]
- * ----------------------------------------------------------
- * 은종현	   2018-06-11	초안
- */ 
+
 package com.gsitm.user.controller;
 
 import java.io.UnsupportedEncodingException;
@@ -54,6 +45,20 @@ import com.gsitm.user.mail.MailHandler;
 import com.gsitm.user.service.MemberService;
 import com.gsitm.user.service.ResvService;
 import com.gsitm.user.service.WorkSpaceService;
+
+/**
+ * @programName : ResvController.java
+ * @author      : 은종현
+ * @date        : 2018-06-11
+ * @function    : 예약 서비스
+ *
+ * [이름]	   	[수정일]     [내용]
+ * ----------------------------------------------------------
+ * 은종현	   2018-06-11	초안
+ * 김동범		18.06.15	예약 내역 확인
+ * 김동범		18.06.18	뷰에서 보내는 데이터 확인
+ */ 
+
 
 @Controller
 @RequestMapping("/resv/*")

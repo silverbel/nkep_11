@@ -1,5 +1,15 @@
 package com.gsitm.common.dto;
 
+/**
+ * @programName : ResvUserInfoDTO.java
+ * @author      : 김동범
+ * @date        : 2018. 6. 13. 
+ * @function    :  
+ *
+ * [이름]   [수정일]     [내용]
+ * ----------------------------------------------------------
+ * 
+ */ 
 public class ResvUserInfoDTO {
 
 	private String rsvSeq;
