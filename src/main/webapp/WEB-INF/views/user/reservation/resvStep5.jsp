@@ -302,50 +302,50 @@ p, ul, ol {
       </div>
                
 
-               <%-- 근무지 번호 :
-               <c:out value="${insertResv.workSeq}" />
-               공간 종류 :
-               <c:out value="${insertResv.roomType}" />
-               공간 번호 :
-               <c:out value="${insertResv.roomSeq}" />
-               예약 종류 :
-               <c:out value="${insertResv.rsvType}" />
-               시작 시간 :
-               <c:out value="${insertResv.startTime}" />
-               종료 시간 :
-               <c:out value="${insertResv.finTime}" />
-               최대 인원 수 :
-               <c:out value="${insertResv.maxCnt}" />
-               멤버 :
-               <c:forEach items="${insertResv.empIdList }" var="emp">
-                  <c:out value="${emp }" />
-               </c:forEach>
-               <c:forEach items="${insertResv.EXPENDABLE }" var="emp">
-                  <c:out value="${emp }" />
-               </c:forEach>
-               <c:forEach items="${insertResv.FIXTURES }" var="emp">
-                  <c:out value="${emp }" />
-               </c:forEach>
-               <c:forEach items="${insertResv.SNACK }" var="emp">
-                  <c:out value="${emp }" />
-               </c:forEach>
-               오늘 :
-               <c:out value="${insertResv.today}" /> --%>
-               <br>
-               <div class="row">
-                  <div class="col-lg-12">
-               <div class="pull-left ">
-                  <button class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
-               </div>
-               <div class="pull-right">
-                  <!-- <form action="/resv/resvStep5.do" method="post"> -->
-                     <button class="btn btn-primary btn-kdb" data-toggle="modal" data-target="#myModal">예약</button>
-                  <!-- </form> -->
-               </div>
-               </div>
-               </div>
-            </div>
-         </section>
+					<%-- 근무지 번호 :
+					<c:out value="${insertResv.workSeq}" />
+					공간 종류 :
+					<c:out value="${insertResv.roomType}" />
+					공간 번호 :
+					<c:out value="${insertResv.roomSeq}" />
+					예약 종류 :
+					<c:out value="${insertResv.rsvType}" />
+					시작 시간 :
+					<c:out value="${insertResv.startTime}" />
+					종료 시간 :
+					<c:out value="${insertResv.finTime}" />
+					최대 인원 수 :
+					<c:out value="${insertResv.maxCnt}" />
+					멤버 :
+					<c:forEach items="${insertResv.empIdList }" var="emp">
+						<c:out value="${emp }" />
+					</c:forEach>
+					<c:forEach items="${insertResv.EXPENDABLE }" var="emp">
+						<c:out value="${emp }" />
+					</c:forEach>
+					<c:forEach items="${insertResv.FIXTURES }" var="emp">
+						<c:out value="${emp }" />
+					</c:forEach>
+					<c:forEach items="${insertResv.SNACK }" var="emp">
+						<c:out value="${emp }" />
+					</c:forEach>
+					오늘 :
+					<c:out value="${insertResv.today}" /> --%>
+					<br>
+					<div class="row">
+						<div class="col-lg-12">
+					<div class="pull-left ">
+						<button class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
+					</div>
+					<div class="pull-right">
+						<form action="/main.do" method="get">
+							<button class="btn btn-primary btn-kdb">확인</button>
+						</form> 
+					</div>
+					</div>
+					</div>
+				</div>
+			</section>
 
       </div>
       <!-- End / Content-->
