@@ -37,6 +37,9 @@ public interface ResvDAO {
 	List<ResvConfirmInfoDTO> getResvShortInfoByDate(Map<?,?> check);
 	List<ResvConfirmInfoDTO> getResvLongInfoByDate(Map<?,?> check);
 	
+	List<ResvConfirmInfoDTO> showUsedList(String empId);
+	
+	
 	
 	
 	// ajax

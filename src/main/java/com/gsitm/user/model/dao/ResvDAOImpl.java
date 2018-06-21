@@ -152,6 +152,10 @@ public class ResvDAOImpl implements ResvDAO {
 	public void mtReject(String rsvSeq) {
 		sqlSession.update("resv.mtReject", rsvSeq);
 	}
+	@Override
+	public List<ResvConfirmInfoDTO> showUsedList(String empId) {
+		return sqlSession.selectList("resv.showUsedList", empId);
+	}
 
 
 }

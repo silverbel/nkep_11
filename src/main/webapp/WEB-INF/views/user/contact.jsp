@@ -135,9 +135,9 @@ description : 메일링
 								</div>
 							</div>
 						</div>
-					</div>
-				</section>
-				<!-- End / Section -->
+						</div>
+					</section>
+					<!-- End / Section -->
 				
 			</div>
 			<!-- End / Content-->

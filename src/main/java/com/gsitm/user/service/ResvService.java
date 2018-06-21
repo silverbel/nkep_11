@@ -130,6 +130,10 @@ public class ResvService {
 	public void insertConfirm(InsertResvDTO insert) {
 		rDao.insertConfirm(insert);
 	}
+	
+	public List<ResvConfirmInfoDTO> showUsedList(String empId){
+		return rDao.showUsedList(empId);
+	}
 
 }
 
