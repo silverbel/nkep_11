@@ -36,7 +36,7 @@ public class NoticeController {
 	private static final Logger logger = LoggerFactory.getLogger(WorkSpaceForAdminController.class);
 
 	@GetMapping("/noticeList.do")
-	public ModelAndView getWorkSpaceListForAdmin(ModelAndView mv, NoticeDTO noticeDTO) {
+	public ModelAndView getNoticeListForAdmin(ModelAndView mv, NoticeDTO noticeDTO) {
 		List<NoticeDTO> list = noticeService.getNoticeList(noticeDTO);
 		mv.setViewName("/admin/noticeList");
 		mv.addObject("noticeList", list);
