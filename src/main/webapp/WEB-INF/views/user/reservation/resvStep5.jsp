@@ -316,9 +316,9 @@ p, ul, ol {
 						<button class="btn btn-default btn-kdb" onclick="fn_prev();">이전</button>
 					</div>
 					<div class="pull-right">
-						<!-- <form action="/resv/resvStep5.do" method="post"> -->
-							<button class="btn btn-primary btn-kdb" data-toggle="modal" data-target="#myModal">예약</button>
-						<!-- </form> -->
+						<form action="/main.do" method="get"> -->
+							<button class="btn btn-primary btn-kdb">확인</button>
+						</form> 
 					</div>
 					</div>
 					</div>
