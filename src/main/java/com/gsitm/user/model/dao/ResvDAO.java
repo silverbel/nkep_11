@@ -29,10 +29,15 @@ public interface ResvDAO {
 	List<ResvUserInfoDTO> showResvUserList(String rsvSeq);
 	List<ResvItemInfoDTO> showResvItemList(String rsvSeq);
 	List<ResvConfirmInfoDTO> showResvConfirmList(String empId);
-	List<ResvDTO> mtRoomRsvList(ResvDTO dto);
+	List<ResvConfirmInfoDTO> mtRoomRsvList();
+	void mtConfirm(String rsvSeq);
+	void mtReject(String rsvSeq);
+	List<ResvConfirmInfoDTO> mtRoomRsvRejectList();
 	ResvConfirmInfoDTO showResvDetail(String rsvSeq);
 	List<ResvConfirmInfoDTO> getResvShortInfoByDate(Map<?,?> check);
 	List<ResvConfirmInfoDTO> getResvLongInfoByDate(Map<?,?> check);
+	
+	
 	
 	// ajax
 	List<ResvItemInfoDTO> roomItemListCheckByRoomSeqAjax(String workSeq);

@@ -38,8 +38,18 @@ public class ResvService {
 	@Autowired
 	private MemberDAO mDao;
 	
-	public List<ResvDTO> mtRoomRsvList(ResvDTO dto) {
-		return rDao.mtRoomRsvList(dto);
+	public void mtConfirm(String rsvSeq) {
+		rDao.mtConfirm(rsvSeq);
+	}
+	public void mtReject(String rsvSeq) {
+		rDao.mtReject(rsvSeq);
+	}
+	public List<ResvConfirmInfoDTO> mtRoomRsvList() {
+		return rDao.mtRoomRsvList();
+	}
+	
+	public List<ResvConfirmInfoDTO> mtRoomRsvRejectList() {
+		return rDao.mtRoomRsvRejectList();
 	}
 	
 	public List<ResvUserInfoDTO> showResvUserList(String rsvSeq) {

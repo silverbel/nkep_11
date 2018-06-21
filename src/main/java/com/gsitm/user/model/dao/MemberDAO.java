@@ -24,4 +24,5 @@ public interface MemberDAO {
 	int memCount(String empId);
 	
 	List<EmployeeDTO> allMemberListAjax();
+	
 }
