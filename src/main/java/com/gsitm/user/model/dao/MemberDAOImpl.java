@@ -57,5 +57,9 @@ public class MemberDAOImpl implements MemberDAO {
 	public EmployeeDTO getTeamBossByid(String id) {
 		return sqlSession.selectOne("member.getTeamBossByid",id);
 	}
+	
+	public void updateBlackList(String empId) {
+		sqlSession.update("member.insertBlackList", empId);
+	}
 
 }

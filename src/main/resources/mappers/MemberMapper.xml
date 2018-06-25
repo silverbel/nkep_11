@@ -93,6 +93,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM nkep_11.TB_EMPLOYEE
 		WHERE EMP_ID = #{id}
 	</select>
+	
+	<update id="updateBlackList" parameterType="String">
+		UPDATE nkep_11.TB_EMPLOYEE
+		   SET BLACK_YN = 'Y'
+		 WHERE EMP_ID = #{empId}
+	</update>
 </mapper>
 
 

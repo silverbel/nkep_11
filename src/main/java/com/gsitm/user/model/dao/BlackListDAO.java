@@ -29,4 +29,5 @@ public interface BlackListDAO {
 	
 	int blackListCount(String empId);
 	
+	void insertBlackList(BlackListLogDTO bList);
 }

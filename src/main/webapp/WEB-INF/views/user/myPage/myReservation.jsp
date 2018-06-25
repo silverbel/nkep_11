@@ -285,7 +285,6 @@ description : my page, 나의 정보 확인
 								<col width="20%">
 								<col width="30%">
 								<col width="10%">
-								<col width="10%">
 								<col width="20%">
 								<col width="10%">
 							</colgroup>
@@ -294,9 +293,8 @@ description : my page, 나의 정보 확인
 									<th>번호</th>
 									<th>장소</th>
 									<th>신청자</th>
-									<th>비용</th>
 									<th>승인 여부</th>
-									<th></th>
+									<th>취소</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -353,14 +351,19 @@ description : my page, 나의 정보 확인
 								<tr class="text-center">
 									<th>사용 번호</th>
 									<th>장소</th>
-									<th>사용 인원</th>
 									<th>비용</th>
+									<th>연장</th>
 								</tr>
 							</thead>
 							<tbody>
+								<c:forEach var="list" items="${usedList }">
 									<tr>
-										<th colspan="4">사용 내역이 없습니다.</th>
+										<td>${list.rsvSeq }</td>
+										<td>${list.roomName }</td>
+										<td>${list.rsvPrice }</td>
+										<td>${list.applicant }</td>
 									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

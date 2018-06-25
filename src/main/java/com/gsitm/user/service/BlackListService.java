@@ -32,4 +32,8 @@ public class BlackListService {
 	public int blackListCount(String empId) {
 		return bDao.blackListCount(empId);
 	}
+	
+	public void insertBlackList(BlackListLogDTO bList) {
+		bDao.insertBlackList(bList);
+	};
 }
