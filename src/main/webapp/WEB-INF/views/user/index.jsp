@@ -22,6 +22,13 @@
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<![endif]-->
 		<meta http-equiv="Content-Type" content="text/jsp; charset=UTF-8">
+		<script type="text/javascript">
+			function fn_go(path, url1, url2) {
+				location.href = path+"/info/workspaceDetail.do?workName="
+						+encodeURIComponent(url1)+
+						"&workAddr="+encodeURIComponent(url2);
+			}
+		</script>
 		<style type="text/css">
 		body{
 			background-image: url("/assets/img/back.png");

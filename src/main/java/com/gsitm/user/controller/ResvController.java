@@ -342,7 +342,7 @@ public class ResvController {
 	@RequestMapping("/confirm.do")
 	public ModelAndView confirm(ModelAndView mv,@RequestParam("rsvSeq") String rsvSeq,
 			@RequestParam("bossYn") String bossYn) {
-		mv.setViewName("/main.do");
+		mv.setViewName("redirect:/main.do");
 		return mv;
 	}
 	
